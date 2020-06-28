@@ -1,0 +1,47 @@
+/**
+ * 色值统一管理 方便维护
+ */
+
+//$color-main: #5995FF; // 主色调
+$color-main: #1BB5EC; // 主色调
+$color-main-bg: #E8F0FF; // 主色调
+
+// 边框颜色
+$color-border: #E9EAEC; // 大模块边框
+$color-border-input: #cccccc; // 输入框
+
+// 背景色
+$bg-main: #f0f0f0;
+$bg-sidebar: #222222;
+$bg-sidebar-item: #000000;
+$bg-search: #F4F4F4;
+$bg-tab: #F9F9F9; // 榜单切换等
+$bg-charge: #F16C01; // 充值
+$bg-news: #F6F9FF; // 消息
+$bg-gift: #F0F1F9; // 选礼物
+
+// 字体图标颜色
+//$color-icon: #cccccc;
+
+// 字体颜色
+$color-title1: #333333; // 一级标题
+$color-title2: #666666; // 二级标题
+$color-title3: #999999; // 三级标题
+$color-title-tool: #C3C3C3; // 工具导航标题 tips文案
+
+// ======================================================================
+// 聊天室
+// ======================================================================
+$color-gift: #FFAF00; // 送礼物
+$color-red-envelope: #F03D37; // 红包
+$color-ban: #F64C70; // 禁言
+$color-hongbao: #EBCD9A; // 红包弹窗
+// ======================================================================
+// 排行榜
+// ======================================================================
+$color-rank-title: #4A4A4A;
+$color-rank-divider: #D8D8D8;
+
+// z-index
+$z-index1: 300;
+$z-index2: 299;

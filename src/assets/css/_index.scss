@@ -1,0 +1,7 @@
+@import "~normalize-scss";
+@include normalize();
+@import "./var.scss";
+@import "./mixin.scss";
+@import "./base.scss";
+@import "./animate.scss";
+//@import "./element-ui.scss";

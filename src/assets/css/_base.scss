@@ -1,0 +1,122 @@
+@import "./_var";
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'PingFangSC-Regular',
+    'PingFang SC',
+    'Microsoft YaHei',
+    '微软雅黑',
+    'Avenir',
+    Helvetica,
+    Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #333;
+  background-color: $bg-main;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+ul {
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
+}
+
+ul,
+li,
+dl,
+ol {
+  list-style: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  outline: none;
+  text-decoration: none;
+}
+
+div:focus{
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+.bold {
+  font-weight: 800!important;
+}
+.pointer {
+  cursor: pointer;
+}
+
+@font-face{
+  font-family: 'gift';
+  src : url('~@/assets/fonts/DIN-BlackItalic.otf');
+}
+.font-gift {
+  font-family: 'gift';
+}
+.color-main {
+  color: $color-main
+}
+.color-red {
+  color: $color-red-envelope
+}
+
+.liveRecomend-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  .liveRecomend-title-text {
+    height: 50px;
+    font-size: 22px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: rgba(51, 51, 51, 1);
+    line-height: 50px;
+  }
+}
+
+.arrow-right {
+  vertical-align: middle;
+  margin-left: 6px;
+  font-size: 13px;
+  color: #666;
+}
+.me-wrap {
+  min-height: 70vh;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 0px;
+}

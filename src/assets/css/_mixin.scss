@@ -1,0 +1,50 @@
+/**
+* 溢出省略号
+* @param {Number} 行数
+*/
+@mixin ellipsis($rowCount: 1) {
+  @if $rowCount <=1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $rowCount;
+    -webkit-box-orient: vertical;
+  }
+}
+
+@mixin title-line-left($color,$width:4px,$hight: 15px,$left:-9px, $top:50% ) {
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: $left;
+    top: $top;
+    display: block;
+    width: $width;
+    height: $hight;
+    transform: translate(0, -50%);
+    background-color: $color;
+  }
+}
+
+@mixin clearfix {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+%clearfix {
+  @include clearfix;
+}
