@@ -14,6 +14,46 @@ const routes = [
     component: Home
   },
   {
+    path:"/privary",
+    name:"Privary",
+    meta:{
+        title:"隐私协议"
+    },
+    component: ()=> import('../views/word/privary.vue')
+},
+{
+  path:"/aboutwe",
+  name:"Aboutwe",
+  meta:{
+      title:"关于我们"
+  },
+  component: ()=> import('../views/word/aboutwe.vue')
+},
+{
+  path:"/serve",
+  name:"Serve",
+  meta:{
+      title:"用户服务协议"
+  },
+  component: ()=> import('../views/word/serve.vue')
+},
+{
+  path:"/host",
+  name:"Host",
+  meta:{
+      title:"主播管理规范"
+  },
+  component: ()=> import('../views/word/host.vue')
+},
+{
+  path:"/barrage",
+  name:"Barrage",
+  meta:{
+      title:"弹幕管理"
+  },
+  component: ()=> import('../views/word/barrage.vue')
+},
+  {
     path: "/zhibo",
     name: "channel",
     component: () => import("../views/channel.vue"),
@@ -65,6 +105,14 @@ const routes = [
           title: "榜单"
         },
         component: () => import("../views/Rank.vue")
+      },
+      {
+        path: "/download",
+        name: "Download",
+        meta: {
+          title: "下载"
+        },
+        component: () => import("../views/Download.vue")
       },
     ]
   },
