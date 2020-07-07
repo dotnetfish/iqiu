@@ -20,21 +20,26 @@ module.exports = {
     type: 'problem',
     docs: {
       description: 'disallow `key` attribute on `<template>`',
-      category: 'essential',
+      categories: ['vue3-essential', 'essential'],
       url: 'https://eslint.vuejs.org/rules/no-template-key.html'
     },
     fixable: null,
     schema: []
   },
-
-  create (context) {
+  /** @param {RuleContext} context */
+  create(context) {
     return utils.defineTemplateBodyVisitor(context, {
-      "VElement[name='template']" (node) {
-        if (utils.hasAttribute(node, 'key') || utils.hasDirective(node, 'bind', 'key')) {
+      /** @param {VElement} node */
+      "VElement[name='template']"(node) {
+        if (
+          utils.hasAttribute(node, 'key') ||
+          utils.hasDirective(node, 'bind', 'key')
+        ) {
           context.report({
-            node: node,
+            node,
             loc: node.loc,
-            message: "'<template>' cannot be keyed. Place the key on real elements instead."
+            message:
+              "'<template>' cannot be keyed. Place the key on real elements instead."
           })
         }
       }

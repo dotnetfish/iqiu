@@ -52,7 +52,7 @@ export default {
   width: 81vw;
   height: 93vh;
   margin-right: 100px;
-  background: url(../img/download.jpg) no-repeat;
+  background: url(../assets/img/download.jpg) no-repeat;
   background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
@@ -85,7 +85,7 @@ export default {
 .download{
   width: 300px;
   height: 180px;
-  background: url(../img/downloadios.png) no-repeat;
+  background: url(../assets/img/downloadios.png) no-repeat;
   background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
@@ -96,7 +96,7 @@ export default {
 .Download{
   width: 280px;
   height: 189px;
-  background: url(../img/downloadandroid.png) no-repeat;
+  background: url(../assets/img/downloadandroid.png) no-repeat;
   background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
@@ -110,7 +110,7 @@ export default {
 .code{
   width: 220px;
   height: 220px;
-  background: url(../img/code.png) no-repeat;
+  background: url(../assets/img/codeios.jpg) no-repeat;
   background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
