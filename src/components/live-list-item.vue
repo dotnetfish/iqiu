@@ -24,6 +24,7 @@
       <!-- </a> -->
     </div>
   </div>
+  
   <div v-else class="live-list">
     <div v-for="(item, index) in liveLists" :key="index" class="live-list-item" :class="listItemW" :style="itemStyle"
          @click="toLiveRoom(item.id,item)">

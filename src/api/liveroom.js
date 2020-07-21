@@ -2,7 +2,7 @@ import axios from "./axios";
 
 // const qs = require("qs");
 
-let baseURL = process.env.VUE_APP_ZY_API;
+let baseURL = 'https://api.iqiulive.cn';
 console.log(baseURL);
 // ---------------------示例 -------------------------
 // export const getRealInfo = (params = {}) => {

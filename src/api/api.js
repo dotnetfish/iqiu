@@ -2,7 +2,9 @@ import axios from "./axios";
 
 const qs = require("qs");
 
-let baseURL = process.env.VUE_APP_ZY_API;
+// let baseURL = process.env.VUE_APP_ZY_API;
+let baseURL = 'https://api.iqiulive.cn';
+// https://api.iqiulive.cn
 console.log(baseURL);
 // ---------------------示例 -------------------------
 // export const getRealInfo = (params = {}) => {
@@ -19,46 +21,50 @@ console.log(baseURL);
 // 用户管理-展期列表
 export const getExtensionOrderReport = data =>
   axios({
-    url: `${ baseURL }/order/getExtensionOrderReport`,
+    url: `${baseURL}/order/getExtensionOrderReport`,
     method: "post",
     data: qs.stringify(data)
   });
 
 // leanCloud-签名
-export const leanCloudSign = (roomId,mac) =>
+export const leanCloudSign = (roomId, mac) =>
   axios({
     // url: `${ baseURL }/aiqiu/v1/chat/leancloud/sessionsign?roomId=${roomId}&mac=${mac}`, // 加密
-    url: `${ baseURL }/aiqiu/v1/chat/leancloud/sessionsign-unencry?roomId=${roomId}&mac=${mac}`,
+    url: `${baseURL}/aiqiu/v1/chat/leancloud/sessionsign-unencry?roomId=${roomId}&mac=${mac}`,
     method: "get",
     contentTypejson: true
   });
 
-// 登录-获取手机验证码-短信加密
+// 登录-获取手机验证码-短信加密.
 export const getCodeEncrypt = param =>
   axios({
-    url: `${ baseURL }/aiqiu/v1/user/logins/codeEncrypt?mobile=${param}`,
+    url: `${baseURL}/aiqiu/v1/user/logins/codeEncrypt?mobile=${param}`,
     method: "post",
     contentTypejson: true
   });
 
 // 登录-发送手机号+验证码
-export const postLoginForm = (param1,param2) =>
-axios({
-  url: `${ baseURL }/aiqiu/v1/user/logins/login/sms?code=${param1}&mobile=${param2}`,
-  method: "post",
-  contentTypejson: true
-});
+export const postLoginForm = (param1, param2) =>
+  axios({
+    url: `${baseURL}/aiqiu/v1/user/logins/login/sms?code=${param1}&mobile=${param2}`,
+    method: "post",
+    contentTypejson: true
+  });
 
 //获取视频信息
 
 export const getChannelInfo = (anchorId) =>
-axios.get(`${baseURL}/aiqiu/v1/live/channels/info?cid=${anchorId}&vf=FLV`)
+  axios.get(`${baseURL}/aiqiu/v1/live/channels/info?cid=${anchorId}&vf=FLV`)
 // axios.get(`${baseURL}/aiqiu/v1/channels/infoM3u8?cid=${anchorId}`)  // hls
+  // axios({
+  //   url:`${baseURL}/aiqiu/v1/live/channels/info?cid=${anchorId}&vf=FLV`,
+  //   method: "get",
+  // })
 
 // 获取关注列表 /user/follow/getFollowAnchors
-export const attentionGetFollowAnchors = (data,headers) =>
+export const attentionGetFollowAnchors = (data, headers) =>
   axios({
-    url: `${ baseURL }/aiqiu/v1/live/follow/channels`,
+    url: `${baseURL}/aiqiu/v1/live/follow/channels`,
     // url: `http://192.168.10.167:8080/aiqiu/v1/attention/getFollowAnchors`,
     method: "get",
     headers,
@@ -82,7 +88,7 @@ export const liveList = (data, headers) =>
     url: `${baseURL}/aiqiu/v1/live/channels/type/channel`,
     method: "get",
     headers,
-    params:data
+    params: data
     // contentTypejson: true,
     // disableHeader: false
   });
@@ -97,15 +103,36 @@ export const recommendLiveList = (data, headers) =>
     // disableHeader: false
   });
 
-  // 获取搜索结果
-  export const searchResult = (data) =>
-    axios({
-      url: `${baseURL}/aiqiu/v1/live/channels/search`,
-      method: "get",
-      params: data
-      // contentTypejson: true,
-      // disableHeader: false
-    });
+  // 获取推荐直播信息
+export const channelInfo = (data, headers) =>
+axios({
+  url: `${baseURL}/aiqiu/v1/live/channels/info`,
+  method: "get",
+  headers,
+  params: data
+  // contentTypejson: true,
+  // disableHeader: false
+});
+// 获取pc推荐直播列表
+export const changeHotVideo = (data, headers) =>
+axios({
+  url: `${baseURL}/aiqiu/v1/live/channels/recommend/pchot`,
+  method: "get",
+  headers,
+  params: data
+  // contentTypejson: true,
+  // disableHeader: false
+});
+
+// 获取搜索结果
+export const searchResult = (data) =>
+  axios({
+    url: `${baseURL}/aiqiu/v1/live/channels/search`,
+    method: "get",
+    params: data
+    // contentTypejson: true,
+    // disableHeader: false
+  });
 
 
 // 检查当前状态

@@ -11,7 +11,6 @@ const CDN_ADDRESS = `${ process.env.VUE_APP_CDN === 'production' ? "https://stat
 console.log(process.env.VUE_APP_ZY_API, "VUE_APP_ZY_API");
 // console.log(process.env.VUE_APP_DOMAIN, "VUE_APP_DOMAIN");
 console.log(process.env.VUE_APP_CONFIG_ENV, "VUE_APP_CONFIG_ENV");
-console.log(process.env.NODE_ENV, "NODE_ENV");
 console.log(CDN_ADDRESS, 'CDN_ADDRESS');
 module.exports = () => {
   let prodConfig = {
@@ -85,7 +84,7 @@ module.exports = () => {
           "/aiqiu/*": {
             target: "https://api.iqiulive.cn", // test
             changeOrigin: true
-          }
+          },
         }
       }
     });

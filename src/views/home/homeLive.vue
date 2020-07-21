@@ -1,9 +1,11 @@
 <template>
   <div>
     <div class="videoRecom">
+      <div class="imgright" @click.self="downloadright()"></div>
+      <div class="imgleft" @click.self="downloadleft()"></div>
       <div class="RecomContent">
         <div class="videoRecomMain">
-          <videoPlayer ref="dPlayer" :roomId="recommendVideo.id" :notLivingSuggest="recommendVideo2"></videoPlayer>
+          <videoPlayer class="videoPlayer" ref="dPlayer" :roomId="recommendVideo.id" :notLivingSuggest="recommendVideo2"></videoPlayer>
           <div class="intoLiveRomm" @click="intoLiveRomm(recommendVideo.id)">进入直播间</div>
         </div>
         <div class="videoRecomList">
@@ -14,6 +16,7 @@
         </div>
       </div>
     </div>
+    
 
 <!--    <div class="events" style="margin-top:15px;">-->
 <!--      <div class="activity">-->
@@ -51,41 +54,95 @@
 
 
     <div class="liveRecomend news" style="margin-top:15px;">
-      <section class="hot-wrap">
+      <div class="img-news">
+        <section class="news-wrap">
+          <div class="liveRecomend-title">
+            <img src="@/assets/home/homeIcon/news.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
+            <p class="liveRecomend-title-text">官方公告
+  <!--            <i class="el-icon-arrow-right arrow-right"></i>-->
+            </P>
+          </div>
+          <div class="allimg">
+          <div class="shuffling">
+          <section class="news-content">
+            <el-carousel height="350px">
+              <el-carousel-item v-for="(item,index) in protocolList" :key="index">
+                <a :href="item.url" target="_blank" @click="homeClickEvent('ad_click','新闻公告',item.url)">
+                  <img :src="item.img" style="width:420px;height:350px;">
+                </a>
+              </el-carousel-item>
+            </el-carousel>
+            <!-- <div class="news-item" v-for="(item,index) in protocolList" :key="index">
+              <a class="news-item-title" :href="item.url" target="_blank">{{ item.title }}</a> -->
+              <!--          <p class="news-item-desc">{{ item }} 爱球直播平台（以下简称“本平台”）是全民的直…</p>-->
+            <!-- </div> -->
+          </section>
+          </div>
+          <div>
+          <div class="img1"> <img src="@/assets/gonggao/small2.png" style="width:210px;height:170px;"></div>
+          <div class="img2"> <img src="@/assets/gonggao/small1.png" style="width:210px;height:170px;"></div>
+          </div>
+          </div>
+        </section>
+        <!-- 新闻 -->
+        <section class="rightnews">
+          <div class="liveRecomend-title">
+            <img src="@/assets/home/homeIcon/news.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
+            <p class="liveRecomend-title-text">新闻
+  <!--            <i class="el-icon-arrow-right arrow-right"></i>-->
+            </P>
+          </div>
+          <div class="news-item" v-for="(item,index) in protocolList" :key="index">
+              <a class="news-item-title" :href="item.url" target="_blank">{{ item.title }}</a>
+              <!--          <p class="news-item-desc">{{ item }} 爱球直播平台（以下简称“本平台”）是全民的直…</p>-->
+            </div>
+            <!-- <div class="shareall">
+              <el-popover
+                placement="bottom-start"
+                width="410"
+                trigger="hover">
+                <div class="text">老铁分享一个呗~</div>
+                <div class="sharearea">
+                <div class="share" @click="share('qq')"><img src="@/assets/share/qq.png" alt=""></div>
+                <div class="share" @click="share('qzone')"><img src="@/assets/share/kongjian.png" alt=""></div>
+                <div class="share" @click="share('weibo')"><img src="@/assets/share/xinlang.png" alt=""></div>
+                <div class="share" @click="share('weixin')" ref="qrCodeUrl" style="width:100px">微信扫码分享</div>
+                </div>
+                <el-button slot="reference">分享</el-button>
+              </el-popover>
+            </div> -->
+        </section>
+        </div>
+
+      <!-- <section class="hot-wrap">
         <div class="liveRecomend-title">
           <img src="@/assets/home/homeIcon/hotRecom@2x.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
           <p class="liveRecomend-title-text">热门
-<!--            推荐<i class="el-icon-arrow-right arrow-right"></i> -->
           </P>
+          <button class="liveRecomend-title-chenge"  @click="changeHotVideo()">换一换
+          </button>
         </div>
         <div style="margin: 0 -12px;width:100%">
-          <livelistitem :liveList="recommendVideo8" :itemStyle="{width: 'calc(33.3% - 24px)'}"
+          <livelistitem :liveList="recommendVideo8" :itemStyle="{width: 'calc(24.4% - 18px)'}"
                         @homeListEventTanck="homeListHotTanck"></livelistitem>
         </div>
-      </section>
-      <section class="news-wrap">
-        <div class="liveRecomend-title">
-          <img src="@/assets/home/homeIcon/news.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
-          <p class="liveRecomend-title-text">官方公告
-<!--            <i class="el-icon-arrow-right arrow-right"></i>-->
-          </P>
-        </div>
-        <section class="news-content">
-          <el-carousel height="236px">
-            <el-carousel-item v-for="(item,index) in protocolList" :key="index">
-              <a :href="item.url" target="_blank" @click="homeClickEvent('ad_click','新闻公告',item.url)">
-                <img :src="item.img" style="width:290px;height:236px;">
-              </a>
-            </el-carousel-item>
-          </el-carousel>
-          <div class="news-item" v-for="(item,index) in protocolList" :key="index">
-            <a class="news-item-title" :href="item.url" target="_blank">{{ item.title }}</a>
-            <!--          <p class="news-item-desc">{{ item }} 爱球直播平台（以下简称“本平台”）是全民的直…</p>-->
-          </div>
-        </section>
-      </section>
+    </section> -->
     </div>
-
+    <div class="liveRecomend">
+        <div class="liveRecomend-title">
+          <img src="@/assets/home/homeIcon/hotRecom@2x.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
+          <p class="liveRecomend-title-text">热门
+           <!-- 推荐<i class="el-icon-arrow-right arrow-right"></i> -->
+          </P>
+          <button class="liveRecomend-title-chenge"  @click="changeHotVideo()">换一换
+           <!-- 推荐<i class="el-icon-arrow-right arrow-right"></i> -->
+          </button>
+        </div>
+        <div style="margin: 0 -12px;width:1224px">
+          <livelistitem :liveList="recommendVideo8" :itemStyle="{width: 'calc(25% - 24px)'}"
+                        @homeListEventTanck="homeListHotTanck"></livelistitem>
+        </div>
+    </div>
     <div class="liveRecomend" v-show="recommendFootball.length>0">
       <div class="liveRecomend-title">
         <img src="@/assets/home/homeIcon/footballRecom@2x.png"
@@ -127,15 +184,26 @@
     </div>
     <!--右下角滑块-->
     <right-float-layer :step="200"></right-float-layer>
+    <!-- 拖拽 -->
+    <div class="video-content" ref="movediv" v-if="videoshow">
+      <div class="videomove" @mousedown="move"></div>
+        <!-- <videosmall src=""></videosmall> -->
+      <videoPlayer class="video-player" ref="player" :roomId="recommendVideo.id" :notLivingSuggest="recommendVideo2"></videoPlayer>
+    </div>
   </div>
 </template>
+<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
 <script>
   import { Button, Popover, divider, Carousel, CarouselItem } from 'element-ui'
   import RightFloatLayer from '@/components/right-float-layer.vue'
   import videoPlayer from "@/components/video/videoPlayer.vue"
   import livelistitem from "@/components/live-list-item.vue"
   import * as eventTrack from '@/utils/eventTracking.js'
-  import { liveList } from "@/api/api";
+  // import { liveList,changeHotVideo } from "@/api/api";
+  import { liveList,recommendLiveList } from "@/api/api"
+  // import  from "@/modules/share/qzopensl.js";
+  import QRCode from 'qrcodejs2'
+  // import img from '@/assets/share/kongjian.png'
 
   export default {
     name: 'home-live',
@@ -163,14 +231,19 @@
           {
             title: "[公告]爱球直播免责声明",
             url: this.USER_SPECIAL_CONTRACT,
-            img: require('@/assets/gonggao/special.jpeg'),
+            img: require('@/assets/gonggao/big2.png'),
           },
           {
             title: "[公告]爱球直播隐私政策",
             url: this.USER_PRIVACY_CONTRACT,
             img: require('@/assets/gonggao/privacy.jpeg'),
           }
-        ]
+        ],
+        sum: 0,
+        positionX:0,
+        positionY:0,
+        scrollTop:0,
+        videoshow:false,
       }
     },
     computed: {
@@ -185,6 +258,7 @@
       // getExtensionOrderReport()
     },
     mounted() {
+      // this.creatQrCode()
       this.getSugestedList()
       this.getZQSugestedList()
       this.getLQSugestedList()
@@ -194,8 +268,62 @@
         // this.reminder()
       }
       this.regularRefresh()
+      window.addEventListener('scroll',this.handleScroll,true)
     },
     methods: {
+      //二维码
+    //   creatQrCode() {
+    //     var qrcode = new QRCode(this.$refs.qrCodeUrl, {
+    //         text: 'http://m.iqiulive.cn', // 需要转换为二维码的内容
+    //         width: 100,
+    //         height: 100,
+    //         colorDark: '#000000',
+    //         colorLight: '#ffffff',
+    //         correctLevel: QRCode.CorrectLevel.H
+    //     })
+    // },
+      //分享
+      // share(type) {
+      //   // console.log(encodeURIComponent(document.location))
+      //   var i = "https://rpic.douyucdn.cn/asrpic/200716/254667_1359.png/dy1"
+      //   if(type=='qq') {
+      //     window.open('http://connect.qq.com/widget/shareqq/index.html?url='+'http://www.iqiulive.cn'+'?sharesource=qzone&title=&pics='+i+'&summary= 根据调查你确实是猪')
+      //   }else if(type=='qzone') {
+      //     window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+'http://www.iqiulive.cn'+'?sharesource=qzone&title=555&pics=图片地址&summary= 嗯嗯')
+      //   }else if(type=='weibo') {
+      //     window.open('http://service.weibo.com/share/share.php?url='+'http://www.iqiulive.cn'+'?sharesource=weibo&title=标题&pic=图片&appkey=微博平台申请的key');
+      //   }else{
+      //     var url = 'http://www.iqiulive.cn',
+      //           encodePath = encodeURIComponent(url),
+      //           targetUrl = 'http://qr.liantu.com/api.php?text=' + encodePath;
+      //        window.open(url,'weixin', 'height=320, width=320')
+      //   }
+        
+      //   // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+document.location.href+'?sharesource=qzone&title='+this.sum+'&pics=图片地址&summary= 嗯嗯')
+      //   // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(document.location) + '?sharesource=qzone&title=' + sum + '&pics=' +  + '&summary=' + '');
+      //   // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+document.location.href+'?sharesource=qzone&title='+ftit+'&pics='+lk+'&summary='+document.querySelector('meta[name="description"]').getAttribute('content'))
+      // },
+      // 滚动条
+      handleScroll() {
+        this.scrollTop = window.pageYOffset;
+        console.log(this.scrollTop)
+        if(this.scrollTop>=700){
+          this.videoshow=true
+        }else{
+          this.videoshow=false
+        }
+        // var offsetTop = Number(this.scrollTop);
+        // this.$refs.movediv.style.top+=offsetTop+'px';
+        // this.$refs.movediv.style.top+=200+'px';
+        // console.log(this.$refs.movediv.style.top)
+        // console.log(offsetTop)
+      },
+      downloadleft() {
+         window.open('http://www.iqiulive.cn/zhibo')
+      },
+      downloadright() {
+         window.open('http://www.iqiulive.cn/category')
+      },
       // 获取推荐列表
       getSugestedList() {
         let data = {
@@ -208,11 +336,76 @@
           // console.log('首页-获取推荐列表--res',res)
           this.recommendVideo = res.data[0]
           this.recommendVideo6 = res.data.slice(0, 6)
-          this.recommendVideo8 = res.data.slice(6, 12)
           this.recommendVideo2 = res.data.slice(1, 3)
+          if(res.data.length<14) {
+            res.data=res.data.reverse();
+            this.recommendVideo8 = res.data.slice(0, 8)}
+            else{this.recommendVideo8 = res.data.slice(0, 8)}
         })
 
       },
+      //拖拽
+      move(e){
+            // let e = window.event;
+            let odiv = e.target;        //获取目标元素
+            //算出鼠标相对元素的位置
+            let disX = e.clientX - odiv.offsetLeft;
+            let disY = e.clientY - odiv.offsetTop;
+            document.onmousemove = (e)=>{       //鼠标按下并移动的事件
+                //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
+                let left = e.clientX - disX;    
+                let top = e.clientY - disY;
+                
+                //绑定元素位置到positionX和positionY上面
+                this.positionX = top;
+                this.positionY = left;
+                
+                //移动当前元素下面没有
+                odiv.style.left = left + 'px';
+                this.$refs.player.$el.style.left = left + 'px'
+                
+                odiv.style.top = top + 'px';
+                this.$refs.player.$el.style.top = top + 'px'
+
+            };
+            document.onmouseup = () => {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+        },
+      // changeHotVideo() {
+      //   console.log("1")
+      //   let data = {
+      //     // p:1,
+      //     // size:6,
+      //     focus:'true',
+      //     typeId:'pchot'
+      //     // typeld:'add'
+      //   }
+      //   changeHotVideo(data).then(res=>{
+      //     this.recommendVideo8=res.data
+      //   })
+      //   },
+      changeHotVideo() {
+        // console.log("1")
+        let data = {
+          // p:1,
+          // size:6,
+          type:'',
+          typeId:'hot'
+          // typeld:'add'
+        }
+        let headers = {}
+        recommendLiveList(data,headers).then(res=>{
+          // console.log(res.data)
+          // if(res.data.length<14)  res.data = res.data.concat(res.data);//res.data=res.data.reverse();
+          if(this.sum==0 && res.data.length>=14) this.sum=6;
+          // console.log(res.data);
+          this.recommendVideo8 = res.data.slice(this.sum,this.sum+8)
+          this.sum += 8
+          if(this.sum >= res.data.length) this.sum = 0
+        })
+        },
       // 获取分类推荐列表-足球
       getZQSugestedList() {
         let data = {
@@ -231,6 +424,7 @@
             console.error(e);
           })
       },
+
       // 获取分类推荐列表-篮球
       getLQSugestedList() {
         let data = {
@@ -266,6 +460,8 @@
       },
       intoLiveRomm(itemID) {
         const { href } = this.$router.resolve(itemID, '/')
+        console.log(this.$router.resolve(itemID, '/'))
+        console.log(5555555);
         window.open(href, "_blank");
         this.homeClickEvent('living_room_enter_click', '首页背投', this.recommendVideo.id, this.recommendVideo.name)
       },
@@ -319,13 +515,27 @@
 <style lang="scss" scoped>
   @import "@/assets/css/_index.scss";
   .videoRecom {
+
     width: 100%;
     min-width: 1202px;
     height: 646px;
     background-color: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(26, 29, 31, 1) 51%, rgba(8, 10, 16, 1) 100%);
     background: url('../../assets/home/videoBg@2x.png') no-repeat 100% top;
     background-size: 100% 100%;
-
+    display: flex;
+    position: relative;
+    
+    .imgleft{
+      position: absolute;
+      width: 50%;
+      height: 646px;
+      background: url(../../assets/home/left.png) no-repeat;
+      background-size: cover;
+      -webkit-background-size: cover;
+      -o-background-size: cover;
+      background-position: center 0;
+      z-index: 0;
+    }
     .RecomContent {
       cursor: pointer;
       width: 1202px;
@@ -335,7 +545,7 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-
+  
       .videoRecomMain {
         width: 1002px;
         height: 602px;
@@ -366,6 +576,7 @@
       }
 
       .videoRecomList {
+        z-index: 1;
         width: 200px;
         height: 602px;
         padding-left: 16px;
@@ -462,6 +673,19 @@
       color: rgba(51, 51, 51, 1);
       line-height: 50px;
     }
+
+    .liveRecomend-title-chenge {
+      margin-left: 50px;
+      height: 50px;
+      font-size: 16px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      border: 0px;
+      font-weight: 500;
+      color: rgb(55, 171, 248);
+      line-height: 50px;
+      z-index: 4;
+      outline:0;
+    }
   }
 
   .arrow-right {
@@ -472,23 +696,52 @@
   }
 
   .news {
-    display: flex;
-    flex-direction: row;
+    // display: flex;
+    // flex-direction: row;
     justify-content: space-between;
 
     .hot-wrap {
-      width: 920px;
+      width: 1020px;
       overflow: hidden;
     }
 
     .news-wrap {
-      width: 290px;
-      height: 514px;
+      // width: 290px;
+      // height: 514px;
+      width: 620px;
+      height: 350px;
       border-radius: 4px;
+      margin-bottom: 150px;
     }
     .news-content {
-      height: calc(514px - 58px);
+      height: calc(514px - 164px);
       background-color: #fff;
+      // display: flex;
+    }
+    .shuffling {
+      width: 420px;
+      height: 350px;
+    }
+    .img-news {
+      display: flex;
+    }
+    .img1 {
+      width: 150px;
+      height: 150px;
+      margin-left: 13px;
+    }
+    .img2 {
+      width: 150px;
+      height: 150px;
+      padding-top: 30px;
+      margin-left: 13px;
+    }
+    .allimg {
+      display: flex;
+    }
+
+    .rightnews {
+      margin-left: 100px;
     }
     .news-item {
       padding: 24px 10px 0;
@@ -508,4 +761,64 @@
       }
     }
   }
+
+  .imgright{
+  position: absolute;
+  right: 0px;
+  width: 50%;
+  height: 646px;
+  background: url(../../assets/home/right.png) no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-position: center 0;
+  overflow: hidden;
+}
+.video-content{
+  // position: absolute;
+  position: fixed;
+  left: 1450px;
+  top: 557px;
+  width: 500px;
+  height: 200px;
+}
+.videomove{
+  position: absolute;     /*定位*/
+  top: 100px;
+  left: 100px;
+  width: 500px;
+  height: 250px;
+  // background-color: #bbf;
+  cursor:move;
+  opacity: 0;
+  z-index: 100;
+}
+.video-player{
+  left: 100px;
+  top: 100px;
+  z-index: 50;
+}
+
+.share{
+  margin-top: 50px;
+  margin-left: 10px;
+  width: 70px;
+  height: 70px;
+}
+
+.shareall{
+  margin-top: 20px;
+  width: 100px;
+}
+.sharearea{
+  width: 410px;
+  height: 200px;
+  display: flex;
+}
+
+.text{
+  font-size: 24px;
+  text-align: center;
+  margin-top: 30px;
+}
 </style>

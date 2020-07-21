@@ -62,7 +62,7 @@ export default {
 
 }
 .downloadall{
-  margin-top: 410px;
+  margin-top: 450px;
   margin-left: 60%;
   height: 600px;
 }
@@ -103,7 +103,7 @@ export default {
   background-position: center 0;
   position: fixed;
   z-index: 2;
-  margin-top: 100px;
+  margin-top: 96px;
   margin-left: 0.6%;
 }
 
@@ -120,7 +120,7 @@ export default {
   margin-left: 41px;
 }
 // .download{
-//   z-index:1;
+//   z-index:1
 // }
 // .center{
 //   margin-right: 100px;

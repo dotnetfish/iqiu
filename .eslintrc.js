@@ -1,17 +1,19 @@
 module.exports = {
+    // mode: 'production',
     "env": {
         "browser": true,
         "es6": true,
         "node": true
     },
-    "parser": "babel-eslint",
+    // "parser": "babel-eslint",
     "extends": "eslint:recommended",
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
+    "root": true,
     "parserOptions": {
-        sourceType: 'module',
+        // sourceType: 'module',
         "ecmaFeatures": {
             "jsx": true
         },
@@ -23,6 +25,7 @@ module.exports = {
         "react"
     ],
     "rules": {
-        "no-console":"off"
+        "no-console":"off",
+        'no-unused-vars': 'off'
     }
 };
