@@ -5,7 +5,7 @@
         </div>
 <!--        <left-side-bar @changeFoldState="changeFoldState"></left-side-bar>-->
         <right-float-layer :step="200"></right-float-layer>
-        <div class="main-box">
+        <div class="main-box" ref="download">
             <router-view :getisFold="getisFold"></router-view>
         </div>
     </div>
@@ -40,15 +40,17 @@
         isNoData: 0,
         isMore: 0,
         allLiveList: [],
-        isFold: false
+        isFold: false,
+        flag:'',
       }
     },
     created () {
       // console.log('频道首页')
       // console.log('折叠状态',this.$store.state.fold);
-      this.getFoldState();
+      // this.getFoldState();
     },
     mounted () {
+      this.download();
     },
     destroyed () {
     },
@@ -93,6 +95,15 @@
       // }
     },
     methods: {
+      download() {
+        this.flag = this.$route.path
+        if(this.flag == '/download') {
+          this.$refs.download.style.width = '100%';
+        }else {
+          this.$refs.download.style.width = '1200px';
+        }
+        console.log(this.$route.path);
+      },
       // 修改折叠状态
       changeFoldState () {
         this.getFoldState();

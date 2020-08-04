@@ -25,8 +25,8 @@ export default {};
 
 <style lang="scss" scoped>
 .barrage {
-  padding-right: 500px;
-  padding-left: 500px;
+      width: 74%;
+    margin: 0 auto;
 }
 .title {
   font-size: 34px;
@@ -39,6 +39,7 @@ export default {};
 }
 .content {
   margin-top: 20px;
+  text-align: justify;
 }
 .contentend{
     margin-top: 20px;

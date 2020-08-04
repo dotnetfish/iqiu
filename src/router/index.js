@@ -30,6 +30,14 @@ const routes = [
   component: ()=> import('../views/word/aboutwe.vue')
 },
 {
+  path:"/aboutwefake",
+  name:"Aboutwefake",
+  meta:{
+      title:"关于我们"
+  },
+  component: ()=> import('../views/word/aboutwefake.vue')
+},
+{
   path:"/serve",
   name:"Serve",
   meta:{
@@ -113,6 +121,22 @@ const routes = [
           title: "下载"
         },
         component: () => import("../views/Download.vue")
+      },
+      {
+        path: "/schedule",
+        name: "Schedule",
+        meta: {
+          title: "赛程"
+        },
+        component: () => import("../views/Schedule.vue")
+      },
+      {
+        path: "/live-broadcast",
+        name: "Live-broadcast",
+        meta: {
+          title: "赛程直播"
+        },
+        component: () => import("../views/schedule/live-broadcast.vue")
       },
     ]
   },

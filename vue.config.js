@@ -1,6 +1,6 @@
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 // const CDN_ADDRESS = `https://static.likedu.top${ process.env.VUE_APP_CONFIG_ENV === 'production' ? "/aiqiu-prod/pc/dist/" : "/aiqiu-prod/pc/dist/" }`;
-const CDN_ADDRESS = `${ process.env.VUE_APP_CDN === 'production' ? "https://static.iqiulive.cn" : "https://static.iqiulive.cn" }/aiqiu-prod/pc/dist/`;
+const CDN_ADDRESS = `${process.env.VUE_APP_CDN === 'production' ? "https://static.iqiulive.cn" : "https://static.iqiulive.cn"}/aiqiu-prod/pc/dist/`;
 
 // const path = require("path");
 
@@ -85,6 +85,11 @@ module.exports = () => {
             target: "https://api.iqiulive.cn", // test
             changeOrigin: true
           },
+          // "/mock/*": {
+          //   target: "https://mock.yonyoucloud.com", // test
+          //   changeOrigin: false,
+          //   secure: false
+          // }
         }
       }
     });

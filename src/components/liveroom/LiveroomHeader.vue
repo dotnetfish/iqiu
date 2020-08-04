@@ -1,40 +1,66 @@
 <template>
   <div class="live-header">
-    <img class="header-logo" :src="channelInfo.avatarUrl" alt="">
+    <img class="header-logo" :src="channelInfo.avatarUrl" alt />
     <div class="header-content">
       <h3 class="title">
         {{ channelInfo.name }}
-        <router-link target="_blank" class="label" v-show="channelInfo.typeName"
-                     :to="{ path: '/zhibo', query: { 'typeId': channelInfo.type || 'all', name: channelInfo.typeName }}">
-          {{ channelInfo.typeName }}
-        </router-link>
+        <router-link
+          target="_blank"
+          class="label"
+          v-show="channelInfo.typeName"
+          :to="{ path: '/zhibo', query: { 'typeId': channelInfo.type || 'all', name: channelInfo.typeName }}"
+        >{{ channelInfo.typeName }}</router-link>
       </h3>
       <div class="label-wrap">
         <span>主播：{{ channelInfo.uname }}</span>
         <span style="margin-left: 40px">房间号：{{ channelInfo.id }}</span>
-        <i class="icon icon2"></i> <span>{{ channelInfo.onlinescore }}</span>
+        <i class="icon icon2"></i>
+        <span>{{ channelInfo.onlinescore }}</span>
       </div>
     </div>
     <div class="shareall">
-              <el-popover
-                placement="bottom-start"
-                width="410"
-                trigger="hover">
-                <div class="text">老铁分享一个呗~</div>
-                <div class="sharearea">
-                <div class="share" @click="share('qq')"><img src="@/assets/share/qq.png" alt=""></div>
-                <div class="share" @click="share('qzone')"><img src="@/assets/share/kongjian.png" alt=""></div>
-                <div class="share" @click="share('weibo')"><img src="@/assets/share/xinlang.png" alt=""></div>
-                <div class="share" @click="share('weixin')" ref="qrCodeUrl" style="width:100px">微信扫码分享</div>
-                </div>
-                <el-button slot="reference"  @click="creatQrCode()" @mouseover="creatQrCode()">分享</el-button>
-              </el-popover>
-            </div>
+      <el-popover placement="bottom-start" width="410" trigger="hover">
+        <div class="text">老铁分享一个呗~</div>
+        <div class="sharearea">
+          <div class="share1" @click="share('qq')">
+            <img src="@/assets/share/qq.png" alt />
+          </div>
+          <div class="share1" @click="share('qzone')">
+            <img src="@/assets/share/kongjian.png" alt />
+          </div>
+          <div class="share1" @click="share('weibo')">
+            <img src="@/assets/share/xinlang.png" alt />
+          </div>
+          <div class="share" @click="share('weixin')" ref="qrCodeUrl" style="width:100px">微信扫码分享</div>
+        </div>
+        <div class="pc-m">
+          <button class="pc" @click="changepc()" ref="pc">直播间地址</button>
+          <button class="m" @click="changem()">H5外链播放器</button>
+        </div>
+        <div class="urlarea" v-if="flag==1">
+          <el-input v-model="sharearea" class="inputurl"></el-input>
+          <button class="copyurl" v-clipboard:copy="area">复制链接</button>
+        </div>
+        <div class="urlarea" v-if="flag==2">
+          <el-input v-model="shareaream" class="inputurl"></el-input>
+          <button class="copyurl" v-clipboard:copy="aream">复制链接</button>
+        </div>
+        <button
+          slot="reference"
+          class="share-button"
+          @mouseenter="blueshare(1)"
+          @mouseleave="blueshare(2)"
+          ref="blue"
+        >
+          <span class="share-text">分享</span>
+        </button>
+      </el-popover>
+    </div>
 
     <div class="header-like">
       <div class="count">{{ channelInfo.followCount }}</div>
       <div class="like" :class="{'follow': follow}" @click.stop="handleLike">
-<!--        <i :class="{'follow': follow}"></i>-->
+        <!--        <i :class="{'follow': follow}"></i>-->
         {{follow?
         '已关注':'关注'}}
       </div>
@@ -43,285 +69,417 @@
 </template>
 
 <script>
-    import { Button,Popover } from 'element-ui'
-    import { attentionAnchor, attentionCancelAnchor } from '@/api/liveroom'
-    import { throttle } from "@/utils/debounceAndthrottle";
-    import QRCode from 'qrcodejs2'
+import { Button, Popover, Input } from "element-ui";
+import { attentionAnchor, attentionCancelAnchor } from "@/api/liveroom";
+import { throttle } from "@/utils/debounceAndthrottle";
+import QRCode from "qrcodejs2";
 
-    export default {
-        name: 'LiveroomHeader',
-        components: {
-        [Button.name]: Button,
-        [Popover.name]: Popover,
+export default {
+  name: "LiveroomHeader",
+  components: {
+    [Button.name]: Button,
+    [Popover.name]: Popover,
+    [Input.name]: Input,
+  },
+  data() {
+    return {
+      sharearea: "",
+      shareaream: "",
+      area: "",
+      flag: 1,
+      aream: "",
+    };
+  },
+  props: {
+    channelInfo: {
+      type: Object,
+      default: () => {
+        return {};
       },
-        props: {
-            channelInfo: {
-                type: Object,
-                default: () => {
-                    return {}
-                }
-            },
-            follow: {
-                type: Boolean,
-                defalut: false
-            }
+    },
+    follow: {
+      type: Boolean,
+      defalut: false,
+    },
+  },
+  computed: {
+    isLogin() {
+      return this.$store.getters.isLogin;
+    },
+  },
+  watch: {
+    channelInfo(a) {
+      console.log("watch");
+      console.log(a);
+    },
+  },
+  mounted() {
+    setTimeout(() => {
+      this.creatQrCode();
+    }, 1000);
+    console.log(9999999);
+    console.log(this.channelInfo.id);
+  },
+  methods: {
+    changepc() {
+      this.flag = 1;
+    },
+    changem() {
+      this.flag = 2;
+    },
+    //复制链接
+    // onCopy() {
+    //   this.$message({
+    //     message: `复制成功！`,
+    //     type: "success",
+    //   });
+    //   this.snackBar.info(this.$t("prompt.copySuccess"));
+    // },
+    // onError() {
+    //   this.$message.error(this.$t("prompt.copyFail"));
+    // },
 
-        },
-        computed: {
-            isLogin() {
-                return this.$store.getters.isLogin
-            }
-        },
-        watch:{
-          channelInfo(a){
-            console.log('watch')
-            console.log(a)
+    blueshare(index) {
+      if (index === 1) {
+        this.$refs.blue.style.color = "rgb(64, 158, 255)";
+        this.$refs.blue.style.border = "rgb(198, 226, 255) solid 1px";
+        this.sharearea = "http://www.iqiulive.cn/" + this.channelInfo.id;
+        this.shareaream = "http://m.iqiulive.cn/" + this.channelInfo.id;
+      } else {
+        this.$refs.blue.style.color = "rgb(0, 0, 0)";
+        this.$refs.blue.style.border = "rgb(190, 190, 190) solid 1px";
+      }
+    },
+    //二维码
+    creatQrCode() {
+      this.area = "http://www.iqiulive.cn/" + this.channelInfo.id;
+      this.aream = "http://m.iqiulive.cn/" + this.channelInfo.id;
+      let that = this;
+      console.log(595986);
+      console.log(that.channelInfo.id);
+      var qrcode = new QRCode(this.$refs.qrCodeUrl, {
+        // eslint-disable-line no-unused-vars
+        text: "http://m.iqiulive.cn/" + that.channelInfo.id, // 需要转换为二维码的内容
+        width: 100,
+        height: 100,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H,
+      });
+    },
+    //分享
+    share(type) {
+      // console.log(encodeURIComponent(document.location))
+      // let i = require('https://rpic.douyucdn.cn/asrpic/200716/48699_1730.png/dy1')
+      console.log(597777776);
+      console.log(this.channelInfo.id);
+      if (type == "qq") {
+        window.open(
+          "http://connect.qq.com/widget/shareqq/index.html?url=" +
+            "http://www.iqiulive.cn/" +
+            this.channelInfo.id +
+            "?sharesource=qzone&title=" +
+            this.channelInfo.name +
+            "&pics=https://static.iqiulive.cn/aiqiu-prod/pc/dist/img/logo_big@2x_o.55bd6cbc.png&summary=" +
+            this.channelInfo.uname +
+            "开播啦,快来看啊"
+        );
+      } else if (type == "qzone") {
+        window.open(
+          "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" +
+            "http://www.iqiulive.cn/" +
+            this.channelInfo.id +
+            "?sharesource=qzone&title=" +
+            this.channelInfo.name +
+            "&pics=https://static.iqiulive.cn/aiqiu-prod/pc/dist/img/logo_big@2x_o.55bd6cbc.png&summary=" +
+            this.channelInfo.uname +
+            "开播啦,快来看啊"
+        );
+      } else if (type == "weibo") {
+        window.open(
+          "http://service.weibo.com/share/share.php?url=" +
+            "http://www.iqiulive.cn/" +
+            this.channelInfo.id +
+            "?sharesource=" +
+            this.channelInfo.uname +
+            "开播啦,快来看啊" +
+            "&title=" +
+            this.channelInfo.name +
+            "&pic=https://static.iqiulive.cn/aiqiu-prod/pc/dist/img/logo_big@2x_o.55bd6cbc.png&appkey=微博平台申请的key"
+        );
+      }
+      // else{
+      //   var url = 'http://www.iqiulive.cn/'+this.channelInfo.id;
+      //         // encodePath = encodeURIComponent(url),
+      //         // targetUrl = 'http://qr.liantu.com/api.php?text=' + encodePath;
+      //     //  window.open(url,'weixin', 'height=320, width=320')
+      // }
+      // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+document.location.href+'?sharesource=qzone&title='+this.sum+'&pics=图片地址&summary= 嗯嗯')
+      // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(document.location) + '?sharesource=qzone&title=' + sum + '&pics=' +  + '&summary=' + '');
+      // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+document.location.href+'?sharesource=qzone&title='+ftit+'&pics='+lk+'&summary='+document.querySelector('meta[name="description"]').getAttribute('content'))
+    },
+    handleLike: throttle(function () {
+      console.log("like click");
+      if (!this.isLogin) {
+        return this.$emit("login");
+      } else if (this.follow) {
+        return attentionCancelAnchor({ cid: this.channelInfo.id }).then(
+          (res) => {
+            console.log(res);
+            this.$emit("update:follow", false);
+            // this.$emit('updateChannelInfo')
+            --this.channelInfo.followCount;
           }
-        },
-        mounted() {
-          setTimeout(() => {
-          this.creatQrCode()
-        }, 1000)
-          console.log(9999999)
-          console.log(this.channelInfo.id)
-        },
-        methods: {
-          
-            //二维码
-            creatQrCode() {
-              let that = this;
-              console.log(595986);
-              console.log(that.channelInfo.id);
-              var qrcode = new QRCode(this.$refs.qrCodeUrl, {// eslint-disable-line no-unused-vars
-                  text: 'http://m.iqiulive.cn/'+that.channelInfo.id, // 需要转换为二维码的内容
-                  width: 100,
-                  height: 100,
-                  colorDark: '#000000',
-                  colorLight: '#ffffff',
-                  correctLevel: QRCode.CorrectLevel.H
-              })
-          },
-            //分享
-      share(type) {
-        // console.log(encodeURIComponent(document.location))
-        // let i = require('https://rpic.douyucdn.cn/asrpic/200716/48699_1730.png/dy1')
-        console.log(597777776);
-        console.log(this.channelInfo.id);
-        if(type=='qq') {
-          window.open('http://connect.qq.com/widget/shareqq/index.html?url='+'http://www.iqiulive.cn/'+this.channelInfo.id+'?sharesource=qzone&title='+this.channelInfo.name+'&pics=https://static.iqiulive.cn/aiqiu-prod/pc/dist/img/logo_big@2x_o.55bd6cbc.png&summary='+this.channelInfo.uname+'开播啦,快来看啊')
-        }else if(type=='qzone') {
-          window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+'http://www.iqiulive.cn'+this.channelInfo.id+'?sharesource=qzone&title='+this.channelInfo.name+'&pics=https://static.iqiulive.cn/aiqiu-prod/pc/dist/img/logo_big@2x_o.55bd6cbc.png&summary='+this.channelInfo.uname+'开播啦,快来看啊')
-        }else if(type=='weibo') {
-          window.open('http://service.weibo.com/share/share.php?url='+'http://www.iqiulive.cn'+this.channelInfo.id+'?sharesource='+this.channelInfo.uname+'开播啦,快来看啊'+'&title='+this.channelInfo.name+'&pic=https://static.iqiulive.cn/aiqiu-prod/pc/dist/img/logo_big@2x_o.55bd6cbc.png&appkey=微博平台申请的key');
-        }
-        // else{
-        //   var url = 'http://www.iqiulive.cn/'+this.channelInfo.id;
-        //         // encodePath = encodeURIComponent(url),
-        //         // targetUrl = 'http://qr.liantu.com/api.php?text=' + encodePath;
-        //     //  window.open(url,'weixin', 'height=320, width=320')
-        // }
-        // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+document.location.href+'?sharesource=qzone&title='+this.sum+'&pics=图片地址&summary= 嗯嗯')
-        // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(document.location) + '?sharesource=qzone&title=' + sum + '&pics=' +  + '&summary=' + '');
-        // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+document.location.href+'?sharesource=qzone&title='+ftit+'&pics='+lk+'&summary='+document.querySelector('meta[name="description"]').getAttribute('content'))
-      },
-            handleLike: throttle(function () {
-                console.log('like click');
-                if (!this.isLogin) {
-                    return this.$emit('login')
-                } else if (this.follow) {
-                    return attentionCancelAnchor({ cid: this.channelInfo.id }).then(res => {
-                        console.log(res);
-                        this.$emit('update:follow', false)
-                        // this.$emit('updateChannelInfo')
-                        --this.channelInfo.followCount
-
-                    })
-                } else if (!this.follow) {
-                    return attentionAnchor({ cid: this.channelInfo.id, channel: 'PC_SITE' }).then(res => {
-                        console.log(res);
-                        this.$emit('update:follow', true)
-                        // this.$emit('updateChannelInfo')
-                        ++this.channelInfo.followCount
-
-                    })
-                }
-            }, 1000),
-            // handleJump(roomId) {
-            //   // 跳转页面
-            //   const { href } = this.$router.resolve(`/${ roomId }`)
-            //   window.open(href, "_blank");
-            // }
-        }
-    }
-    
+        );
+      } else if (!this.follow) {
+        return attentionAnchor({
+          cid: this.channelInfo.id,
+          channel: "PC_SITE",
+        }).then((res) => {
+          console.log(res);
+          this.$emit("update:follow", true);
+          // this.$emit('updateChannelInfo')
+          ++this.channelInfo.followCount;
+        });
+      }
+    }, 1000),
+    // handleJump(roomId) {
+    //   // 跳转页面
+    //   const { href } = this.$router.resolve(`/${ roomId }`)
+    //   window.open(href, "_blank");
+    // }
+  },
+};
 </script>
 
 <style scoped lang="scss">
-  @import "@/assets/css/_index.scss";
+@import "@/assets/css/_index.scss";
 
-  .live-header {
+.live-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: 100%;
+  height: 97px;
+  background-color: #fff;
+  border-radius: 10px 10px 0px 0px;
+
+  .header-logo {
+    flex: 0 0 auto;
+    padding: 0 20px;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+  }
+
+  .header-content {
+    flex: 1 0 auto;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50px;
+    font-size: 14px;
+    color: $color-title2;
 
-    width: 100%;
-    height: 97px;
-    background-color: #fff;
-    border-radius: 10px 10px 0px 0px;
-
-    .header-logo {
-      flex:0 0 auto;
-      padding: 0 20px;
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-    }
-
-    .header-content {
-      flex: 1 0 auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 50px;
-      font-size: 14px;
-      color: $color-title2;
-
-      .title {
-        margin: 0;
-        padding: 0 0 4px;
-        /*width: 250px;*/
-        font-size: 20px;
-        color: $color-title1;
-        @include ellipsis;
-        .label {
-          margin-left: 10px;
-          padding:1px 15px;
-          font-size: 14px;
-          line-height: 1;
-          border-radius: 24px;
-          color: $color-main;
-          background-color: #fff;
-          border: 1px solid $color-main;
-        }
-      }
-
-      .label-wrap {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-
-        .label {
-          color: $color-main;
-          cursor: pointer;
-        }
-
-        .icon {
-          margin-left: 20px;
-          margin-right: 7px;
-          width: 12px;
-          height: 12px;
-
-          /*&:nth-of-type(1) {*/
-          /*  margin-left: 0;*/
-          /*}*/
-        }
-
-        @for $i from 0 through 2 {
-          .icon#{$i} {
-            background: url('~@/assets/img/live-header-icon' +$i+ '.png') 0 0 no-repeat;
-            background-size: 100% 100%;
-          }
-        }
+    .title {
+      margin: 0;
+      padding: 0 0 4px;
+      /*width: 250px;*/
+      font-size: 20px;
+      color: $color-title1;
+      @include ellipsis;
+      .label {
+        margin-left: 10px;
+        padding: 1px 15px;
+        font-size: 14px;
+        line-height: 1;
+        border-radius: 24px;
+        color: $color-main;
+        background-color: #fff;
+        border: 1px solid $color-main;
       }
     }
 
-    .header-like {
+    .label-wrap {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-      margin-right: 20px;
-      margin-top: 10px;
-      width: 172px;
-      height: 34px;
 
-      border-radius: 4px;
-      overflow: hidden;
-      font-size: 14px;
-
-      .count {
-        flex-basis: 50%;
-        height: 34px;
-        line-height: 34px;
-        background-color: $bg-tab;
-        color: $color-title3;
-        text-align: center;
-        @include ellipsis;
+      .label {
+        color: $color-main;
+        cursor: pointer;
       }
 
-      .like {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-basis: 50%;
-        height: 100%;
-        color: #fff;
-        background-color: $color-main;
-        cursor: pointer;
+      .icon {
+        margin-left: 20px;
+        margin-right: 7px;
+        width: 12px;
+        height: 12px;
 
-        &.follow {
-          opacity: .7;
+        /*&:nth-of-type(1) {*/
+        /*  margin-left: 0;*/
+        /*}*/
+      }
 
-          i {
-            background: url('~@/assets/img/live-header-like-o.png') 0 0 no-repeat;
-            background-size: 100%;
-          }
+      @for $i from 0 through 2 {
+        .icon#{$i} {
+          background: url("~@/assets/img/live-header-icon" + $i + ".png")
+            0
+            0
+            no-repeat;
+          background-size: 100% 100%;
         }
-
-        i {
-          margin-right: 5px;
-          width: 21px;
-          height: 21px;
-          background: url('~@/assets/img/live-header-like.png') 0 0 no-repeat;
-          background-size: 100%;
-
-          /*&.follow {*/
-          /*opacity: .7;*/
-          /*display: none;*/
-          /*background: url('~@/assets/img/live-header-like-follow.png') 0 0 no-repeat;*/
-          /*background-size: 100%;*/
-          /*}*/
-        }
-
       }
     }
   }
-  .share{
-  margin-top: 50px;
+
+  .header-like {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    margin-top: 10px;
+    width: 172px;
+    height: 34px;
+
+    border-radius: 4px;
+    overflow: hidden;
+    font-size: 14px;
+
+    .count {
+      flex-basis: 50%;
+      height: 34px;
+      line-height: 34px;
+      background-color: $bg-tab;
+      color: $color-title3;
+      text-align: center;
+      @include ellipsis;
+    }
+
+    .like {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-basis: 50%;
+      height: 100%;
+      color: #fff;
+      background-color: $color-main;
+      cursor: pointer;
+
+      &.follow {
+        opacity: 0.7;
+
+        i {
+          background: url("~@/assets/img/live-header-like-o.png") 0 0 no-repeat;
+          background-size: 100%;
+        }
+      }
+
+      i {
+        margin-right: 5px;
+        width: 21px;
+        height: 21px;
+        background: url("~@/assets/img/live-header-like.png") 0 0 no-repeat;
+        background-size: 100%;
+
+        /*&.follow {*/
+        /*opacity: .7;*/
+        /*display: none;*/
+        /*background: url('~@/assets/img/live-header-like-follow.png') 0 0 no-repeat;*/
+        /*background-size: 100%;*/
+        /*}*/
+      }
+    }
+  }
+}
+.share {
+  margin-top: 60px;
+  margin-left: 54px;
+  width: 70px;
+  height: 70px;
+}
+
+.share1 {
+  margin-top: 100px;
   margin-left: 10px;
   width: 70px;
   height: 70px;
 }
 
-.shareall{
+.inputurl {
+  width: 70%;
+}
+
+.pc-m {
+  display: flex;
+  width: 100%;
+  height: 20px;
+}
+
+.pc {
+  color: #fff;
+  background-color: rgb(122, 215, 252);
+  border: 0;
+  outline-color: rgb(0, 162, 255);
+}
+
+.m {
+  color: #fff;
+  background-color: rgb(122, 215, 252);
+  border: 0;
+  margin-left: 20px;
+  outline-color: rgb(0, 162, 255);
+}
+
+.urlarea {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  margin-top: 10px;
+}
+
+.copyurl {
+  color: #fff;
+  background-color: rgb(122, 215, 252);
+  border: 0;
+  height: 39px;
+  margin-left: 10px;
+  width: 20%;
+  outline-color: rgb(0, 162, 255);
+}
+
+.share-button {
+  width: 86px;
+  height: 34px;
+  background-color: #fff;
+  border: rgb(235, 227, 227) solid 1px;
+  border-radius: 6px;
+  outline: 0;
+}
+
+.shareall {
   // margin-top: 20px;
-  margin-right: 30px;
+  margin-right: 10px;
   margin-top: 9px;
   width: 100px;
   z-index: 5;
+  // border: rgb(190, 190, 190) solid;
 }
-.sharearea{
+.sharearea {
   width: 410px;
-  height: 200px;
+  height: 220px;
   display: flex;
+  margin-top: -30px;
 }
 
-.text{
-  font-size: 24px;
+.share-text {
+  margin-top: 4px;
+}
+
+.text {
+  font-size: 22px;
   text-align: center;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 </style>
-
-      function newFunction() {
-        debugger;
-      }

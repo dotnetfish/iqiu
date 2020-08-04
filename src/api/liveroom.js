@@ -103,3 +103,11 @@ export const loginInfo = params =>
     method: "get",
     params,
   });
+
+// 获取赛程信息
+export const schedule = params =>
+axios({
+  url: 'https://mock.yonyoucloud.com/mock/12556/schedule/distance',
+  method: "get",
+  params,
+});

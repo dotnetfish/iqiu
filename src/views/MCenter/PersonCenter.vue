@@ -34,6 +34,12 @@
               </div>
               <AnchorApply></AnchorApply>
             </el-tab-pane>
+
+            <el-tab-pane name="4" :key="4">
+              <div class="person-title" slot="label">任务中心</div>
+              <TaskCenter></TaskCenter>
+            </el-tab-pane>
+
             <slot></slot>
           </el-tabs>
         </div>
@@ -49,6 +55,7 @@
   // import PersonEdit from './PersonEdit.vue';
   // import PersonCostDetalis from './PersonCostDetalis';
   import AnchorApply from './AnchorApply';
+  import TaskCenter from './TaskCenter';
 
   export default {
     name: "PersonCenter",
@@ -63,7 +70,8 @@
       // PersonWallt,
       // PersonEdit,
       // PersonCostDetalis,
-      AnchorApply
+      AnchorApply,
+      TaskCenter
     },
     data() {
       return {

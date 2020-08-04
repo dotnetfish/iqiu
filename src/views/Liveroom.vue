@@ -43,6 +43,7 @@
         <LiveroomLoginDialog @login="login"></LiveroomLoginDialog>
       </div>
     </div>
+    <liveroomSmallvideo></liveroomSmallvideo>
   </section>
 </template>
 <script>
@@ -55,6 +56,7 @@ import liveroomChat from "@/components/liveroom/LiveroomChat";
 // import LiveroomPaodao from "@/components/liveroom/LiveroomPaodao";
 import LiveroomLoginDialog from "@/components/liveroom/LiveroomLoginDialog";
 import LiveroomRecommend from "@/components/liveroom/LiveroomRecommend";
+import liveroomSmallvideo from "@/components/liveroom/liveroomSmallvideo.vue"
 
 import LeftSideBar from "@/components/left-side-bar.vue";
 import homeNav from "@/views/home/homeNav.vue";
@@ -90,6 +92,7 @@ export default {
     LiveroomLoginDialog,
     liveroomInput,
     LiveroomRecommend,
+    liveroomSmallvideo,
     LeftSideBar,
     homeNav,
     loginPop,
@@ -386,6 +389,7 @@ export default {
   },
 
   mounted() {
+    window.addEventListener("scroll", this.handleScroll, true);
     this.$nextTick(() => {
       this.DanmakuInit();
     });
@@ -396,6 +400,16 @@ export default {
     window.removeEventListener("resize", this.danmakuResize);
   },
   methods: {
+    //滚动条
+    handleScroll() {
+      this.scrollTop = window.pageYOffset;
+      console.log(this.scrollTop);
+      if (this.scrollTop >= 700) {
+        this.videoshow = true;
+      } else {
+        this.videoshow = false;
+      }
+    },
     getFoldState() {
       // let leftFoldState = window.sessionStorage.getItem("leftFoldState");
       // this.isFold =

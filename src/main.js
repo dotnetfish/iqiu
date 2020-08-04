@@ -7,9 +7,12 @@ import "@/assets/css/_element-ui.scss"; // global css
 import { DOWNLOAD_APP_URL, USER_SERVICE_CONTRACT, USER_PRIVACY_CONTRACT, USER_SPECIAL_CONTRACT } from '@/config/index'
 import axios from "axios";
 import { Message } from 'element-ui';
-import Meta from 'vue-meta'
+import Meta from 'vue-meta';
+import VueClipboard from 'vue-clipboard2'
 
 Vue.use(Meta)
+
+Vue.use(VueClipboard)
 
 Vue.config.productionTip = false
 

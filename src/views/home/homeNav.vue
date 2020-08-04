@@ -1,5 +1,5 @@
 <template>
-  <section class=nav-wrap>
+  <section class="nav-wrap">
     <div class="home-nav" :class="{'noLogo': !navLogo}">
       <div class="nav-menu">
         <div class="nav-logo" v-if="navLogo" align="center">
@@ -30,6 +30,10 @@
               <div class="routing" v-if="$route.name !== 'Download' ">下载</div>
               <div class="nav-routing-active" v-if="$route.name === 'Download' ">下载</div>
             </router-link>
+            <!-- <router-link :to="{name:'Schedule'}" @click.native="navClickEvent('赛程')">
+              <div class="routing" v-if="$route.name !== 'Schedule' ">赛程</div>
+              <div class="nav-routing-active" v-if="$route.name === 'Schedule' ">赛程</div>
+            </router-link> -->
             <div class="nav-icon-item">
               <homeNavDownload :displayItem=" 'download' "></homeNavDownload>
             </div>
@@ -197,6 +201,7 @@
           flex-direction: row;
           justify-content: flex-end;
           align-items: center;
+          margin-left: 80px;
 
           ::v-deep.el-input__inner {
             border-radius: 20px;

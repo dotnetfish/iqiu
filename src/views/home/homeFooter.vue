@@ -380,7 +380,8 @@ export default {
 }
 .we {
   display: flex;
-  padding-left: 630px;
+  width: 531px;
+  margin: 0 auto;
 }
 .divide {
   margin-left: 40px;
@@ -390,7 +391,8 @@ export default {
 }
 .address {
   display: flex;
-  padding-left: 694px;
+  width: 415px;
+  margin: 0 auto;
 }
 .blank {
   width: 10px;

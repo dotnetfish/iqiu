@@ -6,6 +6,7 @@ module.exports = {
         "node": true
     },
     // "parser": "babel-eslint",
+    parser: "vue-eslint-parser",
     "extends": "eslint:recommended",
     "globals": {
         "Atomics": "readonly",
@@ -18,9 +19,8 @@ module.exports = {
             "jsx": true
         },
         "ecmaVersion": 2018,
-        "sourceType": "module"
+        sourceType: 'module'
     },
-    parser: "vue-eslint-parser",
     "plugins": [
         "react"
     ],

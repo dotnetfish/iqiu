@@ -54,6 +54,111 @@
 
 
     <div class="liveRecomend news" style="margin-top:15px;">
+      <!-- <div class="liveRecomend">
+        <div class="liveRecomend-title">
+          <img src="@/assets/home/rebo.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
+          <p class="liveRecomend-title-text">热门赛事</P>
+        </div>
+        <div class="bigboss">
+          <div class="boss">
+            <div class="bossone">
+              <div style="width:33px;height:30px;"><img src="@/assets/home/zuqiu.png" style="width:33px;height:30px"></div>
+              <div style="line-height:30px;color:rgb(154, 160, 179);margin-left:10px">莫西超</div>
+              <div style="line-height:30px;margin-left:20%;margin-right:2%">07月28日</div>
+              <div style="line-height:30px;color:rgb(154, 160, 179)">09:00</div>
+            </div>
+
+            <div class="bosstow">
+              <div style="width:60px;height:60px;"><img src="@/assets/icon_nologin@2x.png" style="width:60px;height:60px"></div>
+               <div style="line-height:60px;margin-left:28px;margin-right:28px">0-1</div>
+              <div style="width:60px;height:60px"><img src="@/assets/icon_nologin@2x.png" style="width:60px;height:60px"></div>
+            </div>
+
+            <div class="bossthree">
+              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">系里哈哈</div>
+              <div style="width:60px;height:28px;margin-left:12px;margin-right:12px"><img src="@/assets/home/lookbo.jpg" style="width:60px;height:28px"></div>
+              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">呼哈呼哈</div>
+            </div>
+          </div>
+          <div class="boss">
+            <div class="bossone">
+              <div style="width:33px;height:30px;"><img src="@/assets/home/zuqiu.png" style="width:33px;height:30px"></div>
+              <div style="line-height:30px;color:rgb(154, 160, 179);margin-left:10px">莫西超</div>
+              <div style="line-height:30px;margin-left:20%;margin-right:2%">07月28日</div>
+              <div style="line-height:30px;color:rgb(154, 160, 179)">09:00</div>
+            </div>
+
+            <div class="bosstow">
+              <div style="width:60px;height:60px;"><img src="@/assets/icon_nologin@2x.png" style="width:60px;height:60px"></div>
+               <div style="line-height:60px;margin-left:30px;margin-right:30px">VS</div>
+              <div style="width:60px;height:60px"><img src="@/assets/icon_nologin@2x.png" style="width:60px;height:60px"></div>
+            </div>
+
+            <div class="bossthree">
+              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">系里哈哈</div>
+              <div style="width:60px;height:28px;margin-left:12px;margin-right:12px"><img src="@/assets/home/yuyue.jpg" style="width:60px;height:28px"></div>
+              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">呼哈呼哈</div>
+            </div>
+          </div>
+          <div class="boss">
+            <div class="bossone">
+              <div style="width:33px;height:30px;"><img src="@/assets/home/zuqiu.png" style="width:33px;height:30px"></div>
+              <div style="line-height:30px;color:rgb(154, 160, 179);margin-left:10px">莫西超</div>
+              <div style="line-height:30px;margin-left:20%;margin-right:2%">07月28日</div>
+              <div style="line-height:30px;color:rgb(154, 160, 179)">09:00</div>
+            </div>
+
+            <div class="bosstow">
+              <div style="width:60px;height:60px;"><img src="@/assets/icon_nologin@2x.png" style="width:60px;height:60px"></div>
+               <div style="line-height:60px;margin-left:30px;margin-right:30px">VS</div>
+              <div style="width:60px;height:60px"><img src="@/assets/icon_nologin@2x.png" style="width:60px;height:60px"></div>
+            </div>
+
+            <div class="bossthree">
+              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">系里哈哈</div>
+              <div style="width:60px;height:28px;margin-left:12px;margin-right:12px"><img src="@/assets/home/yuyue.jpg" style="width:60px;height:28px"></div>
+              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">呼哈呼哈</div>
+            </div>
+          </div>
+          <div class="boss">
+            <div class="bossone">
+              <div style="width:33px;height:30px;"><img src="@/assets/home/zuqiu.png" style="width:33px;height:30px"></div>
+              <div style="line-height:30px;color:rgb(154, 160, 179);margin-left:10px">莫西超</div>
+              <div style="line-height:30px;margin-left:20%;margin-right:2%">07月28日</div>
+              <div style="line-height:30px;color:rgb(154, 160, 179)">09:00</div>
+            </div>
+
+            <div class="bosstow">
+              <div style="width:60px;height:60px;"><img src="@/assets/icon_nologin@2x.png" style="width:60px;height:60px"></div>
+               <div style="line-height:60px;margin-left:30px;margin-right:30px">VS</div>
+              <div style="width:60px;height:60px"><img src="@/assets/icon_nologin@2x.png" style="width:60px;height:60px"></div>
+            </div>
+
+            <div class="bossthree">
+              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">系里哈哈</div>
+              <div style="width:60px;height:28px;margin-left:12px;margin-right:12px"><img src="@/assets/home/yuyue.jpg" style="width:60px;height:28px"></div>
+              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">呼哈呼哈</div>
+            </div>
+          </div>
+        </div>   
+    </div> -->
+
+      <div class="liveRecomend">
+        <div class="liveRecomend-title">
+          <img src="@/assets/home/homeIcon/hotRecom@2x.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
+          <p class="liveRecomend-title-text">热门
+           <!-- 推荐<i class="el-icon-arrow-right arrow-right"></i> -->
+          </P>
+          <button class="liveRecomend-title-chenge"  @click="changeHotVideo()">换一换
+           <!-- 推荐<i class="el-icon-arrow-right arrow-right"></i> -->
+          </button>
+        </div>
+        <div style="margin: 0 -12px;width:1224px">
+          <livelistitem :liveList="recommendVideo8" :itemStyle="{width: 'calc(25% - 24px)'}"
+                        @homeListEventTanck="homeListHotTanck"></livelistitem>
+        </div>
+    </div>
+
       <div class="img-news">
         <section class="news-wrap">
           <div class="liveRecomend-title">
@@ -96,21 +201,6 @@
               <a class="news-item-title" :href="item.url" target="_blank">{{ item.title }}</a>
               <!--          <p class="news-item-desc">{{ item }} 爱球直播平台（以下简称“本平台”）是全民的直…</p>-->
             </div>
-            <!-- <div class="shareall">
-              <el-popover
-                placement="bottom-start"
-                width="410"
-                trigger="hover">
-                <div class="text">老铁分享一个呗~</div>
-                <div class="sharearea">
-                <div class="share" @click="share('qq')"><img src="@/assets/share/qq.png" alt=""></div>
-                <div class="share" @click="share('qzone')"><img src="@/assets/share/kongjian.png" alt=""></div>
-                <div class="share" @click="share('weibo')"><img src="@/assets/share/xinlang.png" alt=""></div>
-                <div class="share" @click="share('weixin')" ref="qrCodeUrl" style="width:100px">微信扫码分享</div>
-                </div>
-                <el-button slot="reference">分享</el-button>
-              </el-popover>
-            </div> -->
         </section>
         </div>
 
@@ -128,21 +218,7 @@
         </div>
     </section> -->
     </div>
-    <div class="liveRecomend">
-        <div class="liveRecomend-title">
-          <img src="@/assets/home/homeIcon/hotRecom@2x.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
-          <p class="liveRecomend-title-text">热门
-           <!-- 推荐<i class="el-icon-arrow-right arrow-right"></i> -->
-          </P>
-          <button class="liveRecomend-title-chenge"  @click="changeHotVideo()">换一换
-           <!-- 推荐<i class="el-icon-arrow-right arrow-right"></i> -->
-          </button>
-        </div>
-        <div style="margin: 0 -12px;width:1224px">
-          <livelistitem :liveList="recommendVideo8" :itemStyle="{width: 'calc(25% - 24px)'}"
-                        @homeListEventTanck="homeListHotTanck"></livelistitem>
-        </div>
-    </div>
+
     <div class="liveRecomend" v-show="recommendFootball.length>0">
       <div class="liveRecomend-title">
         <img src="@/assets/home/homeIcon/footballRecom@2x.png"
@@ -185,11 +261,12 @@
     <!--右下角滑块-->
     <right-float-layer :step="200"></right-float-layer>
     <!-- 拖拽 -->
-    <div class="video-content" ref="movediv" v-if="videoshow">
+    <!-- <div class="video-content" ref="movediv" v-if="videoshow">
       <div class="videomove" @mousedown="move"></div>
-        <!-- <videosmall src=""></videosmall> -->
       <videoPlayer class="video-player" ref="player" :roomId="recommendVideo.id" :notLivingSuggest="recommendVideo2"></videoPlayer>
-    </div>
+    </div> -->
+    <liveroomSmallvideo></liveroomSmallvideo>
+
   </div>
 </template>
 <script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
@@ -198,6 +275,7 @@
   import RightFloatLayer from '@/components/right-float-layer.vue'
   import videoPlayer from "@/components/video/videoPlayer.vue"
   import livelistitem from "@/components/live-list-item.vue"
+  import liveroomSmallvideo from "@/components/liveroom/liveroomSmallvideo.vue"
   import * as eventTrack from '@/utils/eventTracking.js'
   // import { liveList,changeHotVideo } from "@/api/api";
   import { liveList,recommendLiveList } from "@/api/api"
@@ -216,6 +294,7 @@
       videoPlayer,
       livelistitem,
       RightFloatLayer,
+      liveroomSmallvideo
     },
     data() {
       return {
@@ -236,14 +315,14 @@
           {
             title: "[公告]爱球直播隐私政策",
             url: this.USER_PRIVACY_CONTRACT,
-            img: require('@/assets/gonggao/privacy.jpeg'),
+            img: require('@/assets/gonggao/big2.png'),
           }
         ],
         sum: 0,
         positionX:0,
         positionY:0,
         scrollTop:0,
-        videoshow:false,
+        // videoshow:false,
       }
     },
     computed: {
@@ -268,7 +347,7 @@
         // this.reminder()
       }
       this.regularRefresh()
-      window.addEventListener('scroll',this.handleScroll,true)
+      // window.addEventListener('scroll',this.handleScroll,true)
     },
     methods: {
       //二维码
@@ -304,20 +383,20 @@
       //   // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+document.location.href+'?sharesource=qzone&title='+ftit+'&pics='+lk+'&summary='+document.querySelector('meta[name="description"]').getAttribute('content'))
       // },
       // 滚动条
-      handleScroll() {
-        this.scrollTop = window.pageYOffset;
-        console.log(this.scrollTop)
-        if(this.scrollTop>=700){
-          this.videoshow=true
-        }else{
-          this.videoshow=false
-        }
-        // var offsetTop = Number(this.scrollTop);
-        // this.$refs.movediv.style.top+=offsetTop+'px';
-        // this.$refs.movediv.style.top+=200+'px';
-        // console.log(this.$refs.movediv.style.top)
-        // console.log(offsetTop)
-      },
+      // handleScroll() {
+      //   this.scrollTop = window.pageYOffset;
+      //   console.log(this.scrollTop)
+      //   if(this.scrollTop>=700){
+      //     this.videoshow=true
+      //   }else{
+      //     this.videoshow=false
+      //   }
+      //   // var offsetTop = Number(this.scrollTop);
+      //   // this.$refs.movediv.style.top+=offsetTop+'px';
+      //   // this.$refs.movediv.style.top+=200+'px';
+      //   // console.log(this.$refs.movediv.style.top)
+      //   // console.log(offsetTop)
+      // },
       downloadleft() {
          window.open('http://www.iqiulive.cn/zhibo')
       },
@@ -331,7 +410,9 @@
           size: 14,
           typeId: 'all'
         }
-        let headers = {}
+        let headers = {
+         
+        }
         liveList(data, headers).then(res => {
           // console.log('首页-获取推荐列表--res',res)
           this.recommendVideo = res.data[0]
@@ -345,34 +426,34 @@
 
       },
       //拖拽
-      move(e){
-            // let e = window.event;
-            let odiv = e.target;        //获取目标元素
-            //算出鼠标相对元素的位置
-            let disX = e.clientX - odiv.offsetLeft;
-            let disY = e.clientY - odiv.offsetTop;
-            document.onmousemove = (e)=>{       //鼠标按下并移动的事件
-                //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
-                let left = e.clientX - disX;    
-                let top = e.clientY - disY;
+      // move(e){
+      //       // let e = window.event;
+      //       let odiv = e.target;        //获取目标元素
+      //       //算出鼠标相对元素的位置
+      //       let disX = e.clientX - odiv.offsetLeft;
+      //       let disY = e.clientY - odiv.offsetTop;
+      //       document.onmousemove = (e)=>{       //鼠标按下并移动的事件
+      //           //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
+      //           let left = e.clientX - disX;    
+      //           let top = e.clientY - disY;
                 
-                //绑定元素位置到positionX和positionY上面
-                this.positionX = top;
-                this.positionY = left;
+      //           //绑定元素位置到positionX和positionY上面
+      //           this.positionX = top;
+      //           this.positionY = left;
                 
-                //移动当前元素下面没有
-                odiv.style.left = left + 'px';
-                this.$refs.player.$el.style.left = left + 'px'
+      //           //移动当前元素下面没有
+      //           odiv.style.left = left + 'px';
+      //           this.$refs.player.$el.style.left = left + 'px'
                 
-                odiv.style.top = top + 'px';
-                this.$refs.player.$el.style.top = top + 'px'
+      //           odiv.style.top = top + 'px';
+      //           this.$refs.player.$el.style.top = top + 'px'
 
-            };
-            document.onmouseup = () => {
-                document.onmousemove = null;
-                document.onmouseup = null;
-            };
-        },
+      //       };
+      //       document.onmouseup = () => {
+      //           document.onmousemove = null;
+      //           document.onmouseup = null;
+      //       };
+      //   },
       // changeHotVideo() {
       //   console.log("1")
       //   let data = {
@@ -413,7 +494,9 @@
           size: 8,
           typeId: 'football'
         }
-        let headers = {}
+        let headers = {
+         
+        }
         liveList(data, headers).then(res => {
           // console.log('首页分类请求--足球', res)
           if (res.data.length) {
@@ -685,6 +768,7 @@
       line-height: 50px;
       z-index: 4;
       outline:0;
+      background-color: rgb(240, 240, 240);
     }
   }
 
@@ -774,30 +858,30 @@
   background-position: center 0;
   overflow: hidden;
 }
-.video-content{
-  // position: absolute;
-  position: fixed;
-  left: 1450px;
-  top: 557px;
-  width: 500px;
-  height: 200px;
-}
-.videomove{
-  position: absolute;     /*定位*/
-  top: 100px;
-  left: 100px;
-  width: 500px;
-  height: 250px;
-  // background-color: #bbf;
-  cursor:move;
-  opacity: 0;
-  z-index: 100;
-}
-.video-player{
-  left: 100px;
-  top: 100px;
-  z-index: 50;
-}
+// .video-content{
+//   // position: absolute;
+//   position: fixed;
+//   left: 1450px;
+//   top: 557px;
+//   width: 500px;
+//   height: 200px;
+// }
+// .videomove{
+//   position: absolute;     /*定位*/
+//   top: 100px;
+//   left: 100px;
+//   width: 500px;
+//   height: 250px;
+//   // background-color: #bbf;
+//   cursor:move;
+//   opacity: 0;
+//   z-index: 100;
+// }
+// .video-player{
+//   left: 100px;
+//   top: 100px;
+//   z-index: 50;
+// }
 
 .share{
   margin-top: 50px;
@@ -820,5 +904,47 @@
   font-size: 24px;
   text-align: center;
   margin-top: 30px;
+}
+
+.bigboss {
+  display: flex;
+  width: 1224px;
+  height: 178px;
+  // border: rgb(243, 108, 108) solid 1px;
+  margin-left: -12px;
+
+}
+
+.boss {
+  width: calc(25% - 22px);
+  height: 178px;
+  border: rgb(233, 236, 243) solid 1px;
+  margin-right: 12px;
+  margin-left: 12px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.bossone {
+  display: flex;
+  height: 30px;
+  margin-top:18px;
+  margin-left: 11px;
+}
+
+.bosstow {
+  display: flex;
+  height: 60px;
+  margin-top:10px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.bossthree {
+  display: flex;
+  height: 30px;
+  margin-top:10px;
+  padding-left: 38px;
+  padding-right: 38px;
 }
 </style>

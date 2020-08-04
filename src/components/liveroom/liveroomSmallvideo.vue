@@ -7,32 +7,56 @@
         class="video-player"
         ref="player"
         :roomId="recommendVideo.id"
-        :notLivingSuggest="recommendVideo2"
       ></videoPlayer>
     </div>
   </div>
 </template>
  <script>
-import livelistitem from "@/views/home/hpmeLive.vue";
+import homeLive from "@/views/home/homeLive.vue";
+import videoPlayer from "@/components/video/videoPlayer.vue";
+import livelistitem from "@/components/live-list-item.vue";
+import { liveList,recommendLiveList } from "@/api/api"
 export default {
-  name: "LiverommSmallvideo",
-  components: {},
-  props: {
-    roomId: {
-      type: String,
-      default: ""
+  // name: "LiveroomSmallvideo",
+  components: {
+      videoPlayer,
+      homeLive
     },
-    notLivingSuggest: {
-      type: Array
-    },
-    videoshow: {
-      type: Boolean
-    }
+  data() {
+      return {
+          recommendVideo: {},
+          videoshow:false,
+      }
   },
+//   props: {
+//     roomId: {
+//       type: String,
+//       default: ""
+//     },
+//     notLivingSuggest: {
+//       type: Array
+//     },
+//     videoshow: {
+//       type: Boolean
+//     }
+//   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll, true);
+    this.getSugestedList();
   },
   methods: {
+    getSugestedList() {
+        let data = {
+          p: 1,
+          size: 14,
+          typeId: 'all'
+        }
+        let headers = {}
+        liveList(data, headers).then(res => {
+          // console.log('首页-获取推荐列表--res',res)
+          this.recommendVideo = res.data[0]
+        })
+      },
     move(e) {
       // let e = window.event;
       let odiv = e.target; //获取目标元素
@@ -69,29 +93,25 @@ export default {
       } else {
         this.videoshow = false;
       }
-      // var offsetTop = Number(this.scrollTop);
-      // this.$refs.movediv.style.top+=offsetTop+'px';
-      // this.$refs.movediv.style.top+=200+'px';
-      // console.log(this.$refs.movediv.style.top)
-      // console.log(offsetTop)
     }
   }
 };
 </script>
 
  <style lang="scss" scoped>
+@import "@/assets/css/_index.scss";
 .video-content {
   // position: absolute;
   position: fixed;
-  left: 1450px;
+      right: 166px;
   top: 557px;
   width: 500px;
   height: 200px;
 }
 .videomove {
   position: absolute; /*定位*/
-  top: 100px;
-  left: 100px;
+  // top: 100px;
+  // left: 20%;
   width: 500px;
   height: 250px;
   // background-color: #bbf;
@@ -100,8 +120,8 @@ export default {
   z-index: 100;
 }
 .video-player {
-  left: 100px;
-  top: 100px;
+  left: 20px;
+  top: 20px;
   z-index: 50;
 }
 </style>
