@@ -3,26 +3,26 @@
     <!-- 侧边栏 -->
     <LeftSideBar></LeftSideBar>
     <!-- 顶部信息 -->
-    <div class="nav">
+    <div v-if="(this.scheduleInfo)" class="nav">
       <div class="iconone">
-        <img src="@/assets/icon_nosearch.png" class="icon1" />
+        <img :src="this.scheduleInfo.teamOneLogo" class="icon1" />
       </div>
-      <div class="teamname1">西班牙西甲豪门</div>
-      <div class="score1">88</div>
+      <div class="teamname1">{{this.scheduleInfo.teamOne}}</div>
+      <div class="score1">{{this.scheduleInfo.teamOneScore}}</div>
       <div class="date-time-state">
         <div class="date-time">
-          <div>7月7日</div>
-          <div>21:00</div>
+          <div>{{this.scheduleInfo.startTime | formatDate}}</div>
+          <!-- <div>21:00</div> -->
         </div>
         <div class="icon-state">
           <img src="@/assets/video.png" class="videoicon" />
           <div class="videoing">正在直播</div>
         </div>
       </div>
-      <div class="score2">98</div>
-      <div class="teamname2">意大利意甲豪门</div>
+      <div class="score2">{{this.scheduleInfo.teamTwoScore}}</div>
+      <div class="teamname2">{{this.scheduleInfo.teamTwo}}</div>
       <div class="icontow">
-        <img src="@/assets/icon_nosearch.png" class="icon1" />
+        <img :src="this.scheduleInfo.teamTwoLogo" class="icon1" />
       </div>
     </div>
     <!-- 主播选择 -->
@@ -36,18 +36,18 @@
           <div class="state">直播中</div>
         </div>
       </div> -->
-      <div v-for="item in part" :key="item">
-        <div class="people2">
+      <div v-for="item in this.matchChannelList.length >= 4? this.matchChannelList.slice(0, 4) : this.matchChannelList" :key="item">
+        <div class="people2" @click="changeRocm(item)">
           <div class="head-portrait">
-            <img src="@/assets/timg.jpg" class="Head-Portrait" />
+            <img :src="item.avatarUrl" class="Head-Portrait" />
           </div>
           <div class="people-name-state">
-            <div class="people-name">雅雅说篮伦</div>
+            <div class="people-name">{{item.uname}}</div>
             <div class="state">直播中</div>
           </div>
         </div>
       </div>
-      <div>
+      <div v-if="matchChannelList.length > 4">
         <img src="@/assets/pull-down.png" class="pull-down" @click="show()" />
       </div>
     </div>
@@ -62,13 +62,13 @@
             <div class="state">直播中</div>
           </div>
         </div> -->
-        <div v-for="item in allpart" :key="item">
-          <div class="people2">
+        <div v-for="item in matchChannelList" :key="item">
+          <div class="people2" @click="changeRocm(item)">
             <div class="head-portrait">
-              <img src="@/assets/timg.jpg" class="Head-Portrait" />
+              <img :src="item.avatarUrl" class="Head-Portrait" />
             </div>
             <div class="people-name-state">
-              <div class="people-name">每天吃蓝莓</div>
+              <div class="people-name">{{item.uname}}</div>
               <div class="state">直播中</div>
             </div>
           </div>
@@ -100,13 +100,13 @@
       </div>
     </div>
     <!-- 分数信息 -->
-    <div class="type-points">
+    <div class="type-points" v-if=false>
       <div class="let-points" @click="changetype(1)" ref="typeone">让分</div>
       <div class="o-zhi" @click="changetype(2)" ref="typetow">欧指</div>
       <div class="total-score" @click="changetype(3)" ref="typethree">总分</div>
     </div>
     <!-- 让分 -->
-    <div class="tabledata" v-if="type==1">
+    <div class="tabledata" v-if="type==1 && false" >
       <el-table
     :data="table1Data"
     :cell-style="changeCellStyle"
@@ -235,7 +235,7 @@
 <script>
 import LeftSideBar from "@/components/left-side-bar.vue";
 import videoPlayer from "@/components/video/videoPlayer.vue";
-import { liveList } from "@/api/api";
+import { liveList,matchInfo,matchChannelList } from "@/api/api";
 import { Table,TableColumn} from "element-ui";
 // import * as eventTrack from '@/utils/eventTracking.js'
 export default {
@@ -245,9 +245,9 @@ export default {
       recommendVideo: {},
       recommendVideo6: [],
       recommendVideo2: [],
-      part:[1,2,3,4],
-      allpart:[1,2,3,4,5,6,7,8,9,10],
+      matchChannelList:[1,2,3,4],
       type:1,
+      scheduleInfo:null,
       table1Data: [{
           company: 'sjhjfkdj',
           guest1: '0.98',
@@ -298,6 +298,43 @@ export default {
     }],
     }
   },
+  //时间戳转换
+  filters: {
+    formatDate: function (value) {
+      // 获取当前年份
+      let nowYear = new Date().getFullYear();
+      // 格式化后的日期时间 yyyy/MM/DD HH:mm
+      let formatDateStr = "";
+
+      let date = new Date(value);
+      
+      // 当前年与查看的比赛不是同一年，则显示年份
+      if(date.getFullYear() != nowYear){
+        formatDateStr = date.getFullYear() + "年";
+      }
+      let month = date.getMonth() + 1;
+      month = month < 10 ? "0" + month : month;
+      // 月
+      formatDateStr = formatDateStr + month + "月";
+      
+      let day = date.getDate();
+      day = day < 10 ? "0" + day : day;
+      // 日
+      formatDateStr = formatDateStr + day + "日 ";
+
+      // 时
+      let h = date.getHours();
+      h = h < 10 ? "0" + h : h;
+      formatDateStr = formatDateStr + h;
+
+      // 分
+      let m = date.getMinutes();
+      m = m < 10 ? "0" + m : m;
+      formatDateStr = formatDateStr + ":" + m;
+
+      return formatDateStr;
+    },
+  },
   components: {
     LeftSideBar,
     videoPlayer,
@@ -305,16 +342,42 @@ export default {
     [TableColumn.name]: TableColumn,
   },
   mounted() {
-    this.getSugestedList();
+    this.getMatchDetail();
+    setTimeout(() => {
+        this.getSugestedList();
+     }, 200);
+    
+    
+    console.log("this.$route.params = ",this.$route);
   },
   methods: {
     changeCellStyle (row, column, rowIndex, columnIndex) {
-   if(row.column.label === "公司"){
-       return 'background: rgba(27,181,236,0.2)'  // 修改的样式
-   }else{
-       return ''
-   }
-},
+      if(row.column.label === "公司"){
+        return 'background: rgba(27,181,236,0.2)'  // 修改的样式
+      }else{
+        return ''
+      }
+    },
+    //获取赛事详情
+    getMatchDetail() {
+      let data = {
+        mid: this.$route.query.mid
+      };
+      matchInfo(data).then((res) => {        
+        this.scheduleInfo = res.data;
+
+        this.getMatchChannelList();
+      });
+    },
+    //获取赛事正在直播的主播列表
+    getMatchChannelList() {
+      let data = {
+        mid: this.$route.query.mid
+      };
+      matchChannelList(data).then((res) => {        
+        this.matchChannelList = res.data;        
+      });
+    },
     show() {
       this.allshow = !this.allshow;
       console.log(this.allshow);
@@ -345,7 +408,7 @@ export default {
         // console.log('首页-获取推荐列表--res',res)
         this.recommendVideo = res.data[0];
         this.recommendVideo6 = res.data.slice(0, 6);
-        this.recommendVideo2 = res.data.slice(1, 3);
+        // this.recommendVideo2 = res.data.slice(1, 3);
       });
     },
 
@@ -462,7 +525,7 @@ export default {
   padding-top: 28px;
   margin-left: 3.4%;
   margin-right: 3.4%;
-  width: 90px;
+  width: 110px;
   height: 100px;
 }
 
@@ -564,6 +627,11 @@ export default {
   color: rgba(255, 255, 255, 1);
   line-height: 22px;
   margin-top: 22px;
+  display: inline-block;
+  white-space: nowrap; 
+  width: 100%; 
+  overflow: hidden;
+  text-overflow:ellipsis;
 }
 
 .state {

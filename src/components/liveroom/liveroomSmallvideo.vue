@@ -103,8 +103,8 @@ export default {
 .video-content {
   // position: absolute;
   position: fixed;
-      right: 166px;
-  top: 557px;
+      right: 86px;
+  top: 350px;
   width: 500px;
   height: 200px;
 }

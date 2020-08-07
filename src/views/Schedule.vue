@@ -57,7 +57,7 @@
             </div>
           </div>
           <!-- <router-link :to="{name:'live-broadcast'}"> -->
-          <div class="centreinformation" @click="live()">
+          <div class="centreinformation" @click="live(item.id)">
             <div class="team1">
               <div class="team-icon">
                 <img :src="item.teamOneLogo" class="icon1" />
@@ -168,8 +168,9 @@ export default {
     [Dialog.name]: Dialog,
   },
   methods: {
-    live() {
-      this.$router.push("/live-broadcast");
+    live(mid) {
+      this.$router.push({ path: '/live-broadcast', query: { mid} })
+      // this.$router.push("/live-broadcast?id=2");
     },
     currentTime() {
       setInterval(this.getDate, 5);

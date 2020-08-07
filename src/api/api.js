@@ -182,46 +182,64 @@ export const rankingQuery = (data) =>
   // 接口地址的域名要用剑波电脑的IP地址,不是接口网站的全地址,只要copy接口文档的接口路径地址就好,比如:/aiqiu/v1/app/match/find
   //赛程列表
   export const matchList = (data, headers) =>
-  axios({
-  url: `${baseurl}/aiqiu/v1/app/match/find`,
-  method: "post",
-  headers:headers,
-  data:  data,
-  contentTypejson: true,
-});
+    axios({
+      url: `${baseurl}/aiqiu/v1/app/match/find`,
+      method: "post",
+      headers:headers,
+      data:  data,
+      contentTypejson: true,
+  });
 
-//添加赛程预约
-export const addmatchList = (data) =>
-axios({
-url: `${baseurl}/aiqiu/v1/app/match/order`,
-method: "post",
-data:  data,
-contentTypejson: true
-});
+  // 赛程详情
+  export const matchInfo = (data) =>
+    axios({
+      url: `${baseurl}/aiqiu/v1/app/match/info`,
+      method: "post",
+      data,
+      contentTypejson: true,
+  });
 
-//取消赛程预约
-export const deletematchList = (data) =>
-axios({
-url: `${baseurl}/aiqiu/v1/app/match/unOrder`,
-method: "post",
-data:  data,
-contentTypejson: true
-});
+  //添加赛程预约
+  export const addmatchList = (data) =>
+    axios({
+      url: `${baseurl}/aiqiu/v1/app/match/order`,
+      method: "post",
+      data:  data,
+      contentTypejson: true
+  });
 
-//关注
-export const focusmatchList = (data) =>
-axios({
-url: `${baseurl}/aiqiu/v1/app/match/follow`,
-method: "post",
-data:  data,
-contentTypejson: true
-});
+  //取消赛程预约
+  export const deletematchList = (data) =>
+    axios({
+      url: `${baseurl}/aiqiu/v1/app/match/unOrder`,
+      method: "post",
+      data:  data,
+      contentTypejson: true
+    });
 
-//关注
-export const nofocusmatchList = (data) =>
-axios({
-url: `${baseurl}/aiqiu/v1/app/match/unFollow`,
-method: "post",
-data:  data,
-contentTypejson: true
-});
+  //关注
+  export const focusmatchList = (data) =>
+    axios({
+      url: `${baseurl}/aiqiu/v1/app/match/follow`,
+      method: "post",
+      data:  data,
+      contentTypejson: true
+  });
+
+  //取消关注
+  export const nofocusmatchList = (data) =>
+    axios({
+      url: `${baseurl}/aiqiu/v1/app/match/unFollow`,
+      method: "post",
+      data:  data,
+      contentTypejson: true
+  });
+
+   // 赛程下预约主播直播列表
+   export const matchChannelList = (data) =>
+    axios({
+      url: `${baseurl}/aiqiu/v1/live/channels/match/channel`,
+      method: "post",
+      data,
+      contentTypejson: true,
+  });
