@@ -10,11 +10,11 @@
         <span class="color-main">200</span> 积分
       </div>
     </div>
-    <div class="allall">
+    <div class="allall"> 
     <div>
       <el-button @click="leftmove()" class="leftmove">＜</el-button>
     </div>
-    <div class="all-gift">
+    <div class="all-gift"> 
       <div class="gift-items" :style="{'right': xxx * 76 + 'px'}">
         <div
           class="gift-item"

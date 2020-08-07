@@ -50,9 +50,10 @@
           class="share-button"
           @mouseenter="blueshare(1)"
           @mouseleave="blueshare(2)"
-          ref="blue"
         >
-          <span class="share-text">分享</span>
+          <img src="@/assets/share/share1.png" style="width:55px;height:17px" v-if="show==true">
+          <img src="@/assets/share/share2.png" style="width:55px;height:17px" v-if="show==false">
+          <!-- <span class="share-text">分享</span> -->
         </button>
       </el-popover>
     </div>
@@ -88,6 +89,7 @@ export default {
       area: "",
       flag: 1,
       aream: "",
+      show:true,
     };
   },
   props: {
@@ -141,13 +143,16 @@ export default {
 
     blueshare(index) {
       if (index === 1) {
-        this.$refs.blue.style.color = "rgb(64, 158, 255)";
-        this.$refs.blue.style.border = "rgb(198, 226, 255) solid 1px";
+        // this.$refs.blue.style.color = "rgb(27, 181, 236)";
+        // this.$refs.blue.style.border = "rgb(27, 181, 236) solid 1px";
+        this.show = !this.show;
         this.sharearea = "http://www.iqiulive.cn/" + this.channelInfo.id;
         this.shareaream = "http://m.iqiulive.cn/" + this.channelInfo.id;
+        console.log(this.show);
       } else {
-        this.$refs.blue.style.color = "rgb(0, 0, 0)";
-        this.$refs.blue.style.border = "rgb(190, 190, 190) solid 1px";
+        this.show = !this.show;
+        // this.$refs.blue.style.color = "rgb(0, 0, 0)";
+        // this.$refs.blue.style.border = "rgb(190, 190, 190) solid 1px";
       }
     },
     //二维码
@@ -419,17 +424,19 @@ export default {
 
 .pc {
   color: #fff;
-  background-color: rgb(122, 215, 252);
+  background-color: rgb(27, 181, 236);
   border: 0;
   outline-color: rgb(0, 162, 255);
+  border-radius: 4px;
 }
 
 .m {
   color: #fff;
-  background-color: rgb(122, 215, 252);
+  background-color: rgb(27, 181, 236);
   border: 0;
   margin-left: 20px;
   outline-color: rgb(0, 162, 255);
+  border-radius: 4px;
 }
 
 .urlarea {
@@ -441,19 +448,20 @@ export default {
 
 .copyurl {
   color: #fff;
-  background-color: rgb(122, 215, 252);
+  background-color: rgb(27, 181, 236);
   border: 0;
   height: 39px;
   margin-left: 10px;
   width: 20%;
   outline-color: rgb(0, 162, 255);
+  border-radius: 4px;
 }
 
 .share-button {
   width: 86px;
   height: 34px;
   background-color: #fff;
-  border: rgb(235, 227, 227) solid 1px;
+  border: 0;
   border-radius: 6px;
   outline: 0;
 }
@@ -478,7 +486,7 @@ export default {
 }
 
 .text {
-  font-size: 22px;
+  font-size: 20px;
   text-align: center;
   margin-top: 20px;
 }

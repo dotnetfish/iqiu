@@ -30,10 +30,10 @@
               <div class="routing" v-if="$route.name !== 'Download' ">下载</div>
               <div class="nav-routing-active" v-if="$route.name === 'Download' ">下载</div>
             </router-link>
-            <!-- <router-link :to="{name:'Schedule'}" @click.native="navClickEvent('赛程')">
+            <router-link :to="{name:'Schedule'}" @click.native="navClickEvent('赛程')">
               <div class="routing" v-if="$route.name !== 'Schedule' ">赛程</div>
               <div class="nav-routing-active" v-if="$route.name === 'Schedule' ">赛程</div>
-            </router-link> -->
+            </router-link>
             <div class="nav-icon-item">
               <homeNavDownload :displayItem=" 'download' "></homeNavDownload>
             </div>

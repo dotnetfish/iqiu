@@ -46,13 +46,14 @@ export default {
       }
       cookie += ';expires=' + options.expires.toUTCString()
     }
+
     // 路径
     if (typeof options.path !== 'undefined') { cookie += ';path=' + options.path }
     // 域名 兼容测试环境
     if (typeof options.domain !== 'undefined') { cookie += ';domain=' + options.domain }
     // 安全连接
     if (options.secure) { cookie += ';secure' }
-
+    console.log("cookie = ",cookie);
     // 保存
     document.cookie = cookie
   },

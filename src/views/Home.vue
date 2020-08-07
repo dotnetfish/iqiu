@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <homeNav :navLogo="true"></homeNav>
+    <!-- <homeSign></homeSign> -->
     <homeLive></homeLive>
 <!--    <homeFooter></homeFooter>-->
   </div>
@@ -9,6 +10,7 @@
 <script>
   import homeNav from '@/views/home/homeNav.vue'
   import homeLive from '@/views/home/homeLive.vue'
+  import homeSign from '@/views/home/homeSign.vue'
   // import homeFooter from '@/views/home/homeFooter.vue'
 
   export default {
@@ -16,6 +18,7 @@
     components: {
       homeNav,
       homeLive,
+      homeSign,
       // homeFooter
     },
     data() {

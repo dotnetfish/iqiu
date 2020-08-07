@@ -7,31 +7,31 @@
     </div>
 
     <div class="alldate">
-      <el-button class="datebutton" :autofocus="true">
+      <el-button class="datebutton" :autofocus="true" @click="getmatchList(nowDate,nowyear)">
         <div class="nowweek">{{nowWeek}}</div>
         <div class="nowdate">{{nowDate}}</div>
       </el-button>
-      <el-button class="datebutton">
+      <el-button class="datebutton"  @click="getmatchList(nowDate1,nowyear)">
         <div class="nowweek">{{nowWeek1}}</div>
         <div class="nowdate">{{nowDate1}}</div>
       </el-button>
-      <el-button class="datebutton">
+      <el-button class="datebutton"  @click="getmatchList(nowDate2,nowyear)">
         <div class="nowweek">{{nowWeek2}}</div>
         <div class="nowdate">{{nowDate2}}</div>
       </el-button>
-      <el-button class="datebutton">
+      <el-button class="datebutton"  @click="getmatchList(nowDate3,nowyear)">
         <div class="nowweek">{{nowWeek3}}</div>
         <div class="nowdate">{{nowDate3}}</div>
       </el-button>
-      <el-button class="datebutton">
+      <el-button class="datebutton"  @click="getmatchList(nowDate4,nowyear)">
         <div class="nowweek">{{nowWeek4}}</div>
         <div class="nowdate">{{nowDate4}}</div>
       </el-button>
-      <el-button class="datebutton">
+      <el-button class="datebutton"  @click="getmatchList(nowDate5nowyear)">
         <div class="nowweek">{{nowWeek5}}</div>
         <div class="nowdate">{{nowDate5}}</div>
       </el-button>
-      <el-button class="datebutton">
+      <el-button class="datebutton"  @click="getmatchList(nowDate6,nowyear)">
         <div class="nowweek">{{nowWeek6}}</div>
         <div class="nowdate">{{nowDate6}}</div>
       </el-button>
@@ -39,111 +39,77 @@
 
     <div class="game-date">
       <div class="bluestrip"></div>
-      <div class="Game-Date">7月22日</div>
+      <div class="Game-Date">{{changedate}}</div>
+      <!-- <button class="state1" ref="already" @click="AddmatchList()">{{appoint}}</button> -->
     </div>
 
     <div class="gameinformation">
-      <div class="information1">
-        <div class="leftinformation">
-          <div class="information-title">英超第35轮</div>
-          <div class="information-time">01:00</div>
-          <div class="information-state">
-            <button class="state1" ref="already" @click="appointment()">{{appoint}}</button>
-          </div>
-        </div>
-        <!-- <router-link :to="{name:'live-broadcast'}"> -->
-        <div class="centreinformation" @click="live()">
-          <div class="team1">
-            <div class="team-icon">
-              <img src="@/assets/icon_nofollow.png" class="icon1" />
+      <div v-for="(item,indexo) in schedulelist" :key="indexo">
+        <div class="information1">
+          <div class="leftinformation">
+            <div class="information-title">{{item.name}}</div>
+            <div class="information-time">{{item.startTime | formatDate}}</div>
+            <div class="information-state" v-if="item.isOrder== 0">
+              <button class="state1" @click="AddmatchList(item)">预约</button>
             </div>
-            <div class="team-name">八一英超</div>
-            <div class="team-score">0</div>
-          </div>
-          <div class="team2">
-            <div class="team-icon">
-              <img src="@/assets/icon_nofollow.png" class="icon1" />
+            <div class="information-state" v-else>
+              <button class="state2" @click="AddmatchList(item)">已预约</button>
             </div>
-            <div class="team-name">托特纳姆尔兹…</div>
-            <div class="team-score">0</div>
           </div>
-        </div>
-        <!-- </router-link> -->
-        <div class="rightinformation">
-          <div class="live" @click="live()"></div>
-          <div class="people">
-            <img src="@/assets/icon_nologin@2x.png" class="people1" />
-          </div>
-          <div class="people">
-            <img src="@/assets/icon_nologin@2x.png" class="people1" />
-          </div>
-          <div class="people">
-            <img src="@/assets/icon_nologin@2x.png" class="people1" />
-          </div>
-          <div class="people">
-            <img src="@/assets/icon_nologin@2x.png" class="people1" />
-          </div>
-          <div class="people">
-            <img src="@/assets/icon_nologin@2x.png" class="people1" />
-          </div>
-          <div class="people">
-            <img src="@/assets/home/jiantou.png" class="allpeople" @click="dialogVisible = true" />
-            <el-dialog :visible.sync="dialogVisible">
-              <div class="flextitle">
-                <div class="one"></div>
-                <div class="dialogtitle">请选择一位主播</div>
-                <div class="one"></div>
-                <div class="Close">
-                  <img src="@/assets/close.png" class="close" @click="dialogVisible = false" />
-                </div>
+          <!-- <router-link :to="{name:'live-broadcast'}"> -->
+          <div class="centreinformation" @click="live()">
+            <div class="team1">
+              <div class="team-icon">
+                <img :src="item.teamOneLogo" class="icon1" />
               </div>
-              <div class="all-head">
-                <div class="head-portrait-name">
-                  <img src="@/assets/icon_nosearch.png" class="head-portrait" />
-                  <div class="photo-name">小鲤鱼</div>
-                </div>
-                <div class="head-portrait-name">
-                  <img src="@/assets/icon_nosearch.png" class="head-portrait" />
-                  <div class="photo-name">小鲤鱼</div>
-                </div>
-                <div class="head-portrait-name">
-                  <img src="@/assets/icon_nosearch.png" class="head-portrait" />
-                  <div class="photo-name">小鲤鱼</div>
-                </div>
-                <div class="head-portrait-name">
-                  <img src="@/assets/icon_nosearch.png" class="head-portrait" />
-                  <div class="photo-name">小鲤鱼</div>
-                </div>
-                <div class="head-portrait-name">
-                  <img src="@/assets/icon_nosearch.png" class="head-portrait" />
-                  <div class="photo-name">小鲤鱼</div>
-                </div>
-                <div class="head-portrait-name">
-                  <img src="@/assets/icon_nosearch.png" class="head-portrait" />
-                  <div class="photo-name">小鲤鱼</div>
-                </div>
-                <div class="head-portrait-name">
-                  <img src="@/assets/icon_nosearch.png" class="head-portrait" />
-                  <div class="photo-name">小鲤鱼</div>
-                </div>
-                <div class="head-portrait-name">
-                  <img src="@/assets/icon_nosearch.png" class="head-portrait" />
-                  <div class="photo-name">小鲤鱼</div>
-                </div>
-                <div class="head-portrait-name">
-                  <img src="@/assets/icon_nosearch.png" class="head-portrait" />
-                  <div class="photo-name">小鲤鱼</div>
-                </div>
-                <div class="head-portrait-name">
-                  <img src="@/assets/icon_nosearch.png" class="head-portrait" />
-                  <div class="photo-name">小鲤鱼</div>
-                </div>
-                <div class="head-portrait-name">
-                  <img src="@/assets/icon_nosearch.png" class="head-portrait" />
-                  <div class="photo-name">小鲤鱼</div>
-                </div>
+              <div class="team-name">{{item.teamOne}}</div>
+              <div class="team-score">{{item.teamOneScore}}</div>
+            </div>
+            <div class="team2">
+              <div class="team-icon">
+                <img :src="item.teamTwoLogo" class="icon1" />
               </div>
-            </el-dialog>
+              <div class="team-name">{{item.teamTwo}}</div>
+              <div class="team-score">{{item.teamTwoScore}}</div>
+            </div>
+          </div>
+          <!-- </router-link> -->
+          <div class="rightinformation">
+            <!-- <div class="live" @click="live()"></div> -->
+            <div v-for="(channel,indext) in item.channels" :key="indext">
+              <div class="people">
+                <img :src="channel.avatarUrl" class="people1" />
+              </div>
+            </div>
+            <div class="peoplepull">
+              <img src="@/assets/home/jiantou.png" class="allpeople" @click="dialog(indexo)" />
+              <el-dialog :visible.sync="dialogVisible">
+                <div class="flextitle">
+                  <div class="one"></div>
+                  <div class="dialogtitle">请选择一位主播</div>
+                  <div class="one"></div>
+                  <div class="Close">
+                    <img src="@/assets/close.png" class="close" @click="dialogVisible = false" />
+                  </div>
+                </div>
+                <div class="all-head">
+                  <div v-for="(channel,indexf) in schedulelist[num].channels" :key="indexf">
+                    <div class="head-portrait-name">
+                      <img :src="channel.avatarUrl" class="head-portrait" />
+                      <div class="photo-name">{{channel.uname}}</div>
+                    </div>
+                  </div>
+                </div>
+              </el-dialog>
+            </div>
+            <div class="focus"> 
+              <div class="information-state" v-if="item.isFollow == 0">
+                <button class="state1" @click="focus(item)">关注</button>
+              </div>
+              <div class="information-state" v-else>
+                <button class="state2" @click="focus(item)">已关注</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -154,10 +120,13 @@
 <script>
 import LeftSideBar from "@/components/left-side-bar.vue";
 import { Button, Dialog } from "element-ui";
+import { matchList, addmatchList, deletematchList, focusmatchList, nofocusmatchList } from "@/api/api";
+ import storages from "@/utils/storage";
 // import {schedule} from '@/api/liveroom'
 export default {
   data() {
     return {
+      nowyear:"",
       nowDate: "",
       nowDate1: "",
       nowDate2: "",
@@ -174,25 +143,46 @@ export default {
       nowWeek5: "",
       nowWeek6: "",
       dialogVisible: false,
-      flag:false,
-      appoint:'预约'
+      flag: false,
+      appoint: false,
+      schedulelist: [],
+      changedate:"",
+      num:0,
+      attenment:false,
     };
+  },
+  //时间戳转换
+  filters: {
+    formatDate: function (value) {
+      let date = new Date(value);
+      let h = date.getHours();
+      h = h < 10 ? "0" + h : h;
+      let m = date.getMinutes();
+      m = m < 10 ? "0" + m : m;
+      return h + ":" + m;
+    },
   },
   components: {
     LeftSideBar,
     [Button.name]: Button,
-    [Dialog.name]: Dialog
+    [Dialog.name]: Dialog,
   },
   methods: {
     live() {
-      this.$router.push('/live-broadcast');
+      this.$router.push("/live-broadcast");
     },
     currentTime() {
-      setInterval(this.getDate, 20);
+      setInterval(this.getDate, 5);
+    },
+    dialog(index) {
+      this.dialogVisible = true;
+      this.num = index;
     },
     //计算一礼拜的日期
-    getDate: function() {
+    getDate: function () {
       var _this = this;
+      let DD = 0;
+      let MM = 0;
       let yy = new Date().getFullYear();
       let mm = new Date().getMonth() + 1;
       let dd = new Date().getDate();
@@ -257,7 +247,13 @@ export default {
         this.nowWeek6 = "星期六";
       }
       // _this.nowTime = hh + ":" + mf;
-      _this.nowDate = mm + "/" + dd;
+      if(dd<10) {
+        DD = '0'+dd
+      }
+      if(mm<10) {
+        MM = '0'+mm
+      }
+      _this.nowDate = MM + "/" + DD;
       dd = dd + 1;
       if (dd > d && mm != 12) {
         dd = 1;
@@ -267,7 +263,13 @@ export default {
         dd = 1;
         mm = 1;
       }
-      _this.nowDate1 = mm + "/" + dd;
+      if(dd<10) {
+        DD = '0'+dd
+      }
+      if(mm<10) {
+        MM = '0'+mm
+      }
+      _this.nowDate1 = MM + "/" + DD;
       dd = dd + 1;
       if (dd > d && mm != 12) {
         dd = 1;
@@ -277,7 +279,13 @@ export default {
         dd = 1;
         mm = 1;
       }
-      _this.nowDate2 = mm + "/" + dd;
+      if(dd<10) {
+        DD = '0'+dd
+      }
+      if(mm<10) {
+        MM = '0'+mm
+      }
+      _this.nowDate2 = MM + "/" + DD;
       dd = dd + 1;
       if (dd > d && mm != 12) {
         dd = 1;
@@ -287,7 +295,13 @@ export default {
         dd = 1;
         mm = 1;
       }
-      _this.nowDate3 = mm + "/" + dd;
+      if(dd<10) {
+        DD = '0'+dd
+      }
+      if(mm<10) {
+        MM = '0'+mm
+      }
+      _this.nowDate3 = MM + "/" + DD;
       dd = dd + 1;
       if (dd > d && mm != 12) {
         dd = 1;
@@ -297,7 +311,13 @@ export default {
         dd = 1;
         mm = 1;
       }
-      _this.nowDate4 = mm + "/" + dd;
+      if(dd<10) {
+        DD = '0'+dd
+      }
+      if(mm<10) {
+        MM = '0'+mm
+      }
+      _this.nowDate4 = MM + "/" + DD;
       dd = dd + 1;
       if (dd > d && mm != 12) {
         dd = 1;
@@ -307,7 +327,13 @@ export default {
         dd = 1;
         mm = 1;
       }
-      _this.nowDate5 = mm + "/" + dd;
+      if(dd<10) {
+        DD = '0'+dd
+      }
+      if(mm<10) {
+        MM = '0'+mm
+      }
+      _this.nowDate5 = MM + "/" + DD;
       dd = dd + 1;
       if (dd > d && mm != 12) {
         dd = 1;
@@ -317,36 +343,111 @@ export default {
         dd = 1;
         mm = 1;
       }
-      _this.nowDate6 = mm + "/" + dd;
+      if(dd<10) {
+        DD = '0'+dd
+      }
+      if(mm<10) {
+        MM = '0'+mm
+      }
+      _this.nowDate6 = MM + "/" + DD;
+      _this.nowyear = yy;
     },
     // 销毁定时器
-    beforeDestroy: function() {
+    beforeDestroy: function () {
       if (this.getDate) {
         console.log("销毁定时器");
         clearInterval(this.getDate); // 在Vue实例销毁前，清除时间定时器
       }
     },
-    appointment() {
-      this.flag = !this.flag;
-      if(this.flag==true){
-        this.$refs.already.style.color = 'rgb(255,255,255)';
-      this.$refs.already.style.background = 'rgba(27,181,236,1)';
-      this.appoint='已预约'
+    // appointment() {
+    //   this.flag = !this.flag;
+    //   if (this.flag == true) {
+    //     this.$refs.already.style.color = "rgb(255,255,255)";
+    //     this.$refs.already.style.background = "rgba(27,181,236,1)";
+    //     this.appoint = "已预约";
+    //   } else {
+    //     this.$refs.already.style.color = "#1bb5ec";
+    //     this.$refs.already.style.background = "rgba(255, 255, 255, 1)";
+    //     this.appoint = "预约";
+    //   }
+    // },
+
+    //预约和取消
+    AddmatchList(item) {
+      if(item.isOrder == 0) {
+        let data = {
+          cid:this.$store.state.userStatus.userInfo.uid,
+          mid: item.id
+        }
+        addmatchList(data).then(res => {
+          item.isOrder = 1;
+          console.log(res.data)
+          })
       }else {
-        this.$refs.already.style.color = '#1bb5ec';
-      this.$refs.already.style.background = 'rgba(255, 255, 255, 1)';
-      this.appoint='预约'
+          let data = {
+          cid:this.$store.state.userStatus.userInfo.uid,
+          mid: item.id
+        }
+        deletematchList(data).then(res => {
+           item.isOrder = 0;
+          console.log(res.data)
+          })
+        }
+      this.appoint = !this.appoint;
+      console.log(this.appoint);
+    },
+    //关注
+    focus(item) {
+      if(item.isFollow == 0) {
+        let data = {
+          mid: item.id
+        }
+        focusmatchList(data).then(res => {
+          item.isFollow = 1
+          console.log(res.data)
+          })
+        }else {
+          let data = {
+          mid: item.id
+        }
+        nofocusmatchList(data).then(res => {
+          item.isFollow = 0;
+          console.log(res.data)
+          })
+        }
+      this.attenment = !this.attenment;
+    },
+    //获取列表
+    getmatchList(date,year) {
+      let t1 = this.nowyear;
+      let t2 = this.nowDate;
+      if(date != null) {
+        t1 = year;
+        t2 = date;
       }
+      this.changedate = t2;
+      let timeStr1 = t1 + "/" + t2 + "/00:00:00";
+      let timeStr2 = t1 + "/" + t2 + "/23:59:59";
+      console.log(t1 + "/" + t2)
+      console.log(timeStr2)
+      let time1 = new Date(timeStr1).getTime();
+      let time2 = new Date(timeStr2).getTime();
+      let headers = { "content-type": "application/json" };
+      let data = {
+        startTime: time1,
+        endTime: time2,
+      };
+      matchList(data, headers).then((res) => {
+        this.schedulelist = res.data;
+      });
     },
   },
-  // created() {
-  //     schedule().then(res =>{
-  //         console.log(res)
-  //     })
-  // },
   mounted() {
     this.currentTime();
-  }
+    setTimeout(() => {
+        this.getmatchList();
+     }, 200);
+  },
 };
 </script>
 
@@ -491,6 +592,18 @@ export default {
   outline: 0;
 }
 
+.state2 {
+  width: 62px;
+  height: 25px;
+  line-height: 25px;
+  background: rgba(27,181,236,1);
+  color: #ffffff;
+  margin-left: 30px;
+  margin-top: 5px;
+  outline: 0;
+  border: 1px solid rgba(27, 181, 236, 1);
+}
+
 .team1 {
   width: 100%;
   height: 60px;
@@ -539,6 +652,12 @@ export default {
 .people {
   width: 105px;
   height: 120px;
+  margin-left: 40px;
+}
+.peoplepull {
+  width: 105px;
+  height: 120px;
+  margin-left: 40px;
 }
 
 .people1 {
@@ -619,5 +738,12 @@ export default {
 .photo-name {
   text-align: center;
   margin-top: 14px;
+}
+
+.focus {
+  position: absolute;
+  right: 0;
+  margin-right: 37px;
+  margin-top: 45px;
 }
 </style>

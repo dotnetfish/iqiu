@@ -27,7 +27,7 @@
     </div>
     <!-- 主播选择 -->
     <div class="people-nav" v-if="allshow==false">
-      <div class="people1">
+      <!-- <div class="people1">
         <div class="head-portrait">
           <img src="@/assets/timg.jpg" class="Head-Portrait" />
         </div>
@@ -35,32 +35,16 @@
           <div class="people-name">雅雅说篮伦</div>
           <div class="state">直播中</div>
         </div>
-      </div>
-      <div class="people2">
-        <div class="head-portrait">
-          <img src="@/assets/timg.jpg" class="Head-Portrait" />
-        </div>
-        <div class="people-name-state">
-          <div class="people-name">雅雅说篮伦</div>
-          <div class="state">直播中</div>
-        </div>
-      </div>
-      <div class="people2">
-        <div class="head-portrait">
-          <img src="@/assets/timg.jpg" class="Head-Portrait" />
-        </div>
-        <div class="people-name-state">
-          <div class="people-name">雅雅说篮伦</div>
-          <div class="state">直播中</div>
-        </div>
-      </div>
-      <div class="people2">
-        <div class="head-portrait">
-          <img src="@/assets/timg.jpg" class="Head-Portrait" />
-        </div>
-        <div class="people-name-state">
-          <div class="people-name">雅雅说篮伦</div>
-          <div class="state">直播中</div>
+      </div> -->
+      <div v-for="item in part" :key="item">
+        <div class="people2">
+          <div class="head-portrait">
+            <img src="@/assets/timg.jpg" class="Head-Portrait" />
+          </div>
+          <div class="people-name-state">
+            <div class="people-name">雅雅说篮伦</div>
+            <div class="state">直播中</div>
+          </div>
         </div>
       </div>
       <div>
@@ -69,7 +53,7 @@
     </div>
     <div v-if="allshow==true">
       <div class="people-nav-pull">
-        <div class="people1">
+        <!-- <div class="people1">
           <div class="head-portrait">
             <img src="@/assets/timg.jpg" class="Head-Portrait" />
           </div>
@@ -77,86 +61,16 @@
             <div class="people-name">每天吃蓝莓</div>
             <div class="state">直播中</div>
           </div>
-        </div>
-        <div class="people2">
-          <div class="head-portrait">
-            <img src="@/assets/timg.jpg" class="Head-Portrait" />
-          </div>
-          <div class="people-name-state">
-            <div class="people-name">每天吃蓝莓</div>
-            <div class="state">直播中</div>
-          </div>
-        </div>
-        <div class="people2">
-          <div class="head-portrait">
-            <img src="@/assets/timg.jpg" class="Head-Portrait" />
-          </div>
-          <div class="people-name-state">
-            <div class="people-name">每天吃蓝莓</div>
-            <div class="state">直播中</div>
-          </div>
-        </div>
-        <div class="people2">
-          <div class="head-portrait">
-            <img src="@/assets/timg.jpg" class="Head-Portrait" />
-          </div>
-          <div class="people-name-state">
-            <div class="people-name">每天吃蓝莓</div>
-            <div class="state">直播中</div>
-          </div>
-        </div>
-        <div class="people2">
-          <div class="head-portrait">
-            <img src="@/assets/timg.jpg" class="Head-Portrait" />
-          </div>
-          <div class="people-name-state">
-            <div class="people-name">每天吃蓝莓</div>
-            <div class="state">直播中</div>
-          </div>
-        </div>
-        <div class="people2">
-          <div class="head-portrait">
-            <img src="@/assets/timg.jpg" class="Head-Portrait" />
-          </div>
-          <div class="people-name-state">
-            <div class="people-name">每天吃蓝莓</div>
-            <div class="state">直播中</div>
-          </div>
-        </div>
-        <div class="people2">
-          <div class="head-portrait">
-            <img src="@/assets/timg.jpg" class="Head-Portrait" />
-          </div>
-          <div class="people-name-state">
-            <div class="people-name">每天吃蓝莓</div>
-            <div class="state">直播中</div>
-          </div>
-        </div>
-        <div class="people2">
-          <div class="head-portrait">
-            <img src="@/assets/timg.jpg" class="Head-Portrait" />
-          </div>
-          <div class="people-name-state">
-            <div class="people-name">每天吃蓝莓</div>
-            <div class="state">直播中</div>
-          </div>
-        </div>
-        <div class="people2">
-          <div class="head-portrait">
-            <img src="@/assets/timg.jpg" class="Head-Portrait" />
-          </div>
-          <div class="people-name-state">
-            <div class="people-name">每天吃蓝莓</div>
-            <div class="state">直播中</div>
-          </div>
-        </div>
-        <div class="people2">
-          <div class="head-portrait">
-            <img src="@/assets/timg.jpg" class="Head-Portrait" />
-          </div>
-          <div class="people-name-state">
-            <div class="people-name">每天吃蓝莓</div>
-            <div class="state">直播中</div>
+        </div> -->
+        <div v-for="item in allpart" :key="item">
+          <div class="people2">
+            <div class="head-portrait">
+              <img src="@/assets/timg.jpg" class="Head-Portrait" />
+            </div>
+            <div class="people-name-state">
+              <div class="people-name">每天吃蓝莓</div>
+              <div class="state">直播中</div>
+            </div>
           </div>
         </div>
         <div>
@@ -331,6 +245,8 @@ export default {
       recommendVideo: {},
       recommendVideo6: [],
       recommendVideo2: [],
+      part:[1,2,3,4],
+      allpart:[1,2,3,4,5,6,7,8,9,10],
       type:1,
       table1Data: [{
           company: 'sjhjfkdj',

@@ -3,6 +3,7 @@ import { WHITELIST_CODE, TIME_OUT_CODE } from "@/config";
 // import { Message } from 'element-ui';
 import cookie from "@/modules/utils/cookie.js";
 import store from "@/store/index";
+import { debug } from "leancloud-realtime";
 
 // 设置uuid
 cookie.getItem("X-User-Agent") ||
@@ -28,6 +29,13 @@ instance.interceptors.request.use(
   config => {
     // 设置header
     setHeader(config);
+    // 临时处理,后面删掉 start
+    if(config.url.startsWith("http://192.168.0.109:8080")){
+      config.headers["xx-user-token"] = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ4eC11c2VyLWlkIjoiMTAwMDQ2MDMiLCJpc3MiOiJhaXFpdSIsImV4cCI6MTU5NzA0MDg2NCwiaWF0IjoxNTk2NDM2MDY0fQ.bvP_VBH3iUAlcWUqjY7ZlXKxKg2MI-bD5ehDUBGCtkfvsk_W9nQsym1XAPBEDX4-vctItN-ooN4eLD4YrvGGsw";
+      config.headers["xx_n_t"] =  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ4eC11c2VyLWlkIjoiMTAwMDQ2MDMiLCJpc3MiOiJhaXFpdSIsImV4cCI6MTU5NzA0MDg2NCwiaWF0IjoxNTk2NDM2MDY0fQ.bvP_VBH3iUAlcWUqjY7ZlXKxKg2MI-bD5ehDUBGCtkfvsk_W9nQsym1XAPBEDX4-vctItN-ooN4eLD4YrvGGsw";
+    }
+    console.log("=======================config.headers = ",config);
+    // 临时处理,后面删掉 end
     return config;
   },
   error => {
@@ -40,7 +48,7 @@ instance.interceptors.request.use(
 // axios response封装的数据在data里面
 instance.interceptors.response.use(
   response => {
-    // console.log(response, "response");
+    console.log(response, "response");
     // 进度查询等长时间loading兼容
     if (response.data.code === TIME_OUT_CODE) {
       // TODO 重新登录 怎么处理
@@ -49,13 +57,15 @@ instance.interceptors.response.use(
     } else if (response.config.noCheckCode) {
       return response.data;
     }
+
     // 请求成功
     if (WHITELIST_CODE.includes(response.data.code)) {
       return response.data;
     } else {
       errorToast(response);
-      return Promise.reject(response);
+      return response.data;
     }
+    
   },
   error => {
     const response = error.response || {};
@@ -78,6 +88,8 @@ function setHeader(config) {
   config.headers["Content-Type"] = config.contentTypejson
     ? "application/json"
     : "application/x-www-form-urlencoded";
+    // config.headers["xx-user-token"] = cookie.getItem('xx-user-token') || cookie.getItem('xx_n_t');
+    // config.headers["xx_n_t"] =  cookie.getItem('xx-user-token') || cookie.getItem('xx_n_t');
   // config.headers["xx-user-token"] = cookie.getItem('xx_n_t') || "";
   // config.headers["X-User-Agent"] = `version=MIFAN_pc;channel=main;mac=${ storage.getItem('uuid') }`;
 

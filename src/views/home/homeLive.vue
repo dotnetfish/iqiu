@@ -54,7 +54,7 @@
 
 
     <div class="liveRecomend news" style="margin-top:15px;">
-      <!-- <div class="liveRecomend">
+      <div class="liveRecomend">
         <div class="liveRecomend-title">
           <img src="@/assets/home/rebo.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
           <p class="liveRecomend-title-text">热门赛事</P>
@@ -141,7 +141,7 @@
             </div>
           </div>
         </div>   
-    </div> -->
+    </div>
 
       <div class="liveRecomend">
         <div class="liveRecomend-title">
@@ -423,7 +423,6 @@
             this.recommendVideo8 = res.data.slice(0, 8)}
             else{this.recommendVideo8 = res.data.slice(0, 8)}
         })
-
       },
       //拖拽
       // move(e){
