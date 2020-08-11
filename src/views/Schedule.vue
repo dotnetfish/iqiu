@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loginPop ref="login" ></loginPop>
     <LeftSideBar></LeftSideBar>
 
     <div class="title">
@@ -50,10 +51,10 @@
             <div class="information-title">{{item.name}}</div>
             <div class="information-time">{{item.startTime | formatDate}}</div>
             <div class="information-state" v-if="item.isOrder== 0">
-              <button class="state1" @click="AddmatchList(item)">预约</button>
+              <button class="state1" @click="getApplyStatus(item)">预约</button>
             </div>
             <div class="information-state" v-else>
-              <button class="state2" @click="AddmatchList(item)">已预约</button>
+              <button class="state2" @click="getApplyStatus(item)">已预约</button>
             </div>
           </div>
           <!-- <router-link :to="{name:'live-broadcast'}"> -->
@@ -81,7 +82,8 @@
                 <img :src="channel.avatarUrl" class="people1" />
               </div>
             </div>
-            <div class="peoplepull">
+            <div v-if="schedulelist[indexo].channels.length == 0" class="nopeople">暂时还没有主播在直播哦～</div>
+            <div class="peoplepull" v-if="schedulelist[indexo].channels.length != 0">
               <img src="@/assets/home/jiantou.png" class="allpeople" @click="dialog(indexo)" />
               <el-dialog :visible.sync="dialogVisible">
                 <div class="flextitle">
@@ -102,12 +104,17 @@
                 </div>
               </el-dialog>
             </div>
-            <div class="focus"> 
+            <div class="focus" v-if="schedulelist[indexo].channels.length != 0"> 
               <div class="information-state" v-if="item.isFollow == 0">
                 <button class="state1" @click="focus(item)">关注</button>
               </div>
               <div class="information-state" v-else>
                 <button class="state2" @click="focus(item)">已关注</button>
+              </div>
+            </div>
+            <div class="focus" v-if="schedulelist[indexo].channels.length == 0"> 
+              <div class="information-state">
+                <button class="state3" @click="focus(item)">我要直播</button>
               </div>
             </div>
           </div>
@@ -119,8 +126,9 @@
 
 <script>
 import LeftSideBar from "@/components/left-side-bar.vue";
+import loginPop from "@/components/login/loginTipPopup.vue";
 import { Button, Dialog } from "element-ui";
-import { matchList, addmatchList, deletematchList, focusmatchList, nofocusmatchList } from "@/api/api";
+import { matchList, addmatchList, deletematchList, focusmatchList, nofocusmatchList, applyStatus } from "@/api/api";
  import storages from "@/utils/storage";
 // import {schedule} from '@/api/liveroom'
 export default {
@@ -149,6 +157,7 @@ export default {
       changedate:"",
       num:0,
       attenment:false,
+      anchorStatus:0,
     };
   },
   //时间戳转换
@@ -164,6 +173,7 @@ export default {
   },
   components: {
     LeftSideBar,
+    loginPop,
     [Button.name]: Button,
     [Dialog.name]: Dialog,
   },
@@ -248,6 +258,8 @@ export default {
         this.nowWeek6 = "星期六";
       }
       // _this.nowTime = hh + ":" + mf;
+      DD=dd;
+      MM=mm;
       if(dd<10) {
         DD = '0'+dd
       }
@@ -264,6 +276,8 @@ export default {
         dd = 1;
         mm = 1;
       }
+      DD=dd;
+      MM=mm;
       if(dd<10) {
         DD = '0'+dd
       }
@@ -280,6 +294,8 @@ export default {
         dd = 1;
         mm = 1;
       }
+      DD=dd;
+      MM=mm;
       if(dd<10) {
         DD = '0'+dd
       }
@@ -296,6 +312,8 @@ export default {
         dd = 1;
         mm = 1;
       }
+      DD=dd;
+      MM=mm;
       if(dd<10) {
         DD = '0'+dd
       }
@@ -312,6 +330,8 @@ export default {
         dd = 1;
         mm = 1;
       }
+      DD=dd;
+      MM=mm;
       if(dd<10) {
         DD = '0'+dd
       }
@@ -328,6 +348,8 @@ export default {
         dd = 1;
         mm = 1;
       }
+      DD=dd;
+      MM=mm;
       if(dd<10) {
         DD = '0'+dd
       }
@@ -344,6 +366,8 @@ export default {
         dd = 1;
         mm = 1;
       }
+      DD=dd;
+      MM=mm;
       if(dd<10) {
         DD = '0'+dd
       }
@@ -375,48 +399,74 @@ export default {
 
     //预约和取消
     AddmatchList(item) {
-      if(item.isOrder == 0) {
-        let data = {
-          cid:this.$store.state.userStatus.userInfo.uid,
-          mid: item.id
-        }
-        addmatchList(data).then(res => {
-          item.isOrder = 1;
-          console.log(res.data)
-          })
-      }else {
+      if(this.anchorStatus == 2) {
+        if(item.isOrder == 0) {
           let data = {
-          cid:this.$store.state.userStatus.userInfo.uid,
-          mid: item.id
+            cid:this.$store.state.userStatus.userInfo.uid,
+            mid: item.id
+          }
+          addmatchList(data).then(res => {
+            item.isOrder = 1;
+            console.log(res.data)
+            })
+        }else {
+            let data = {
+            cid:this.$store.state.userStatus.userInfo.uid,
+            mid: item.id
+          }
+          deletematchList(data).then(res => {
+            item.isOrder = 0;
+            console.log(res.data)
+            })
+          }
+        this.appoint = !this.appoint;
+        console.log(this.appoint);
+      } else {
+        this.$message('您还不是主播,请前往认证主播');
+      }
+    },
+    // 判断主播
+    getApplyStatus(item) {
+      // 已登陆,验证是否主播
+      if(this.$store.state.userStatus.userInfo.uid){
+        let data = {
+          uid:this.$store.state.userStatus.userInfo.uid,
         }
-        deletematchList(data).then(res => {
-           item.isOrder = 0;
-          console.log(res.data)
-          })
-        }
-      this.appoint = !this.appoint;
-      console.log(this.appoint);
+        console.log("id==",this.$store.state.userStatus.userInfo.uid)
+        applyStatus(data).then(res => {
+          this.anchorStatus = res.channelApplyStatus
+          this.AddmatchList(item)
+          console.log("申请状态==",res.channelApplyStatus)
+        });
+      } else { // 未登录,弹出登录框
+ // 展示登陆弹窗
+      this.$refs.login.openLoginDialog();
+      }
     },
     //关注
     focus(item) {
-      if(item.isFollow == 0) {
-        let data = {
-          mid: item.id
-        }
-        focusmatchList(data).then(res => {
-          item.isFollow = 1
-          console.log(res.data)
-          })
-        }else {
+      if(this.$store.state.userStatus.userInfo.uid) {
+        if(item.isFollow == 0) {
           let data = {
-          mid: item.id
-        }
-        nofocusmatchList(data).then(res => {
-          item.isFollow = 0;
-          console.log(res.data)
-          })
-        }
-      this.attenment = !this.attenment;
+            mid: item.id
+          }
+          focusmatchList(data).then(res => {
+            item.isFollow = 1
+            console.log(res.data)
+            })
+          }else {
+            let data = {
+            mid: item.id
+          }
+          nofocusmatchList(data).then(res => {
+            item.isFollow = 0;
+            console.log(res.data)
+            })
+          }
+        this.attenment = !this.attenment;
+      } else {
+        this.$refs.login.openLoginDialog();
+      }
     },
     //获取列表
     getmatchList(date,year) {
@@ -605,6 +655,18 @@ export default {
   border: 1px solid rgba(27, 181, 236, 1);
 }
 
+.state3 {
+  width: 86px;
+  height: 25px;
+  line-height: 25px;
+  background: rgba(255, 255, 255, 1);
+  border: 1px solid #EC6B6B;
+  color: #EC6B6B;
+  margin-left: 30px;
+  margin-top: 5px;
+  outline: 0;
+}
+
 .team1 {
   width: 100%;
   height: 60px;
@@ -655,6 +717,18 @@ export default {
   height: 120px;
   margin-left: 40px;
 }
+
+.nopeople {
+  width:240px;
+  height:120px;
+  font-size:20px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(153,153,153,1);
+  line-height:120px;
+  margin-left: 40px;
+}
+
 .peoplepull {
   width: 105px;
   height: 120px;

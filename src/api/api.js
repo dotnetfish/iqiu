@@ -3,7 +3,7 @@ import axios from "./axios";
 const qs = require("qs");
 
 // let baseURL = process.env.VUE_APP_ZY_API;
-let baseURL = 'https://api.iqiulive.cn';
+let baseURL = process.env.VUE_APP_ZY_API;
 let baseurl = 'http://192.168.0.109:8080';
 // https://api.iqiulive.cn
 console.log(baseURL);
@@ -199,6 +199,17 @@ export const rankingQuery = (data) =>
       contentTypejson: true,
   });
 
+  // 热门赛程详情
+  export const hotmatchList = (data, headers) =>
+    axios({
+      url: `${baseurl}/aiqiu/v1/app/match/hot`,
+      method: "post",
+      headers:headers,
+      data:  data,
+      contentTypejson: true,
+  });
+
+
   //添加赛程预约
   export const addmatchList = (data) =>
     axios({
@@ -243,3 +254,13 @@ export const rankingQuery = (data) =>
       data,
       contentTypejson: true,
   });
+
+  // 申请状态
+  export const applyStatus = (data) =>
+  axios({
+    url: `${baseurl}/aiqiu/v1/live/channels/apply/status`,
+    method: "post",
+    data,
+    contentTypejson: true,
+});
+

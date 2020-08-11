@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loginPop ref="login" ></loginPop>
     <div class="videoRecom">
       <div class="imgright" @click.self="downloadright()"></div>
       <div class="imgleft" @click.self="downloadleft()"></div>
@@ -54,53 +55,40 @@
 
 
     <div class="liveRecomend news" style="margin-top:15px;">
-      <!-- <div class="liveRecomend">
+      <div class="liveRecomend">
         <div class="liveRecomend-title">
           <img src="@/assets/home/rebo.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
           <p class="liveRecomend-title-text">热门赛事</P>
         </div>
         <div class="bigboss">
-          <div class="boss">
+          <div class="boss" v-for="(item,indexo) in schedulelist" :key="indexo">
             <div class="bossone">
               <div style="width:33px;height:30px;"><img src="@/assets/home/zuqiu.png" style="width:33px;height:30px"></div>
-              <div style="line-height:30px;color:rgb(154, 160, 179);margin-left:10px">莫西超</div>
-              <div style="line-height:30px;margin-left:20%;margin-right:2%">07月28日</div>
-              <div style="line-height:30px;color:rgb(154, 160, 179)">09:00</div>
+              <div style="line-height:30px;color:rgb(154, 160, 179);margin-left:10px;width:120px">{{item.name}}</div>
+              <div style="line-height:30px;width:80px;margin-right:6px">{{nowDate}}</div>
+              <div style="line-height:30px;color:rgb(154, 160, 179);margin-right:10px">{{item.startTime | formatDate}}</div>
             </div>
 
             <div class="bosstow">
-              <div style="width:60px;height:60px;"><img src="@/assets/icon_nologin@2x.png" style="width:60px;height:60px"></div>
-               <div style="line-height:60px;margin-left:28px;margin-right:28px">0-1</div>
-              <div style="width:60px;height:60px"><img src="@/assets/icon_nologin@2x.png" style="width:60px;height:60px"></div>
+              <div style="width:60px;height:60px;"><img :src="item.teamOneLogo" style="width:60px;height:60px"></div>
+               <div style="line-height:60px;width:95px;text-align: center;">{{item.teamOneScore}}-{{item.teamTwoScore}}</div>
+              <div style="width:60px;height:60px"><img :src="item.teamTwoLogo" style="width:60px;height:60px"></div>
             </div>
 
             <div class="bossthree">
-              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">系里哈哈</div>
-              <div style="width:60px;height:28px;margin-left:12px;margin-right:12px"><img src="@/assets/home/lookbo.jpg" style="width:60px;height:28px"></div>
-              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">呼哈呼哈</div>
+              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{item.teamOne}}</div>
+              <div style="width:100px;height:28px;margin-left:18px">
+                <div class="information-state" v-if="item.isOrder== 0">
+                  <button class="state1" @click="getApplyStatus(item)">预约</button>
+                </div>
+                <div class="information-state" v-else>
+                  <button class="state2" @click="getApplyStatus(item)">已预约</button>
+                </div>
+              </div>
+              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{item.teamTwo}}</div>
             </div>
           </div>
-          <div class="boss">
-            <div class="bossone">
-              <div style="width:33px;height:30px;"><img src="@/assets/home/zuqiu.png" style="width:33px;height:30px"></div>
-              <div style="line-height:30px;color:rgb(154, 160, 179);margin-left:10px">莫西超</div>
-              <div style="line-height:30px;margin-left:20%;margin-right:2%">07月28日</div>
-              <div style="line-height:30px;color:rgb(154, 160, 179)">09:00</div>
-            </div>
-
-            <div class="bosstow">
-              <div style="width:60px;height:60px;"><img src="@/assets/icon_nologin@2x.png" style="width:60px;height:60px"></div>
-               <div style="line-height:60px;margin-left:30px;margin-right:30px">VS</div>
-              <div style="width:60px;height:60px"><img src="@/assets/icon_nologin@2x.png" style="width:60px;height:60px"></div>
-            </div>
-
-            <div class="bossthree">
-              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">系里哈哈</div>
-              <div style="width:60px;height:28px;margin-left:12px;margin-right:12px"><img src="@/assets/home/yuyue.jpg" style="width:60px;height:28px"></div>
-              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">呼哈呼哈</div>
-            </div>
-          </div>
-          <div class="boss">
+          <!-- <div class="boss">
             <div class="bossone">
               <div style="width:33px;height:30px;"><img src="@/assets/home/zuqiu.png" style="width:33px;height:30px"></div>
               <div style="line-height:30px;color:rgb(154, 160, 179);margin-left:10px">莫西超</div>
@@ -119,29 +107,9 @@
               <div style="width:60px;height:28px;margin-left:12px;margin-right:12px"><img src="@/assets/home/yuyue.jpg" style="width:60px;height:28px"></div>
               <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">呼哈呼哈</div>
             </div>
-          </div>
-          <div class="boss">
-            <div class="bossone">
-              <div style="width:33px;height:30px;"><img src="@/assets/home/zuqiu.png" style="width:33px;height:30px"></div>
-              <div style="line-height:30px;color:rgb(154, 160, 179);margin-left:10px">莫西超</div>
-              <div style="line-height:30px;margin-left:20%;margin-right:2%">07月28日</div>
-              <div style="line-height:30px;color:rgb(154, 160, 179)">09:00</div>
-            </div>
-
-            <div class="bosstow">
-              <div style="width:60px;height:60px;"><img src="@/assets/icon_nologin@2x.png" style="width:60px;height:60px"></div>
-               <div style="line-height:60px;margin-left:30px;margin-right:30px">VS</div>
-              <div style="width:60px;height:60px"><img src="@/assets/icon_nologin@2x.png" style="width:60px;height:60px"></div>
-            </div>
-
-            <div class="bossthree">
-              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">系里哈哈</div>
-              <div style="width:60px;height:28px;margin-left:12px;margin-right:12px"><img src="@/assets/home/yuyue.jpg" style="width:60px;height:28px"></div>
-              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">呼哈呼哈</div>
-            </div>
-          </div>
+          </div> -->
         </div>   
-    </div> -->
+    </div>
 
       <div class="liveRecomend">
         <div class="liveRecomend-title">
@@ -277,8 +245,9 @@
   import livelistitem from "@/components/live-list-item.vue"
   import liveroomSmallvideo from "@/components/liveroom/liveroomSmallvideo.vue"
   import * as eventTrack from '@/utils/eventTracking.js'
+  import loginPop from "@/components/login/loginTipPopup.vue";
   // import { liveList,changeHotVideo } from "@/api/api";
-  import { liveList,recommendLiveList } from "@/api/api"
+  import { liveList,recommendLiveList,matchList,addmatchList, deletematchList, applyStatus } from "@/api/api"
   // import  from "@/modules/share/qzopensl.js";
   import QRCode from 'qrcodejs2'
   // import img from '@/assets/share/kongjian.png'
@@ -294,6 +263,7 @@
       videoPlayer,
       livelistitem,
       RightFloatLayer,
+      loginPop,
       liveroomSmallvideo
     },
     data() {
@@ -322,9 +292,21 @@
         positionX:0,
         positionY:0,
         scrollTop:0,
+        schedulelist: [],
+        nowDate:'',
         // videoshow:false,
       }
     },
+    filters: {
+    formatDate: function (value) {
+      let date = new Date(value);
+      let h = date.getHours();
+      h = h < 10 ? "0" + h : h;
+      let m = date.getMinutes();
+      m = m < 10 ? "0" + m : m;
+      return h + ":" + m;
+    },
+  },
     computed: {
       userStatus() {
         return this.$store.state.userStatus
@@ -347,56 +329,90 @@
         // this.reminder()
       }
       this.regularRefresh()
+      setTimeout(() => {
+        this.getmatchList();
+     }, 200)
+     this.currentTime();
       // window.addEventListener('scroll',this.handleScroll,true)
     },
     methods: {
-      //二维码
-    //   creatQrCode() {
-    //     var qrcode = new QRCode(this.$refs.qrCodeUrl, {
-    //         text: 'http://m.iqiulive.cn', // 需要转换为二维码的内容
-    //         width: 100,
-    //         height: 100,
-    //         colorDark: '#000000',
-    //         colorLight: '#ffffff',
-    //         correctLevel: QRCode.CorrectLevel.H
-    //     })
-    // },
-      //分享
-      // share(type) {
-      //   // console.log(encodeURIComponent(document.location))
-      //   var i = "https://rpic.douyucdn.cn/asrpic/200716/254667_1359.png/dy1"
-      //   if(type=='qq') {
-      //     window.open('http://connect.qq.com/widget/shareqq/index.html?url='+'http://www.iqiulive.cn'+'?sharesource=qzone&title=&pics='+i+'&summary= 根据调查你确实是猪')
-      //   }else if(type=='qzone') {
-      //     window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+'http://www.iqiulive.cn'+'?sharesource=qzone&title=555&pics=图片地址&summary= 嗯嗯')
-      //   }else if(type=='weibo') {
-      //     window.open('http://service.weibo.com/share/share.php?url='+'http://www.iqiulive.cn'+'?sharesource=weibo&title=标题&pic=图片&appkey=微博平台申请的key');
-      //   }else{
-      //     var url = 'http://www.iqiulive.cn',
-      //           encodePath = encodeURIComponent(url),
-      //           targetUrl = 'http://qr.liantu.com/api.php?text=' + encodePath;
-      //        window.open(url,'weixin', 'height=320, width=320')
-      //   }
-        
-      //   // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+document.location.href+'?sharesource=qzone&title='+this.sum+'&pics=图片地址&summary= 嗯嗯')
-      //   // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(document.location) + '?sharesource=qzone&title=' + sum + '&pics=' +  + '&summary=' + '');
-      //   // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+document.location.href+'?sharesource=qzone&title='+ftit+'&pics='+lk+'&summary='+document.querySelector('meta[name="description"]').getAttribute('content'))
-      // },
-      // 滚动条
-      // handleScroll() {
-      //   this.scrollTop = window.pageYOffset;
-      //   console.log(this.scrollTop)
-      //   if(this.scrollTop>=700){
-      //     this.videoshow=true
-      //   }else{
-      //     this.videoshow=false
-      //   }
-      //   // var offsetTop = Number(this.scrollTop);
-      //   // this.$refs.movediv.style.top+=offsetTop+'px';
-      //   // this.$refs.movediv.style.top+=200+'px';
-      //   // console.log(this.$refs.movediv.style.top)
-      //   // console.log(offsetTop)
-      // },
+      //预约和取消
+    AddmatchList(item) {
+      if(this.anchorStatus == 2) {
+        if(item.isOrder == 0) {
+          let data = {
+            cid:this.$store.state.userStatus.userInfo.uid,
+            mid: item.id
+          }
+          addmatchList(data).then(res => {
+            item.isOrder = 1;
+            console.log(res.data)
+            })
+        }else {
+            let data = {
+            cid:this.$store.state.userStatus.userInfo.uid,
+            mid: item.id
+          }
+          deletematchList(data).then(res => {
+            item.isOrder = 0;
+            console.log(res.data)
+            })
+          }
+        this.appoint = !this.appoint;
+        console.log(this.appoint);
+      } else {
+        this.$message('您还不是主播,请前往认证主播');
+      }
+    },
+    // 判断主播
+    getApplyStatus(item) {
+      // 已登陆,验证是否主播
+      if(this.$store.state.userStatus.userInfo.uid){
+        let data = {
+          uid:this.$store.state.userStatus.userInfo.uid,
+        }
+        console.log("id==",this.$store.state.userStatus.userInfo.uid)
+        applyStatus(data).then(res => {
+          this.anchorStatus = res.channelApplyStatus
+          this.AddmatchList(item)
+          console.log("申请状态==",res.channelApplyStatus)
+        });
+      } else { // 未登录,弹出登录框
+ // 展示登陆弹窗
+      this.$refs.login.openLoginDialog();
+      }
+    },
+      currentTime() {
+      setInterval(this.getDate, 5);
+    },
+      getDate: function () {
+        var _this = this;
+        let mm = new Date().getMonth() + 1;
+        let dd = new Date().getDate();
+        _this.nowDate = mm + "月" + dd + "日";
+      },
+      getmatchList() {
+      let yy = new Date().getFullYear();
+      let mm = new Date().getMonth() + 1;
+      let dd = new Date().getDate();
+      let date = yy + "/" + mm + "/" + dd;
+      let timeStr1 = date + "/00:00:00";
+      let timeStr2 = date + "/23:59:59";
+      console.log(timeStr2)
+      let time1 = new Date(timeStr1).getTime();
+      let time2 = new Date(timeStr2).getTime();
+      let headers = { "content-type": "application/json" };
+      let data = {
+        startTime: time1,
+        endTime: time2,
+      };
+      matchList(data, headers).then((res) => {
+        this.schedulelist = res.data;
+        console.log("==================",this.schedulelist)
+        this.schedulelist = res.data.slice(0, 4)
+        console.log("==================",this.schedulelist)
+      });
+    },
       downloadleft() {
          window.open('http://www.iqiulive.cn/zhibo')
       },
@@ -414,14 +430,19 @@
          
         }
         liveList(data, headers).then(res => {
-          // console.log('首页-获取推荐列表--res',res)
-          this.recommendVideo = res.data[0]
-          this.recommendVideo6 = res.data.slice(0, 6)
-          this.recommendVideo2 = res.data.slice(1, 3)
-          if(res.data.length<14) {
-            res.data=res.data.reverse();
-            this.recommendVideo8 = res.data.slice(0, 8)}
-            else{this.recommendVideo8 = res.data.slice(0, 8)}
+          console.log('首页-获取推荐列表--res',res)
+          if(res.data && res.data.length > 0){
+            this.recommendVideo = res.data[0]
+            this.recommendVideo6 = res.data.slice(0, 6)
+            this.recommendVideo2 = res.data.slice(1, 3)
+            if(res.data.length<14) {
+              res.data=res.data.reverse();
+              this.recommendVideo8 = res.data.slice(0, 8)
+            }else{
+              this.recommendVideo8 = res.data.slice(0, 8)
+            }
+          }
+         
         })
       },
       //拖拽
@@ -915,9 +936,9 @@
 }
 
 .boss {
-  width: calc(25% - 22px);
+  width: calc(25% - 28px);
   height: 178px;
-  border: rgb(233, 236, 243) solid 1px;
+  border: rgb(233, 236, 243) solid 2px;
   margin-right: 12px;
   margin-left: 12px;
   background-color: #fff;
@@ -931,12 +952,16 @@
   margin-left: 11px;
 }
 
+.datetime {
+  right: 0;
+}
+
 .bosstow {
   display: flex;
   height: 60px;
   margin-top:10px;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 34px;
+  padding-right: 34px;
 }
 
 .bossthree {
@@ -945,5 +970,27 @@
   margin-top:10px;
   padding-left: 38px;
   padding-right: 38px;
+}
+
+.state1 {
+  width: 62px;
+  height: 25px;
+  line-height: 25px;
+  background: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(27, 181, 236, 1);
+  color: #1bb5ec;
+  margin-top: 5px;
+  outline: 0;
+}
+
+.state2 {
+  width: 62px;
+  height: 25px;
+  line-height: 25px;
+  background: rgba(27,181,236,1);
+  color: #ffffff;
+  margin-top: 5px;
+  outline: 0;
+  border: 1px solid rgba(27, 181, 236, 1);
 }
 </style>

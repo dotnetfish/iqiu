@@ -101,6 +101,7 @@
           return this.$store.state.userStatus
         },
         set(val){
+          console.log("111111111111111111set UserStatus = ",val);
           this.$store.commit('updateUserStatus', val)
         }
       },
@@ -269,6 +270,7 @@
  .login-pop{
    ::v-deep.el-dialog{
      border-radius:10px;
+     height: auto !important;
    }
    ::v-deep.el-dialog__header{
      margin-top: 11px;

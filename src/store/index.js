@@ -56,7 +56,7 @@ export default new Vuex.Store({
     },
     // 修改userStatus
     updateUserStatus(state, userStatus) {
-      console.log(userStatus);
+      console.log("修改登陆状态 = ",userStatus);
       storages.setItem('userStatus', userStatus)
       if (userStatus.userInfo) state.userStatus.userInfo = userStatus.userInfo
       if (userStatus.loginStatus) state.userStatus.loginStatus = userStatus.loginStatus
