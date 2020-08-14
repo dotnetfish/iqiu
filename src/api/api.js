@@ -4,7 +4,7 @@ const qs = require("qs");
 
 // let baseURL = process.env.VUE_APP_ZY_API;
 let baseURL = process.env.VUE_APP_ZY_API;
-let baseurl = 'http://192.168.0.109:8080';
+// let baseurl = 'http://192.168.0.109:8080';
 // https://api.iqiulive.cn
 console.log(baseURL);
 // ---------------------示例 -------------------------
@@ -183,7 +183,7 @@ export const rankingQuery = (data) =>
   //赛程列表
   export const matchList = (data, headers) =>
     axios({
-      url: `${baseurl}/aiqiu/v1/app/match/find`,
+      url: `${baseURL}/aiqiu/v1/app/match/find`,
       method: "post",
       headers:headers,
       data:  data,
@@ -193,7 +193,7 @@ export const rankingQuery = (data) =>
   // 赛程详情
   export const matchInfo = (data) =>
     axios({
-      url: `${baseurl}/aiqiu/v1/app/match/info`,
+      url: `${baseURL}/aiqiu/v1/app/match/info`,
       method: "post",
       data,
       contentTypejson: true,
@@ -202,7 +202,7 @@ export const rankingQuery = (data) =>
   // 热门赛程详情
   export const hotmatchList = (data, headers) =>
     axios({
-      url: `${baseurl}/aiqiu/v1/app/match/hot`,
+      url: `${baseURL}/aiqiu/v1/app/match/hot`,
       method: "post",
       headers:headers,
       data:  data,
@@ -213,7 +213,7 @@ export const rankingQuery = (data) =>
   //添加赛程预约
   export const addmatchList = (data) =>
     axios({
-      url: `${baseurl}/aiqiu/v1/app/match/order`,
+      url: `${baseURL}/aiqiu/v1/app/match/order`,
       method: "post",
       data:  data,
       contentTypejson: true
@@ -222,7 +222,7 @@ export const rankingQuery = (data) =>
   //取消赛程预约
   export const deletematchList = (data) =>
     axios({
-      url: `${baseurl}/aiqiu/v1/app/match/unOrder`,
+      url: `${baseURL}/aiqiu/v1/app/match/unOrder`,
       method: "post",
       data:  data,
       contentTypejson: true
@@ -231,7 +231,7 @@ export const rankingQuery = (data) =>
   //关注
   export const focusmatchList = (data) =>
     axios({
-      url: `${baseurl}/aiqiu/v1/app/match/follow`,
+      url: `${baseURL}/aiqiu/v1/app/match/follow`,
       method: "post",
       data:  data,
       contentTypejson: true
@@ -240,7 +240,7 @@ export const rankingQuery = (data) =>
   //取消关注
   export const nofocusmatchList = (data) =>
     axios({
-      url: `${baseurl}/aiqiu/v1/app/match/unFollow`,
+      url: `${baseURL}/aiqiu/v1/app/match/unFollow`,
       method: "post",
       data:  data,
       contentTypejson: true
@@ -249,7 +249,7 @@ export const rankingQuery = (data) =>
    // 赛程下预约主播直播列表
    export const matchChannelList = (data) =>
     axios({
-      url: `${baseurl}/aiqiu/v1/live/channels/match/channel`,
+      url: `${baseURL}/aiqiu/v1/live/channels/match/channel`,
       method: "post",
       data,
       contentTypejson: true,
@@ -258,7 +258,7 @@ export const rankingQuery = (data) =>
   // 申请状态
   export const applyStatus = (data) =>
   axios({
-    url: `${baseurl}/aiqiu/v1/live/channels/apply/status`,
+    url: `${baseURL}/aiqiu/v1/live/channels/apply/status`,
     method: "post",
     data,
     contentTypejson: true,
