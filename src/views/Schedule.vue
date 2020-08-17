@@ -28,7 +28,7 @@
         <div class="nowweek">{{nowWeek4}}</div>
         <div class="nowdate">{{nowDate4}}</div>
       </el-button>
-      <el-button class="datebutton"  @click="getmatchList(nowDate5nowyear)">
+      <el-button class="datebutton"  @click="getmatchList(nowDate5,nowyear)">
         <div class="nowweek">{{nowWeek5}}</div>
         <div class="nowdate">{{nowDate5}}</div>
       </el-button>
@@ -505,6 +505,7 @@ export default {
       };
       matchList(data, headers).then((res) => {
         this.schedulelist = res.data;
+        console.log(this.schedulelist)
       });
     },
   },
