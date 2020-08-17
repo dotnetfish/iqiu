@@ -45,16 +45,29 @@
     </div>
 
     <div class="gameinformation">
+      <div @click="goother()" class="none" v-if="schedulelist.length == 0"><div><img src="@/assets/none.png"></div> <div>今日无比赛，去其他地方看看</div></div>
       <div v-for="(item,indexo) in schedulelist" :key="indexo">
         <div class="information1">
           <div class="leftinformation">
             <div class="information-title">{{item.name}}</div>
             <div class="information-time">{{item.startTime | formatDate}}</div>
-            <div class="information-state" v-if="item.isOrder== 0">
-              <button class="state1" @click="getApplyStatus(item)">预约</button>
+            <div v-if="item.status==1">
+              <div class="information-state" v-if="item.isOrder== 0">
+                <button class="state1" @click="getApplyStatus(item)">预约</button>
+              </div>
+              <div class="information-state" v-else>
+                <button class="state2" @click="getApplyStatus(item)">已预约</button>
+              </div>
             </div>
-            <div class="information-state" v-else>
-              <button class="state2" @click="getApplyStatus(item)">已预约</button>
+            <div v-if="item.status==3">
+              <div class="information-state">
+                <button class="state4">已结束</button>
+              </div>
+            </div>
+            <div v-if="item.status==2">
+              <div class="information-state">
+                <button class="state5"><span class="word">直播中</span></button>
+              </div>
             </div>
           </div>
           <!-- <router-link :to="{name:'live-broadcast'}"> -->
@@ -75,7 +88,7 @@
             </div>
           </div>
           <!-- </router-link> -->
-          <div class="rightinformation">
+          <div class="rightinformation" v-if="item.status !==3" @click="live(item.id)">
             <!-- <div class="live" @click="live()"></div> -->
             <div v-for="(channel,indext) in item.channels" :key="indext">
               <div class="people">
@@ -83,12 +96,12 @@
               </div>
             </div>
             <div v-if="schedulelist[indexo].channels.length == 0" class="nopeople">暂时还没有主播在直播哦～</div>
-            <div class="peoplepull" v-if="schedulelist[indexo].channels.length != 0">
+            <div class="peoplepull" v-if="schedulelist[indexo].channels.length > 5">
               <img src="@/assets/home/jiantou.png" class="allpeople" @click="dialog(indexo)" />
               <el-dialog :visible.sync="dialogVisible">
                 <div class="flextitle">
                   <div class="one"></div>
-                  <div class="dialogtitle">请选择一位主播</div>
+                  <div class="dialogtitle">已预约主播</div>
                   <div class="one"></div>
                   <div class="Close">
                     <img src="@/assets/close.png" class="close" @click="dialogVisible = false" />
@@ -396,7 +409,9 @@ export default {
     //     this.appoint = "预约";
     //   }
     // },
-
+    goother() {
+      this.$router.push({ path: '/' })
+    },
     //预约和取消
     AddmatchList(item) {
       if(this.anchorStatus == 2) {
@@ -632,9 +647,9 @@ export default {
 }
 
 .state1 {
-  width: 62px;
+  width: 71px;
   height: 25px;
-  line-height: 25px;
+  line-height: 20.5px;
   background: rgba(255, 255, 255, 1);
   border: 1px solid rgba(27, 181, 236, 1);
   color: #1bb5ec;
@@ -644,9 +659,9 @@ export default {
 }
 
 .state2 {
-  width: 62px;
+  width: 71px;
   height: 25px;
-  line-height: 25px;
+  line-height: 20.5px;
   background: rgba(27,181,236,1);
   color: #ffffff;
   margin-left: 30px;
@@ -656,12 +671,36 @@ export default {
 }
 
 .state3 {
-  width: 86px;
+  width: 71px;
   height: 25px;
-  line-height: 25px;
+  line-height: 20.5px;
   background: rgba(255, 255, 255, 1);
   border: 1px solid #EC6B6B;
   color: #EC6B6B;
+  margin-left: 30px;
+  margin-top: 5px;
+  outline: 0;
+}
+
+.state4 {
+  width: 71px;
+  height: 25px;
+  line-height: 20.5px;
+  background: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(240,240,240,1);
+  color:rgba(153,153,153,1);;
+  margin-left: 30px;
+  margin-top: 5px;
+  outline: 0;
+}
+
+.state5 {
+  width: 71px;
+  height: 25px;
+  line-height: 20.5px;
+  background:rgba(236,107,107,1);
+  border: 1px solid #ffffff;
+  color: #ffffff;
   margin-left: 30px;
   margin-top: 5px;
   outline: 0;
@@ -713,7 +752,7 @@ export default {
 }
 
 .people {
-  width: 105px;
+  width: 36px;
   height: 120px;
   margin-left: 40px;
 }
@@ -736,10 +775,11 @@ export default {
 }
 
 .people1 {
-  width: 80px;
-  height: 80px;
-  margin-top: 20px;
+  width: 50px;
+  height: 50px;
+  margin-top: 38px;
   border-radius: 150px;
+  border: #f2f2f2 1px solid;
 }
 
 .allpeople {
@@ -820,5 +860,15 @@ export default {
   right: 0;
   margin-right: 37px;
   margin-top: 45px;
+}
+
+.word {
+  margin-bottom: 1px;
+}
+
+.none {
+  margin: auto;
+  width: 185px;
+  padding-top: 5%;
 }
 </style>
