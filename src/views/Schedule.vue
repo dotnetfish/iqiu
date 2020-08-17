@@ -45,7 +45,7 @@
     </div>
 
     <div class="gameinformation">
-      <div @click="goother()" class="none" v-if="schedulelist.length == 0"><div><img src="@/assets/none.png"></div> <div>今日无比赛，去其他地方看看</div></div>
+      <div @click="goother()" class="none" v-if="schedulelist == null"><div><img src="@/assets/none.png"></div> <div>今日无比赛，去其他地方看看</div></div>
       <div v-for="(item,indexo) in schedulelist" :key="indexo">
         <div class="information1">
           <div class="leftinformation">
@@ -505,7 +505,6 @@ export default {
       };
       matchList(data, headers).then((res) => {
         this.schedulelist = res.data;
-        console.log(this.schedulelist)
       });
     },
   },
