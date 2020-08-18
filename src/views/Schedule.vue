@@ -647,61 +647,61 @@ export default {
 }
 
 .state1 {
-  width: 71px;
+  width: 90px;
   height: 25px;
   line-height: 20.5px;
   background: rgba(255, 255, 255, 1);
   border: 1px solid rgba(27, 181, 236, 1);
   color: #1bb5ec;
-  margin-left: 30px;
+  margin-left: 15px;
   margin-top: 5px;
   outline: 0;
 }
 
 .state2 {
-  width: 71px;
+  width: 90px;
   height: 25px;
   line-height: 20.5px;
   background: rgba(27,181,236,1);
   color: #ffffff;
-  margin-left: 30px;
+  margin-left: 15px;
   margin-top: 5px;
   outline: 0;
   border: 1px solid rgba(27, 181, 236, 1);
 }
 
 .state3 {
-  width: 71px;
+  width: 90px;
   height: 25px;
   line-height: 20.5px;
   background: rgba(255, 255, 255, 1);
   border: 1px solid #EC6B6B;
   color: #EC6B6B;
-  margin-left: 30px;
+  margin-left: 15px;
   margin-top: 5px;
   outline: 0;
 }
 
 .state4 {
-  width: 71px;
+  width: 90px;
   height: 25px;
   line-height: 20.5px;
   background: rgba(255, 255, 255, 1);
   border: 1px solid rgba(240,240,240,1);
   color:rgba(153,153,153,1);;
-  margin-left: 30px;
+  margin-left: 15px;
   margin-top: 5px;
   outline: 0;
 }
 
 .state5 {
-  width: 71px;
+  width: 90px;
   height: 25px;
   line-height: 20.5px;
   background:rgba(236,107,107,1);
   border: 1px solid #ffffff;
   color: #ffffff;
-  margin-left: 30px;
+  margin-left: 15px;
   margin-top: 5px;
   outline: 0;
 }

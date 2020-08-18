@@ -52,12 +52,12 @@
               </div>
               <div class="popper-foot">
                 <p class="count">我的积分：{{ userLogin.credit }}</p>
-                <!--<input class="input" type="tel" v-model="gift.value">-->
-                <!-- <el-input v-model="mydefined" placeholder="自定义" :value="mydefined" class="mydefined"></el-input> -->
+                <!-- <input class="input" type="tel" v-model="gift.value"> -->
+                <el-input v-model="gift.value" placeholder="自定义" :value="gift.value" class="input"></el-input>
                 <el-button
                   class="poppper-btn"
                   :loading="sending"
-                  @click.stop="handleSendGift(item, 1)"
+                  @click.stop="handleSendGift(item, gift.value)"
                 >赠送</el-button>
               </div>
             </div>
@@ -99,25 +99,24 @@ export default {
     return {
       sending: false,
       xxx: 0,
-      mydefined:0,
       hidden: true, // 展示全部礼物
       radioList: [
         {
-          value: 1,
+          value: 10,
           desc: "十全十美",
         },
-        // {
-        //   value: 25,
-        //   desc: "十全十美",
-        // },
-        // {
-        //   value: 999,
-        //   desc: "十全十美",
-        // },
-        // {
-        //   value: 1314,
-        //   desc: "十全十美",
-        // },
+        {
+          value: 25,
+          desc: "十全十美",
+        },
+        {
+          value: 999,
+          desc: "十全十美",
+        },
+        {
+          value: 1314,
+          desc: "十全十美",
+        },
       ],
       radioIndex: 0,
       gift: {
@@ -475,9 +474,11 @@ export default {
     align-items: center;
     height: 40px;
 
-    .mydefined {
-      width: 100px;
-    }
+    // .mydefined {
+    //   width: 53px;
+    //   height: 26px;
+    //   margin-right: 5px;
+    // }
 
     .count {
       flex: 1;
