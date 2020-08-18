@@ -12,7 +12,8 @@
     </div>
     <div class="allall"> 
     <div>
-      <el-button @click="leftmove()" class="leftmove">＜</el-button>
+      <el-button @click="leftmove()" class="leftmove" v-if="xxx != 0">＜</el-button>
+      <div class="leftmove" v-if="xxx == 0"></div> 
     </div>
     <div class="all-gift"> 
       <div class="gift-items" :style="{'right': xxx * 76 + 'px'}">
@@ -71,7 +72,7 @@
       </div>
     </div>
     <div class="rightmove">
-      <el-button @click="rightmove()">＞</el-button>
+      <el-button @click="rightmove()" v-if="xxx !=5">＞</el-button>
     </div>
     </div>
     <!--    <div class="popper-switch" @click="handleSwitch">-->
