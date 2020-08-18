@@ -13,7 +13,7 @@ import VueClipboard from 'vue-clipboard2'
 Vue.use(Meta)
 
 Vue.use(VueClipboard)
-Vue.use(Message);
+// Vue.use(Message);
 
 Vue.config.productionTip = false
 

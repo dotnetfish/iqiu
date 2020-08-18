@@ -79,7 +79,7 @@
       </div>
     </div>
     <!-- 视频 -->
-    <div class="RecomContent">
+    <div class="RecomContent" v-if="recommendVideo">
       <div class="videoRecomMain">
         <videoPlayer
           class="videoPlayer"
@@ -242,7 +242,7 @@ export default {
   data() {
     return {
       allshow: false,
-      recommendVideo: {},
+      recommendVideo: null,
       recommendVideo6: [],
       recommendVideo2: [],
       matchChannelList:[1,2,3,4],
@@ -343,11 +343,6 @@ export default {
   },
   mounted() {
     this.getMatchDetail();
-    setTimeout(() => {
-        this.getSugestedList();
-     }, 200);
-    
-    
     console.log("this.$route.params = ",this.$route);
   },
   methods: {
@@ -375,7 +370,14 @@ export default {
         mid: this.$route.query.mid
       };
       matchChannelList(data).then((res) => {        
-        this.matchChannelList = res.data;        
+        this.matchChannelList = res.data;
+        console.log("比赛视频", this.matchChannelList)
+
+        if(this.matchChannelList && this.matchChannelList.length > 0){
+          this.recommendVideo = res.data[0];
+        }
+        
+        this.getSugestedList();
       });
     },
     show() {
@@ -406,7 +408,12 @@ export default {
       let headers = {};
       liveList(data, headers).then((res) => {
         // console.log('首页-获取推荐列表--res',res)
-        this.recommendVideo = res.data[0];
+        console.log("2222比赛视频", this.recommendVideo)
+        if(!this.recommendVideo){
+          this.recommendVideo = res.data[0];
+          console.log("3333比赛视频", this.recommendVideo)
+        }
+        
         this.recommendVideo6 = res.data.slice(0, 6);
         // this.recommendVideo2 = res.data.slice(1, 3);
       });

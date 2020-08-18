@@ -195,7 +195,7 @@ export default {
   },
   methods: {
     live(mid) {
-      this.$router.push({ path: '/live-broadcast', query: { mid} })
+      this.$router.push({ path: '/live-broadcast', query: { mid } })
       // this.$router.push("/live-broadcast?id=2");
     },
     currentTime() {

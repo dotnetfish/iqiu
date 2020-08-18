@@ -483,7 +483,7 @@
 
     .chat-wrap {
       position: relative;
-      height: calc(100vh - 260px);
+      height: calc(80vh - 260px);
       border-top: 1px solid $color-border;
       border-bottom: 1px solid $color-border;
     }

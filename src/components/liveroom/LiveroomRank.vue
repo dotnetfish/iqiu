@@ -2,7 +2,7 @@
   <div>
     <div class="list">
       <div class="towrank">
-        <div style="width:96px;height:28px;font-size:20px;margin-left:44px;line-height:28px">
+        <div style="width:96px;height:28px;font-size:20px;margin-left:84px;line-height:28px">
           <button class="day" @click="changeblue()" ref="newtask">日榜</button>
         </div>
         <div style="width:96px;height:28px;margin-left:60px;line-height:28px">
@@ -28,9 +28,34 @@ export default {
   data() {
     return {
       rankinglist: [],
+      showblue:true,
+      id:''
     };
   },
   methods: {
+    changeblue() {
+      this.showblue = !this.showblue;
+      if(this.showblue == true) {
+        this.$refs.newtask.style.color = 'rgba(51, 51, 51, 1)';
+        this.$refs.oldtask.style.color = 'rgba(122,122,122,1)';
+      }else{
+        this.$refs.oldtask.style.color = 'rgba(51, 51, 51, 1)';
+        this.$refs.newtask.style.color = 'rgba(122,122,122,1)';
+      }
+    },
+    // getUrlId () {
+    //   console.log('2222222222222222')
+    //   var url = decodeURI(location.search) // 获取url中"?"符后的字串 ('?modFlag=business&role=1')
+    //   var theRequest = {}
+    //   if (url.indexOf('?') !== -1) {
+    //     var str = url.substr(1) // substr()方法返回从参数值开始到结束的字符串；
+    //     var strs = str.split('&')
+    //     for (var i = 0; i < strs.length; i++) {
+    //       theRequest[strs[i].split('=')[0]] = (strs[i].split('=')[1])
+    //     }
+    //     this.id = theRequest.id// 此时的theRequest就是我们需要的参数；
+    //   } else return false
+    // },
     getrankingList() {
       let data = {
         type: 1,
@@ -44,6 +69,7 @@ export default {
   },
   mounted() {
     // this.getrankingList()
+    // this.getUrlId()
   },
 };
 </script>
@@ -76,5 +102,21 @@ export default {
   border: 0px;
   outline: 0;
   color:rgba(122,122,122,1);
+}
+
+.blueone {
+  width: 36px;
+  height: 4px;
+  background: rgba(83, 199, 241, 1);
+  border-radius: 2px;
+  margin-left: 92px;
+}
+
+.bluetow {
+  width: 36px;
+  height: 4px;
+  background: rgba(83, 199, 241, 1);
+  border-radius: 2px;
+  margin-left: 248px;
 }
 </style>
