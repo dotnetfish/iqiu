@@ -12,7 +12,8 @@
     </div>
     <div class="allall"> 
     <div>
-      <el-button @click="leftmove()" class="leftmove">＜</el-button>
+      <el-button @click="leftmove()" class="leftmove" v-if="xxx != 0">＜</el-button>
+      <div class="leftmove" v-if="xxx == 0"></div> 
     </div>
     <div class="all-gift"> 
       <div class="gift-items" :style="{'right': xxx * 76 + 'px'}">
@@ -26,7 +27,7 @@
           <el-popover
             popper-class="live-popper"
             placement="top-end"
-            width="305"
+            width="335"
             @hide="popverHide"
             @show="popverShow(index)"
             trigger="hover"
@@ -52,12 +53,12 @@
               </div>
               <div class="popper-foot">
                 <p class="count">我的积分：{{ userLogin.credit }}</p>
-                <!--<input class="input" type="tel" v-model="gift.value">-->
-
+                <!-- <input class="input" type="tel" v-model="gift.value"> -->
+                <el-input v-model="gift.value" placeholder="自定义" :value="gift.value" class="input"></el-input>
                 <el-button
                   class="poppper-btn"
                   :loading="sending"
-                  @click.stop="handleSendGift(item, 1)"
+                  @click.stop="handleSendGift(item, gift.value)"
                 >赠送</el-button>
               </div>
             </div>
@@ -71,7 +72,7 @@
       </div>
     </div>
     <div class="rightmove">
-      <el-button @click="rightmove()">＞</el-button>
+      <el-button @click="rightmove()" v-if="xxx !=5">＞</el-button>
     </div>
     </div>
     <!--    <div class="popper-switch" @click="handleSwitch">-->
@@ -102,7 +103,19 @@ export default {
       hidden: true, // 展示全部礼物
       radioList: [
         {
-          value: 1,
+          value: 10,
+          desc: "十全十美",
+        },
+        {
+          value: 25,
+          desc: "十全十美",
+        },
+        {
+          value: 999,
+          desc: "十全十美",
+        },
+        {
+          value: 1314,
           desc: "十全十美",
         },
       ],
@@ -433,6 +446,7 @@ export default {
 
     .popper-radios-wrap {
       margin-top: 9px;
+      width: 400px;
 
       .popper-radio {
         display: inline-block;
@@ -460,6 +474,12 @@ export default {
     justify-content: flex-start;
     align-items: center;
     height: 40px;
+
+    // .mydefined {
+    //   width: 53px;
+    //   height: 26px;
+    //   margin-right: 5px;
+    // }
 
     .count {
       flex: 1;

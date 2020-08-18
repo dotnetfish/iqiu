@@ -117,6 +117,9 @@
                 </div>
               </el-dialog>
             </div>
+          </div>
+
+          <div class="end" v-if="item.status !==3">
             <div class="focus" v-if="schedulelist[indexo].channels.length != 0"> 
               <div class="information-state" v-if="item.isFollow == 0">
                 <button class="state1" @click="focus(item)">关注</button>
@@ -414,7 +417,7 @@ export default {
     },
     //预约和取消
     AddmatchList(item) {
-      if(this.anchorStatus == 2) {
+      if(this.anchorStatus == "SUCCESS") {
         if(item.isOrder == 0) {
           let data = {
             cid:this.$store.state.userStatus.userInfo.uid,
@@ -437,7 +440,10 @@ export default {
         this.appoint = !this.appoint;
         console.log(this.appoint);
       } else {
-        this.$message('您还不是主播,请前往认证主播');
+        this.$message({
+         message: "您还不是主播,请前往认证主播",
+         type: "success"
+       });
       }
     },
     // 判断主播
@@ -606,7 +612,7 @@ export default {
 
 .rightinformation {
   position: relative;
-  width: 60%;
+  width: 42%;
   // border: 1px solid rgba(240, 240, 240, 1);
   display: flex;
 }
@@ -644,64 +650,65 @@ export default {
 .information-state {
   width: 100%;
   height: 45px;
+  z-index: 10;
 }
 
 .state1 {
-  width: 71px;
+  width: 90px;
   height: 25px;
   line-height: 20.5px;
   background: rgba(255, 255, 255, 1);
   border: 1px solid rgba(27, 181, 236, 1);
   color: #1bb5ec;
-  margin-left: 30px;
+  margin-left: 15px;
   margin-top: 5px;
   outline: 0;
 }
 
 .state2 {
-  width: 71px;
+  width: 90px;
   height: 25px;
   line-height: 20.5px;
   background: rgba(27,181,236,1);
   color: #ffffff;
-  margin-left: 30px;
+  margin-left: 15px;
   margin-top: 5px;
   outline: 0;
   border: 1px solid rgba(27, 181, 236, 1);
 }
 
 .state3 {
-  width: 71px;
+  width: 90px;
   height: 25px;
   line-height: 20.5px;
   background: rgba(255, 255, 255, 1);
   border: 1px solid #EC6B6B;
   color: #EC6B6B;
-  margin-left: 30px;
+  margin-left: 15px;
   margin-top: 5px;
   outline: 0;
 }
 
 .state4 {
-  width: 71px;
+  width: 90px;
   height: 25px;
   line-height: 20.5px;
   background: rgba(255, 255, 255, 1);
   border: 1px solid rgba(240,240,240,1);
   color:rgba(153,153,153,1);;
-  margin-left: 30px;
+  margin-left: 15px;
   margin-top: 5px;
   outline: 0;
 }
 
 .state5 {
-  width: 71px;
+  width: 90px;
   height: 25px;
   line-height: 20.5px;
   background:rgba(236,107,107,1);
   border: 1px solid #ffffff;
   color: #ffffff;
-  margin-left: 30px;
+  margin-left: 15px;
   margin-top: 5px;
   outline: 0;
 }
@@ -870,5 +877,10 @@ export default {
   margin: auto;
   width: 185px;
   padding-top: 5%;
+}
+
+.end {
+  width: 18%;
+  position: relative;
 }
 </style>
