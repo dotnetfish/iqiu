@@ -977,7 +977,7 @@
 .state1 {
   width: 62px;
   height: 25px;
-  line-height: 25px;
+  line-height: 23px;
   background: rgba(255, 255, 255, 1);
   border: 1px solid rgba(27, 181, 236, 1);
   color: #1bb5ec;
@@ -988,7 +988,7 @@
 .state2 {
   width: 62px;
   height: 25px;
-  line-height: 25px;
+  line-height: 23px;
   background: rgba(27,181,236,1);
   color: #ffffff;
   margin-top: 5px;

@@ -26,7 +26,7 @@
           <el-popover
             popper-class="live-popper"
             placement="top-end"
-            width="305"
+            width="335"
             @hide="popverHide"
             @show="popverShow(index)"
             trigger="hover"
@@ -53,7 +53,7 @@
               <div class="popper-foot">
                 <p class="count">我的积分：{{ userLogin.credit }}</p>
                 <!--<input class="input" type="tel" v-model="gift.value">-->
-
+                <!-- <el-input v-model="mydefined" placeholder="自定义" :value="mydefined" class="mydefined"></el-input> -->
                 <el-button
                   class="poppper-btn"
                   :loading="sending"
@@ -99,12 +99,25 @@ export default {
     return {
       sending: false,
       xxx: 0,
+      mydefined:0,
       hidden: true, // 展示全部礼物
       radioList: [
         {
           value: 1,
           desc: "十全十美",
         },
+        // {
+        //   value: 25,
+        //   desc: "十全十美",
+        // },
+        // {
+        //   value: 999,
+        //   desc: "十全十美",
+        // },
+        // {
+        //   value: 1314,
+        //   desc: "十全十美",
+        // },
       ],
       radioIndex: 0,
       gift: {
@@ -433,6 +446,7 @@ export default {
 
     .popper-radios-wrap {
       margin-top: 9px;
+      width: 400px;
 
       .popper-radio {
         display: inline-block;
@@ -460,6 +474,10 @@ export default {
     justify-content: flex-start;
     align-items: center;
     height: 40px;
+
+    .mydefined {
+      width: 100px;
+    }
 
     .count {
       flex: 1;
