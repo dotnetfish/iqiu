@@ -107,8 +107,8 @@
               >
                 <img src="@/assets/home/gongan.png" style="width:15px;height:15px" />
                 <span style="margin: 0px 0px 0px 5px; color:#939393;">
-                  浙公网安备
-                  33010902002549号
+                  桂公网安备
+                  45030202000096号
                 </span>
               </a>
             </div>
