@@ -117,6 +117,9 @@
                 </div>
               </el-dialog>
             </div>
+          </div>
+
+          <div class="end" v-if="item.status !==3">
             <div class="focus" v-if="schedulelist[indexo].channels.length != 0"> 
               <div class="information-state" v-if="item.isFollow == 0">
                 <button class="state1" @click="focus(item)">关注</button>
@@ -414,7 +417,7 @@ export default {
     },
     //预约和取消
     AddmatchList(item) {
-      if(this.anchorStatus == 2) {
+      if(this.anchorStatus == "SUCCESS") {
         if(item.isOrder == 0) {
           let data = {
             cid:this.$store.state.userStatus.userInfo.uid,
@@ -437,7 +440,10 @@ export default {
         this.appoint = !this.appoint;
         console.log(this.appoint);
       } else {
-        this.$message('您还不是主播,请前往认证主播');
+        this.$message({
+         message: "您还不是主播,请前往认证主播",
+         type: "success"
+       });
       }
     },
     // 判断主播
@@ -606,7 +612,7 @@ export default {
 
 .rightinformation {
   position: relative;
-  width: 60%;
+  width: 42%;
   // border: 1px solid rgba(240, 240, 240, 1);
   display: flex;
 }
@@ -644,6 +650,7 @@ export default {
 .information-state {
   width: 100%;
   height: 45px;
+  z-index: 10;
 }
 
 .state1 {
@@ -870,5 +877,10 @@ export default {
   margin: auto;
   width: 185px;
   padding-top: 5%;
+}
+
+.end {
+  width: 18%;
+  position: relative;
 }
 </style>

@@ -29,6 +29,7 @@
       </div>
       <div class="chat-wrap">
         <liveroomNotice :msg="channelInfo.notice"></liveroomNotice>
+        <!-- <liveroomRank></liveroomRank> -->
         <liveroomChat
           :giftListToObject="giftListToObject"
           :hongbaoList="hongbaoList"
@@ -50,7 +51,7 @@
 import LiveroomHeader from "@/components/liveroom/LiveroomHeader";
 import LiveroomGift from "@/components/liveroom/LiveroomGift";
 import liveroomNotice from "@/components/liveroom/LiveroomNotice";
-// import liveroomRank from "@/components/liveroom/LiveroomRank";
+import liveroomRank from "@/components/liveroom/LiveroomRank";
 import liveroomInput from "@/components/liveroom/LiveroomInput";
 import liveroomChat from "@/components/liveroom/LiveroomChat";
 // import LiveroomPaodao from "@/components/liveroom/LiveroomPaodao";
@@ -88,7 +89,7 @@ export default {
     liveroomChat,
     // LiveroomPaodao,
     liveroomNotice,
-    // liveroomRank,
+    liveroomRank,
     LiveroomLoginDialog,
     liveroomInput,
     LiveroomRecommend,

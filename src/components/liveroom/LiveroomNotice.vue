@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="live-notice">
     <div class="content">
       {{ msg }}
@@ -7,6 +8,9 @@
       {{ msg }}
     </div>
   </div>
+  <!-- <div class="list">
+  </div> -->
+</div>
 </template>
 
 <script>
@@ -34,6 +38,11 @@
     }
   }
 
+  .list {
+    width: 100%;
+    height: 150px;
+    border: rgb(0, 255, 255) solid 1px;
+  }
   .live-notice {
     position: relative;
     height: 51px;

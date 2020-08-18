@@ -13,10 +13,11 @@ import VueClipboard from 'vue-clipboard2'
 Vue.use(Meta)
 
 Vue.use(VueClipboard)
+Vue.use(Message);
 
 Vue.config.productionTip = false
 
-Vue.prototype.Message = Message;
+Vue.prototype.$message = Message;
 
 // 把对象挂载vue中
 Vue.prototype.$axios = axios;

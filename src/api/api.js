@@ -264,3 +264,12 @@ export const rankingQuery = (data) =>
     contentTypejson: true,
 });
 
+// 榜单
+export const rankingList = (data) =>
+axios({
+  url: `${baseURL}/aiqiu/v1/live/ranking/list`,
+  method: "post",
+  data,
+  contentTypejson: true,
+});
+
