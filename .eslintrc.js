@@ -6,7 +6,7 @@ module.exports = {
         "node": true
     },
     // "parser": "babel-eslint",
-    parser: "vue-eslint-parser",
+     parser: "vue-eslint-parser",
     "extends": "eslint:recommended",
     "globals": {
         "Atomics": "readonly",

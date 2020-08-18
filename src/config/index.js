@@ -14,7 +14,7 @@ export const WHITELIST_CODE = [0, 600, 602, 400];
  */
 export const WHITELIST_FLOW = [];
 // 直播助手下载
-export const DOWNLOAD_APP_URL = "https://static.iqiulive.cn/upload/iQiuTool-V1.0.0.5-Setup.exe";
+export const DOWNLOAD_APP_URL = "http://static.cloudartisan.cn/upload/iQiuTool-V1.0.0.5-Setup.exe";
 // 用户服务协议
 export const USER_SERVICE_CONTRACT = `${ process.env.VUE_APP_CDN === 'production' ? "https://m.iqiulive.cn" : "https://m.iqiulive.com" }/contract_user`;
 // 用户隐私协议
