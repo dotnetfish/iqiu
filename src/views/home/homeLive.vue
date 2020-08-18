@@ -247,7 +247,7 @@
   import * as eventTrack from '@/utils/eventTracking.js'
   import loginPop from "@/components/login/loginTipPopup.vue";
   // import { liveList,changeHotVideo } from "@/api/api";
-  import { liveList,recommendLiveList,matchList,addmatchList, deletematchList, applyStatus } from "@/api/api"
+  import { liveList,recommendLiveList,hotmatchList,addmatchList, deletematchList, applyStatus } from "@/api/api"
   // import  from "@/modules/share/qzopensl.js";
   import QRCode from 'qrcodejs2'
   // import img from '@/assets/share/kongjian.png'
@@ -406,10 +406,12 @@
         startTime: time1,
         endTime: time2,
       };
-      matchList(data, headers).then((res) => {
+      hotmatchList(data, headers).then((res) => {
         this.schedulelist = res.data;
         console.log("==================",this.schedulelist)
-        this.schedulelist = res.data.slice(0, 4)
+        if(res.data){
+          this.schedulelist = res.data.slice(0, 4)
+        }
         console.log("==================",this.schedulelist)
       });
     },
