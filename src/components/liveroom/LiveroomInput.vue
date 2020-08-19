@@ -78,7 +78,7 @@
     padding-right: 11px;
 
     ::v-deep .el-textarea {
-      width: 265px;
+      width: 376px;
       display: inline-block;
     }
 

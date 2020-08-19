@@ -13,14 +13,18 @@
               <div class="routing" v-if="$route.name !== 'home' ">首页</div>
               <div class="nav-routing-active" v-if="$route.name === 'home' ">首页</div>
             </router-link>
-            <router-link :to="{name:'LiveList'}" @click.native="navClickEvent('直播')">
+            <!-- <router-link :to="{name:'LiveList'}" @click.native="navClickEvent('直播')">
               <div class="routing" v-if="$route.name !== 'LiveList' && $route.name !== 'liveroom' ">直播</div>
               <div class="nav-routing-active" v-if="$route.name === 'LiveList' ">直播</div>
               <div class="nav-routing-active" v-if="$route.name === 'liveroom' ">直播</div>
-            </router-link>
+            </router-link> -->
             <router-link :to="{name:'CategoryList'}" @click.native="navClickEvent('分类')">
-              <div class="routing" v-if="$route.name !== 'CategoryList' ">分类</div>
-              <div class="nav-routing-active" v-if="$route.name === 'CategoryList' ">分类</div>
+              <div class="routing" v-if="$route.name !== 'CategoryList' ">直播</div>
+              <div class="nav-routing-active" v-if="$route.name === 'CategoryList' ">直播</div>
+            </router-link>
+            <router-link :to="{name:'Schedule'}" @click.native="navClickEvent('赛程')">
+              <div class="routing" v-if="$route.name !== 'Schedule' ">赛程</div>
+              <div class="nav-routing-active" v-if="$route.name === 'Schedule' ">赛程</div>
             </router-link>
             <router-link :to="{name:'Rank'}" @click.native="navClickEvent('榜单')">
               <div class="routing" v-if="$route.name !== 'Rank' ">榜单</div>
@@ -29,10 +33,6 @@
             <router-link :to="{name:'Download'}" @click.native="navClickEvent('下载')">
               <div class="routing" v-if="$route.name !== 'Download' ">下载</div>
               <div class="nav-routing-active" v-if="$route.name === 'Download' ">下载</div>
-            </router-link>
-            <router-link :to="{name:'Schedule'}" @click.native="navClickEvent('赛程')">
-              <div class="routing" v-if="$route.name !== 'Schedule' ">赛程</div>
-              <div class="nav-routing-active" v-if="$route.name === 'Schedule' ">赛程</div>
             </router-link>
             <div class="nav-icon-item">
               <homeNavDownload :displayItem=" 'download' "></homeNavDownload>

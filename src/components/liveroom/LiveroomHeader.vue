@@ -119,8 +119,7 @@ export default {
     setTimeout(() => {
       this.creatQrCode();
     }, 1000);
-    console.log(9999999);
-    console.log(this.channelInfo.id);
+    // console.log("899898898989889==",this.channelInfo.id);
   },
   methods: {
     changepc() {
@@ -160,8 +159,8 @@ export default {
       this.area = "http://www.iqiulive.cn/" + this.channelInfo.id;
       this.aream = "http://m.iqiulive.cn/" + this.channelInfo.id;
       let that = this;
-      console.log(595986);
-      console.log(that.channelInfo.id);
+      // console.log(595986);
+      console.log("channelInfo",that.channelInfo);
       var qrcode = new QRCode(this.$refs.qrCodeUrl, {
         // eslint-disable-line no-unused-vars
         text: "http://m.iqiulive.cn/" + that.channelInfo.id, // 需要转换为二维码的内容

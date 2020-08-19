@@ -29,7 +29,7 @@
       </div>
       <div class="chat-wrap">
         <liveroomNotice :msg="channelInfo.notice"></liveroomNotice>
-        <!-- <liveroomRank></liveroomRank> -->
+        <liveroomRank :channelInfo="channelInfo"></liveroomRank>
         <liveroomChat
           :giftListToObject="giftListToObject"
           :hongbaoList="hongbaoList"
@@ -522,7 +522,7 @@ export default {
       //   console.log("yes Promise");
       // } else console.log("no Promise");
       this.getChannelInfo().then(()=>{
-          console.log("yes Promise");
+          console.log("yes Promise===",this.channelInfo);
           this.connetConversation();
           this.getrecommendLiveList();
       })      
@@ -808,6 +808,7 @@ export default {
   // float:left;
   display: flex;
   flex-direction: column;
+  width: 89%;
 }
 
 .chat-wrap {
@@ -817,7 +818,7 @@ export default {
   top: 80px;
   overflow: hidden;
   border-radius: 10px;
-  width: 370px;
+  width: 482px;
   height: 100%;
 
   background-color: #fff;

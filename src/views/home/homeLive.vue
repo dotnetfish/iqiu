@@ -57,11 +57,13 @@
     <div class="liveRecomend news" style="margin-top:15px;">
       <div class="liveRecomend">
         <div class="liveRecomend-title">
-          <img src="@/assets/home/rebo.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
+          <img src="@/assets/home/rebo.png" style="width:36px;height:32px;margin: 18px 12px 18px 0px;">
           <p class="liveRecomend-title-text">热门赛事</P>
+          <button class="liveRecomend-title-chenge-hot"  @click="changeHotschedule()" v-if="schedulelist.length>4">换一换
+          </button>
         </div>
         <div class="bigboss">
-          <div class="boss" v-for="(item,indexo) in schedulelist" :key="indexo">
+          <div class="boss" v-for="(item,indexo) in hotschedulelist" :key="indexo" @click="live(item.id)">
             <div class="bossone">
               <div style="width:33px;height:30px;"><img src="@/assets/home/zuqiu.png" style="width:33px;height:30px"></div>
               <div style="line-height:30px;color:rgb(154, 160, 179);margin-left:10px;width:120px">{{item.name}}</div>
@@ -118,7 +120,6 @@
            <!-- 推荐<i class="el-icon-arrow-right arrow-right"></i> -->
           </P>
           <button class="liveRecomend-title-chenge"  @click="changeHotVideo()">换一换
-           <!-- 推荐<i class="el-icon-arrow-right arrow-right"></i> -->
           </button>
         </div>
         <div style="margin: 0 -12px;width:1224px">
@@ -293,7 +294,9 @@
         positionY:0,
         scrollTop:0,
         schedulelist: [],
+        hotschedulelist: [],
         nowDate:'',
+        flag:true
         // videoshow:false,
       }
     },
@@ -410,10 +413,24 @@
         this.schedulelist = res.data;
         console.log("==================",this.schedulelist)
         if(res.data){
-          this.schedulelist = res.data.slice(0, 4)
+          this.schedulelist = res.data.slice(0, 8)
+          this.hotschedulelist = this.schedulelist.slice(0, 4)
+          this.flag = true
         }
         console.log("==================",this.schedulelist)
       });
+    },
+    changeHotschedule() {
+      if(this.flag==true) {
+        this.hotschedulelist = this.schedulelist.slice(4, 8)
+        this.flag = false
+      } else{
+        this.hotschedulelist = this.schedulelist.slice(0, 4)
+        this.flag = true
+      }
+    },
+    live(mid) {
+      this.$router.push({ path: '/live-broadcast', query: { mid } })
     },
       downloadleft() {
          window.open('http://www.iqiulive.cn/zhibo')
@@ -780,6 +797,21 @@
     }
 
     .liveRecomend-title-chenge {
+      margin-left: 104px;
+      height: 50px;
+      font-size: 16px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      border: 0px;
+      font-weight: 500;
+      color: rgb(55, 171, 248);
+      line-height: 50px;
+      z-index: 4;
+      outline:0;
+      cursor: pointer;
+      background-color: rgb(240, 240, 240);
+    }
+    .liveRecomend-title-chenge-hot {
+      cursor: pointer;
       margin-left: 50px;
       height: 50px;
       font-size: 16px;
@@ -983,6 +1015,7 @@
   color: #1bb5ec;
   margin-top: 5px;
   outline: 0;
+  cursor:pointer;
 }
 
 .state2 {
@@ -993,6 +1026,7 @@
   color: #ffffff;
   margin-top: 5px;
   outline: 0;
+  cursor:pointer;
   border: 1px solid rgba(27, 181, 236, 1);
 }
 </style>

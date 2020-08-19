@@ -265,11 +265,20 @@ export const rankingQuery = (data) =>
 });
 
 // 榜单
-export const rankingList = (data) =>
-axios({
-  url: `${baseURL}/aiqiu/v1/live/ranking/list`,
-  method: "post",
-  data,
-  contentTypejson: true,
-});
+// export const requestRankingList = (data) =>
+// axios({
+//   url: `${baseURL}/aiqiu/v1/live/ranking/list`,
+//   method: "post",
+//   data,
+//   contentTypejson: true,
+// });
+
+   // 赛程下预约主播直播列表
+   export const requestRankingList = (data) =>
+    axios({
+      url: `${baseURL}/aiqiu/v1/live/ranking/list`,
+      method: "post",
+      data,
+      contentTypejson: true,
+  });
 

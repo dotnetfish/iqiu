@@ -143,9 +143,9 @@
 <script>
 import LeftSideBar from "@/components/left-side-bar.vue";
 import loginPop from "@/components/login/loginTipPopup.vue";
+import storages from "@/utils/storage";
 import { Button, Dialog } from "element-ui";
 import { matchList, addmatchList, deletematchList, focusmatchList, nofocusmatchList, applyStatus } from "@/api/api";
- import storages from "@/utils/storage";
 // import {schedule} from '@/api/liveroom'
 export default {
   data() {
@@ -663,6 +663,7 @@ export default {
   margin-left: 15px;
   margin-top: 5px;
   outline: 0;
+  cursor:pointer;
 }
 
 .state2 {
@@ -675,6 +676,7 @@ export default {
   margin-top: 5px;
   outline: 0;
   border: 1px solid rgba(27, 181, 236, 1);
+  cursor:pointer;
 }
 
 .state3 {
@@ -687,6 +689,7 @@ export default {
   margin-left: 15px;
   margin-top: 5px;
   outline: 0;
+  cursor:pointer;
 }
 
 .state4 {
@@ -711,6 +714,7 @@ export default {
   margin-left: 15px;
   margin-top: 5px;
   outline: 0;
+  cursor:pointer;
 }
 
 .team1 {
