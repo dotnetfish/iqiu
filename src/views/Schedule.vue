@@ -91,12 +91,14 @@
           <div class="rightinformation" v-if="item.status !==3" @click="live(item.id)">
             <!-- <div class="live" @click="live()"></div> -->
             <div v-for="(channel,indext) in item.channels" :key="indext">
-              <div class="people">
+              <div class="people" v-if="indext<5">
                 <img :src="channel.avatarUrl" class="people1" />
               </div>
             </div>
             <div v-if="schedulelist[indexo].channels.length == 0" class="nopeople">暂时还没有主播在直播哦～</div>
-            <div class="peoplepull" v-if="schedulelist[indexo].channels.length > 5">
+          </div>
+          <div class="peoplepull" v-if="schedulelist[indexo].channels.length < 6"><div class="allpeople"></div></div>
+          <div class="peoplepull" v-if="schedulelist[indexo].channels.length > 5">
               <img src="@/assets/home/jiantou.png" class="allpeople" @click="dialog(indexo)" />
               <el-dialog :visible.sync="dialogVisible">
                 <div class="flextitle">
@@ -117,8 +119,6 @@
                 </div>
               </el-dialog>
             </div>
-          </div>
-
           <div class="end" v-if="item.status !==3">
             <div class="focus" v-if="schedulelist[indexo].channels.length != 0"> 
               <div class="information-state" v-if="item.isFollow == 0">
@@ -130,7 +130,7 @@
             </div>
             <div class="focus" v-if="schedulelist[indexo].channels.length == 0"> 
               <div class="information-state">
-                <button class="state3" @click="focus(item)">我要直播</button>
+                <button class="state3" @click="getApplyStatus(item)">我要直播</button>
               </div>
             </div>
           </div>
@@ -174,6 +174,8 @@ export default {
       num:0,
       attenment:false,
       anchorStatus:0,
+      nday:0,
+      nmouth:0,
     };
   },
   //时间戳转换
@@ -438,6 +440,7 @@ export default {
             })
           }
         this.appoint = !this.appoint;
+        this.GetmatchList();
         console.log(this.appoint);
       } else {
         this.$message({
@@ -455,9 +458,9 @@ export default {
         }
         console.log("id==",this.$store.state.userStatus.userInfo.uid)
         applyStatus(data).then(res => {
-          this.anchorStatus = res.channelApplyStatus
+          this.anchorStatus = res.data.channelApplyStatus
           this.AddmatchList(item)
-          console.log("申请状态==",res.channelApplyStatus)
+          console.log("申请状态==",res.data)
         });
       } else { // 未登录,弹出登录框
  // 展示登陆弹窗
@@ -491,12 +494,36 @@ export default {
     },
     //获取列表
     getmatchList(date,year) {
+      this.nday = date;
+      this.nmouth = year 
       let t1 = this.nowyear;
       let t2 = this.nowDate;
       if(date != null) {
         t1 = year;
         t2 = date;
+      } else{
+        this.nday = this.nowDate;
+        this.nmouth = this.nowyear;
       }
+      this.changedate = t2;
+      let timeStr1 = t1 + "/" + t2 + "/00:00:00";
+      let timeStr2 = t1 + "/" + t2 + "/23:59:59";
+      console.log(t1 + "/" + t2)
+      console.log(timeStr2)
+      let time1 = new Date(timeStr1).getTime();
+      let time2 = new Date(timeStr2).getTime();
+      let headers = { "content-type": "application/json" };
+      let data = {
+        startTime: time1,
+        endTime: time2,
+      };
+      matchList(data, headers).then((res) => {
+        this.schedulelist = res.data;
+      });
+    },
+    GetmatchList() {
+      let t1 = this.nmouth;
+      let t2 = this.nday;
       this.changedate = t2;
       let timeStr1 = t1 + "/" + t2 + "/00:00:00";
       let timeStr2 = t1 + "/" + t2 + "/23:59:59";
@@ -612,7 +639,7 @@ export default {
 
 .rightinformation {
   position: relative;
-  width: 42%;
+  width: 37%;
   // border: 1px solid rgba(240, 240, 240, 1);
   display: flex;
 }
@@ -765,7 +792,7 @@ export default {
 .people {
   width: 36px;
   height: 120px;
-  margin-left: 40px;
+  margin-right: 40px;
 }
 
 .nopeople {
@@ -780,9 +807,11 @@ export default {
 }
 
 .peoplepull {
-  width: 105px;
+  width: 4%;
   height: 120px;
-  margin-left: 40px;
+  margin-left: 1%;
+  margin-top: 4px;
+
 }
 
 .people1 {
@@ -797,7 +826,6 @@ export default {
   width: 32px;
   height: 32px;
   margin-top: 44px;
-  margin-left: 20px;
 }
 
 ::v-deep .el-dialog {

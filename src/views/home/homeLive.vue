@@ -63,15 +63,15 @@
           </button>
         </div>
         <div class="bigboss">
-          <div class="boss" v-for="(item,indexo) in hotschedulelist" :key="indexo" @click="live(item.id)">
-            <div class="bossone">
+          <div class="boss" v-for="(item,indexo) in hotschedulelist" :key="indexo">
+            <div class="bossone" @click="live(item.id)">
               <div style="width:33px;height:30px;"><img src="@/assets/home/zuqiu.png" style="width:33px;height:30px"></div>
               <div style="line-height:30px;color:rgb(154, 160, 179);margin-left:10px;width:120px">{{item.name}}</div>
-              <div style="line-height:30px;width:80px;margin-right:6px">{{nowDate}}</div>
+              <div style="line-height:30px;width:92px;margin-right:6px">{{item.startTime | formatdate}}</div>
               <div style="line-height:30px;color:rgb(154, 160, 179);margin-right:10px">{{item.startTime | formatDate}}</div>
             </div>
 
-            <div class="bosstow">
+            <div class="bosstow" @click="live(item.id)">
               <div style="width:60px;height:60px;"><img :src="item.teamOneLogo" style="width:60px;height:60px"></div>
                <div style="line-height:60px;width:95px;text-align: center;">{{item.teamOneScore}}-{{item.teamTwoScore}}</div>
               <div style="width:60px;height:60px"><img :src="item.teamTwoLogo" style="width:60px;height:60px"></div>
@@ -296,7 +296,7 @@
         schedulelist: [],
         hotschedulelist: [],
         nowDate:'',
-        flag:true
+        flag:true,
         // videoshow:false,
       }
     },
@@ -308,6 +308,14 @@
       let m = date.getMinutes();
       m = m < 10 ? "0" + m : m;
       return h + ":" + m;
+    },
+    formatdate: function (value) {
+      let date = new Date(value);
+      let M = date.getMonth() + 1;
+      M = M < 10 ? "0" + M : M;
+      let d = date.getDate();
+      d = d < 10 ? "0" + d : d;
+      return M + "月" + d + "日";
     },
   },
     computed: {
@@ -341,7 +349,7 @@
     methods: {
       //预约和取消
     AddmatchList(item) {
-      if(this.anchorStatus == 2) {
+      if(this.anchorStatus == "SUCCESS") {
         if(item.isOrder == 0) {
           let data = {
             cid:this.$store.state.userStatus.userInfo.uid,
@@ -376,9 +384,8 @@
         }
         console.log("id==",this.$store.state.userStatus.userInfo.uid)
         applyStatus(data).then(res => {
-          this.anchorStatus = res.channelApplyStatus
+          this.anchorStatus = res.data.channelApplyStatus
           this.AddmatchList(item)
-          console.log("申请状态==",res.channelApplyStatus)
         });
       } else { // 未登录,弹出登录框
  // 展示登陆弹窗
@@ -1028,5 +1035,9 @@
   outline: 0;
   cursor:pointer;
   border: 1px solid rgba(27, 181, 236, 1);
+}
+
+.information-state {
+  z-index:10
 }
 </style>

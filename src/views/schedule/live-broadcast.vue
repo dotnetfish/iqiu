@@ -16,7 +16,8 @@
         </div>
         <div class="icon-state">
           <img src="@/assets/video.png" class="videoicon" />
-          <div class="videoing">正在直播</div>
+          <div class="videoing" v-if="scheduleInfo.status==2">正在直播</div>
+          <div class="videoing" v-if="scheduleInfo.status==1">未开始</div>
         </div>
       </div>
       <div class="score2">{{this.scheduleInfo.teamTwoScore}}</div>
@@ -36,14 +37,15 @@
           <div class="state">直播中</div>
         </div>
       </div> -->
-      <div v-for="item in this.matchChannelList.length >= 4? this.matchChannelList.slice(0, 4) : this.matchChannelList" :key="item">
+      <div v-for="(item,index) in this.matchChannelList.length >= 4? this.matchChannelList.slice(0, 4) : this.matchChannelList" :key="index">
         <div class="people2" @click="changeRocm(item)">
           <div class="head-portrait">
             <img :src="item.avatarUrl" class="Head-Portrait" />
           </div>
           <div class="people-name-state">
             <div class="people-name">{{item.uname}}</div>
-            <div class="state">直播中</div>
+            <div class="state" v-if="item.living">直播中</div>
+            <div class="state" v-else >未开播</div>
           </div>
         </div>
       </div>
@@ -53,23 +55,15 @@
     </div>
     <div v-if="allshow==true">
       <div class="people-nav-pull">
-        <!-- <div class="people1">
-          <div class="head-portrait">
-            <img src="@/assets/timg.jpg" class="Head-Portrait" />
-          </div>
-          <div class="people-name-state">
-            <div class="people-name">每天吃蓝莓</div>
-            <div class="state">直播中</div>
-          </div>
-        </div> -->
-        <div v-for="item in matchChannelList" :key="item">
-          <div class="people2" @click="changeRocm(item)">
+        <div v-for="(item,index1) in matchChannelList" :key="index1">
+          <div class="people2" @click="changeRocm(index1)">
             <div class="head-portrait">
               <img :src="item.avatarUrl" class="Head-Portrait" />
             </div>
             <div class="people-name-state">
               <div class="people-name">{{item.uname}}</div>
-              <div class="state">直播中</div>
+              <div class="state" v-if="item.living">直播中</div>
+              <div class="state" v-else >未开播</div>
             </div>
           </div>
         </div>
@@ -87,7 +81,7 @@
           :roomId="recommendVideo.id"
           :notLivingSuggest="recommendVideo2"
         ></videoPlayer>
-        <div class="intoLiveRomm" @click="intoLiveRomm(recommendVideo.id)">进入直播间</div>
+        <div class="intoLiveRomm" @click="intoLiveRomm(recommendVideo.id)" >进入直播间</div>
       </div>
       <div class="videoRecomList">
         <div
@@ -415,7 +409,7 @@ export default {
         }
         
         this.recommendVideo6 = res.data.slice(0, 6);
-        // this.recommendVideo2 = res.data.slice(1, 3);
+        this.recommendVideo2 = res.data.slice(1, 3);
       });
     },
 
@@ -578,7 +572,7 @@ export default {
 .people-nav-pull {
   position: relative;
   width: 1200px;
-  height: 520px;
+  // height: 520px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   margin-left: 19.75%;
@@ -588,8 +582,9 @@ export default {
 
 .people2 {
   display: flex;
-  margin-top: 15px;
+  margin-top: 7.5px;
   margin-left: 20px;
+  margin-bottom: 7.5px;
   width: 265px;
   height: 100px;
   background: rgba(0, 0, 0, 0.4);
@@ -642,14 +637,13 @@ export default {
 }
 
 .state {
-  width: 62px;
+  width: 66px;
   height: 25px;
   background: rgba(236, 107, 107, 1);
-  border-radius: 10px;
+  border-radius: 15px;
   line-height: 25px;
   text-align: center;
   color: rgb(255, 255, 255);
-  margin-left: 9px;
   margin-top: 10px;
 }
 
@@ -803,5 +797,16 @@ export default {
   margin-top: 20px;
 }
 
-
+.player-status {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background: rgba($color: #000, $alpha: 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+}
 </style>

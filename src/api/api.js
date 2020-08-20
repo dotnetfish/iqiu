@@ -273,7 +273,7 @@ export const rankingQuery = (data) =>
 //   contentTypejson: true,
 // });
 
-   // 赛程下预约主播直播列表
+   // 榜单
    export const requestRankingList = (data) =>
     axios({
       url: `${baseURL}/aiqiu/v1/live/ranking/list`,

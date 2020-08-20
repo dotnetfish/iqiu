@@ -2,10 +2,10 @@
   <div>
     <div class="list">
       <div class="towrank">
-        <div style="width:52px;height:28px;font-size:20px;margin-left:100px;line-height:28px">
+        <div style="width:70px;height:28px;font-size:20px;margin-left:20.8%;line-height:28px">
           <button class="day" @click="changeblue(true)" ref="newtask">日榜</button>
         </div>
-        <div style="width:52px;height:28px;margin-left:190px;line-height:28px">
+        <div style="width:70px;height:28px;margin-left:35.7%;line-height:28px">
           <button class="week" @click="changeblue(false)" ref="oldtask">周榜</button>
         </div>
         <div class="line"></div>
@@ -234,7 +234,7 @@ export default {
   height: 4px;
   background: rgba(83, 199, 241, 1);
   border-radius: 2px;
-  margin-left: 109px;
+  margin-left: 22.4%;
 }
 
 .bluetow {
@@ -242,7 +242,7 @@ export default {
   height: 4px;
   background: rgba(83, 199, 241, 1);
   border-radius: 2px;
-  margin-left: 350px;
+  margin-left: 72.6%;
 }
 
 .befor-three {
@@ -357,7 +357,7 @@ export default {
 
 .name1 {
   position: absolute;
-  margin-left: 38px;
+  margin-left: 7.9%;
   font-size: 18px;
   color:rgba(102,102,102,1);
   width: 120px;
@@ -368,7 +368,7 @@ export default {
 }
 .name2 {
   position: absolute;
-  margin-left: 187px;
+  margin-left: 39%;
   color:rgba(102,102,102,1);
   width: 120px;
   text-align: center;
@@ -378,7 +378,7 @@ export default {
 }
 .name3 {
   position: absolute;
-  margin-left: 338px;
+  margin-left: 70.1%;
   color:rgba(102,102,102,1);
   width: 120px;
   text-align: center;
@@ -390,7 +390,7 @@ export default {
 .three-rank {
   display: flex;
   width: 100%;
-  margin-top: 4px;
+  margin-top: 8px;
   height: 17px;
 }
 
@@ -404,7 +404,7 @@ export default {
 }
 .rank2 {
   position: absolute;
-  margin-left: 193px;
+  margin-left: 40%;
   width: 107px;
   font-size:14px;
   color:rgba(153,153,153,1);
@@ -412,7 +412,7 @@ export default {
 }
 .rank3 {
   position: absolute;
-  margin-left: 344px;
+  margin-left: 71.3%;
   font-size:14px;
   color:rgba(153,153,153,1);
   text-align: center;

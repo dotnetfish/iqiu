@@ -818,7 +818,8 @@ export default {
   top: 80px;
   overflow: hidden;
   border-radius: 10px;
-  width: 482px;
+  min-width: 350px;
+  width: 25.4%;
   height: 100%;
 
   background-color: #fff;
