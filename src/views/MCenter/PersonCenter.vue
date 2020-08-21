@@ -37,7 +37,7 @@
 
             <el-tab-pane name="4" :key="4">
               <div class="person-title" slot="label">任务中心</div>
-              <TaskCenter></TaskCenter>
+              <!-- <TaskCenter></TaskCenter> -->
             </el-tab-pane>
 
             <slot></slot>

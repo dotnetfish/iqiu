@@ -16,7 +16,7 @@
       </div>
       <div v-if="showblue==true">
         <div @mouseenter="changeImageSrc(1)" @mouseleave="changeImageSrc(2)">
-        <div class="befor-three">
+        <div class="befor-three" v-if="rankinglist[1]">
             <div class="level2">
               <img src="@/assets/rank/no2.png">
               <img :src=rankinglist[1].avatarUrl class="no2" v-if="rankinglist[1]">
@@ -29,6 +29,13 @@
               <img src="@/assets/rank/no3.png">
               <img :src=rankinglist[2].avatarUrl class="no3" v-if="rankinglist[2]">
             </div>
+        </div>
+        <div v-else>
+          <div class="norank"><img src="@/assets/rank/none.png" class="norankimg"></div>
+          <div style="display:flex">
+          <div  class="top">给主播赠送礼物即可上榜哦～</div>
+          <button class="gift"><span class="postgift">我要赠礼</span></button>
+          </div>
         </div>
         <div class="three-name">
           <div class="name1" v-if="rankinglist[1]">{{rankinglist[1].uname}}</div>
@@ -417,5 +424,58 @@ export default {
   color:rgba(153,153,153,1);
   text-align: center;
   width: 107px;
+}
+
+.norank {
+  width: 100%;
+  height: 140px;
+  // display:table-cell;
+	// vertical-align:middle;
+	// text-align:center;
+  display:-webkit-box;
+	display:-ms-flexbox;
+	display:flex-box;
+	display:flex;
+	-webkit-box-align:center;
+	-ms-flex-align:center;
+	align-items:center;
+	-webkit-box-pack:center;
+	-ms-flex-pack:center;
+	justify-content:center;
+	text-align:center;
+}
+
+.norankimg {
+  width: 70px;
+  height: 70px;
+}
+
+.gift {
+  width:102px;
+height:40px;
+background:rgba(27,181,236,1);
+border-radius:20px;
+border: 0px;
+}
+
+.postgift {
+  width:80px;
+height:28px;
+font-size:20px;
+font-family:PingFangSC-Medium,PingFang SC;
+font-weight:500;
+color:rgba(255,255,255,1);
+line-height:28px;
+}
+
+.top {
+  font-size:14px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(102,102,102,1);
+  height:40px;
+  line-height:40px;
+  margin-left: 20%;;
+  margin-right: 2%;
 }
 </style>

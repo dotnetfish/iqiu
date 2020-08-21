@@ -153,8 +153,8 @@
           </section>
           </div>
           <div>
-          <div class="img1"> <img src="@/assets/gonggao/small2.png" style="width:210px;height:170px;"></div>
-          <div class="img2"> <img src="@/assets/gonggao/small1.png" style="width:210px;height:170px;"></div>
+          <div class="img1"> <img src="@/assets/gonggao/small2.png" style="width:210px;height:170px;" @click="privacy()"></div>
+          <div class="img2"> <img src="@/assets/gonggao/small1.png" style="width:210px;height:170px;" @click="liability()"></div>
           </div>
           </div>
         </section>
@@ -280,12 +280,12 @@
         protocolList: [
           {
             title: "[公告]爱球直播免责声明",
-            url: this.USER_SPECIAL_CONTRACT,
+            url: 'http://m.iqiulive.cn/contract_user',
             img: require('@/assets/gonggao/big2.png'),
           },
           {
             title: "[公告]爱球直播隐私政策",
-            url: this.USER_PRIVACY_CONTRACT,
+            url: 'http://m.iqiulive.cn/contract_privacy',
             img: require('@/assets/gonggao/big2.png'),
           }
         ],
@@ -347,6 +347,12 @@
       // window.addEventListener('scroll',this.handleScroll,true)
     },
     methods: {
+    privacy() {
+      window.location.href = 'http://m.iqiulive.cn/contract_privacy'
+    },
+    liability() {
+      window.location.href = 'http://m.iqiulive.cn/contract_user'
+    },
       //预约和取消
     AddmatchList(item) {
       if(this.anchorStatus == "SUCCESS") {

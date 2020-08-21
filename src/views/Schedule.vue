@@ -622,7 +622,7 @@ export default {
 
 .gameinformation {
   width: 80%;
-  height: 360px;
+  height: 0px;
   background-color: #fff;
 }
 
@@ -808,7 +808,7 @@ export default {
 .nopeople {
   width:240px;
   height:120px;
-  font-size:20px;
+  font-size:16px;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   color:rgba(153,153,153,1);
