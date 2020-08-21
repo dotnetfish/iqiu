@@ -81,9 +81,11 @@
               <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{item.teamOne}}</div>
               <div style="width:100px;height:28px;margin-left:18px">
                 <div class="information-state" v-if="item.isOrder== 0">
+                  <img src="@/assets/schedule/appoint.png" style="position:absolute;width:16px;height:16px;margin-top:7.5px;" @click="getApplyStatus(item)">
                   <button class="state1" @click="getApplyStatus(item)">预约</button>
                 </div>
                 <div class="information-state" v-else>
+                  <img src="@/assets/schedule/alappoint.png" style="position:absolute;width:16px;height:16px;margin-top:7.5px;margin-left:-3px" @click="getApplyStatus(item)">
                   <button class="state2" @click="getApplyStatus(item)">已预约</button>
                 </div>
               </div>
@@ -1024,10 +1026,11 @@
   height: 25px;
   line-height: 23px;
   background: rgba(255, 255, 255, 1);
-  border: 1px solid rgba(27, 181, 236, 1);
-  color: #1bb5ec;
+  border: 0px solid rgba(27, 181, 236, 1);
+  color: #1BB5EC;
   margin-top: 5px;
   outline: 0;
+  margin-left: 7px;
   cursor:pointer;
 }
 
@@ -1035,12 +1038,14 @@
   width: 62px;
   height: 25px;
   line-height: 23px;
-  background: rgba(27,181,236,1);
+  background: rgb(255, 255, 255);
   color: #ffffff;
   margin-top: 5px;
   outline: 0;
   cursor:pointer;
-  border: 1px solid rgba(27, 181, 236, 1);
+  border: 0px solid rgba(27, 181, 236, 1);
+  color: #999999;
+  margin-left: 11px;
 }
 
 .information-state {

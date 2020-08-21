@@ -16,7 +16,7 @@
       </div>
       <div v-if="showblue==true">
         <div @mouseenter="changeImageSrc(1)" @mouseleave="changeImageSrc(2)">
-        <div class="befor-three" v-if="rankinglist[1]">
+        <div class="befor-three" v-if="rankinglist[0]">
             <div class="level2">
               <img src="@/assets/rank/no2.png">
               <img :src=rankinglist[1].avatarUrl class="no2" v-if="rankinglist[1]">
@@ -34,7 +34,7 @@
           <div class="norank"><img src="@/assets/rank/none.png" class="norankimg"></div>
           <div style="display:flex">
           <div  class="top">给主播赠送礼物即可上榜哦～</div>
-          <button class="gift"><span class="postgift">我要赠礼</span></button>
+          <!-- <button class="gift"><span class="postgift">我要赠礼</span></button> -->
           </div>
         </div>
         <div class="three-name">
@@ -475,7 +475,8 @@ line-height:28px;
   color:rgba(102,102,102,1);
   height:40px;
   line-height:40px;
-  margin-left: 20%;;
-  margin-right: 2%;
+  // margin-left: 20%;;
+  // margin-right: 2%;
+  margin: auto;
 }
 </style>
