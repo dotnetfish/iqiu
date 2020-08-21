@@ -2,14 +2,14 @@
   
     <div class="background-my">
       <div class="downloadall">
-        <div class="download">
+        <!-- <div class="download">
           <button round class="downloadios" @click="openIos()">ios</button>
           <div v-if="showimg1" class="code1"></div>
         </div>
         <div class="Download">
           <button round class="downloadandroid" @click="openAndroid()">andriod</button>
           <div v-if="showimg2" class="code2"></div> 
-        </div>
+        </div> -->
       </div>
     </div>
  
@@ -26,9 +26,6 @@ export default {
     };
   },
   computed:{
-  },
-  mounted: {
-    
   },
   methods:{
     openIos() {
@@ -60,7 +57,7 @@ export default {
   width: 100%;
   height: 930px;
   margin: 0 auto;
-  background: url(../assets/img/download.jpg) no-repeat;
+  background: url(../assets/img/download1.png) no-repeat;
   background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;

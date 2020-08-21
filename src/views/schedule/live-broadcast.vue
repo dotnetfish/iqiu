@@ -56,7 +56,7 @@
     <div v-if="allshow==true">
       <div class="people-nav-pull">
         <div v-for="(item,index1) in matchChannelList" :key="index1">
-          <div class="people2" @click="changeRocm(index1)">
+          <div class="people2" @click="changeRocm(item)">
             <div class="head-portrait">
               <img :src="item.avatarUrl" class="Head-Portrait" />
             </div>
@@ -81,7 +81,7 @@
           :roomId="recommendVideo.id"
           :notLivingSuggest="recommendVideo2"
         ></videoPlayer>
-        <div class="intoLiveRomm" @click="intoLiveRomm(recommendVideo.id)" >进入直播间</div>
+        <div class="intoLiveRomm" @click="intoLiveRomm(recommendVideo.id)">进入直播间</div>
       </div>
       <div class="videoRecomList">
         <div
@@ -380,6 +380,7 @@ export default {
     },
     changeRocm(item) {
       this.recommendVideo = item;
+      console.log("9999999999999999999999999",this.recommendVideo)
     },
     intoLiveRomm(itemID) {
       const { href } = this.$router.resolve(itemID, "/");
@@ -446,8 +447,8 @@ export default {
 @import "@/assets/css/_index.scss";
 .back {
   position: absolute;
-  width: 172%;
-  height: 1779px;
+  width: 163%;
+  height: 912px;
   background: url(../../assets/beijing.png) no-repeat;
   background-size: cover;
   -webkit-background-size: cover;
@@ -467,7 +468,7 @@ export default {
 .iconone {
   width: 100px;
   height: 100px;
-  margin-left: 22.6%;
+  margin-left: 25.1%;
 }
 
 .icontow {
@@ -565,7 +566,8 @@ export default {
   height: 130px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
-  margin-left: 19.75%;
+  // margin-left: 19.75%;
+  margin: auto;
   display: flex;
 }
 
@@ -666,7 +668,8 @@ export default {
   cursor: pointer;
   width: 1202px;
   height: 646px;
-  margin-left: 19.75%;
+  // margin-left: 19.75%;
+  margin: auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

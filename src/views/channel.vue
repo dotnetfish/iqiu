@@ -52,6 +52,9 @@
     mounted () {
       this.download();
     },
+    beforeUpdate () {
+      this.download();
+    },
     destroyed () {
     },
     computed: {
@@ -102,7 +105,7 @@
         }else {
           this.$refs.download.style.width = '1200px';
         }
-        console.log(this.$route.path);
+        console.log("44444444444",this.$route.path);
       },
       // 修改折叠状态
       changeFoldState () {

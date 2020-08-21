@@ -51,11 +51,13 @@
           <div class="leftinformation">
             <div class="information-title">{{item.name}}</div>
             <div class="information-time">{{item.startTime | formatDate}}</div>
-            <div v-if="item.status==1">
+            <div v-if="item.status==2">
               <div class="information-state" v-if="item.isOrder== 0">
+                <img src="@/assets/schedule/appoint.png" style="position:absolute;width:16px;height:16px;margin-left: 39px;margin-top: 8.5px;" @click="getApplyStatus(item)">
                 <button class="state1" @click="getApplyStatus(item)">预约</button>
               </div>
               <div class="information-state" v-else>
+                <img src="@/assets/schedule/alappoint.png" style="position:absolute;width:16px;height:16px;margin-left: 39px;margin-top: 8.5px;" @click="getApplyStatus(item)">
                 <button class="state2" @click="getApplyStatus(item)">已预约</button>
               </div>
             </div>
@@ -64,9 +66,10 @@
                 <button class="state4">已结束</button>
               </div>
             </div>
-            <div v-if="item.status==2">
+            <div v-if="item.status==1">
               <div class="information-state">
                 <button class="state5"><span class="word">直播中</span></button>
+                <img src="https://shark2.douyucdn.cn/front-publish/live-master/assets/images/live_88e1ca6.gif" style="position:absolute;width:16px;height:16px;margin-left: -22px;margin-top: 9.5px;" @click="getApplyStatus(item)">
               </div>
             </div>
           </div>
@@ -122,14 +125,17 @@
           <div class="end" v-if="item.status !==3">
             <div class="focus" v-if="schedulelist[indexo].channels.length != 0"> 
               <div class="information-state" v-if="item.isFollow == 0">
-                <button class="state1" @click="focus(item)">关注</button>
+                <img src="@/assets/schedule/focus.png" style="position:absolute;width:13px;height:13px;margin-left: 42px;margin-top: 10.5px;" @click="focus(item)">
+                <button class="state1" @click="focus(item)" >关注</button>
               </div>
               <div class="information-state" v-else>
-                <button class="state2" @click="focus(item)">已关注</button>
+                <img src="@/assets/schedule/alfocus.png" style="position:absolute;width:13px;height:13px;margin-left: 48px;margin-top: 10.5px;" @click="focus(item)">
+                <button class="state2" @click="focus(item)" style="padding-left:22px">已关注</button>
               </div>
             </div>
             <div class="focus" v-if="schedulelist[indexo].channels.length == 0"> 
               <div class="information-state">
+                <img src="@/assets/schedule/my.png" style="position:absolute;width:17px;height:11px;margin-left: 12px;margin-top: 12px;" @click="focus(item)">
                 <button class="state3" @click="getApplyStatus(item)">我要直播</button>
               </div>
             </div>
@@ -143,6 +149,7 @@
 <script>
 import LeftSideBar from "@/components/left-side-bar.vue";
 import loginPop from "@/components/login/loginTipPopup.vue";
+// import channel from "@/views/channel.vue"
 import storages from "@/utils/storage";
 import { Button, Dialog } from "element-ui";
 import { matchList, addmatchList, deletematchList, focusmatchList, nofocusmatchList, applyStatus } from "@/api/api";
@@ -685,10 +692,11 @@ export default {
   height: 25px;
   line-height: 20.5px;
   background: rgba(255, 255, 255, 1);
-  border: 1px solid rgba(27, 181, 236, 1);
-  color: #1bb5ec;
-  margin-left: 15px;
+  border: 0px solid rgba(27, 181, 236, 1);
+  color: #1BB5EC;
+  margin-left: 27px;
   margin-top: 5px;
+  font-size: 12px;
   outline: 0;
   cursor:pointer;
 }
@@ -697,12 +705,14 @@ export default {
   width: 90px;
   height: 25px;
   line-height: 20.5px;
-  background: rgba(27,181,236,1);
-  color: #ffffff;
-  margin-left: 15px;
+  // background: rgba(27,181,236,1);
+  background: #ffffff;
+  color: #999999;
+  margin-left: 34px;
   margin-top: 5px;
   outline: 0;
-  border: 1px solid rgba(27, 181, 236, 1);
+  border: 0px solid rgba(27, 181, 236, 1);
+  font-size: 12px;
   cursor:pointer;
 }
 
@@ -711,7 +721,7 @@ export default {
   height: 25px;
   line-height: 20.5px;
   background: rgba(255, 255, 255, 1);
-  border: 1px solid #EC6B6B;
+  border: 0px solid #EC6B6B;
   color: #EC6B6B;
   margin-left: 15px;
   margin-top: 5px;
@@ -735,10 +745,10 @@ export default {
   width: 90px;
   height: 25px;
   line-height: 20.5px;
-  background:rgba(236,107,107,1);
-  border: 1px solid #ffffff;
-  color: #ffffff;
-  margin-left: 15px;
+  background:rgb(255, 255, 255);
+  border: 0px solid #ffffff;
+  color: #EC6B6B;
+  margin-left: 10px;
   margin-top: 5px;
   outline: 0;
   cursor:pointer;
