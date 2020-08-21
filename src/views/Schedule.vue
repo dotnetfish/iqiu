@@ -51,7 +51,7 @@
           <div class="leftinformation">
             <div class="information-title">{{item.name}}</div>
             <div class="information-time">{{item.startTime | formatDate}}</div>
-            <div v-if="item.status==2">
+            <div v-if="item.status==1">
               <div class="information-state" v-if="item.isOrder== 0">
                 <img src="@/assets/schedule/appoint.png" style="position:absolute;width:16px;height:16px;margin-left: 39px;margin-top: 8.5px;" @click="getApplyStatus(item)">
                 <button class="state1" @click="getApplyStatus(item)">预约</button>
@@ -66,7 +66,7 @@
                 <button class="state4">已结束</button>
               </div>
             </div>
-            <div v-if="item.status==1">
+            <div v-if="item.status==2">
               <div class="information-state">
                 <button class="state5"><span class="word">直播中</span></button>
                 <img src="https://shark2.douyucdn.cn/front-publish/live-master/assets/images/live_88e1ca6.gif" style="position:absolute;width:16px;height:16px;margin-left: -22px;margin-top: 9.5px;" @click="getApplyStatus(item)">
