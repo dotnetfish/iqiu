@@ -37,6 +37,7 @@
           <div class="state">直播中</div>
         </div>
       </div> -->
+      <div v-if="this.matchChannelList.length==0" class="nohost">暂无主播直播~</div>
       <div v-for="(item,index) in this.matchChannelList.length >= 4? this.matchChannelList.slice(0, 4) : this.matchChannelList" :key="index">
         <div class="people2" @click="changeRocm(item)">
           <div class="head-portrait">
@@ -491,6 +492,9 @@ export default {
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: rgba(255, 255, 255, 1);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .teamname2 {
@@ -501,6 +505,9 @@ export default {
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: rgba(255, 255, 255, 1);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .score1 {
@@ -811,5 +818,15 @@ export default {
       flex-direction: column;
       align-items: center;
       justify-content: center;
+}
+
+.nohost {
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  height: 130px;
+  line-height: 130px;
+  margin-left: 65px;
+  font-family: PingFangSC-Regular, PingFang SC;
+
 }
 </style>

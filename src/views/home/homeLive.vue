@@ -1011,6 +1011,7 @@
   margin-top:10px;
   padding-left: 34px;
   padding-right: 34px;
+  cursor:pointer;
 }
 
 .bossthree {

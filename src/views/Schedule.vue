@@ -641,12 +641,14 @@ export default {
 
 .centreinformation {
   width: 27%;
+  cursor:pointer;
   // border: 1px solid rgba(240, 240, 240, 1);
 }
 
 .rightinformation {
   position: relative;
   width: 37%;
+  cursor:pointer;
   // border: 1px solid rgba(240, 240, 240, 1);
   display: flex;
 }
