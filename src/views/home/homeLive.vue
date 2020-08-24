@@ -79,7 +79,7 @@
 
             <div class="bossthree">
               <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{item.teamOne}}</div>
-              <div style="width:100px;height:28px;margin-left:18px">
+              <div style="width:100px;height:28px;margin-left:18px" v-if="item.status==1">
                 <div class="information-state" v-if="item.isOrder== 0">
                   <img src="@/assets/schedule/appoint.png" style="position:absolute;width:16px;height:16px;margin-top:7.5px;" @click="getApplyStatus(item)">
                   <button class="state1" @click="getApplyStatus(item)">预约</button>
@@ -89,6 +89,12 @@
                   <button class="state2" @click="getApplyStatus(item)">已预约</button>
                 </div>
               </div>
+              <div style="width:100px;height:28px;margin-left:18px" v-if="item.status==2">
+              <div class="information-state">
+                <img src="https://shark2.douyucdn.cn/front-publish/live-master/assets/images/live_88e1ca6.gif" style="position:absolute;width:16px;height:16px;margin-top:7.5px;margin-left:-3px">
+                <button class="state5">直播中</button>
+              </div>
+            </div>
               <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{item.teamTwo}}</div>
             </div>
           </div>
@@ -1051,5 +1057,17 @@
 
 .information-state {
   z-index:10
+}
+
+.state5 {
+  width: 62px;
+  height: 25px;
+  line-height: 20.5px;
+  background:rgb(255, 255, 255);
+  border: 0px solid #ffffff;
+  color: #EC6B6B;
+  margin-left: 10px;
+  margin-top: 4px;
+  outline: 0;
 }
 </style>

@@ -69,7 +69,7 @@
             <div v-if="item.status==2">
               <div class="information-state">
                 <button class="state5"><span class="word">直播中</span></button>
-                <img src="https://shark2.douyucdn.cn/front-publish/live-master/assets/images/live_88e1ca6.gif" style="position:absolute;width:16px;height:16px;margin-left: -22px;margin-top: 9.5px;" @click="getApplyStatus(item)">
+                <img src="https://shark2.douyucdn.cn/front-publish/live-master/assets/images/live_88e1ca6.gif" style="position:absolute;width:16px;height:16px;margin-left: -22px;margin-top: 9.5px;">
               </div>
             </div>
           </div>
