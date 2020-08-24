@@ -66,7 +66,7 @@
           <div class="boss" v-for="(item,indexo) in hotschedulelist" :key="indexo">
             <div class="bossone" @click="live(item.id)">
               <div style="width:33px;height:30px;"><img src="@/assets/home/zuqiu.png" style="width:33px;height:30px"></div>
-              <div style="line-height:30px;color:rgb(154, 160, 179);margin-left:10px;width:120px">{{item.name}}</div>
+              <div style="line-height:30px;color:rgb(154, 160, 179);margin-left:10px;width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" >{{item.name}}</div>
               <div style="line-height:30px;width:92px;margin-right:6px">{{item.startTime | formatdate}}</div>
               <div style="line-height:30px;color:rgb(154, 160, 179);margin-right:10px">{{item.startTime | formatDate}}</div>
             </div>
