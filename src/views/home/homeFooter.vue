@@ -115,11 +115,11 @@
             <span class="blank"></span>
             <div class="record-content"><a
                 target="_blank"
-                href="http://beian.miit.gov.cn/state/outPortal/loginPortal.action"
+                href="http://beian.miit.gov.cn/"
                 style="display:inline-block;text-decoration:none;"
               >
                 <span style="margin: 0px 0px 0px 5px; color:#939393;">
-                  ICP备案号：浙ICP备20019840号-1
+                  ICP备案号：桂ICP备2020006699号
                 </span>
               </a></div>
           </div>
