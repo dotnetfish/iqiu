@@ -808,7 +808,7 @@ export default {
   // float:left;
   display: flex;
   flex-direction: column;
-  width: calc(81vw - 240px);
+  width: calc(80vw - 240px);
 }
 
 .chat-wrap {

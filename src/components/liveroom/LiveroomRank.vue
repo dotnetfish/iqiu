@@ -198,7 +198,7 @@ export default {
 <style scoped lang="scss">
 .list {
   width: 100%;
-  height: 248px;
+  height: 238px;
   // border: rgb(0, 255, 255) solid 1px;
 }
 
@@ -314,7 +314,7 @@ export default {
   background-color: rgb(255, 255, 255);
   position: absolute;
   z-index: 10;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .onerank {
@@ -377,6 +377,7 @@ export default {
   position: absolute;
   margin-left: 39%;
   color:rgba(102,102,102,1);
+  font-size: 18px;
   width: 120px;
   text-align: center;
   white-space:nowrap;
@@ -387,6 +388,7 @@ export default {
   position: absolute;
   margin-left: 70.1%;
   color:rgba(102,102,102,1);
+  font-size: 18px;
   width: 120px;
   text-align: center;
   white-space:nowrap;
