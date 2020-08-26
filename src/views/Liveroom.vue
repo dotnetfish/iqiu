@@ -808,25 +808,24 @@ export default {
   // float:left;
   display: flex;
   flex-direction: column;
-  width: calc(80vw - 240px);
+  // width: calc(80vw - 240px);
+  width: calc(93vw - 482px);
 }
 
 .chat-wrap {
-  position: fixed;
+  position: absolute;
   z-index: 3;
   right: 0;
   top: 80px;
-  overflow: hidden;
   border-radius: 10px;
-  min-width: 350px;
-  width: 25.4%;
+  width: 19%;
   height: 100%;
-
+  min-width: 482px;
   background-color: #fff;
-
   border: 1px solid $color-border;
   border-top: 0px solid $color-border;
   border-right: 0px solid $color-border;
+
 }
 
 .empty {

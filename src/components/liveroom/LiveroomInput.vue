@@ -76,9 +76,10 @@
     height: 54px;
     padding-left: 12px;
     padding-right: 11px;
+    margin-bottom: 40px;
 
     ::v-deep .el-textarea {
-      width: 376px;
+      width: 80%;
       display: inline-block;
     }
 
@@ -89,7 +90,7 @@
 
     .btn {
       display: inline-block;
-      width: 80px;
+      width: 20%;
       height: 54px;
       /*line-height: 54px;*/
       text-align: center;

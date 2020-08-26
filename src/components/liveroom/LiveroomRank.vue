@@ -39,8 +39,10 @@
         </div>
         <div class="three-name">
           <div class="name1" v-if="rankinglist[1]">{{rankinglist[1].uname}}</div>
+          <div class="name1" v-else>虚位以待</div>
           <div class="name2" v-if="rankinglist[0]">{{rankinglist[0].uname}}</div>
           <div class="name3" v-if="rankinglist[2]">{{rankinglist[2].uname}}</div>
+          <div class="name3" v-else>虚位以待</div>
         </div>
         <div class="three-rank">
           <div class="rank1" v-if="rankinglist[1]">{{rankinglist[1].score}}贡献值</div>
@@ -52,7 +54,7 @@
 
       <div v-if="showblue==false">
         <div @mouseenter="changeImageSrc(1)" @mouseleave="changeImageSrc(2)">
-        <div class="befor-three">
+        <div class="befor-three" v-if="rankinglist[0]">
             <div class="level2">
               <img src="@/assets/rank/no2.png">
               <img :src=rankinglist[1].avatarUrl class="no2" v-if="rankinglist[1]">
@@ -66,6 +68,13 @@
               <img :src=rankinglist[2].avatarUrl class="no3" v-if="rankinglist[2]">
             </div>
         </div>
+        <div v-else>
+          <div class="norank"><img src="@/assets/rank/none.png" class="norankimg"></div>
+          <div style="display:flex">
+          <div  class="top">给主播赠送礼物即可上榜哦～</div>
+          <!-- <button class="gift"><span class="postgift">我要赠礼</span></button> -->
+          </div>
+        </div>
         <div class="three-name">
           <div class="name1" v-if="rankinglist[1]">{{rankinglist[1].uname}}</div>
           <div class="name2" v-if="rankinglist[0]">{{rankinglist[0].uname}}</div>
@@ -78,7 +87,7 @@
         </div>
         </div>
       </div>
-      <div v-if="flag==true">
+      <div v-if="flag==true && rankinglist[0]">
         <div class="allrank">
           <div v-for="(item,index) in rankinglist" :key="index">
           <div class="onerank" v-if="index>2"><div class="rankid">{{item.rank}}</div><div class="rankname">{{item.uname}}</div><div class="rankrank" style="width:80px;text-align:right">{{item.score}}</div></div>
@@ -227,6 +236,7 @@ export default {
   border: 0px;
   outline: 0;
   color: rgba(51, 51, 51, 1);
+  cursor: pointer;
 }
 
 .week {
@@ -234,6 +244,7 @@ export default {
   border: 0px;
   outline: 0;
   color:rgba(122,122,122,1);
+  cursor: pointer;
 }
 
 .blueone {
@@ -259,7 +270,7 @@ export default {
 .level2 {
   margin-left: 58px;
   display: flex;
-  height: 94px;
+  height: 87px;
   width: 17%;
   margin-top: 24px;
 }
@@ -272,7 +283,7 @@ export default {
   justify-content:center;
 }
 .level3 {
-  height: 94px;
+  height: 88px;
   width: 17%;
   margin-top: 26px;
   display: flex;
@@ -280,31 +291,34 @@ export default {
 
 .no2 {
   z-index: 2;
-  position: absolute;
-  border-radius: 150px;
-  margin-left: 5px;
-  margin-top: 19px;
-  width: 70px;
-  height: 70px;
+    position: absolute;
+    -webkit-border-radius: 150px;
+    border-radius: 150px;
+    margin-left: 1.5px;
+    margin-top: 19px;
+    width: 67px;
+    height: 67px;
 }
 
 .no1 {
-  z-index: 2;
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  border-radius: 150px;
-  margin-top: 16px;
+    z-index: 2;
+    position: absolute;
+    width: 82px;
+    height: 82px;
+    -webkit-border-radius: 150px;
+    border-radius: 150px;
+    margin-top: 22px;
+    margin-left: 1px;
 }
 
 .no3 {
   z-index: 2;
   position: absolute;
   border-radius: 150px;
-  margin-left: 6px;
+  margin-left: 5px;
   margin-top: 20px;
-  width: 70px;
-  height: 70px;
+  width: 63px;
+  height: 63px;
 }
 
 .allrank {
@@ -325,7 +339,7 @@ export default {
 }
 
 .rankid {
-  font-size:18px;
+  font-size:14px;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   color:rgba(153,153,153,1);
@@ -336,7 +350,7 @@ export default {
 }
 
 .rankname {
-  font-size:18px;
+  font-size:14px;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   color:rgba(102,102,102,1);
@@ -347,7 +361,7 @@ export default {
 }
 
 .rankrank {
-  font-size:18px;
+  font-size:14px;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   color:rgba(153,153,153,1);
@@ -364,9 +378,9 @@ export default {
 
 .name1 {
   position: absolute;
-  margin-left: 7.9%;
-  font-size: 18px;
-  color:rgba(102,102,102,1);
+  margin-left: 7%;
+  font-size: 14px;
+  color:#999999;
   width: 120px;
   text-align: center;
   white-space:nowrap;
@@ -377,7 +391,7 @@ export default {
   position: absolute;
   margin-left: 39%;
   color:rgba(102,102,102,1);
-  font-size: 18px;
+  font-size: 14px;
   width: 120px;
   text-align: center;
   white-space:nowrap;
@@ -386,9 +400,9 @@ export default {
 }
 .name3 {
   position: absolute;
-  margin-left: 70.1%;
-  color:rgba(102,102,102,1);
-  font-size: 18px;
+  margin-left: 69.2%;
+  color:#999999;
+  font-size: 14px;
   width: 120px;
   text-align: center;
   white-space:nowrap;
@@ -407,7 +421,7 @@ export default {
   position: absolute;
   margin-left: 44px;
   width: 107px;
-  font-size:14px;
+  font-size:12px;
   color:rgba(153,153,153,1);
   text-align: center;
 }
@@ -415,14 +429,14 @@ export default {
   position: absolute;
   margin-left: 40%;
   width: 107px;
-  font-size:14px;
+  font-size:12px;
   color:rgba(153,153,153,1);
   text-align: center;
 }
 .rank3 {
   position: absolute;
   margin-left: 71.3%;
-  font-size:14px;
+  font-size:12px;
   color:rgba(153,153,153,1);
   text-align: center;
   width: 107px;
