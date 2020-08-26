@@ -819,7 +819,6 @@ export default {
   top: 80px;
   border-radius: 10px;
   width: 19%;
-  height: 100%;
   min-width: 482px;
   background-color: #fff;
   border: 1px solid $color-border;

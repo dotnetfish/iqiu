@@ -26,10 +26,10 @@
               <div class="routing" v-if="$route.name !== 'Schedule' ">赛程</div>
               <div class="nav-routing-active" v-if="$route.name === 'Schedule' ">赛程</div>
             </router-link>
-            <router-link :to="{name:'Rank'}" @click.native="navClickEvent('榜单')">
+            <!-- <router-link :to="{name:'Rank'}" @click.native="navClickEvent('榜单')">
               <div class="routing" v-if="$route.name !== 'Rank' ">榜单</div>
               <div class="nav-routing-active" v-if="$route.name === 'Rank' ">榜单</div>
-            </router-link>
+            </router-link> -->
             <router-link :to="{name:'Download'}" @click.native="navClickEvent('下载')">
               <div class="routing" v-if="$route.name !== 'Download' ">下载</div>
               <div class="nav-routing-active" v-if="$route.name === 'Download' ">下载</div>
