@@ -1,6 +1,50 @@
 <template>
   <div>
     <loginPop ref="login" ></loginPop>
+    <el-dialog
+        :visible.sync = isPassword
+        width="520px"
+        height="323px"
+        class="setpass"
+        :close-on-click-modal = false
+        :modal = true
+      >
+      <div class="Backpassword">
+          <div>设置登入密码</div>
+        </div>
+        <div class="login-pop-content">
+          <el-form>
+            <el-form-item>
+              <div class="loginMobile">
+                <input
+                  type="password"
+                  class="loginInput"
+                  placeholder="请输入新密码"
+                  show-password
+                  v-model="Newpassword"
+                  style="width:200px;"
+                />
+              </div>
+              <span class="error" v-if="flag1">大写字母、小写字母、数字和标点符号至少包含2种且长度在8-16</span>
+            </el-form-item>
+            <el-form-item>
+              <div class="loginMobile" style="margin-bottom:40px;">
+                <input
+                  type="password"
+                  class="loginInput"
+                  placeholder="确认新密码"
+                  show-password
+                  v-model="Newpassword1"
+                  style="width:200px;"
+                />
+              </div>
+              <span class="error" v-if="flag2">密码不一致</span>
+            </el-form-item>
+          </el-form>
+          <el-button class="loginBtn" @click="submit()" style="margin-bottom:20px">完成</el-button>
+          <div class="noforever"><img src="@/assets/dui.png" style="width:18px;height:18px;margin-right:5px" @click="noshow"><div @click="noshow">不在提醒</div></div>
+        </div>
+    </el-dialog>
     <div class="videoRecom">
       <div class="imgright" @click.self="downloadright()"></div>
       <div class="imgleft" @click.self="downloadleft()"></div>
@@ -52,8 +96,7 @@
 <!--        </div>-->
 <!--      </div>-->
 <!--    </div>-->
-
-
+    
     <div class="liveRecomend news" style="margin-top:15px;">
       <div class="liveRecomend">
         <div class="liveRecomend-title">
@@ -243,20 +286,20 @@
       <videoPlayer class="video-player" ref="player" :roomId="recommendVideo.id" :notLivingSuggest="recommendVideo2"></videoPlayer>
     </div> -->
     <liveroomSmallvideo></liveroomSmallvideo>
-
   </div>
 </template>
 <script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
 <script>
-  import { Button, Popover, divider, Carousel, CarouselItem } from 'element-ui'
+  import { Button, Popover, divider, Carousel, CarouselItem, Dialog, Form, FormItem, } from 'element-ui'
   import RightFloatLayer from '@/components/right-float-layer.vue'
   import videoPlayer from "@/components/video/videoPlayer.vue"
   import livelistitem from "@/components/live-list-item.vue"
+  import { loginInfo } from "@/api/liveroom";
   import liveroomSmallvideo from "@/components/liveroom/liveroomSmallvideo.vue"
   import * as eventTrack from '@/utils/eventTracking.js'
   import loginPop from "@/components/login/loginTipPopup.vue";
   // import { liveList,changeHotVideo } from "@/api/api";
-  import { liveList,recommendLiveList,hotmatchList,addmatchList, deletematchList, applyStatus } from "@/api/api"
+  import { liveList,recommendLiveList,hotmatchList,addmatchList, deletematchList, applyStatus, setPassword } from "@/api/api"
   // import  from "@/modules/share/qzopensl.js";
   import QRCode from 'qrcodejs2'
   // import img from '@/assets/share/kongjian.png'
@@ -264,6 +307,9 @@
   export default {
     name: 'home-live',
     components: {
+      [FormItem.name]: FormItem,
+      [Form.name]: Form,
+      [Dialog.name]: Dialog,
       [Button.name]: Button,
       [Popover.name]: Popover,
       [divider.name]: divider,
@@ -298,6 +344,7 @@
           }
         ],
         sum: 0,
+        isPassword:false,
         positionX:0,
         positionY:0,
         scrollTop:0,
@@ -305,6 +352,10 @@
         hotschedulelist: [],
         nowDate:'',
         flag:true,
+        flag1: false,
+        flag2:false,
+        Newpassword:"",
+      Newpassword1:"",
         // videoshow:false,
       }
     },
@@ -347,6 +398,9 @@
         // TODO 未登录弹登陆
         // this.reminder()
       }
+      if(this.$store.state.userStatus.userInfo.uid) {
+          this.getHomeUserInfo()
+      }
       this.regularRefresh()
       setTimeout(() => {
         this.getmatchList();
@@ -355,6 +409,58 @@
       // window.addEventListener('scroll',this.handleScroll,true)
     },
     methods: {
+      //设置密码
+      submit() {
+      var FloatRegex = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{8,16}$/;
+      if (!FloatRegex.test(this.Newpassword)) {
+        this.flag1 = true;
+      } else {
+        this.flag1 = false;
+      }
+      if (this.Newpassword != this.Newpassword1) {
+        this.flag2 = true;
+      } else {
+        this.flag2 = false;
+      }
+      if (this.flag1 == false && this.flag2 == false) {
+        this.getsetPassword();
+      }
+    },
+    getsetPassword() {
+      let data = {
+        password: this.Newpassword,
+      };
+      setPassword(data).then((res) => {
+        this.$message({
+          message: res.msg,
+          type: "success",
+        });
+        if (res.msg == "success") {
+          this.isPassword = false;
+        }
+      });
+    },
+    noshow () {
+      this.isPassword = false;
+      localStorage.setItem('flag',false);
+      console.log('登录获取用户信息是否弹窗134111111111',localStorage.getItem('flag'));
+    },
+    getHomeUserInfo () {
+        loginInfo().then(res => {
+          this.isPassword = res.data.isPassword
+          if(this.isPassword == 0) {
+            if(localStorage.getItem('flag')=='false') {
+              this.isPassword = false
+            } else {
+              this.isPassword = true
+              console.log('登录获取用户信息是否弹窗55',localStorage.getItem('flag'));
+            }
+          } else {
+            this.isPassword = false
+          }
+          // this.balance = res.data.accountDto.miCoin.balance
+        })
+      },
     privacy() {
       window.location.href = 'http://m.iqiulive.cn/contract_privacy'
     },
@@ -1069,5 +1175,80 @@
   margin-left: 10px;
   margin-top: 4px;
   outline: 0;
+}
+
+.Backpassword {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 24px;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  margin-bottom: 67px;
+  margin-top: -28px;
+}
+
+.error {
+  width: 362px;
+  height: 40px;
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(249, 52, 52, 1);
+  line-height: 40px;
+  margin-left: 19px;
+}
+
+  .login-pop-content {
+    padding: 0px 20px 0px 20px;
+    .loginMobile {
+      border-bottom: 1px solid rgba(242, 242, 242, 1);
+      border-left: 0px solid rgba(242, 242, 242, 1);
+      border-right: 0px solid rgba(242, 242, 242, 1);
+      border-top: 0px solid rgba(242, 242, 242, 1);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      .loginInput{
+        border: none;
+        outline: none;
+        text-align: left;
+        font-size: 16px;
+        line-height: 14px;
+        padding: 0 18px;
+        color: rgba(74, 74, 74, 1);
+        height: 40px;
+      }
+    }
+  }
+
+  .loginBtn {
+  width: 320px;
+  height: 48px;
+  margin-top: 50px;
+  margin: 0 auto;
+  display: block;
+  background: $color-main;
+  border-radius: 24px;
+  font-size: 20px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
+}
+
+.setpass {
+  border-radius: 10px;
+}
+
+.noforever {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  margin-top: 100px;
+  font-size: 18px;
+  color: rgb(255, 255, 255);
+  width: 85%;
+  cursor: pointer;
 }
 </style>

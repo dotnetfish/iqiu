@@ -282,3 +282,67 @@ export const rankingQuery = (data) =>
       contentTypejson: true,
   });
 
+     // 设置密码
+     export const setPassword = (data) =>
+     axios({
+       url: `${baseURL}/aiqiu/v1/user/logins/setPassword`,
+       method: "post",
+       data,
+       contentTypejson: true,
+   });
+
+   // 修改密码
+   export const updatePassword = (data) =>
+   axios({
+     url: `${baseURL}/aiqiu/v1/user/logins/updatePassword`,
+     method: "post",
+     data,
+     contentTypejson: true,
+ });
+
+ // 密码登入
+ export const loginPassword = (data) =>
+ axios({
+   url: `${baseURL}/aiqiu/v1/user/logins/password`,
+   method: "post",
+   data,
+   contentTypejson: true,
+});
+
+// 忘记密码
+export const backPassword = (data) =>
+axios({
+  url: `${baseURL}/aiqiu/v1/user/logins/backPassword`,
+  method: "post",
+  data,
+  contentTypejson: true,
+});
+
+// 注册
+export const loginregister = (data) =>
+axios({
+  url: `${baseURL}/aiqiu/v1/user/logins/register`,
+  method: "post",
+  data,
+  contentTypejson: true,
+});
+
+// 新手任务
+export const newTaskAdd = (data) =>
+axios({
+  url: `${baseURL}/aiqiu/v1/app/task/newTaskAdd`,
+  method: "post",
+  data,
+  contentTypejson: true,
+});
+
+// 新手任务完成情况
+export const newTaskList = (data) =>
+axios({
+  url: `${baseURL}/aiqiu/v1/app/task/newTaskList`,
+  method: "post",
+  data,
+  contentTypejson: true,
+});
+
+

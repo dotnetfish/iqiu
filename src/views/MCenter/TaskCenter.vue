@@ -1,7 +1,7 @@
 <template>
   <section class="apply me-wrap">
     <div
-      style="font-size:24px;font-family:PingFangSC-Medium,PingFang SC;font-weight:500;color:rgba(51,51,51,1);margin-bottom:20px;"
+      style="font-size:24px;font-weight:500;color:rgba(51,51,51,1);margin-bottom:20px;"
     >任务中心</div>
     <div class="baseinformation">
       <div style="margin-right:20px">
@@ -49,83 +49,135 @@
     </div>
     <!-- 新手任务 -->
     <div v-if="showblue == true">
-      <div class="task">
-        <div style="width:44px;height:44px"><img src="@/assets/task/task1.png"></div>
-        <div style="width:360px;height:44px;margin-left:5px"><div class="task-title">首次签到打卡</div><div class="task-reward">获取球票100</div></div>
-        <div style="width:66px;height:28px;margin-top:8px"><button class="done">已完成</button></div>
+      <div class="merge">
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task1.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">首次签到打卡</div><div class="task-reward">获取积分100，获得经验10</div></div>
+          <div style="width:66px;margin-left:10px">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/task1.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">{{nlist[1].status}}</div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task3.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">观看三十分钟以上，可当日累计时长</div><div class="task-reward">获取积分100，获得经验5</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+        </div>
       </div>
-      <div class="task">
-        <div style="width:44px;height:44px"><img src="@/assets/task/task2.png"></div>
-        <div style="width:360px;height:44px;margin-left:5px"><div class="task-title">完善个人资料</div><div class="task-reward">获取球票200</div></div>
-        <div style="width:66px;height:28px;margin-top:8px"><button class="done">已完成</button></div>
+      <div class="merge">
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task2.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">完善个人资料</div><div class="task-reward">获取积分200，获得经验10</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="done">已完成</button></div>
+        </div>
+        <div class="divider"></div>
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task4.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">分享到QQ、微信、朋友圈、微博</div><div class="task-reward">获取积分200，获得经验10</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+        </div>
       </div>
-      <div class="task">
-        <div style="width:44px;height:44px"><img src="@/assets/task/task3.png"></div>
-        <div style="width:360px;height:44px;margin-left:5px"><div class="task-title">观看三十分钟以上，可当日累计时长</div><div class="task-reward">获取球票100</div></div>
-        <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+      <div class="merge">
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task5.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">发送三条弹幕</div><div class="task-reward">获取积分100，获得经验10</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+        </div>
+        <div class="divider"></div>
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task6.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">首次关注主播10个</div><div class="task-reward">获取积分100，获得经验10</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+        </div>
       </div>
-      <div class="task">
-        <div style="width:44px;height:44px"><img src="@/assets/task/task4.png"></div>
-        <div style="width:360px;height:44px;margin-left:5px"><div class="task-title">分享到QQ、微信、朋友圈、微博。</div><div class="task-reward">获取球票200</div></div>
-        <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+      <div class="merge">
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task5.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">送一次礼物</div><div class="task-reward">获取积分100，获得经验10</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+        </div>
+        <div class="divider"></div>
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task6.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">收藏直播间</div><div class="task-reward">获取积分100，获得经验10</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+        </div>
       </div>
-      <div class="task">
-        <div style="width:44px;height:44px"><img src="@/assets/task/task5.png"></div>
-        <div style="width:360px;height:44px;margin-left:5px"><div class="task-title">发送三条弹幕或送礼物</div><div class="task-reward">获取球票100</div></div>
-        <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
-      </div>
-      <div class="task">
-        <div style="width:44px;height:44px"><img src="@/assets/task/task6.png"></div>
-        <div style="width:360px;height:44px;margin-left:5px"><div class="task-title">首次关注主播10个且收藏直播间</div><div class="task-reward">获取球票100</div></div>
-        <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
-      </div>
-      <div class="task">
-        <div style="width:44px;height:44px"><img src="@/assets/task/task7.png"></div>
-        <div style="width:360px;height:44px;margin-left:5px"><div class="task-title">首次充值，任意金额即可</div><div class="task-reward">获取球票1000</div></div>
-        <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
-      </div>
-      <div class="task">
-        <div style="width:44px;height:44px"><img src="@/assets/task/task8.png"></div>
-        <div style="width:360px;height:44px;margin-left:5px"><div class="task-title">绑定邮箱、微信号</div><div class="task-reward">获取球票200</div></div>
-        <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+      <div class="merge">
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task8.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">绑定邮箱、微信号</div><div class="task-reward">获取积分200，获得经验10</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+        </div>
+        <div class="divider"></div>
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task7.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">首次充值，任意金额即可</div><div class="task-reward">获取积分1000，获得经验30</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+        </div>
       </div>
     </div>
     <!-- 日常任务 -->
     <div v-if="showblue == false">
-      <div class="task">
-        <div style="width:44px;height:44px"><img src="@/assets/task/task1.png"></div>
-        <div style="width:360px;height:44px;margin-left:5px"><div class="task-title">首次签到打卡</div><div class="task-reward">获取球票50</div></div>
-        <div style="width:66px;height:28px;margin-top:8px"><button class="done">已完成</button></div>
+      <div class="merge">
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task1.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">首次签到打卡</div><div class="task-reward">获取积分50,获得经验5</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="done">已完成</button></div>
+        </div>
+        <div class="divider"></div>
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task3.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">观看三十分钟以上</div><div class="task-reward">获取积分50，获得经验5</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+        </div>
       </div>
-      <div class="task">
-        <div style="width:44px;height:44px"><img src="@/assets/task/task9.png"></div>
-        <div style="width:360px;height:44px;margin-left:5px"><div class="task-title">送礼物</div><div class="task-reward">获取球票10</div></div>
-        <div style="width:66px;height:28px;margin-top:8px"><button class="done">已完成</button></div>
-      </div>
-      <div class="task">
-        <div style="width:44px;height:44px"><img src="@/assets/task/task3.png"></div>
-        <div style="width:360px;height:44px;margin-left:5px"><div class="task-title">观看三十分钟以上</div><div class="task-reward">获取球票50</div></div>
-        <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
-      </div>
+      <div class="merge">
       <div class="task">
         <div style="width:44px;height:44px"><img src="@/assets/task/task4.png"></div>
-        <div style="width:360px;height:44px;margin-left:5px"><div class="task-title">分享到QQ、微信、朋友圈、微博。</div><div class="task-reward">获取球票200</div></div>
+        <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">分享到QQ、微信、朋友圈、微博。</div><div class="task-reward">获取球票200,获得经验5</div></div>
         <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
       </div>
-      <div class="task">
-        <div style="width:44px;height:44px"><img src="@/assets/task/task5.png"></div>
-        <div style="width:360px;height:44px;margin-left:5px"><div class="task-title">主播社区发动态、帖子、收藏、转发</div><div class="task-reward">获取球票50</div></div>
-        <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+      <div class="divider"></div>
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task9.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">送礼物</div><div class="task-reward">获取球票100,获得经验10</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="done">已完成</button></div>
+        </div>
       </div>
-      <div class="task">
-        <div style="width:44px;height:44px"><img src="@/assets/task/task6.png"></div>
-        <div style="width:360px;height:44px;margin-left:5px"><div class="task-title">首次关注主播10个且收藏直播间</div><div class="task-reward">获取球票10</div></div>
-        <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+      <div class="merge">
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task5.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">主播社区发动态、帖子、收藏、转发</div><div class="task-reward">获取球票50,获得经验5</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+        </div>
+        <div class="divider"></div>
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task6.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">首次关注主播</div><div class="task-reward">获取球票10,获得经验1</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+        </div>
       </div>
+      <div class="merge">
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task6.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">收藏直播间</div><div class="task-reward">获取球票200,获得经验10</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+        </div>
+        <div class="divider"></div>
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task7.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">发送弹幕</div><div class="task-reward">获得经验5</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+        </div>
+      </div>
+      <div class="merge">
       <div class="task">
-        <div style="width:44px;height:44px"><img src="@/assets/task/task7.png"></div>
-        <div style="width:360px;height:44px;margin-left:5px"><div class="task-title">首次充值，任意金额即可</div><div class="task-reward">获取球票1000</div></div>
-        <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+          <div style="width:44px;height:44px"><img src="@/assets/task/task7.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">首次充值，任意金额即可</div><div class="task-reward">获取球票1000，获得经验20</div></div>
+          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+      </div>
       </div>
     </div>
   </section>
@@ -134,6 +186,7 @@
 <script>
 import Cropper from "@/components/MCenter/Cropper.vue";
 import { Progress } from "element-ui";
+import { newTaskList } from "@/api/api";
 import { usersLoginInfo } from "@/api/mcenterapi";
 export default {
   name: "TaskCenter",
@@ -146,6 +199,39 @@ export default {
       squareUrl: "",
       userName: "",
       showblue: true,
+      newlist:[],
+      nlist: [{
+        type:1,
+        status:0,
+      },{
+        type:2,
+        status:0,
+      },{
+        type:3,
+        status:0,
+      },{
+        type:4,
+        status:0,
+      },{
+        type:5,
+        status:0,
+      },{
+        type:6,
+        status:0,
+      },{
+        type:7,
+        status:0,
+      },{
+        type:8,
+        status:0,
+      },{
+        type:9,
+        status:0,
+      },{
+        type:10,
+        status:1,
+      },
+      ],
     };
   },
   methods: {
@@ -182,9 +268,18 @@ export default {
           console.error(error);
         });
     },
+    getnewTaskList() {
+      newTaskList().then((res) => {
+        this.newlist = res
+        console.log("9999999999999999989999999",res)
+      });
+    },
   },
   mounted() {
     this.usersLoginInfo();
+    // if(this.$store.state.userStatus.userInfo.uid) {
+    //   this.getnewTaskList();
+    // }
   },
 };
 </script>
@@ -253,7 +348,7 @@ export default {
   height: 44px;
   width: 100%;
   display: flex;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
 }
 
 .task-title {
@@ -292,5 +387,19 @@ export default {
   border:2px solid rgba(153,153,153,1);
   background:rgb(255, 255, 255);
   color: rgba(153,153,153,1);
+}
+
+.merge {
+  display: flex;
+  height: 75px;
+  width: 910px;
+  align-items: center;
+}
+
+.divider {
+  width:1px;
+  height:45px;
+  border:1px solid rgba(240,240,240,1);
+  margin-right: 27px;
 }
 </style>

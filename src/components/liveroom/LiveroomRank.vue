@@ -270,7 +270,7 @@ export default {
 .level2 {
   margin-left: 58px;
   display: flex;
-  height: 87px;
+  height: 88px;
   width: 17%;
   margin-top: 24px;
 }
@@ -283,7 +283,7 @@ export default {
   justify-content:center;
 }
 .level3 {
-  height: 88px;
+  height: 90px;
   width: 17%;
   margin-top: 26px;
   display: flex;
@@ -291,24 +291,21 @@ export default {
 
 .no2 {
   z-index: 2;
-    position: absolute;
-    -webkit-border-radius: 150px;
-    border-radius: 150px;
-    margin-left: 1.5px;
-    margin-top: 19px;
-    width: 67px;
-    height: 67px;
+  position: absolute;
+  border-radius: 150px;
+  margin-left: 3.5px;
+  margin-top: 21px;
+  width: 62px;
+  height: 62px;
 }
 
 .no1 {
-    z-index: 2;
-    position: absolute;
-    width: 82px;
-    height: 82px;
-    -webkit-border-radius: 150px;
-    border-radius: 150px;
-    margin-top: 22px;
-    margin-left: 1px;
+  z-index: 2;
+  position: absolute;
+  width: 77px;
+  height: 76px;
+  border-radius: 150px;
+  margin-top: 20px;
 }
 
 .no3 {
@@ -316,7 +313,7 @@ export default {
   position: absolute;
   border-radius: 150px;
   margin-left: 5px;
-  margin-top: 20px;
+  margin-top: 21px;
   width: 63px;
   height: 63px;
 }

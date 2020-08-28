@@ -67,11 +67,15 @@
         }
       );
     },
+    mounted(){
+      console.log('989889998',this.config)
+    },
     methods: {
-      fillRankList(rankList = [], rankType) {
+      fillRankList(rankList, rankType) {
         let list = [];
         if (rankList.length >= 10) {
           this.config[rankType].list = rankList;
+          list = rankList
         } else {
           list = JSON.parse(JSON.stringify(rankList));
           list.length = 10;
@@ -81,6 +85,8 @@
             score: 0
           }, rankList.length, 10)
         }
+
+        console.log('87777777777777',this.config)
 
         this.$set(this.config[rankType], 'top3', [list[1], list[0], list[2]])
         this.$set(this.config[rankType], 'top7', list.slice(3, 10))
