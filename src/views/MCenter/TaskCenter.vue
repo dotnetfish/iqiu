@@ -51,70 +51,137 @@
     <div v-if="showblue == true">
       <div class="merge">
         <div class="task">
-          <div style="width:44px;height:44px"><img src="@/assets/task/task1.png"></div>
+          <div style="width:44px;height:44px"><img :src= nlist[0].url ></div>
           <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">首次签到打卡</div><div class="task-reward">获取积分100，获得经验10</div></div>
-          <div style="width:66px;margin-left:10px">
-            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/task1.png" style="width:30px;height:30px"></div>
-            <div style="color:rgba(153,153,153,1);">{{nlist[1].status}}</div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[0].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[0].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
           </div>
         </div>
         <div class="divider"></div>
         <div class="task">
-          <div style="width:44px;height:44px"><img src="@/assets/task/task3.png"></div>
+          <div style="width:44px;height:44px"><img :src= nlist[1].url></div>
           <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">观看三十分钟以上，可当日累计时长</div><div class="task-reward">获取积分100，获得经验5</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[1].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[1].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
         </div>
       </div>
       <div class="merge">
         <div class="task">
-          <div style="width:44px;height:44px"><img src="@/assets/task/task2.png"></div>
+          <div style="width:44px;height:44px"><img :src= nlist[2].url></div>
           <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">完善个人资料</div><div class="task-reward">获取积分200，获得经验10</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="done">已完成</button></div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[2].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[2].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
         </div>
         <div class="divider"></div>
         <div class="task">
-          <div style="width:44px;height:44px"><img src="@/assets/task/task4.png"></div>
+          <div style="width:44px;height:44px"><img :src= nlist[3].url></div>
           <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">分享到QQ、微信、朋友圈、微博</div><div class="task-reward">获取积分200，获得经验10</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[3].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[3].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
         </div>
       </div>
       <div class="merge">
         <div class="task">
-          <div style="width:44px;height:44px"><img src="@/assets/task/task5.png"></div>
+          <div style="width:44px;height:44px"><img :src= nlist[4].url></div>
           <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">发送三条弹幕</div><div class="task-reward">获取积分100，获得经验10</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[4].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[4].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
         </div>
         <div class="divider"></div>
         <div class="task">
-          <div style="width:44px;height:44px"><img src="@/assets/task/task6.png"></div>
+          <div style="width:44px;height:44px"><img :src= nlist[6].url></div>
           <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">首次关注主播10个</div><div class="task-reward">获取积分100，获得经验10</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[6].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[6].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
         </div>
       </div>
       <div class="merge">
         <div class="task">
-          <div style="width:44px;height:44px"><img src="@/assets/task/task5.png"></div>
-          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">送一次礼物</div><div class="task-reward">获取积分100，获得经验10</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
-        </div>
-        <div class="divider"></div>
-        <div class="task">
-          <div style="width:44px;height:44px"><img src="@/assets/task/task6.png"></div>
-          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">收藏直播间</div><div class="task-reward">获取积分100，获得经验10</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
-        </div>
-      </div>
-      <div class="merge">
-        <div class="task">
-          <div style="width:44px;height:44px"><img src="@/assets/task/task8.png"></div>
+          <div style="width:44px;height:44px"><img :src= nlist[9].url></div>
           <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">绑定邮箱、微信号</div><div class="task-reward">获取积分200，获得经验10</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[9].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[9].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
         </div>
         <div class="divider"></div>
         <div class="task">
-          <div style="width:44px;height:44px"><img src="@/assets/task/task7.png"></div>
+          <div style="width:44px;height:44px"><img :src= nlist[7].url></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">收藏直播间</div><div class="task-reward">获取积分100，获得经验10</div></div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[7].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[7].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
+        </div>
+      </div>
+      <div class="merge">
+        <div class="task">
+          <div style="width:44px;height:44px"><img :src= nlist[5].url></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">送一次礼物</div><div class="task-reward">获取积分100，获得经验10</div></div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[5].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[5].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="task">
+          <div style="width:44px;height:44px"><img :src= nlist[8].url></div>
           <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">首次充值，任意金额即可</div><div class="task-reward">获取积分1000，获得经验30</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[8].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="nlist[8].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
         </div>
       </div>
     </div>
@@ -124,59 +191,122 @@
         <div class="task">
           <div style="width:44px;height:44px"><img src="@/assets/task/task1.png"></div>
           <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">首次签到打卡</div><div class="task-reward">获取积分50,获得经验5</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="done">已完成</button></div>
+          <div style="width:66px;margin-left:10px" v-if="dlist[13].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="dlist[13].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
         </div>
         <div class="divider"></div>
         <div class="task">
-          <div style="width:44px;height:44px"><img src="@/assets/task/task3.png"></div>
+          <div style="width:44px;height:44px"><img src="@/assets/task/task2.png"></div>
           <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">观看三十分钟以上</div><div class="task-reward">获取积分50，获得经验5</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+          <div style="width:66px;margin-left:10px" v-if="dlist[0].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="dlist[0].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
         </div>
       </div>
       <div class="merge">
       <div class="task">
         <div style="width:44px;height:44px"><img src="@/assets/task/task4.png"></div>
-        <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">分享到QQ、微信、朋友圈、微博。</div><div class="task-reward">获取球票200,获得经验5</div></div>
-        <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+        <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">分享到QQ、微信、朋友圈、微博。</div><div class="task-reward">获取积分200,获得经验5</div></div>
+        <div style="width:66px;margin-left:10px" v-if="dlist[1].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="dlist[1].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
       </div>
       <div class="divider"></div>
         <div class="task">
-          <div style="width:44px;height:44px"><img src="@/assets/task/task9.png"></div>
-          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">送礼物</div><div class="task-reward">获取球票100,获得经验10</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="done">已完成</button></div>
-        </div>
-      </div>
-      <div class="merge">
-        <div class="task">
           <div style="width:44px;height:44px"><img src="@/assets/task/task5.png"></div>
-          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">主播社区发动态、帖子、收藏、转发</div><div class="task-reward">获取球票50,获得经验5</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
-        </div>
-        <div class="divider"></div>
-        <div class="task">
-          <div style="width:44px;height:44px"><img src="@/assets/task/task6.png"></div>
-          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">首次关注主播</div><div class="task-reward">获取球票10,获得经验1</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">发送弹幕</div><div class="task-reward">获得经验5</div></div>
+          <div style="width:66px;margin-left:10px" v-if="dlist[12].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="dlist[12].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
         </div>
       </div>
       <div class="merge">
         <div class="task">
-          <div style="width:44px;height:44px"><img src="@/assets/task/task6.png"></div>
-          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">收藏直播间</div><div class="task-reward">获取球票200,获得经验10</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+          <div style="width:44px;height:44px"><img src="@/assets/task/task11.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">主播社区发动态、帖子、收藏、转发</div><div class="task-reward">获取积分50,获得经验5</div></div>
+          <div style="width:66px;margin-left:10px" v-if="dlist[8].status == 0 && dlist[9].status == 0 && dlist[10].status == 0 && dlist[11].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-else>
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
         </div>
         <div class="divider"></div>
         <div class="task">
-          <div style="width:44px;height:44px"><img src="@/assets/task/task7.png"></div>
-          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">发送弹幕</div><div class="task-reward">获得经验5</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+          <div style="width:44px;height:44px"><img src="@/assets/task/task6.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">首次关注主播</div><div class="task-reward">获取积分10,获得经验1</div></div>
+          <div style="width:66px;margin-left:10px" v-if="dlist[3].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="dlist[3].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
+        </div>
+      </div>
+      <div class="merge">
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task10.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">收藏直播间</div><div class="task-reward">获取积分200,获得经验10</div></div>
+          <div style="width:66px;margin-left:10px" v-if="dlist[4].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="dlist[4].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="task">
+          <div style="width:44px;height:44px"><img src="@/assets/task/task9.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">送礼物</div><div class="task-reward">获取积分100,获得经验10</div></div>
+          <div style="width:66px;margin-left:10px" v-if="dlist[2].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-if="dlist[2].status == 1">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
         </div>
       </div>
       <div class="merge">
       <div class="task">
-          <div style="width:44px;height:44px"><img src="@/assets/task/task7.png"></div>
-          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">首次充值，任意金额即可</div><div class="task-reward">获取球票1000，获得经验20</div></div>
-          <div style="width:66px;height:28px;margin-top:8px"><button class="nodone">未完成</button></div>
+          <div style="width:44px;height:44px"><img src="@/assets/task/task8.png"></div>
+          <div style="width:290px;height:44px;margin-left:5px"><div class="task-title">充值用户等级、包月、包年球票</div><div class="task-reward">获取积分1000，获得经验20</div></div>
+          <div style="width:66px;margin-left:10px" v-if="dlist[7].status == 0 && dlist[5].status == 0 && dlist[6].status == 0">
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/no.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">未完成</div>
+          </div>
+          <div style="width:66px;margin-left:10px" v-else>
+            <div style="display:flex;justify-content:center;width:43px;margin-bottom:2px"><img src="@/assets/task/dui.png" style="width:30px;height:30px"></div>
+            <div style="color:rgba(153,153,153,1);">已完成</div>
+          </div>
       </div>
       </div>
     </div>
@@ -186,7 +316,7 @@
 <script>
 import Cropper from "@/components/MCenter/Cropper.vue";
 import { Progress } from "element-ui";
-import { newTaskList } from "@/api/api";
+import { newTaskList, dayTaskList } from "@/api/api";
 import { usersLoginInfo } from "@/api/mcenterapi";
 export default {
   name: "TaskCenter",
@@ -200,36 +330,109 @@ export default {
       userName: "",
       showblue: true,
       newlist:[],
+      daylist:[],
       nlist: [{
         type:1,
-        status:0,
+        status:1,
+        url: '@/assets/task/task1.png'
       },{
         type:2,
         status:0,
+        url:'@/assets/task/task2.png'
       },{
         type:3,
         status:0,
+        url:'@/assets/task/task3.png'
       },{
         type:4,
         status:0,
+        url:'@/assets/task/task4.png'
       },{
         type:5,
         status:0,
+        url:'@/assets/task/task5.png'
       },{
         type:6,
         status:0,
+        url:'@/assets/task/task9.png'
       },{
         type:7,
         status:0,
+        url:'@/assets/task/task6.png'
       },{
         type:8,
-        status:0,
+        status:1,
+        url:'@/assets/task/task10.png'
+        
       },{
         type:9,
         status:0,
+        url:'@/assets/task/task8.png'
       },{
         type:10,
+        status:0,
+        url:'@/assets/task/task7.png'
+      },
+      ],
+      dlist: [{
+        type:1,
         status:1,
+        url: '@/assets/task/task2.png'
+      },{
+        type:2,
+        status:0,
+        url:'@/assets/task/task4.png'
+      },{
+        type:3,
+        status:0,
+        url:'@/assets/task/task9.png'
+      },{
+        type:4,
+        status:0,
+        url:'@/assets/task/task6.png'
+      },{
+        type:5,
+        status:0,
+        url:'@/assets/task/task10.png'
+      },{
+        type:6,
+        status:0,
+        url:'@/assets/task/task8.png'
+      },{
+        type:7,
+        status:0,
+        url:'@/assets/task/task8.png'
+      },{
+        type:8,
+        status:0,
+        url:'@/assets/task/task8.png'
+        
+      },{
+        type:9,
+        status:0,
+        url:'@/assets/task/task11.png'
+      },{
+        type:10,
+        status:0,
+        url:'@/assets/task/task11.png'
+      },
+      {
+        type:11,
+        status:0,
+        url:'@/assets/task/task11.png'
+      },{
+        type:12,
+        status:0,
+        url:'@/assets/task/task11.png'
+      },{
+        type:13,
+        status:0,
+        url:'@/assets/task/task5.png'
+      },
+      {
+        type:14,
+        status:0,
+        url:'@/assets/task/task1.png'
       },
       ],
     };
@@ -274,11 +477,20 @@ export default {
         console.log("9999999999999999989999999",res)
       });
     },
+    getdayTaskList() {
+      dayTaskList().then((res) => {
+        this.daylist = res
+        console.log("9999999999999999989999998",res)
+      });
+    },
   },
   mounted() {
     this.usersLoginInfo();
     // if(this.$store.state.userStatus.userInfo.uid) {
     //   this.getnewTaskList();
+    // }
+    // if(this.$store.state.userStatus.userInfo.uid) {
+    //   this.getdayTaskList();
     // }
   },
 };

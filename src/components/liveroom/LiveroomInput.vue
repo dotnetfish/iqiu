@@ -21,6 +21,7 @@
   import { Input, Button } from 'element-ui'
   import setTime from "@/utils/setTime";
   import { throttle } from "@/utils/debounceAndthrottle";
+  import {addMesNum} from "@/api/api"
 
   export default {
     name: 'LiveroomInput',
@@ -62,7 +63,12 @@
         if (!this.textarea) return;
         this.$emit('sendMsg', this.textarea)
         this.textarea = "";
+        this.getaddMesNum()
       }, 2000),
+      getaddMesNum () {
+        addMesNum ().then((res) => {
+      });
+      }
     }
   }
 </script>

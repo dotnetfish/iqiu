@@ -669,6 +669,9 @@ export default {
   font-size: 14px;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
   color: rgba(102, 102, 102, 1);
 }
 

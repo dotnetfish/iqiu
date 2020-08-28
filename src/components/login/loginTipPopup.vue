@@ -237,7 +237,7 @@
                   style="width:200px;"
                 />
               </div>
-              <span class="error" v-if="flag1">大写字母、小写字母、数字和标点符号至少包含2种且长度在8-16</span>
+              <span class="error" v-if="flag1">大写字母、小写字母、数字和标点符号至少包含2种且长度在6-16</span>
             </el-form-item>
             <el-form-item>
               <div class="loginMobile" style="margin-bottom:20px;">
@@ -313,7 +313,7 @@
                   style="width:200px;"
                 />
               </div>
-              <span class="error" v-if="flag1">大写字母、小写字母、数字和标点符号至少包含2种且长度在8-16</span>
+              <span class="error" v-if="flag1">大写字母、小写字母、数字和标点符号至少包含2种且长度在6-16</span>
             </el-form-item>
             <el-form-item>
               <div class="loginMobile" style="margin-bottom:20px;">
@@ -562,7 +562,7 @@ export default {
     },
     submitForm2() {
       if (this.showMessage === "right" && this.code.length === 4) {
-        var FloatRegex = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{8,16}$/;
+        var FloatRegex = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{6,16}$/;
         if (!FloatRegex.test(this.newpassword)) {
           this.flag1 = true;
         } else {
@@ -606,7 +606,7 @@ export default {
     //注册
     submitForm3() {
       if (this.showMessage === "right" && this.code.length === 4) {
-        var FloatRegex = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{8,16}$/;
+        var FloatRegex = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{6,16}$/;
         if (!FloatRegex.test(this.Newpassword)) {
           this.flag1 = true;
         } else {
@@ -778,6 +778,7 @@ export default {
   }
   .login-pop-content {
     padding: 0px 20px 0px 20px;
+    z-index: 999;
     .errorMessage {
       color: rgba(255, 61, 48, 1);
       line-height: 20px;

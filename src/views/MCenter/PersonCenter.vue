@@ -34,12 +34,16 @@
               </div>
               <AnchorApply></AnchorApply>
             </el-tab-pane>
-
-            <el-tab-pane name="4" :key="4">
+            <el-tab-pane name="6" :key="6">
               <div class="person-title" slot="label">任务中心</div>
               <!-- <TaskCenter></TaskCenter> -->
             </el-tab-pane>
-
+            <el-tab-pane name="5" :key="5">
+              <div class="person-title" slot="label">直播记录</div>  
+            </el-tab-pane>
+             <el-tab-pane name="4" :key="4">
+              <div class="person-title" slot="label">房间管理</div>
+            </el-tab-pane>
             <slot></slot>
           </el-tabs>
         </div>

@@ -345,4 +345,29 @@ axios({
   contentTypejson: true,
 });
 
+// 日常任务
+export const dayTaskAdd = (data) =>
+axios({
+  url: `${baseURL}/aiqiu/v1/app/task/newTaskAdd_1598507021132`,
+  method: "post",
+  data,
+  contentTypejson: true,
+});
+
+// 日常任务完成情况
+export const dayTaskList = (data) =>
+axios({
+  url: `${baseURL}/aiqiu/v1/app/task/everydayTaskList`,
+  method: "post",
+  data,
+  contentTypejson: true,
+});
+// 添加弹幕记录
+export const addMesNum = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/task/addMesNum`,
+  method: "post",
+  data,
+  contentTypejson: true,
+})
 

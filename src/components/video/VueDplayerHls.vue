@@ -82,6 +82,10 @@ export default {
         hotkey: false, // 开启热键，支持快进、快退、音量控制、播放暂停
         preload: 'auto',
         volume: 0.8,
+        date1:'',
+        date2:'',
+        date3:'',
+        time:0,
         mutex: true, // 互斥，阻止多个播放器同时播放
         contextmenu: '',
         video: this.video
@@ -122,6 +126,8 @@ export default {
     initEvents () {
       this.dPlayer.on('play', () => {
         this.$emit('play')
+        this.date1 = new Date()
+        console.log("开始播放(～￣▽￣)～")
       })
       this.dPlayer.on('quality_start', (res) => {
         storages.setItem('quality', res.code)
@@ -129,6 +135,14 @@ export default {
       })
       this.dPlayer.on('pause', () => {
         this.$emit('pause')
+        this.date2 = new Date()
+        this.date3 = this.date2.getTime() - this.date1.getTime();
+        var leave1=this.date3%(24*3600*1000)
+        var leave2=leave1%(3600*1000)
+        var minutes=Math.floor(leave2/(60*1000))
+        var leave3=leave2%(60*1000)
+        this.time=this.time + Math.round(leave3/1000)
+        console.log("结束播放(～￣▽￣)～=",minutes,this.time)
       })
       this.dPlayer.on('canplay', () => {
         this.$emit('canplay')

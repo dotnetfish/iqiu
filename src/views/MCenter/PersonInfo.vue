@@ -136,7 +136,7 @@
         <div style="display:flex;">
           <span class="password">密码</span>
           <el-input v-model="Password" style="width:355px" show-password></el-input>
-          <span class="error" v-if="flag1">大写字母、小写字母、数字和标点符号至少包含2种且长度在8-16</span>
+          <span class="error" v-if="flag1">大写字母、小写字母、数字和标点符号至少包含2种且长度在6-16</span>
         </div>
         <div style="display:flex;margin-top:40px;">
           <span class="confirm-password">确认密码</span>
@@ -164,7 +164,7 @@
         <div style="display:flex;margin-top:40px;">
           <span class="updatepassword">新密码</span>
           <el-input v-model="newPassword" style="width:355px" show-password></el-input>
-          <span class="error" v-if="Flag1">大写字母、小写字母、数字和标点符号至少包含2种且长度在8-16</span>
+          <span class="error" v-if="Flag1">大写字母、小写字母、数字和标点符号至少包含2种且长度在6-16</span>
         </div>
         <div style="display:flex;margin-top:40px;">
           <span class="confirm-updatepassword">确认密码</span>
@@ -264,7 +264,7 @@ export default {
       this.repassword = false;
     },
     submit() {
-      var FloatRegex = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{8,16}$/;
+      var FloatRegex = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{6,16}$/;
       if (!FloatRegex.test(this.Password)) {
         this.flag1 = true;
       } else {
@@ -281,7 +281,7 @@ export default {
       console.log(this.Password);
     },
     submitupdate() {
-      var FloatRegex = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{8,16}$/;
+      var FloatRegex = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{6,16}$/;
       if (!FloatRegex.test(this.newPassword)) {
         this.Flag1 = true;
       } else {
