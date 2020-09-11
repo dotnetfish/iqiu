@@ -2,15 +2,15 @@
   <div>
     <div class="list">
       <div class="towrank">
-        <div style="width:70px;height:28px;font-size:20px;margin-left:20.8%;line-height:28px">
+        <div style="width:70px;height:28px;font-size:18px;margin-left:16.8%;line-height:28px">
           <button class="day" @click="changeblue(true)" ref="newtask">日榜</button>
         </div>
-        <div style="width:70px;height:28px;margin-left:35.7%;line-height:28px">
+        <div style="width:70px;height:28px;margin-left:35.7%;line-height:28px;font-size:18px">
           <button class="week" @click="changeblue(false)" ref="oldtask">周榜</button>
         </div>
         <div class="line"></div>
       </div>
-      <div style="display:flex;height:4px;width:100%;margin-bottom:22px">
+      <div style="display:flex;height:4px;width:100%;margin-bottom:2px">
         <div class="blueone" v-if="showblue==true"></div>
         <div class="bluetow" v-if="showblue==false"></div>
       </div>
@@ -39,10 +39,10 @@
         </div>
         <div class="three-name">
           <div class="name1" v-if="rankinglist[1]">{{rankinglist[1].uname}}</div>
-          <div class="name1" v-else>虚位以待</div>
+          <div class="name1" v-if="rankinglist[0]!=null && rankinglist[1]==null">虚位以待</div>
           <div class="name2" v-if="rankinglist[0]">{{rankinglist[0].uname}}</div>
           <div class="name3" v-if="rankinglist[2]">{{rankinglist[2].uname}}</div>
-          <div class="name3" v-else>虚位以待</div>
+          <div class="name3" v-if="rankinglist[0]!=null && rankinglist[2]==null">虚位以待</div>
         </div>
         <div class="three-rank">
           <div class="rank1" v-if="rankinglist[1]">{{rankinglist[1].score}}贡献值</div>
@@ -176,7 +176,7 @@ export default {
         type: that.typedw,
         cid: that.channelInfo.id,
         // uid: that.$store.state.userStatus.userInfo.uid,
-        uid:"10004603"
+        uid:this.$store.state.userStatus.userInfo.uid
       };
       requestRankingList(data).then((res) => {
         that.rankinglist = res.data.rankingItemDtoList;
@@ -207,7 +207,7 @@ export default {
 <style scoped lang="scss">
 .list {
   width: 100%;
-  height: 238px;
+  height: 216px;
   // border: rgb(0, 255, 255) solid 1px;
 }
 
@@ -252,7 +252,7 @@ export default {
   height: 4px;
   background: rgba(83, 199, 241, 1);
   border-radius: 2px;
-  margin-left: 22.4%;
+  margin-left: 19%;
 }
 
 .bluetow {
@@ -260,7 +260,7 @@ export default {
   height: 4px;
   background: rgba(83, 199, 241, 1);
   border-radius: 2px;
-  margin-left: 72.6%;
+  margin-left: 73.3%;
 }
 
 .befor-three {
@@ -268,11 +268,11 @@ export default {
 }
 
 .level2 {
-  margin-left: 58px;
+  margin-left: 42px;
   display: flex;
-  height: 88px;
+  height: 65px;
   width: 17%;
-  margin-top: 24px;
+  margin-top: 30px;
 }
 .level1 {
   height: 120px;
@@ -283,9 +283,9 @@ export default {
   justify-content:center;
 }
 .level3 {
-  height: 90px;
+  height: 66px;
   width: 17%;
-  margin-top: 26px;
+  margin-top: 32px;
   display: flex;
 }
 
@@ -293,29 +293,29 @@ export default {
   z-index: 2;
   position: absolute;
   border-radius: 150px;
-  margin-left: 3.5px;
-  margin-top: 21px;
-  width: 62px;
-  height: 62px;
+  margin-left: 2.4px;
+  margin-top: 14.4px;
+  width: 47px;
+  height: 47px;
 }
 
 .no1 {
   z-index: 2;
   position: absolute;
-  width: 77px;
-  height: 76px;
+  width: 58px;
+  height: 58px;
   border-radius: 150px;
-  margin-top: 20px;
+  margin-top: 14px;
 }
 
 .no3 {
   z-index: 2;
   position: absolute;
   border-radius: 150px;
-  margin-left: 5px;
-  margin-top: 21px;
-  width: 63px;
-  height: 63px;
+  margin-left: 2px;
+  margin-top: 15px;
+  width: 48px;
+  height: 48px;
 }
 
 .allrank {
@@ -342,7 +342,7 @@ export default {
   color:rgba(153,153,153,1);
   line-height:30px;
   height: 30px;
-  margin-left: 43px;
+  margin-left: 20px;
   width: 17px;
 }
 
@@ -363,21 +363,21 @@ export default {
   font-weight:400;
   color:rgba(153,153,153,1);
   line-height:30px;
-  height: 30px;;
+  height: 30px;
+  margin-right: 24px;
 }
 
 .three-name {
   display: flex;
   width: 100%;
-  margin-top: 10px;
   height: 17px;
 }
 
 .name1 {
   position: absolute;
-  margin-left: 7%;
+  margin-left: 2%;
   font-size: 14px;
-  color:#999999;
+  color:rgba(102,102,102,1);
   width: 120px;
   text-align: center;
   white-space:nowrap;
@@ -386,7 +386,7 @@ export default {
 }
 .name2 {
   position: absolute;
-  margin-left: 39%;
+  margin-left: 35%;
   color:rgba(102,102,102,1);
   font-size: 14px;
   width: 120px;
@@ -397,8 +397,8 @@ export default {
 }
 .name3 {
   position: absolute;
-  margin-left: 69.2%;
-  color:#999999;
+  margin-left: 64.2%;
+  color:rgba(102,102,102,1);
   font-size: 14px;
   width: 120px;
   text-align: center;
@@ -416,7 +416,7 @@ export default {
 
 .rank1 {
   position: absolute;
-  margin-left: 44px;
+  margin-left: 14px;
   width: 107px;
   font-size:12px;
   color:rgba(153,153,153,1);
@@ -424,7 +424,7 @@ export default {
 }
 .rank2 {
   position: absolute;
-  margin-left: 40%;
+  margin-left: 38%;
   width: 107px;
   font-size:12px;
   color:rgba(153,153,153,1);
@@ -432,7 +432,7 @@ export default {
 }
 .rank3 {
   position: absolute;
-  margin-left: 71.3%;
+  margin-left: 66.3%;
   font-size:12px;
   color:rgba(153,153,153,1);
   text-align: center;

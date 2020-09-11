@@ -348,7 +348,7 @@ axios({
 // 日常任务
 export const dayTaskAdd = (data) =>
 axios({
-  url: `${baseURL}/aiqiu/v1/app/task/newTaskAdd_1598507021132`,
+  url: `${baseURL}/aiqiu/v1/app/task/everydayTaskAdd`,
   method: "post",
   data,
   contentTypejson: true,
@@ -371,3 +371,83 @@ axios({
   contentTypejson: true,
 })
 
+// 签到情况列表
+export const signlist = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/sign/list`,
+  method: "post",
+  data,
+  contentTypejson: true,
+})
+
+//签到
+export const signadd = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/sign/add`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//邮箱
+export const bindEmail = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/user/bindEmail`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//查看是否可以领取粉丝牌
+export const findFanCard = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/fanCard/findFanCard`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//领取粉丝牌
+export const getFanCard = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/fanCard/get`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//佩戴粉丝牌
+export const wearFanCard = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/fanCard/wear`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//用户实时等级
+export const getLevel = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/user/getLevel`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//直播间粉丝牌列表
+export const getChannelFanCard = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/fanCard/getChannelFanCard`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//我的粉丝牌列表
+export const myFanCardList = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/fanCard/myFanCardList`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})

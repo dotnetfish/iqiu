@@ -3,6 +3,7 @@ import { WHITELIST_CODE, TIME_OUT_CODE } from "@/config";
 // import { Message } from 'element-ui';
 import cookie from "@/modules/utils/cookie.js";
 import store from "@/store/index";
+import { Message } from "element-ui";
 import { debug } from "leancloud-realtime";
 
 // 设置uuid
@@ -34,7 +35,6 @@ instance.interceptors.request.use(
       config.headers["xx-user-token"] = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ4eC11c2VyLWlkIjoiMTAwMDQ2MDMiLCJpc3MiOiJhaXFpdSIsImV4cCI6MTU5NzA0MDg2NCwiaWF0IjoxNTk2NDM2MDY0fQ.bvP_VBH3iUAlcWUqjY7ZlXKxKg2MI-bD5ehDUBGCtkfvsk_W9nQsym1XAPBEDX4-vctItN-ooN4eLD4YrvGGsw";
       config.headers["xx_n_t"] =  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ4eC11c2VyLWlkIjoiMTAwMDQ2MDMiLCJpc3MiOiJhaXFpdSIsImV4cCI6MTU5NzA0MDg2NCwiaWF0IjoxNTk2NDM2MDY0fQ.bvP_VBH3iUAlcWUqjY7ZlXKxKg2MI-bD5ehDUBGCtkfvsk_W9nQsym1XAPBEDX4-vctItN-ooN4eLD4YrvGGsw";
     }
-    console.log("=======================config.headers = ",config);
     // 临时处理,后面删掉 end
     return config;
   },
@@ -60,6 +60,27 @@ instance.interceptors.response.use(
 
     // 请求成功
     if (WHITELIST_CODE.includes(response.data.code)) {
+      if(response.data.task != null || response.data.gift != null) {
+        for(var i= 0;i<response.data.task.length;i++) {
+          if(response.data.task[i].taskType == 1) {
+            Message({
+              message: "完成新手任务获得积分"+response.data.task[i].coin+",获得经验"+response.data.task[i].experience,
+              type: "success"
+            });
+          }
+          if(response.data.task[i].taskType == 2){
+            Message({
+              message: "完成新手任务获得积分"+response.data.task[i].coin+",获得经验"+response.data.task[i].experience,
+              type: "success"
+            });
+          }
+      }
+      }
+      // console.log("asfgyuewgfwyefgweyfgyfgyegfagywagfewgef",response.data)
+      // Message({
+      //   message: "恭喜恭喜~~~",
+      //   type: "success"
+      // });
       return response.data;
     } else {
       errorToast(response);

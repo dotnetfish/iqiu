@@ -11,7 +11,7 @@
           </cropper>
         </div>
         <div class="name-info">
-          <div class="title">姓名</div>
+          <div class="title">用户名</div>
           <el-input
             v-model="userName"
             size="medium"
@@ -19,6 +19,83 @@
             class="name-input"
             placeholder="请输入"
           ></el-input>
+        </div>
+        <div class="name-info">
+          <div style="display:flex;justify-content: flex-start;align-items: center;">
+          <div class="title">出生日期</div>
+            <el-date-picker
+              v-model="datetime"
+              value-format="timestamp"
+              :default-value= datetime
+              type="date"
+              placeholder="请选择日期">
+            </el-date-picker>
+          </div>
+        </div>
+        <div class="name-info">
+          <div class="title">所在地</div>
+          <el-cascader
+            size="large"
+            :options="options"
+            v-model="selectedOptions"
+            :placeholder="selectedOptions"
+            @change="addressChange">
+          </el-cascader>
+          <!-- <v-distpicker 
+              @province="Province"
+              @city="City"
+              :hide-area=true
+              >
+          </v-distpicker> -->
+        </div>
+        <div class="name-info">
+          <div style="display:flex;justify-content: flex-start;align-items: center;">
+          <div class="title">手机号</div>
+          <div><input
+            class="weixin-input"
+            v-model="telphone"
+            :disabled="true"
+            placeholder="请输入手机号码"
+            style="cursor: not-allowed"
+          ></div>
+          </div>
+          <div style="display:flex;justify-content: flex-start;align-items: center;">
+          <div class="title">邮箱</div>
+          <div><input
+            v-model="isEmail"
+            class="weixin-input"
+            placeholder="绑定邮箱号码"
+          ></div>
+          <button class="Binding" @click="isEmailbinding">绑定</button>
+          </div>
+        </div>
+        <div class="name-info">
+          <div style="display:flex;justify-content: flex-start;align-items: center;">
+          <div class="title">微信</div>
+          <div><input
+            class="weixin-input"
+            placeholder="绑定微信账号"
+          ></div>
+          <button class="binding" @click="binding">绑定</button>
+          </div>
+          <div style="display:flex;justify-content: flex-start;align-items: center;">
+          <div class="title">QQ</div>
+          <div><input
+            class="weixin-input"
+            placeholder="绑定QQ账号"
+          ></div>
+          <button class="binding" @click="binding">绑定</button>
+          </div>
+        </div>
+        <div class="name-info">
+          <div class="title">个人简介</div>
+          <textarea
+            v-model="signature"
+            size="medium"
+            minlength="5"
+            class="signature-input"
+            placeholder="请用简短的文字介绍自己，大约60个字符。"
+          ></textarea>
         </div>
         <div class="name-info">
           <div class="title">积分</div>
@@ -71,7 +148,7 @@
       <!-- 密码设置及修改 -->
       <section class="accout-wrap" style="margin-top:26px">
         <div class="mobile-wrap">
-          <img src="@/assets/img/Mcenter-mobile.png" style="width:46px;height:60px;" />
+          <img src="@/assets/img/password.png" style="width:59px;height:59px;" />
           <div class="content">
             <p>密码设置</p>
             <p>设置登录密码更多登录方式</p>
@@ -80,7 +157,7 @@
           <el-button type="primary" size="small" round @click="password()" v-if="isPassword==1" disabled= true>已设置</el-button>
         </div>
         <div class="mobile-wrap">
-          <img src="@/assets/img/Mcenter-play.png" style="width:58px;height:42px;" />
+          <img src="@/assets/img/password.png" style="width:59px;height:59px;" />
           <div class="content">
             <p>修改密码</p>
             <p>设置登录密码更多登录方式</p>
@@ -178,12 +255,12 @@
 </template>
 
 <script>
-import { Row, Col, Button, Avatar, Card, Input, Message } from "element-ui";
-import { setPassword, updatePassword } from "@/api/api";
-
+import { Row, Col, Button, Avatar, Card, Input, Message, DatePicker, Cascader } from "element-ui";
+import { setPassword, updatePassword, bindEmail } from "@/api/api";
 import { updateUser, usersLoginInfo } from "@/api/mcenterapi";
 import Cropper from "@/components/MCenter/Cropper.vue";
 import { loginInfo } from "@/api/liveroom";
+import { provinceAndCityData, CodeToText } from 'element-china-area-data';
 
 export default {
   name: "PersonInfo",
@@ -195,6 +272,8 @@ export default {
     [Avatar.name]: Avatar,
     [Card.name]: Card,
     [Message.name]: Message,
+    [DatePicker.name]: DatePicker,
+    [Cascader.name]: Cascader,
     Cropper,
   },
   data() {
@@ -219,8 +298,26 @@ export default {
       oldPassword: "",
       newPassword: "",
       newPassword2: "",
+      datetime:"",
+      selectedOptions:'',
+      signature:"",
+      isEmail:"",
+      isEmailnull:"",
+      options: provinceAndCityData,
+      province:"",
+      city:"",
+      telphone:"",
     };
   },
+  // filters: {
+  //   formatDate: function (value) {
+  //     let date = new Date(value);
+  //     let yy = date.getFullYear();
+  //     let mm = date.getMonth() + 1;
+  //     let dd = date.getDate();
+  //     return yy + "-" + mm + "-" + dd;
+  //   },
+  // },
   computed: {
     userStatus: {
       get() {
@@ -239,6 +336,28 @@ export default {
     },
   },
   methods: {
+    //绑定邮箱
+    isEmailbinding() {
+      let data = {
+        email: this.isEmail
+      }
+      bindEmail(data).then((res) => {
+        Message.success({
+              message: "绑定成功",
+            });
+      })
+    },
+    //所在地
+    addressChange(arr) {
+          console.log("sadafssgasegge=",this.selectedOptions)
+          console.log(CodeToText[arr[0]], CodeToText[arr[1]]);
+          this.province = CodeToText[arr[0]]
+          this.city = CodeToText[arr[1]]
+      },
+    binding() {
+      // window.location.href = 'https://open.weixin.qq.com/connect/qrconnect?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect'
+      window.location.href = 'https://open.weixin.qq.com/connect/qrconnect?appid=wx8628eaef85e3a193&redirect_uri=https%3A%2F%2Fwww.douyu.com%2Fmember%2Foauth%2Fsignin%2Fweixin&state=d395c8a277ee705bebb7408263c9ab0d&scope=snsapi_login&response_type=code&approval_prompt=force'
+    },
     handlePlay() {},
     editInfo() {
       this.$emit("showInfoEdit", 2);
@@ -313,6 +432,9 @@ export default {
           type: "success",
         });
         if (res.msg != "旧密码错误") {
+          this.oldPassword = '';
+          this.newPassword = '';
+          this.newPassword2 = "";
           this.repassword = true;
         }
       });
@@ -362,13 +484,24 @@ export default {
     },
     getHomeUserInfo () {
         loginInfo().then(res => {
-          this.isPassword = res.data.isPassword
+          this.isPassword = res.data.isPassword;
+          this.datetime = res.data.birthday;
+          this.signature = res.data.sign;
+          this.selectedOptions = res.data.area;
+          this.telphone = res.data.mobile;
+          this.isEmail = res.data.emailNum;
+          this.isEmailnull = res.data.emailNum;
+          this.uname = res.data.uname;
           // this.balance = res.data.accountDto.miCoin.balance
         })
       },
     save() {
       let data = {
         uname: this.userName,
+        birthday: this.datetime,
+        sign: this.signature,
+        area: this.province+this.city,
+        emailNum: this.isEmail
       };
       this.updateUser(data, "名字修改成功");
     },
@@ -377,15 +510,16 @@ export default {
       let data = {
         avatarUrl: url,
       };
-      this.updateUser(data, "头像上传成功");
+      // this.updateUser(data, "头像上传成功");
+      this.updateUser(data);
     },
-    updateUser(data, messages) {
+    updateUser(data) {
       updateUser(data)
         .then((response) => {
           if (response.code === 0) {
             this.usersLoginInfo();
             Message.success({
-              message: messages,
+              message: "修改成功",
             });
           } else {
             Message.error({
@@ -587,8 +721,9 @@ export default {
       align-items: center;
 
       .title {
-        width: 102px;
-        text-align: center;
+        width: 90px;
+        text-align: right;
+        margin-right: 30px;
         font-size: 16px;
         font-weight: 500;
         color: #666;
@@ -598,7 +733,7 @@ export default {
         width: 460px;
         /*height: 52px;*/
         ::v-deep .el-input__inner {
-          height: 52px;
+          height: 44px;
           line-height: 52px;
         }
       }
@@ -705,4 +840,96 @@ export default {
   border-radius:20px;
   color:rgba(51,51,51,1);
 }
+
+.weixin-input {
+  width: 262px;
+  height: 44px;
+  border: 1px solid #dcdfe6;
+  color: #606266;
+  border-radius: 4px;
+  padding: 0 15px;
+  font-size: 14px;
+}
+.signature-input {
+  width: 676px;
+  height: 100px;
+  border: 1px solid #dcdfe6;
+  color: #606266;
+  border-radius: 4px;
+  padding: 0 15px;
+  font-size: 14px;
+}
+.signature-input:focus {
+  outline: none;
+  border-color: #409eff;
+}
+.weixin-input:focus {
+  outline: none;
+  border-color: #409eff;
+}
+
+.binding {
+  position: absolute;
+  font-size: 16px;
+  background-color: #fff;
+  color: #00B8F2;
+  border: 0;
+  cursor: pointer;
+  outline:none;
+  right: 56%;
+}
+.Binding {
+  position: absolute;
+  font-size: 16px;
+  background-color: #fff;
+  color: #00B8F2;
+  border: 0;
+  cursor: pointer;
+  outline:none;
+  right: 13%;
+}
+
+.isBinding {
+  position: absolute;
+  font-size: 16px;
+  background-color: #fff;
+  color: #999999;
+  border: 0;
+  cursor: pointer;
+  outline:none;
+  right: 13%;
+}
+
+::v-deep .el-input__inner {
+  height: 44px;
+  width: 294px;
+}
+
+::v-deep .wrapper{
+  width: 200px;
+}
+::v-deep .distpicker-address-wrapper select{
+  width: 294px;
+  margin-right: 10px;
+  outline:0
+}
+
+// ::v-deep .distpicker-address-wrapper label{
+// }
+
+//  ::v-deep .address-header{
+//     bottom: 400px;
+//     width: 100%;
+//     background: #000;
+//     color:#fff;
+//   }
+::v-deep input::-webkit-input-placeholder {
+    color:black;
+  }
+::v-deep input::-moz-input-placeholder {
+    color: black;
+  }
+::v-deep  input::-ms-input-placeholder {
+    color: black;
+  }
 </style>

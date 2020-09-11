@@ -72,7 +72,7 @@
       </div>
     </div>
     <div class="rightmove">
-      <el-button @click="rightmove()" v-if="xxx !=5">＞</el-button>
+      <el-button @click="rightmove()" v-if="xxx !=8">＞</el-button>
     </div>
     </div>
     <!--    <div class="popper-switch" @click="handleSwitch">-->
@@ -164,7 +164,7 @@ export default {
   created() {},
   methods: {
     rightmove() {
-      if (this.xxx < 5) {
+      if (this.xxx < 8) {
         this.xxx += 1;
       }
     },

@@ -53,7 +53,6 @@
         >
           <img src="@/assets/share/share1.png" style="width:55px;height:17px" v-if="show==true">
           <img src="@/assets/share/share2.png" style="width:55px;height:17px" v-if="show==false">
-          <!-- <span class="share-text">分享</span> -->
         </button>
       </el-popover>
     </div>
@@ -74,6 +73,7 @@ import { Button, Popover, Input } from "element-ui";
 import { attentionAnchor, attentionCancelAnchor } from "@/api/liveroom";
 import { throttle } from "@/utils/debounceAndthrottle";
 import QRCode from "qrcodejs2";
+import { newTaskAdd,dayTaskAdd } from "@/api/api";
 
 export default {
   name: "LiveroomHeader",
@@ -128,6 +128,56 @@ export default {
     changem() {
       this.flag = 2;
     },
+    getnewTaskAdd(type) {
+      let data = {
+          type:4
+        }
+      newTaskAdd(data).then((res) => {
+      });
+      this.getdayTaskAdd(type)
+    },
+    getdayTaskAdd(type) {
+      let data = {
+          type:2
+        }
+      dayTaskAdd(data).then((res) => {
+      });
+      if (type == "qq") {
+        window.open(
+          "http://connect.qq.com/widget/shareqq/index.html?url=" +
+            "http://www.iqiulive.cn/" +
+            this.channelInfo.id +
+            "?sharesource=qzone&title=" +
+            this.channelInfo.name +
+            "&pics=https://static.iqiulive.cn/aiqiu-prod/pc/dist/img/logo_big@2x_o.55bd6cbc.png&summary=" +
+            this.channelInfo.uname +
+            "开播啦,快来看啊"
+        );
+      } else if (type == "qzone") {
+        window.open(
+          "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" +
+            "http://www.iqiulive.cn/" +
+            this.channelInfo.id +
+            "?sharesource=qzone&title=" +
+            this.channelInfo.name +
+            "&pics=https://static.iqiulive.cn/aiqiu-prod/pc/dist/img/logo_big@2x_o.55bd6cbc.png&summary=" +
+            this.channelInfo.uname +
+            "开播啦,快来看啊"
+        );
+      } else if (type == "weibo") {
+        window.open(
+          "http://service.weibo.com/share/share.php?url=" +
+            "http://www.iqiulive.cn/" +
+            this.channelInfo.id +
+            "?sharesource=" +
+            this.channelInfo.uname +
+            "开播啦,快来看啊" +
+            "&title=" +
+            this.channelInfo.name +
+            "&pic=https://static.iqiulive.cn/aiqiu-prod/pc/dist/img/logo_big@2x_o.55bd6cbc.png&appkey=微博平台申请的key"
+        );
+      }
+    },
     //复制链接
     // onCopy() {
     //   this.$message({
@@ -177,41 +227,7 @@ export default {
       // let i = require('https://rpic.douyucdn.cn/asrpic/200716/48699_1730.png/dy1')
       console.log(597777776);
       console.log(this.channelInfo.id);
-      if (type == "qq") {
-        window.open(
-          "http://connect.qq.com/widget/shareqq/index.html?url=" +
-            "http://www.iqiulive.cn/" +
-            this.channelInfo.id +
-            "?sharesource=qzone&title=" +
-            this.channelInfo.name +
-            "&pics=https://static.iqiulive.cn/aiqiu-prod/pc/dist/img/logo_big@2x_o.55bd6cbc.png&summary=" +
-            this.channelInfo.uname +
-            "开播啦,快来看啊"
-        );
-      } else if (type == "qzone") {
-        window.open(
-          "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" +
-            "http://www.iqiulive.cn/" +
-            this.channelInfo.id +
-            "?sharesource=qzone&title=" +
-            this.channelInfo.name +
-            "&pics=https://static.iqiulive.cn/aiqiu-prod/pc/dist/img/logo_big@2x_o.55bd6cbc.png&summary=" +
-            this.channelInfo.uname +
-            "开播啦,快来看啊"
-        );
-      } else if (type == "weibo") {
-        window.open(
-          "http://service.weibo.com/share/share.php?url=" +
-            "http://www.iqiulive.cn/" +
-            this.channelInfo.id +
-            "?sharesource=" +
-            this.channelInfo.uname +
-            "开播啦,快来看啊" +
-            "&title=" +
-            this.channelInfo.name +
-            "&pic=https://static.iqiulive.cn/aiqiu-prod/pc/dist/img/logo_big@2x_o.55bd6cbc.png&appkey=微博平台申请的key"
-        );
-      }
+      this.getnewTaskAdd(type)
       // else{
       //   var url = 'http://www.iqiulive.cn/'+this.channelInfo.id;
       //         // encodePath = encodeURIComponent(url),

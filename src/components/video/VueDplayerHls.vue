@@ -10,6 +10,7 @@ import DPlayer from 'dplayer'
 import 'dplayer/dist/DPlayer.min.css'
 import elementResizeDetectorMaker from 'element-resize-detector'
 import storages from "@/utils/storage.js";
+import { newTaskAdd,dayTaskAdd } from "@/api/api";
 
  // window.Hls = Hls
 window.flvjs = flvjs
@@ -22,7 +23,12 @@ export default {
   data () {
     return {
       dPlayer: null,
-      height: 0
+      height: 0,
+      date1:'',
+      date2:'',
+      date3:'',
+      time:0,
+      addtime:0,
     }
   },
   watch: {
@@ -82,10 +88,6 @@ export default {
         hotkey: false, // 开启热键，支持快进、快退、音量控制、播放暂停
         preload: 'auto',
         volume: 0.8,
-        date1:'',
-        date2:'',
-        date3:'',
-        time:0,
         mutex: true, // 互斥，阻止多个播放器同时播放
         contextmenu: '',
         video: this.video
@@ -127,7 +129,12 @@ export default {
       this.dPlayer.on('play', () => {
         this.$emit('play')
         this.date1 = new Date()
-        console.log("开始播放(～￣▽￣)～")
+        if(new Date().getDate() != localStorage.getItem('nowdate')) {
+          localStorage.setItem('nowdate',new Date().getDate());
+          localStorage.setItem('nowtime',0);
+          localStorage.setItem('flagtime',0);
+        }
+        console.log("开始播放(～￣▽￣)～",localStorage.getItem('nowdate'))
       })
       this.dPlayer.on('quality_start', (res) => {
         storages.setItem('quality', res.code)
@@ -141,8 +148,16 @@ export default {
         var leave2=leave1%(3600*1000)
         var minutes=Math.floor(leave2/(60*1000))
         var leave3=leave2%(60*1000)
-        this.time=this.time + Math.round(leave3/1000)
-        console.log("结束播放(～￣▽￣)～=",minutes,this.time)
+        // this.time=Number(Math.round(leave3/1000))
+        this.time=minutes
+        this.timeadd = this.time + Number(localStorage.getItem('nowtime'))
+        localStorage.setItem('nowtime',this.timeadd);
+        // localStorage.getItem('nowtime') = localStorage.getItem('nowtime') + this.time
+        if(localStorage.getItem('nowtime') > 30 || localStorage.getItem('flagtime')==0) {
+          localStorage.setItem('flagtime',1);
+          this.getnewTaskAdd()
+        }
+        console.log("结束播放(～￣▽￣)～=",localStorage.getItem('nowtime'))
       })
       this.dPlayer.on('canplay', () => {
         this.$emit('canplay')
@@ -156,6 +171,21 @@ export default {
       this.dPlayer.on('error', () => {
         this.$emit('error')
       })
+    },
+    getnewTaskAdd() {
+      let data = {
+          type:3
+        }
+      newTaskAdd(data).then((res) => {
+      });
+      this.getdayTaskAdd()
+    },
+    getdayTaskAdd() {
+      let data = {
+          type:1
+        }
+      dayTaskAdd(data).then((res) => {
+      });
     }
   }
 }

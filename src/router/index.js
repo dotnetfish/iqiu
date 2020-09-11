@@ -61,6 +61,22 @@ const routes = [
   },
   component: ()=> import('../views/word/barrage.vue')
 },
+{
+  path:"/fans",
+  name:"Fans",
+  meta:{
+      title:"粉丝体系"
+  },
+  component: ()=> import('../views/word/fans.vue')
+},
+{
+  path:"/levelthat",
+  name:"Levelthat",
+  meta:{
+      title:"等级制度"
+  },
+  component: ()=> import('../views/word/levelthat.vue')
+},
   {
     path: "/zhibo",
     name: "channel",

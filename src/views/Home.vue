@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <homeNav :navLogo="true"></homeNav>
-    <!-- <homeSign></homeSign> -->
+    <homeSign v-if="this.$store.state.userStatus.userInfo.uid"></homeSign>
     <homeLive></homeLive>
 <!--    <homeFooter></homeFooter>-->
   </div>

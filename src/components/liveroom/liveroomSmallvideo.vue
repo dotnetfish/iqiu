@@ -87,7 +87,7 @@ export default {
     },
     handleScroll() {
       this.scrollTop = window.pageYOffset;
-      console.log(this.scrollTop);
+      // console.log(this.scrollTop);
       if (this.scrollTop >= 700) {
         this.videoshow = true;
       } else {

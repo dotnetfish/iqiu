@@ -40,7 +40,8 @@
           @login="login"
           @hongBaoSuccess="getloginInfo"
         ></liveroomChat>
-        <liveroomInput :userInfo="userInfo" @sendMsg="sendMsg" @login="login"></liveroomInput>
+        <!-- <div class="fanmessage"><img src="@/assets/timg.jpg" style="width:90%;height:60px;"></div> -->
+        <liveroomInput :userInfo="userInfo" @sendMsg="sendMsg" @login="login" :channelInfo="channelInfo"></liveroomInput>
         <LiveroomLoginDialog @login="login"></LiveroomLoginDialog>
       </div>
     </div>
@@ -541,7 +542,7 @@ export default {
         this.userLogin = res.data;
         // this.userStatus.userInfo.balance = res.data.accountDto.miCoin.balance
         // console.log('this.userStatus.userInfo.balance',this.userStatus.userInfo.balance)
-        console.log("直播间-个人信息", res);
+        // console.log("直播间-个人信息", res);
       });
     },
     // 当前用户进入直播间的信息
@@ -549,7 +550,7 @@ export default {
       // if (!this.isLogin) return;
       return enterRoom({ cid: this.liveroom }).then(res => {
         this.userInfo = res.data;
-        console.log(res);
+        // console.log(res);
       });
     },
     // 获取直播间信息
@@ -809,17 +810,17 @@ export default {
   display: flex;
   flex-direction: column;
   // width: calc(80vw - 240px);
-  width: calc(93vw - 482px);
+  width: calc(93vw - 371px);
 }
 
 .chat-wrap {
-  position: absolute;
+  position: fixed;
   z-index: 3;
   right: 0;
   top: 80px;
   border-radius: 10px;
-  width: 19%;
-  min-width: 482px;
+  width: 17%;
+  min-width: 371px;
   background-color: #fff;
   border: 1px solid $color-border;
   border-top: 0px solid $color-border;

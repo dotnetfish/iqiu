@@ -163,7 +163,29 @@
           </div> -->
         </div>   
     </div>
-
+    <!-- ss -->
+    <!-- <div class="shareall">
+      <el-popover placement="bottom-start" width="410" trigger="hover">
+        <div class="text">老铁分享一个呗~</div>
+        <div class="sharearea">
+          <div class="share1" @click="share('qq')">
+            <img src="@/assets/share/qq.png" alt />
+          </div>
+          <div class="share1" @click="share('qzone')">
+            <img src="@/assets/share/kongjian.png" alt />
+          </div>
+          <div class="share1" @click="share('weibo')">
+            <img src="@/assets/share/xinlang.png" alt />
+          </div>
+        </div>
+        <button
+          slot="reference"
+          class="share-button"
+        >
+          <span class="share-text">分享</span>
+        </button>
+      </el-popover>
+    </div> -->
       <div class="liveRecomend">
         <div class="liveRecomend-title">
           <img src="@/assets/home/homeIcon/hotRecom@2x.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
@@ -299,7 +321,7 @@
   import * as eventTrack from '@/utils/eventTracking.js'
   import loginPop from "@/components/login/loginTipPopup.vue";
   // import { liveList,changeHotVideo } from "@/api/api";
-  import { liveList,recommendLiveList,hotmatchList,addmatchList, deletematchList, applyStatus, setPassword } from "@/api/api"
+  import { liveList,recommendLiveList,hotmatchList,addmatchList, deletematchList, applyStatus, setPassword,newTaskAdd,dayTaskAdd} from "@/api/api"
   // import  from "@/modules/share/qzopensl.js";
   import QRCode from 'qrcodejs2'
   // import img from '@/assets/share/kongjian.png'
@@ -409,6 +431,62 @@
       // window.addEventListener('scroll',this.handleScroll,true)
     },
     methods: {
+      share(type) {
+      // console.log(encodeURIComponent(document.location))
+      // let i = require('https://rpic.douyucdn.cn/asrpic/200716/48699_1730.png/dy1')
+      console.log(597777776);
+      this.getnewTaskAdd(type)
+      // else{
+      //   var url = 'http://www.iqiulive.cn/'+this.channelInfo.id;
+      //         // encodePath = encodeURIComponent(url),
+      //         // targetUrl = 'http://qr.liantu.com/api.php?text=' + encodePath;
+      //     //  window.open(url,'weixin', 'height=320, width=320')
+      // }
+      // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+document.location.href+'?sharesource=qzone&title='+this.sum+'&pics=图片地址&summary= 嗯嗯')
+      // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(document.location) + '?sharesource=qzone&title=' + sum + '&pics=' +  + '&summary=' + '');
+      // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+document.location.href+'?sharesource=qzone&title='+ftit+'&pics='+lk+'&summary='+document.querySelector('meta[name="description"]').getAttribute('content'))
+    },
+      getnewTaskAdd(type) {
+        let data = {
+          type:4
+        }
+      newTaskAdd(data).then((res) => {
+      });
+      this.getdayTaskAdd(type)
+    },
+    getdayTaskAdd(type) {
+      let data = {
+          type:2
+        }
+      dayTaskAdd(data).then((res) => {
+      });
+      if (type == "qq") {
+        window.open(
+          "http://connect.qq.com/widget/shareqq/index.html?url=" +
+            "http://www.iqiulive.cn/" +
+            "?sharesource=qzone&title=" +
+            "&pics=https://static.iqiulive.cn/aiqiu-prod/pc/dist/img/logo_big@2x_o.55bd6cbc.png&summary=" +
+            "开播啦,快来看啊"
+        );
+      } else if (type == "qzone") {
+        window.open(
+          "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" +
+            "http://www.iqiulive.cn/" +
+            "?sharesource=qzone&title=" +
+            "&pics=https://static.iqiulive.cn/aiqiu-prod/pc/dist/img/logo_big@2x_o.55bd6cbc.png&summary=" +
+            "开播啦,快来看啊"
+        );
+      } else if (type == "weibo") {
+        window.open(
+          "http://service.weibo.com/share/share.php?url=" +
+            "http://www.iqiulive.cn/"+
+            "?sharesource=" +
+            "开播啦,快来看啊" +
+            "&title=" +
+            "&pic=https://static.iqiulive.cn/aiqiu-prod/pc/dist/img/logo_big@2x_o.55bd6cbc.png&appkey=微博平台申请的key"
+        );
+      }
+    },
       //设置密码
       submit() {
       var FloatRegex = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{8,16}$/;
@@ -560,10 +638,10 @@
       this.$router.push({ path: '/live-broadcast', query: { mid } })
     },
       downloadleft() {
-         window.open('http://www.iqiulive.cn/zhibo')
+         window.open(process.env.VUE_APP_ZY_API + '/zhibo')
       },
       downloadright() {
-         window.open('http://www.iqiulive.cn/category')
+         window.open(process.env.VUE_APP_ZY_API + '/category')
       },
       // 获取推荐列表
       getSugestedList() {

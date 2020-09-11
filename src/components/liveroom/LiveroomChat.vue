@@ -681,11 +681,12 @@
         cursor: pointer;
         @extend .main;
       }
-
+// 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
       .item-content {
         margin-left: 10px;
         cursor: default;
         color: $color-title2;
+        // color: red;
       }
 
       .gift-icon {

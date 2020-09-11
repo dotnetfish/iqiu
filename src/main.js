@@ -11,7 +11,9 @@ import Meta from 'vue-meta';
 import VueClipboard from 'vue-clipboard2'
 import { HappyScroll } from 'vue-happy-scroll'
 import 'vue-happy-scroll/docs/happy-scroll.css'
+import VDistpicker from 'v-distpicker'
 
+Vue.component('v-distpicker', VDistpicker)
 Vue.use(HappyScroll)
 Vue.component('happy-scroll', HappyScroll)
 Vue.use(Meta)
