@@ -235,7 +235,7 @@
         Message.success({
               message: "佩戴成功",
             });
-        // this.$router.go(0);
+        this.$router.go(0);
       },
       //领取粉丝牌页面
       Getfancard() {
@@ -338,7 +338,7 @@
       this.GetLevel();
       setTimeout(() => {
         this.GetChannelFanCard();
-     }, 200);
+     }, 10);
     },
     watch: {
     channelInfo(a) {
@@ -438,7 +438,7 @@
 
   .nofanscard1 {
     margin-left: 7px;
-    margin-top: 18px;
+    margin-top: 16px;
     margin-bottom: 5px;
     width: 45px;
     height: 19px;
@@ -589,6 +589,7 @@
   color: rgb(107, 181, 241);
   text-align: center;
   width: 60px;
+  height: 18px;
   cursor: pointer;
 }
 
