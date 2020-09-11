@@ -72,7 +72,7 @@
       </div>
     </div>
     <div class="rightmove">
-      <el-button @click="rightmove()" v-if="xxx != giftList.length">＞</el-button>
+      <el-button @click="rightmove()" v-if="xxx != length">＞</el-button>
     </div>
     </div>
     <!--    <div class="popper-switch" @click="handleSwitch">-->
@@ -100,6 +100,7 @@ export default {
     return {
       sending: false,
       xxx: 0,
+      length:8,
       hidden: true, // 展示全部礼物
       radioList: [
         {
@@ -164,6 +165,8 @@ export default {
   created() {},
   methods: {
     rightmove() {
+      console.log("sadafaefwertwrrgreg===-==",this.giftList.length)
+      this.length = this.giftList.length - 8;
       if (this.xxx < this.giftList.length) {
         this.xxx += 1;
       }
