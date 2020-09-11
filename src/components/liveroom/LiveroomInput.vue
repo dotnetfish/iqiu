@@ -65,7 +65,7 @@
     </div>
     <div class="fans" @mouseenter="changeflagconditions(1)" @mouseleave="changeflagconditions(2)" @click="getfanslist()" v-if="islevel==true">
       <div>
-        <div class="nofanscard1"><img :src="nowicon"></div>
+        <div class="nofanscard1"><img :src="nowicon" style="width: 47px;height: 18px;"></div>
       </div>
     </div>
     <div class="changefansflag" v-if="changefansflag==true">
@@ -75,7 +75,7 @@
           <div>
             <div v-for="(item,index) in fanslist" :key="index">
               <div style="display:flex;margin-bottom:10px">
-                <div style="margin-left:21px;margin-right:12px">{{item.icon}}</div>
+                <div style="margin-left:21px;margin-right:12px"><img :src="item.icon" style="width: 47px;height: 18px;"></div>
                 <div>{{item.name}}</div>
                 <div v-if="item.isGet == 0 && item.isHave == 1" class="getnowfans" @click="getnowfans()">可领取</div>
                 <div v-if="item.isGet == 0 && item.isHave == 0" class="getnowfans">不可领取</div>
@@ -287,10 +287,11 @@
         this.getaddMesNum()
       }, 2000),
       getaddMesNum () {
+        console.log("发送弹幕id====",this.channelInfo.id)
         let data = {
             cid:this.channelInfo.id,
           }
-        addMesNum().then((res) => {
+        addMesNum(data).then((res) => {
       });
       },
       changeImageSrc(index) {
