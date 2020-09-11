@@ -44,7 +44,7 @@
       giftItem: {
         handler: function (newValue) {
           // console.log(oldValue, 'oldValue');
-          // console.log(newValue, 'newValue');
+          console.log(newValue, 'newValue');
           if (!newValue) return;
           // 添加标识
           newValue.vueKey = new Date().getTime()
@@ -87,7 +87,7 @@
       },
       // 更新弹幕
       updateShowingList() {
-        console.log('updateShowingList----start-gif');
+        console.log('updateShowingList----start-gif',this.showingList);
         console.log(this.giftListToObject,'giftListToObject');
         if (this.showingList.length === 0 && this.taskList.length > 0) {
           const item = this.taskList.shift()

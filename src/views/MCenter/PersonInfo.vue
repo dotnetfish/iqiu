@@ -69,7 +69,7 @@
           <button class="Binding" @click="isEmailbinding">绑定</button>
           </div>
         </div>
-        <div class="name-info">
+        <!-- <div class="name-info">
           <div style="display:flex;justify-content: flex-start;align-items: center;">
           <div class="title">微信</div>
           <div><input
@@ -86,7 +86,7 @@
           ></div>
           <button class="binding" @click="binding">绑定</button>
           </div>
-        </div>
+        </div> -->
         <div class="name-info">
           <div class="title">个人简介</div>
           <textarea

@@ -64,8 +64,9 @@
       </div>
     </div>
     <div class="fans" @mouseenter="changeflagconditions(1)" @mouseleave="changeflagconditions(2)" @click="getfanslist()" v-if="islevel==true">
-      <div>
-        <div class="nofanscard1"><img :src="nowicon" style="width: 47px;height: 18px;"></div>
+      <div style="position: relative;">
+        <div class="nofanscard1"><img :src="nowicon" style="width: 66px;height: 24px;"></div>
+        <div class="fansname">{{this.name}}</div>
       </div>
     </div>
     <div class="changefansflag" v-if="changefansflag==true">
@@ -75,13 +76,14 @@
           <div>
             <div v-for="(item,index) in fanslist" :key="index">
               <div style="display:flex;margin-bottom:10px">
-                <div style="margin-left:21px;margin-right:12px"><img :src="item.icon" style="width: 47px;height: 18px;"></div>
-                <div>{{item.name}}</div>
+                <div style="margin-left:21px;margin-right:12px"><img :src="item.icon" style="width: 66px;height: 24px;"></div>
+                <div class="name3">{{item.name}}</div>
+                <div>{{item.channelName}}</div>
                 <div v-if="item.isGet == 0 && item.isHave == 1" class="getnowfans" @click="getnowfans()">可领取</div>
                 <div v-if="item.isGet == 0 && item.isHave == 0" class="getnowfans">不可领取</div>
               </div>
               <div style="display:flex;align-items:center;height: 26px;margin-bottom:10px" v-if="item.isGet == 1 || item.isGet == null" >
-                <div v-if="item.status == 0"><div class="alchange" @click="alter(item.id)"></div></div>
+                <div v-if="item.status == 0"><div class="alchange" @click="alter(item.fanCardId)"></div></div>
                 <div v-if="item.status == 1"><img src="@/assets/fans/alchange.png" style="width: 15px;height: 15px;margin-left: 21px;"></div>  
                 <div style="margin-left:21px;margin-right:12px">Lv.{{item.level}}</div>
                 <div style="width:120px;margin-left:15px;">
@@ -109,11 +111,13 @@
     <el-dialog
       :visible.sync="dialogVisible"
       style="margin-top:12vh"
-      :modal=false
-      width="30%">
-      <div style="text-align:center;font-size: 24px;color: #333333;">是否领取</div>
+      :modal=false>
+      <div style="text-align:center;font-size: 24px;color: #333333;margin-top: 90px;">是否领取</div>
       <div style="text-align:center;font-size: 24px;color: #333333;margin-top:20px">专属主播粉丝勋章</div>
-      <div style="text-align:center;margin-top:40px"><img :src="nowreceive.icon"></div>
+      <div style="text-align:center;margin-top:40px;position: relative;">
+        <img :src="nowreceive.icon" style="width: 94px;height: 35px;">
+        <div class="fansname2">{{this.name2}}</div>
+      </div>
       <div style="text-align:center;margin-top:40px;display: flex;justify-content: center;margin-bottom:26px">
         <div style="width: 424px;height: 60px;background: #1BB5EC;border-radius: 28px;font-size: 24px;color: #FFFFFF;line-height:60px;cursor:pointer;" @click="Getfancard()">领取</div>
       </div>
@@ -149,8 +153,11 @@
         nowreceive:[],
         islevel:false,
         nowicon:"",
+        name:"",
+        name2:"",
         fanslist:[],
-        changefansflag:false
+        changefansflag:false,
+        length:"",
       }
     },
     props: {
@@ -193,7 +200,8 @@
         Message.success({
               message: "粉丝牌切换成功",
             });
-        this.GetLevel();
+        this.$router.go(0);
+        // this.GetLevel();
       },
       //打开直播间粉丝牌列表
       getfanslist() {
@@ -207,7 +215,12 @@
       }
         getChannelFanCard(data).then((res) => {
           this.fanslist = res.data
-          console.log("sadfakjffhjgg000",res)
+          if(res.data == null){
+            this.length = 0
+          } else{
+            this.length = res.data.length
+          }
+          console.log(this.length,"sadfakjffhjgg000",this.fanslist)
         })
       },
       //是否佩戴粉丝牌
@@ -222,6 +235,7 @@
         Message.success({
               message: "佩戴成功",
             });
+        // this.$router.go(0);
       },
       //领取粉丝牌页面
       Getfancard() {
@@ -231,8 +245,12 @@
         getFanCard(data).then((res) => {
           console.log("之前是否有领粉丝牌",res)
         })
-        this.dialogVisible = false
+        if(this.length<2) {
+          this.$router.go(0);
+        } else {
+          this.dialogVisible = false
         this.dialogVisible1 = true
+        }   
       },
       //是否可以领取粉丝牌
       getfindFanCard() {
@@ -241,7 +259,7 @@
         }
         findFanCard(data).then((res) => {
           this.nowreceive = res.data
-          // this.dialogVisible1 = true
+          this.name2 = res.data.name
           if(res.code == 500) {
             Message.success({
               message: "该主播未申请粉丝牌",
@@ -259,9 +277,11 @@
       //用户实时等级
       GetLevel() {
         getLevel().then((res) => {
+          console.log("dfaa====================",res)
           if(res.data.userFanCard != null) {
             this.islevel = true
             this.nowicon = res.data.userFanCard.icon
+            this.name = res.data.userFanCard.name
           } else{
             this.islevel = false
           }
@@ -269,7 +289,11 @@
         // this.GetChannelFanCard()
       },
       receive() {
-        this.getfindFanCard()
+        if(this.length == 0){
+          this.getfindFanCard()
+        } else {
+          this.getfanslist()
+        }
       },
       more() {
         this.$router.push({ path: '/fans' })
@@ -312,9 +336,9 @@
     mounted() {
       // this.getfindFanCard()
       this.GetLevel();
-    //   setTimeout(() => {
-    //     this.GetChannelFanCard();
-    //  }, 200);
+      setTimeout(() => {
+        this.GetChannelFanCard();
+     }, 200);
     },
     watch: {
     channelInfo(a) {
@@ -413,7 +437,7 @@
   }
 
   .nofanscard1 {
-    margin-left: 15px;
+    margin-left: 7px;
     margin-top: 18px;
     margin-bottom: 5px;
     width: 45px;
@@ -566,5 +590,36 @@
   text-align: center;
   width: 60px;
   cursor: pointer;
+}
+
+.fansname{
+  position: absolute;
+  color: #ffffff;
+  top: 4.5px;
+  left: 28px;
+  font-size: 12px;
+  width: 44px;
+  text-align: center;
+}
+
+.fansname2{
+      position: absolute;
+    color: #ffffff;
+    top: 10.5px;
+    left: 12px;
+    width: 100%;
+    font-size: 15px;
+}
+
+.name3 {
+  position: absolute;
+  color: #ffffff;
+  font-size: 12px;
+  height: 24px;
+  line-height: 24px;
+  width: 44px;
+  text-align: center;
+  margin-left: 42px;
+
 }
 </style>

@@ -657,6 +657,7 @@ export default {
     },
     // 分配弹幕返回数据
     assignedMessage(message) {
+      
       let text = message._lctext;
       let type = message._lctype;
       let md5String = md5Secret(text);

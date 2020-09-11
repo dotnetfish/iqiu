@@ -79,7 +79,7 @@ module.exports = () => {
       devServer: {
         disableHostCheck: true,//(required)
         port: 80,
-        host: '127.0.0.1',
+        host: '192.168.0.100',
         proxy: {
           "/aiqiu/*": {
             target: "https://api.iqiulive.cn", // test

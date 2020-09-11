@@ -72,7 +72,7 @@
       </div>
     </div>
     <div class="rightmove">
-      <el-button @click="rightmove()" v-if="xxx !=8">＞</el-button>
+      <el-button @click="rightmove()" v-if="xxx != giftList.length">＞</el-button>
     </div>
     </div>
     <!--    <div class="popper-switch" @click="handleSwitch">-->
@@ -164,7 +164,7 @@ export default {
   created() {},
   methods: {
     rightmove() {
-      if (this.xxx < 8) {
+      if (this.xxx < this.giftList.length) {
         this.xxx += 1;
       }
     },
@@ -178,6 +178,7 @@ export default {
       if (isNaN(this.gift.value) || !this.gift.value)
         return this.Message.error("请输入数字");
       this.sending = true;
+      console.log("礼物item = ",item);
       sendGift({
         uid: this.userLogin.id,
         sendFromType: 0, // 礼物来源: credit:0 package:1 coin:2
