@@ -469,3 +469,30 @@ axios({
   data,
   contentTypejson:true,
 })
+
+//系统消息列表
+export const sysMessagelist = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/sysMessage/list`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//系统未读消息
+export const haveMessage = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/sysMessage/haveMessage`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//读消息
+export const readsysMessage = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/sysMessage/read`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
