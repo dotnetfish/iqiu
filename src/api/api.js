@@ -425,6 +425,15 @@ axios({
   contentTypejson:true,
 })
 
+//取消佩戴粉丝牌
+export const unwearFanCard = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/fanCard/unWear`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
 //用户实时等级
 export const getLevel = (data) =>
 axios({
@@ -447,6 +456,15 @@ axios({
 export const myFanCardList = (data) =>
 axios({
   url:`${baseURL}/aiqiu/v1/app/fanCard/myFanCardList`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//主播申请粉丝牌
+export const FanCardadd = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/fanCard/add`,
   method:"post",
   data,
   contentTypejson:true,

@@ -33,7 +33,8 @@
     <div class="reward" v-if="flagreward==true">
       <img src="@/assets/sign/reward.png" style="margin-top:200px;margin-bottom:14px">
         <div v-for="(item,index) in task.task" :key="index">
-          <div v-if="task.task" style="width:100%;text-align:center;color:white">获取积分{{item.coin}},获得经验{{item.experience}}</div>
+          <div v-if="task[index].taskType == 1" style="width:100%;text-align:center;color:white">完成新手任务，获取积分{{item.coin}},获得经验{{item.experience}}</div>
+          <div v-if="task[index].taskType == 2" style="width:100%;text-align:center;color:white">完成日常任务，获取积分{{item.coin}},获得经验{{item.experience}}</div>
         </div>
         <div v-if="task.gift" style="width:100%;text-align:center;color:white">获得{{task.gift.name}}x{{task.gift.num}}</div>
     </div>

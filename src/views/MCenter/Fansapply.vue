@@ -19,15 +19,15 @@
         <el-input v-model="fansname" style="width:300px"></el-input>
     </div>
     <div class="rules">需要三个汉字或四个数字/英文/中英数结合</div>
-    <div style="margin-left:120px"><el-button class="submit">提交</el-button></div>
+    <div style="margin-left:120px"><el-button class="submit" @click="submit">提交</el-button></div>
 
   </section>
 </template>
 
 <script>
 import Cropper from "@/components/MCenter/Cropper.vue";
-import { Button, Input} from "element-ui";
-import { myFanCardList, wearFanCard } from "@/api/api";
+import { Button, Input, Message} from "element-ui";
+import { FanCardadd } from "@/api/api";
 import { usersLoginInfo } from "@/api/mcenterapi";
 import { loginInfo } from "@/api/liveroom";
 
@@ -37,13 +37,14 @@ export default {
     Cropper,
     [Button.name]: Button,
     [Input.name]: Input,
+    [Message.name]: Message,
   },
   data() {
     return {
       squareUrl: "",
       userName: "",
       userid:"",
-      levellist:[],
+      // levellist:[],
       fansname:"",
     };
   },
@@ -57,18 +58,34 @@ export default {
   },
   methods: {
     submit() {
-     var FloatRegex = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{6,16}$/;
-      if (!FloatRegex.test(this.Password)) {
-        this.flag1 = true;
+    var FloatRegex = /^([\u4e00-\u9fa5]{3,3}|[a-zA-Z]{4,4}|[0-9]{4,4}|(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?![\u4e00-\u9fa5]+$)^.{4,4})$/;
+      if (!FloatRegex.test(this.fansname)) {
+        Message.error({
+              message: "格式错误",
+            });
       } else {
-        this.flag1 = false;
+        let data = {
+          name: this.fansname
+        }
+        FanCardadd(data).then(res => {
+          console.log(res)
+          if(res.code == 0){
+            Message.success({
+              message: "申请成功,待审核",
+            });
+          } else{
+            Message.error({
+              message: res.msg,
+            });
+          }
+        })
       }
       },
     getHomeUserInfo () {
         loginInfo().then(res => {
-          this.levellist = res.data.userLevelDto;
-          console.log("个人信息9",res)
-          console.log("个人信息9",parseFloat(((this.levellist.experience/(this.levellist.experience + this.levellist.needExperience))*100).toFixed(1)))
+          // this.levellist = res.data.userLevelDto;
+          // console.log("个人信息9",res)
+          // console.log("个人信息9",parseFloat(((this.levellist.experience/(this.levellist.experience + this.levellist.needExperience))*100).toFixed(1)))
         })
       },
     usersLoginInfo() {

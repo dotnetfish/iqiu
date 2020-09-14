@@ -48,7 +48,7 @@
       <div class="blueone" v-if="showblue==true"></div>
       <div class="bluetow" v-if="showblue==false"></div>
     </div>
-    <div class="nowfansbj">
+    <div class="nowfansbj" v-if="myfanscardlist[0].status == 1">
         <div><img :src="myfanscardlist[0].avatar" style="width:60px;height:60px;margin-top:20px;margin-left:10px;border-radius:150px"></div>
         <div class="divier"></div>
         <div class="information">
@@ -65,7 +65,7 @@
         <div class="alwearfans">已装备</div>
     </div>
     <el-table :data="myfanscardlist" style="width: 100%;">
-      <el-table-column prop="id" header-align="center" align="center" label="勋章所属"></el-table-column>
+      <el-table-column prop="channelName" header-align="center" align="center" label="勋章所属"></el-table-column>
       <el-table-column prop="name" header-align="center" align="center" label="勋章名称"></el-table-column>
       <el-table-column prop="level" header-align="center" align="center" label="勋章等级"></el-table-column>
       <el-table-column prop="intimacy,needIntimacy" header-align="center" align="center" label="勋章进度">
@@ -73,10 +73,11 @@
           {{scope.row.intimacy}}/{{scope.row.intimacy+scope.row.needIntimacy}}
         </template>
       </el-table-column>
-      <el-table-column fixed="right" header-align="center" align="center" width="100" label="操作">
+      <el-table-column fixed="right" header-align="center" align="center" width="200" label="操作">
         <template slot-scope="scope">
-          <el-button type="text" size="small" @click="wear(scope.row.id)" v-if="scope.row.status==0">佩戴</el-button>
+          <el-button type="text" size="small" @click="wear(scope.row.fanCardId)" v-if="scope.row.status==0">佩戴</el-button>
           <el-button type="text" size="small" v-if="scope.row.status==1">已佩戴</el-button>
+          <el-button type="text" size="small" v-if="scope.row.status==1" @click="nowear(scope.row.fanCardId)">取消佩戴</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -86,7 +87,7 @@
 <script>
 import Cropper from "@/components/MCenter/Cropper.vue";
 import { Progress, Table, TableColumn, Button} from "element-ui";
-import { myFanCardList, wearFanCard } from "@/api/api";
+import { myFanCardList, wearFanCard, unwearFanCard } from "@/api/api";
 import { usersLoginInfo } from "@/api/mcenterapi";
 import { loginInfo } from "@/api/liveroom";
 
@@ -119,6 +120,17 @@ export default {
     //   },
   },
   methods: {
+    //取消佩戴粉丝牌
+    nowear(id){
+      let data = {
+        cid:id
+      }
+          unwearFanCard(data).then((res) => {
+        })
+        setTimeout(() => {
+            this.getmyFanCardList()
+        }, 200);
+    },
       //佩戴粉丝牌
       wear(id) {
           let data = {
@@ -132,7 +144,7 @@ export default {
       },
       getmyFanCardList() {
           myFanCardList().then((res)=>{
-              console.log("我的粉丝牌列表=",res.data)
+              console.log("我的粉丝牌列表=",res)
               this.myfanscardlist = res.data
           })
       },

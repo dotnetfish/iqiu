@@ -38,14 +38,14 @@
               <div class="person-title" slot="label">任务中心</div>
               <TaskCenter></TaskCenter>
             </el-tab-pane>
-            <!-- <el-tab-pane name="7" :key="7">
+            <el-tab-pane name="7" :key="7">
               <div class="person-title" slot="label">我的勋章</div>
               <Mymedal></Mymedal>
-            </el-tab-pane> -->
-            <!-- <el-tab-pane name="8" :key="8">
+            </el-tab-pane>
+            <el-tab-pane name="8" :key="8">
               <div class="person-title" slot="label">粉丝牌申请</div>
               <Fansapply></Fansapply>
-            </el-tab-pane> -->
+            </el-tab-pane>
             <el-tab-pane name="5" :key="5">
               <div class="person-title" slot="label">直播记录</div>  
             </el-tab-pane>

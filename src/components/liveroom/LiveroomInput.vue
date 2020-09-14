@@ -579,7 +579,7 @@
   }
 
 ::v-deep .el-progress-bar__innerText {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .getnowfans {
@@ -596,7 +596,7 @@
 .fansname{
   position: absolute;
   color: #ffffff;
-  top: 4.5px;
+  top: 5px;
   left: 28px;
   font-size: 12px;
   width: 44px;
