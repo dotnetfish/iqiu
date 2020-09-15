@@ -46,10 +46,10 @@
               <div class="person-title" slot="label">粉丝牌申请</div>
               <Fansapply></Fansapply>
             </el-tab-pane>
-            <el-tab-pane name="9" :key="9">
-              <div class="person-title" slot="label">系统消息<div class="count">({{count}}未读)</div></div>
+            <!-- <el-tab-pane name="9" :key="9">
+              <div class="person-title" slot="label">系统消息<div class="count" v-if="count == true"></div></div>
               <SysMessage></SysMessage>
-            </el-tab-pane>
+            </el-tab-pane> -->
             <el-tab-pane name="5" :key="5">
               <div class="person-title" slot="label">直播记录</div>  
             </el-tab-pane>
@@ -118,7 +118,7 @@
       gethaveMessage() {
         haveMessage().then((res) => {
           if(res.data.isHave == 1) {
-            this.count = res.data.count
+            this.count = true
           }
         })
       },
@@ -355,10 +355,13 @@
   
   .count {
     color: rgb(255, 60, 60);
+    background-color: rgb(255, 60, 60);
     border-radius: 150px;
+    width: 6px;
+    height: 6px;
     font-size: 12px;
     position: absolute;
-    top: -6px;
+    top: 20px;
     left: 112px;
   }
 </style>

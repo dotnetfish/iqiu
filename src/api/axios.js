@@ -70,7 +70,7 @@ instance.interceptors.response.use(
           }
           if(response.data.task[i].taskType == 2){
             Message({
-              message: "完成新手任务获得积分"+response.data.task[i].coin+",获得经验"+response.data.task[i].experience,
+              message: "完成日常任务获得积分"+response.data.task[i].coin+",获得经验"+response.data.task[i].experience,
               type: "success"
             });
           }

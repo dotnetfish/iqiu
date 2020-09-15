@@ -37,11 +37,12 @@
           :msgList="msgList"
           :giftItem="giftItem"
           :userInfo="userInfo"
+          :col="col"
           @login="login"
           @hongBaoSuccess="getloginInfo"
         ></liveroomChat>
         <!-- <div class="fanmessage"><img src="@/assets/timg.jpg" style="width:90%;height:60px;"></div> -->
-        <liveroomInput :userInfo="userInfo" @sendMsg="sendMsg" @login="login" :channelInfo="channelInfo"></liveroomInput>
+        <liveroomInput :userInfo="userInfo" @sendMsg="sendMsg" @login="login" :channelInfo="channelInfo" @change-color='getcolor'></liveroomInput>
         <LiveroomLoginDialog @login="login"></LiveroomLoginDialog>
       </div>
     </div>
@@ -145,6 +146,8 @@ export default {
         // "logOutStatus": "INAUDIT"
       },
       liveroom: "",
+      col:'',
+      col1:'',
       channelInfo: {}, // 主播信息
       userInfo: {
         channelRoleType: 0,
@@ -402,6 +405,10 @@ export default {
     window.removeEventListener("resize", this.danmakuResize);
   },
   methods: {
+    getcolor(color){
+      this.col = color
+      console.log("改变颜色=",this.col)
+    },
     //滚动条
     handleScroll() {
       this.scrollTop = window.pageYOffset;
@@ -464,11 +471,22 @@ export default {
      * @param type
      */
     sendDanmaku(message, type) {
+      this.col1 = this.col 
+      if(this.col == '#000000'){
+        this.col1 = '#FFFFFF'
+      }
       let colorMap = {
-        "-1": "#ffffff",
+        "-1": this.col1,
         1: "#FFC955",
         2: "#FF7F64"
       };
+      // if(this.col == '#000000'){
+      //   let colorMap = {
+      //   "-1": '#FFFFFF',
+      //   1: "#FFC955",
+      //   2: "#FF7F64"
+      // };
+      // }
       let comment = {
         text: message,
 
@@ -558,8 +576,8 @@ export default {
     return channelInfo({ cid: this.liveroom }).then(res => {
            this.channelInfo = res.data;
            document.title = this.channelInfo.name;
-           console.log(112233);
-           console.log(res);
+          //  console.log(112233);
+          //  console.log(res);
         });
     },
     // 获取推荐列表
@@ -713,8 +731,8 @@ export default {
       }
     },
     // 发送消息
-    sendMsg(msg) {
-      console.log(msg, "sendMsg");
+    sendMsg(msg,nowicon,name) {
+      console.log(msg, "sendMsg",name);
       let sign = md5Secret(msg);
       let params = {
         user: {
@@ -724,12 +742,15 @@ export default {
           avatar: this.userLogin.avatarUrl
         },
         pType: 0,
+        msgColor: this.col,
+        fansCardName: name,
+        fansCardUrl: nowicon,
         pid: this.liveroom,
         lcuid: `CHAT_USER_${this.userLogin.id}`,
         sign
       };
-      Chat.sendMsg(msg, params).then(() => {
-        console.log("success");
+      Chat.sendMsg(msg,nowicon,name, params).then(() => {
+        console.log("success",this.col);
         this.msgList.push({
           _lcattrs: {
             user: {
@@ -740,9 +761,12 @@ export default {
             }
           },
           _lctype: -1,
-          _lctext: msg
+          _lctext: msg,
+          msgColor: this.col,
+          fansCardName: name,
+          fansCardUrl: nowicon,
         });
-        this.sendDanmaku(msg, "-1");
+        this.sendDanmaku(msg,"-1");
       });
     },
     login() {

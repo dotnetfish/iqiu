@@ -7,28 +7,43 @@
     <!-- <div class="fanmessage" @mouseenter="changeImageSrc(1)" @mouseleave="changeImageSrc(2)">
       <div v-if="flag==false"><img src="@/assets/fans/painting.png"></div>
       <div v-if="flag==true"><img src="@/assets/fans/painting1.png"></div>
-    </div>
-    <div class="paintingmessage" v-if="flag==true" @mouseenter="changeImageSrc(1)" @mouseleave="changeImageSrc(2)">
+    </div> -->
+    <!-- <div class="paintingmessage" v-if="flag==true" @mouseenter="changeImageSrc(1)" @mouseleave="changeImageSrc(2)">
       <div class="paintingmessage-back">
         <div style="margin-left:28px">彩色弹幕</div>
         <div class="changebarrage">
-          <div class="change1">
-              <img src="@/assets/fans/default.png">
+          <div class="change1" @click="changecolor(1)">
+              <img src="@/assets/fans/default.png" v-if="colornum==1">
           </div>
-          <div class="change2">
+          <div class="change2" v-if="level<10">
               <img src="@/assets/fans/key.png" class="change">
           </div>
-          <div class="change3">
+          <div class="change2" @click="changecolor(2)" v-else>
+            <img src="@/assets/fans/default.png" v-if="colornum==2" class="change7">
+          </div>
+          <div class="change3" v-if="level<20">
               <img src="@/assets/fans/key.png" class="change">
           </div>
-          <div class="change4">
+          <div class="change3" @click="changecolor(3)" v-else>
+            <img src="@/assets/fans/default.png" v-if="colornum==3" class="change7">
+          </div>
+          <div class="change4" v-if="level<30">
               <img src="@/assets/fans/key.png" class="change">
           </div>
-          <div class="change5">
+          <div class="change4" @click="changecolor(4)" v-else>
+            <img src="@/assets/fans/default.png" v-if="colornum==4" class="change7">
+          </div>
+          <div class="change5" v-if="level<40">
               <img src="@/assets/fans/key.png" class="change">
           </div>
-          <div class="change6">
+          <div class="change5" @click="changecolor(5)" v-else>
+            <img src="@/assets/fans/default.png" v-if="colornum==5" class="change7">
+          </div>
+          <div class="change6" v-if="level<50">
               <img src="@/assets/fans/key.png" class="change">
+          </div>
+          <div class="change6" @click="changecolor(6)" v-else>
+            <img src="@/assets/fans/default.png" v-if="colornum==6" class="change7">
           </div>
         </div>
       </div>
@@ -158,6 +173,8 @@
         fanslist:[],
         changefansflag:false,
         length:"",
+        level:'',
+        colornum:1
       }
     },
     props: {
@@ -185,6 +202,27 @@
       }
     },
     methods: {
+      changecolor(x) {
+        if(x==1) {
+          this.$emit('change-color','#000000')
+        }
+        if(x==2) {
+          this.$emit('change-color','#77BF39')
+        }
+        if(x==3) {
+          this.$emit('change-color','#815BE6')
+        }
+        if(x==4) {
+          this.$emit('change-color','#F6695D')
+        }
+        if(x==5) {
+          this.$emit('change-color','#5D7AF6')
+        }
+        if(x==6) {
+          this.$emit('change-color','#F6A95D')
+        }
+        this.colornum = x
+      },
       //直播间粉丝牌列表获取粉丝牌
       getnowfans() {
         this.Getfancard()
@@ -274,6 +312,18 @@
           console.log("asdfadfaa",res)
       });
       },
+      GETfindFanCard() {
+        let data = {
+          cid:this.channelInfo.id
+        }
+        findFanCard(data).then((res) => {
+          if(res.data.level) {
+            this.level = res.data.level
+          } else {
+            this.level = 0
+          }
+      });
+      },
       //用户实时等级
       GetLevel() {
         getLevel().then((res) => {
@@ -306,7 +356,11 @@
       // },
       handleSend: throttle(function () {
         if (!this.textarea) return;
-        this.$emit('sendMsg', this.textarea)
+        if(this.nowicon){
+          this.$emit('sendMsg', this.textarea,this.nowicon,this.name)
+        }else{
+          this.$emit('sendMsg', this.textarea)
+        }
         this.textarea = "";
         this.getaddMesNum()
       }, 2000),
@@ -335,10 +389,14 @@
     },
     mounted() {
       // this.getfindFanCard()
+      this.changecolor(1);
       this.GetLevel();
       setTimeout(() => {
         this.GetChannelFanCard();
      }, 10);
+      setTimeout(() => {
+        this.GETfindFanCard();
+     }, 100);
     },
     watch: {
     channelInfo(a) {
@@ -504,6 +562,7 @@
     margin-top: 24px;
     line-height: 40px;
     text-align: center;
+    cursor: pointer;
   }
   .change2 {
     width: 40px;
@@ -513,6 +572,7 @@
     border-radius: 150px;
     margin-left: 10px;
     margin-top: 24px;
+    cursor: pointer;
   }
   
   .change3 {
@@ -523,6 +583,7 @@
     border-radius: 150px;
     margin-left: 10px;
     margin-top: 24px;
+    cursor: pointer;
   }
 
   .change4 {
@@ -533,6 +594,7 @@
     border-radius: 150px;
     margin-left: 10px;
     margin-top: 24px;
+    cursor: pointer;
   }
 
   .change5 {
@@ -543,6 +605,7 @@
     border-radius: 150px;
     margin-left: 10px;
     margin-top: 24px;
+    cursor: pointer;
   }
 
   .change6 {
@@ -553,10 +616,15 @@
     border-radius: 150px;
     margin-left: 10px;
     margin-top: 24px;
+    cursor: pointer;
   }
   .change {
     margin-top: 4px;
     margin-left: 8px;
+  }
+  .change7 {
+    margin-top: 13px;
+    margin-left: 11px;
   }
   ::v-deep .el-dialog__wrapper .el-dialog {
     // width: 30%;

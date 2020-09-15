@@ -52,7 +52,7 @@
         <div><img :src="myfanscardlist[0].avatar" style="width:60px;height:60px;margin-top:20px;margin-left:10px;border-radius:150px"></div>
         <div class="divier"></div>
         <div class="information">
-            <div style="font-size: 16px;color: #1BB5EC;margin-top:17px;">{{myfanscardlist[0].uid}}</div>
+            <div style="font-size: 16px;color: #1BB5EC;margin-top:17px;">{{myfanscardlist[0].channelName}}</div>
             <div style="font-size: 12px;color: #666666;margin-top:12px;margin-bottom:12px">粉丝等级:{{myfanscardlist[0].level}}</div>
             <div style="font-size: 12px;color: #999999;display:flex;">
                 <div>等级亲密度:</div>

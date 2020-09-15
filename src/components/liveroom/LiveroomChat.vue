@@ -25,10 +25,13 @@
           <template v-if="item._lctype === -1">
             <img class="role-icon" v-if="item._lcattrs.user.role != 0"
                  :src="require('@/assets/img/live-chat-role'+item._lcattrs.user.role+'.png')" alt="">
-            <div>
+            <div style="display:flex;">
+              <div style="margin-right:4px;position:relative"><img :src="item.fansCardUrl" style="width: 66px;height: 24px;">
+              <span style="position:absolute;color:#FFFFFF;left:20px;text-align:center;top:3px;width:45px">{{item.fansCardName}}</span>
+              </div>
               <span class="item-name" :data-item="index">{{ item._lcattrs.user.name }}:            </span>
               <span
-                class="item-content">{{ item._lctext }}</span></div>
+                class="item-content" :style="{'color':col}">{{ item._lctext }}</span></div>
           </template>
           <!--系统消息&禁言-->
           <template v-else-if="item._lctype === 1 || item._lctype === 5">
@@ -96,6 +99,9 @@
         default: () => {
           return {}
         }
+      },
+      col: {
+        type: String
       },
       userInfo: {
         type: Object,
@@ -679,14 +685,18 @@
       .item-name {
         flex: 1;
         cursor: pointer;
+        height: 24px;
+        line-height: 24px;
         @extend .main;
       }
 // 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
       .item-content {
         margin-left: 10px;
+        height: 24px;
+        line-height: 24px;
         cursor: default;
-        color: $color-title2;
-        // color: red;
+        // color: $color-title2;
+        // color: col;
       }
 
       .gift-icon {
