@@ -4,7 +4,7 @@
     <div class="mask mask-login" v-if="!isLogin" @click.stop="$emit('login')"><span>登陆</span>即可发送弹幕</div>
     <!-- <div class="fanmessage"><img src="@/assets/timg.jpg" style="width:90%;height:60px;"></div> -->
     <!-- 彩色弹幕 -->
-    <!-- <div class="fanmessage" @mouseenter="changeImageSrc(1)" @mouseleave="changeImageSrc(2)">
+    <div class="fanmessage" @mouseenter="changeImageSrc(1)" @mouseleave="changeImageSrc(2)">
       <div v-if="flag==false"><img src="@/assets/fans/painting.png"></div>
       <div v-if="flag==true"><img src="@/assets/fans/painting1.png"></div>
     </div>
@@ -47,7 +47,7 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
     <el-input
       type="textarea"
       :rows="2"
