@@ -17,6 +17,15 @@
 
     <!--聊天室-->
     <section class="chat-wrap">
+      <!-- 举报框 -->
+      <!-- <div v-if="flag==true" class="reportborder">
+        <div style="display:flex">
+          <img :src="userimg" style="width:56px;height:56px;margin-left:27px;margin-top:3px">
+          <div style="margin-top:36px;margin-left:5px;font-size:14px">{{username}}</div>
+          <img src="@/assets/close.png" @click="flag = false" style="margin-top:36px;margin-left:98px;width:16px;height:16px;cursor: pointer;">
+        </div>
+        <div class="reportbuttom">举报用户</div>
+      </div> -->
       <!--聊天内容-->
       <section ref="chat" class="chat" id="chat" @scroll="chatScroll" @click.stop="handleBan">
         <div class="chat-item" v-for="(item,index) in msgList" :key="item.sign">
@@ -29,7 +38,7 @@
                 <img :src="item._lcattrs.user.fansCardUrl" style="width: 42px;height: 16px;margin-right:6px;" v-if="item._lcattrs.user.fansCardUrl">
                 <span style="position:absolute;color:#FFFFFF;left:6px;text-align:center;top:-1px;width:45px;transform: scale(0.7);">{{item._lcattrs.user.fansCardName}}</span>
                 <img :src="item._lcattrs.user.icon" style="width: 40px;height: 16px;margin-right:6px;" v-if="item._lcattrs.user.icon">
-                <span class="item-name" :data-item="index">{{ item._lcattrs.user.name }}: </span>
+                <span class="item-name" :data-item="index" @click="reportuser(item._lcattrs.user.name,item._lcattrs.user.avatar)">{{ item._lcattrs.user.name }}: </span>
               <span class="item-content" :style="{'color':item._lcattrs.msgColor}" v-if="item._lcattrs.msgColor">{{ item._lctext }}</span>
               <span class="item-content" :style="{'color':'#000000'}" v-else>{{ item._lctext }}</span>
               </div>
@@ -200,7 +209,9 @@
         banDialog: false,
         // scrollTarget: null,
         newMessage: 0, // 未显示的消息
-
+        flag:false,
+        username:'',
+        userimg:'',
         showingList: [
           // {
           //   showId: '冯曦妤_12915206930636800',
@@ -333,6 +344,12 @@
       // this.scrollTarget = document.getElementById("chat")
     },
     methods: {
+      //举报用户
+      reportuser(name,img){
+        this.username = name;
+        this.userimg = img;
+        this.flag=!this.flag;
+      },
       /**
        * 0~0.99元
        * 1~99元
@@ -735,4 +752,26 @@
     }
   }
 
+  .reportborder{
+  width: 314px;
+  height: 165px;
+  background: url(../../assets/rank/report.png) no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-position: center 0;
+  overflow: hidden;
+  position: fixed;
+  z-index: 999;
+  margin-top: 108px;
+  margin-left: 20px;
+  }
+
+  .reportbuttom{
+    width: 64px;
+    height: 20px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    border: 1px solid #999999;
+  }
 </style>

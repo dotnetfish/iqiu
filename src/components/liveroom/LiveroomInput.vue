@@ -396,7 +396,8 @@
     },
     mounted() {
       // this.getfindFanCard()
-      this.getHomeUserInfo();
+      if(this.$store.state.userStatus.userInfo.uid){
+         this.getHomeUserInfo();
       this.changecolor(1);
       this.GetLevel();
       setTimeout(() => {
@@ -405,6 +406,7 @@
       setTimeout(() => {
         this.GETfindFanCard();
      }, 100);
+      }
     },
     watch: {
     channelInfo(a) {
