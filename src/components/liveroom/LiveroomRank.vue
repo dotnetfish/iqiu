@@ -209,6 +209,12 @@ export default {
   width: 100%;
   height: 216px;
   // border: rgb(0, 255, 255) solid 1px;
+  background: url(../../assets/rank/beijing.png) no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-position: center 0;
+  overflow: hidden;
 }
 
 .line {

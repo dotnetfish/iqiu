@@ -85,6 +85,10 @@ export default {
               this.messagelist = res.data
           })
       },
+      getreadsysMessage(){
+          readsysMessage().then((res) => {
+          })
+      },
     usersLoginInfo() {
       usersLoginInfo()
         .then((response) => {
@@ -104,6 +108,7 @@ export default {
   mounted() {
     this.usersLoginInfo();
     this.getsysMessagelist();
+    this.getreadsysMessage();
   },
 };
 </script>

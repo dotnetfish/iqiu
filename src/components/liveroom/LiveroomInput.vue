@@ -7,8 +7,8 @@
     <!-- <div class="fanmessage" @mouseenter="changeImageSrc(1)" @mouseleave="changeImageSrc(2)">
       <div v-if="flag==false"><img src="@/assets/fans/painting.png"></div>
       <div v-if="flag==true"><img src="@/assets/fans/painting1.png"></div>
-    </div> -->
-    <!-- <div class="paintingmessage" v-if="flag==true" @mouseenter="changeImageSrc(1)" @mouseleave="changeImageSrc(2)">
+    </div>
+    <div class="paintingmessage" v-if="flag==true" @mouseenter="changeImageSrc(1)" @mouseleave="changeImageSrc(2)">
       <div class="paintingmessage-back">
         <div style="margin-left:28px">彩色弹幕</div>
         <div class="changebarrage">
@@ -146,6 +146,7 @@
   import { Input, Button, Popover, Dialog, Message, Progress } from 'element-ui'
   import setTime from "@/utils/setTime";
   import { throttle } from "@/utils/debounceAndthrottle";
+  import { loginInfo } from "@/api/liveroom"
   import {addMesNum, findFanCard, getFanCard, wearFanCard, getLevel, getChannelFanCard} from "@/api/api"
 
   export default {
@@ -174,7 +175,8 @@
         changefansflag:false,
         length:"",
         level:'',
-        colornum:1
+        colornum:1,
+        levelicon:'',
       }
     },
     props: {
@@ -202,6 +204,11 @@
       }
     },
     methods: {
+      getHomeUserInfo () {
+        loginInfo().then(res => {
+          this.levelicon = res.data.userLevelDto.icon;
+        })
+      },
       changecolor(x) {
         if(x==1) {
           this.$emit('change-color','#000000')
@@ -357,7 +364,7 @@
       handleSend: throttle(function () {
         if (!this.textarea) return;
         if(this.nowicon){
-          this.$emit('sendMsg', this.textarea,this.nowicon,this.name)
+          this.$emit('sendMsg', this.textarea,this.nowicon,this.name,this.levelicon)
         }else{
           this.$emit('sendMsg', this.textarea)
         }
@@ -389,6 +396,7 @@
     },
     mounted() {
       // this.getfindFanCard()
+      this.getHomeUserInfo();
       this.changecolor(1);
       this.GetLevel();
       setTimeout(() => {

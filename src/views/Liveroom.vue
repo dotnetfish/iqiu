@@ -731,7 +731,7 @@ export default {
       }
     },
     // 发送消息
-    sendMsg(msg,nowicon,name) {
+    sendMsg(msg,nowicon,name,levelicon) {
       console.log(msg, "sendMsg",name);
       let sign = md5Secret(msg);
       let params = {
@@ -739,17 +739,18 @@ export default {
           id: this.userLogin.id,
           name: this.userLogin.uname,
           role: this.userInfo.channelRoleType,
-          avatar: this.userLogin.avatarUrl
+          avatar: this.userLogin.avatarUrl,
+          fansCardName: name,
+          fansCardUrl: nowicon,
+          icon:levelicon,
         },
         pType: 0,
         msgColor: this.col,
-        fansCardName: name,
-        fansCardUrl: nowicon,
         pid: this.liveroom,
         lcuid: `CHAT_USER_${this.userLogin.id}`,
         sign
       };
-      Chat.sendMsg(msg,nowicon,name, params).then(() => {
+      Chat.sendMsg(msg,params).then(() => {
         console.log("success",this.col);
         this.msgList.push({
           _lcattrs: {
@@ -757,14 +758,16 @@ export default {
               role: this.userInfo.channelRoleType,
               name: this.userLogin.uname,
               id: this.userLogin.id,
-              avatar: this.userLogin.avatarUrl
-            }
+              avatar: this.userLogin.avatarUrl,
+              fansCardName: name,
+              fansCardUrl: nowicon,
+              icon:levelicon,
+            },
+            msgColor: this.col,
           },
           _lctype: -1,
           _lctext: msg,
-          msgColor: this.col,
-          fansCardName: name,
-          fansCardUrl: nowicon,
+          icon:levelicon,
         });
         this.sendDanmaku(msg,"-1");
       });

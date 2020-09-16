@@ -46,10 +46,10 @@
               <div class="person-title" slot="label">粉丝牌申请</div>
               <Fansapply></Fansapply>
             </el-tab-pane>
-            <!-- <el-tab-pane name="9" :key="9">
+            <el-tab-pane name="9" :key="9">
               <div class="person-title" slot="label">系统消息<div class="count" v-if="count == true"></div></div>
               <SysMessage></SysMessage>
-            </el-tab-pane> -->
+            </el-tab-pane>
             <el-tab-pane name="5" :key="5">
               <div class="person-title" slot="label">直播记录</div>  
             </el-tab-pane>

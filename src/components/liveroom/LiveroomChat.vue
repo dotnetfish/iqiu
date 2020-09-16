@@ -25,13 +25,19 @@
           <template v-if="item._lctype === -1">
             <img class="role-icon" v-if="item._lcattrs.user.role != 0"
                  :src="require('@/assets/img/live-chat-role'+item._lcattrs.user.role+'.png')" alt="">
-            <div style="display:flex;">
-              <div style="margin-right:4px;position:relative"><img :src="item.fansCardUrl" style="width: 66px;height: 24px;">
-              <span style="position:absolute;color:#FFFFFF;left:20px;text-align:center;top:3px;width:45px">{{item.fansCardName}}</span>
+              <div style="position:relative;">
+                <img :src="item._lcattrs.user.fansCardUrl" style="width: 42px;height: 16px;margin-right:6px;">
+                <span style="position:absolute;color:#FFFFFF;left:6px;text-align:center;top:-1px;width:45px;transform: scale(0.7);">{{item._lcattrs.user.fansCardName}}</span>
+                <img :src="item._lcattrs.user.icon" style="width: 40px;height: 16px;margin-right:6px;">
+                <span class="item-name" :data-item="index">{{ item._lcattrs.user.name }}: </span>
+              <span class="item-content" :style="{'color':item._lcattrs.msgColor}" v-if="item._lcattrs.msgColor">{{ item._lctext }}</span>
+              <span class="item-content" :style="{'color':'#000000'}" v-else>{{ item._lctext }}</span>
               </div>
-              <span class="item-name" :data-item="index">{{ item._lcattrs.user.name }}:            </span>
-              <span
-                class="item-content" :style="{'color':col}">{{ item._lctext }}</span></div>
+              <!-- <div style="margin-right:4px;">
+                <img :src="item.icon" style="width: 46px;height: 18px;margin-top: 3px;">
+              </div>
+              <span class="item-name" :data-item="index">{{ item._lcattrs.user.name }}:</span>
+              <span class="item-content" :style="{'color':col}">{{ item._lctext }}</span> -->
           </template>
           <!--系统消息&禁言-->
           <template v-else-if="item._lctype === 1 || item._lctype === 5">
@@ -678,7 +684,7 @@
 
       .chat-item {
         display: flex;
-        align-items: center;
+        align-items:flex-start;
         padding: 7px 0;
       }
 
@@ -686,14 +692,18 @@
         flex: 1;
         cursor: pointer;
         height: 24px;
+        font-size: 14px;
         line-height: 24px;
         @extend .main;
       }
 // 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
       .item-content {
-        margin-left: 10px;
+        margin-left: 4px;
         height: 24px;
         line-height: 24px;
+        white-space: normal;
+        word-break: break-all;
+        font-size: 14px;
         cursor: default;
         // color: $color-title2;
         // color: col;
@@ -708,6 +718,7 @@
         margin-right: 4px;
         width: 26px;
         height: 14px;
+        margin-top: 2px;
       }
     }
 
