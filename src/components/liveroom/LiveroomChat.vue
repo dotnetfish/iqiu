@@ -67,7 +67,7 @@
                  :src="require('@/assets/img/live-chat-role'+item._lcattrs.user.role+'.png')" alt="">
               <div style="position:relative;">
                 <img :src="item._lcattrs.user.fansCardUrl" style="width: 42px;height: 16px;margin-right:6px;" v-if="item._lcattrs.user.fansCardUrl">
-                <span style="position:absolute;color:#FFFFFF;left:6px;text-align:center;top:-1px;width:45px;transform: scale(0.7);">{{item._lcattrs.user.fansCardName}}</span>
+                <span style="position:absolute;color:#FFFFFF;left:6px;text-align:center;top:-1px;width:42px;transform: scale(0.7);">{{item._lcattrs.user.fansCardName}}</span>
                 <img :src="item._lcattrs.user.icon" style="width: 40px;height: 16px;margin-right:6px;" v-if="item._lcattrs.user.icon">
                 <span class="item-name" :data-item="index" @click="reportuser(item._lcattrs.user.name,item._lcattrs.user.avatar,item._lcattrs.user.sign,item._lctext)">{{ item._lcattrs.user.name }}: </span>
               <span class="item-content" :style="{'color':item._lcattrs.msgColor}" v-if="item._lcattrs.msgColor">{{ item._lctext }}</span>
