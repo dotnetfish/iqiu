@@ -455,7 +455,7 @@ export default {
     },
     danmakuResize: debounce(
       function() {
-        console.log(this.danmaku);
+        console.log("aaaa",this.danmaku);
         this.danmaku.resize();
       },
       200,
@@ -470,13 +470,13 @@ export default {
      * @param message
      * @param type
      */
-    sendDanmaku(message, type) {
+    sendDanmaku(message, type,msgColor) {
       this.col1 = this.col 
-      if(this.col == '#000000'){
-        this.col1 = '#FFFFFF'
+      if(msgColor == '#000000'){
+        msgColor = '#FFFFFF'
       }
       let colorMap = {
-        "-1": this.col1,
+        "-1": msgColor,
         1: "#FFC955",
         2: "#FF7F64"
       };
@@ -629,7 +629,7 @@ export default {
     // 弹幕初始化
     connetConversation() {
       var error;
-      // throw error;那我不知道你用yarn就有了
+      // throw error;
       console.log("链接聊天室-用户信息", this.userStatus);
       let clientId = "CHAT_VISITOR_" + uuidv4();
       if (this.isLogin) {
@@ -675,11 +675,11 @@ export default {
     },
     // 分配弹幕返回数据
     assignedMessage(message) {
-      
       let text = message._lctext;
       let type = message._lctype;
       let md5String = md5Secret(text);
       let sign = message._lcattrs.sign;
+      let msg = message._lcattrs.msgColor
       /**
        * 因为加密的字符串含有leanCloud的屏蔽词, 会被转化为*, 所以各个客户端需要增加以下逻辑
        * 第一步: 判断字符串中是否包含*: 不包含直接对比
@@ -702,7 +702,7 @@ export default {
         }
         // 飘窗弹幕
         if (type === -1) {
-          this.sendDanmaku(text, "-1");
+          this.sendDanmaku(text, "-1", msg);
         }
         if (type === 1) {
           this.sendDanmaku(text, message._lcattrs.sm === 0 ? 2 : 1);
@@ -732,7 +732,7 @@ export default {
     },
     // 发送消息
     sendMsg(msg,nowicon,name,levelicon) {
-      console.log(msg, "sendMsg",name);
+      console.log(msg,"sendMsg",name);
       let sign = md5Secret(msg);
       let params = {
         user: {
@@ -743,6 +743,7 @@ export default {
           fansCardName: name,
           fansCardUrl: nowicon,
           icon:levelicon,
+          sign:this.userLogin.sign,
         },
         pType: 0,
         msgColor: this.col,
@@ -762,6 +763,7 @@ export default {
               fansCardName: name,
               fansCardUrl: nowicon,
               icon:levelicon,
+              sign:this.userLogin.sign,
             },
             msgColor: this.col,
           },
@@ -769,7 +771,8 @@ export default {
           _lctext: msg,
           icon:levelicon,
         });
-        this.sendDanmaku(msg,"-1");
+        // console.log("aaaaaaaaaaaaaaaaaaaaadddddddd=",this.col)
+        this.sendDanmaku(msg,"-1",this.col);
       });
     },
     login() {

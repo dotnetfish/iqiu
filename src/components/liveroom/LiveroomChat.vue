@@ -22,10 +22,41 @@
         <div style="display:flex">
           <img :src="userimg" style="width:56px;height:56px;margin-left:27px;margin-top:3px">
           <div style="margin-top:36px;margin-left:5px;font-size:14px">{{username}}</div>
-          <img src="@/assets/close.png" @click="flag = false" style="margin-top:36px;margin-left:98px;width:16px;height:16px;cursor: pointer;">
+          <img src="@/assets/close2.png" @click="flag = false" style="margin-top:36px;margin-left:98px;width:16px;height:16px;cursor: pointer;">
         </div>
-        <div class="reportbuttom">举报用户</div>
+        <div style="margin-top:14px;margin-left:14px;font-size:14px;height:50px;white-space: normal;width: 92%;word-break: break-all;">个性签名:{{usersign}}</div>
+        <div class="reportbuttom" @click="reportinfo()">举报用户</div>
       </div> -->
+      <!-- 举报内容 -->
+      <div v-if="flag1==true" class="reportborderinfo">
+        <div style="width: 306px;height: 29px;background: #1BB5EC;">
+          <span style="margin-left:14px;color:#ffffff">用户举报</span>
+          <img src="@/assets/close3.png" @click="flag1 = false" style="margin-top:6px;margin-left:200px;width:16px;height:16px;cursor: pointer;">
+        </div>
+        <div style="display:flex">
+          <div class="reportbuttom1" >举报头像</div>
+          <div class="reportbuttom2" >举报昵称</div>
+          <div class="reportbuttom1" @click="reportbaninfo()">举报弹幕</div>
+        </div>
+      </div>
+      <!-- 举报弹幕 -->
+      <div v-if="flag2==true" class="reportbaninfo">
+        <div style="width: 306px;height: 30px;background: #1BB5EC;display:flex">
+          <div style="margin-left:126px;color:#ffffff;font-size:14px;height: 30px;line-height: 30px;">弹幕举报</div>
+          <div><img src="@/assets/close3.png" @click="flag2 = false" style="margin-top:6px;margin-left:94px;width:16px;height:16px;cursor: pointer;"></div>
+        </div>
+        <div class="name-content">
+          <div style="margin-top:14px;margin-left:14px;font-size:14px;white-space:normal;word-break:break-all;width:92%;letter-spacing:1px;line-height:125%">{{username}}:{{usercontent}}</div>
+        </div>
+        <div style="margin-left:20px;margin-top:16px;font-size:14px;color:#333333">举报类型</div>
+        <div style="display:flex;flex-wrap:wrap">
+          <div class="reportbuttom3" >垃圾广告营销</div>
+          <div class="reportbuttom1" >侮辱谩骂</div>
+          <div class="reportbuttom1" >违法反动</div>
+          <div class="reportbuttom1">淫秽色情</div>
+          <div class="reportbuttom3">嘲讽/不友善</div>
+        </div>
+      </div>
       <!--聊天内容-->
       <section ref="chat" class="chat" id="chat" @scroll="chatScroll" @click.stop="handleBan">
         <div class="chat-item" v-for="(item,index) in msgList" :key="item.sign">
@@ -38,7 +69,7 @@
                 <img :src="item._lcattrs.user.fansCardUrl" style="width: 42px;height: 16px;margin-right:6px;" v-if="item._lcattrs.user.fansCardUrl">
                 <span style="position:absolute;color:#FFFFFF;left:6px;text-align:center;top:-1px;width:45px;transform: scale(0.7);">{{item._lcattrs.user.fansCardName}}</span>
                 <img :src="item._lcattrs.user.icon" style="width: 40px;height: 16px;margin-right:6px;" v-if="item._lcattrs.user.icon">
-                <span class="item-name" :data-item="index" @click="reportuser(item._lcattrs.user.name,item._lcattrs.user.avatar)">{{ item._lcattrs.user.name }}: </span>
+                <span class="item-name" :data-item="index" @click="reportuser(item._lcattrs.user.name,item._lcattrs.user.avatar,item._lcattrs.user.sign,item._lctext)">{{ item._lcattrs.user.name }}: </span>
               <span class="item-content" :style="{'color':item._lcattrs.msgColor}" v-if="item._lcattrs.msgColor">{{ item._lctext }}</span>
               <span class="item-content" :style="{'color':'#000000'}" v-else>{{ item._lctext }}</span>
               </div>
@@ -79,6 +110,7 @@
   import LiveroomBan from '@/components/liveroom/LiveroomBan'
   // import LiveroomHongbao from '@/components/liveroom/LiveroomHongbao'
   import LiveroomGif from '@/components/liveroom/LiveroomGif'
+  import { accusationadd } from '@/api/api'
 
   import { debounce } from "@/utils/debounceAndthrottle";
 
@@ -210,8 +242,12 @@
         // scrollTarget: null,
         newMessage: 0, // 未显示的消息
         flag:false,
+        flag1:false,
+        flag2:false,
         username:'',
         userimg:'',
+        usersign:'',
+        usercontent:'',
         showingList: [
           // {
           //   showId: '冯曦妤_12915206930636800',
@@ -345,10 +381,20 @@
     },
     methods: {
       //举报用户
-      reportuser(name,img){
+      reportuser(name,img,sign,content){
         this.username = name;
         this.userimg = img;
-        this.flag=!this.flag;
+        this.usersign = sign;
+        this.usercontent = content;
+        this.flag = true;
+      },
+      reportinfo(){
+        this.flag = false;
+        this.flag1 = true;
+      },
+      reportbaninfo(){
+        this.flag1 = false;
+        this.flag2 = true;
       },
       /**
        * 0~0.99元
@@ -767,11 +813,92 @@
   margin-left: 20px;
   }
 
+  .reportborderinfo{
+  width: 306px;
+  height: 93px;
+  box-shadow: 0px 2px 4px 0px #D8D8D8;
+  position: fixed;
+  background: white;
+  z-index: 999;
+  margin-top: 108px;
+  margin-left: 20px;
+  }
+
+  .reportbaninfo{
+  width: 306px;
+  height: 417px;
+  box-shadow: 0px 2px 4px 0px #D8D8D8;
+  position: fixed;
+  background: white;
+  z-index: 999;
+  margin-top: 22px;
+  margin-left: 20px;
+  }
+
   .reportbuttom{
     width: 64px;
     height: 20px;
     background: #FFFFFF;
     border-radius: 5px;
     border: 1px solid #999999;
+    margin-left: 20px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 19px;
+    cursor: pointer;
+  }
+
+  .reportbuttom1{
+    width: 64px;
+    height: 20px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #999999;
+    margin-left: 20px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 19px;
+    margin-top: 20px;
+    cursor: pointer;
+    color:#666666;
+  }
+
+  .reportbuttom2{
+    width: 64px;
+    height: 20px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #999999;
+    margin-left: 20px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 19px;
+    margin-top: 20px;
+    color: #666666;
+    cursor: pointer;
+  }
+
+  .reportbuttom3{
+    width: 88px;
+    height: 20px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #999999;
+    margin-left: 20px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 19px;
+    margin-top: 20px;
+    color: #666666;
+    cursor: pointer;
+  }
+
+  .name-content{
+    width: 286px;
+    height: 91px;
+    background: #F2F2F2;
+    margin-top: 10px;
+    margin-left: 10px;
+    display: flex;
   }
 </style>

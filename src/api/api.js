@@ -496,3 +496,12 @@ axios({
   data,
   contentTypejson:true,
 })
+
+//举报弹幕
+export const accusationadd = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/accusation/add`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
