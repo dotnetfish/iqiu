@@ -28,6 +28,9 @@
               <p>
                 <a href="https://www.hupu.com" class="content" target="_blank">虎扑</a>
               </p>
+              <p>
+                <a href="https://www.ttshoumi.com" class="content" target="_blank">收米直播</a>
+              </p>
               </div>
             </div>
             <!--            <el-divider direction="vertical" style="height:124px" height="124"></el-divider> -->
@@ -54,7 +57,7 @@
             <div class="content-layout">
               <p class="title">关注我们</p>
               <p class="content sub-title">主播及公会合作微信</p>
-              <img src="@/assets/img/all-contact-qrcode.png" style="width:96px;height:96px" />
+              <img src="@/assets/all-contact-qrcode.jpg" style="width:96px;height:96px" />
             </div>
             <div class="content-layout">
               <p class="title">联系我们</p>
