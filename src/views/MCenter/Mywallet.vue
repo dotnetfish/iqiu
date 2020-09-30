@@ -227,6 +227,7 @@ export default {
           // console.log("返回的链接=",res,"aa")
         let routeData = this.$router.resolve({ path:'/html',query:{htmls:res.data.payInfo}})
         // console.log(routeData)
+        this.dialogVisible = false
         window.open(routeData.href,'_blank');
         }else{
           Message.error(res.msg);
