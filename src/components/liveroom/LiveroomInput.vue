@@ -10,7 +10,7 @@
     </div>
     <div class="paintingmessage" v-if="flag==true" @mouseenter="changeImageSrc(1)" @mouseleave="changeImageSrc(2)">
       <div class="paintingmessage-back">
-        <div style="margin-left:28px">彩色弹幕<span style="font-size:12px;color:#1BB5EC;margin-left:6px">(粉丝牌每十级解锁一个彩色弹幕)</span></div>
+        <div style="margin-left:28px">彩色弹幕<span style="font-size:12px;color:#F9772A;margin-left:6px">(粉丝牌每十级解锁一个彩色弹幕)</span></div>
         <div class="changebarrage">
           <div class="change1" @click="changecolor(1)">
               <img src="@/assets/fans/default.png" v-if="colornum==1">
@@ -127,8 +127,8 @@
       <div style="text-align:center;font-size: 24px;color: #333333;margin-top:130px">领取成功</div>
       <div style="text-align:center;font-size: 24px;color: #333333;margin-top:20px">是否佩戴当前粉丝牌</div>
       <div style="text-align:center;margin-top:40px;display: flex;justify-content: center;margin-bottom:26px;">
-        <div style="width: 160px;height: 60px;background: #1BB5EC;border-radius: 28px;font-size: 24px;color: #FFFFFF;line-height:60px;cursor:pointer;margin-right:40px" @click="nowear">取消</div>
-        <div style="width: 160px;height: 60px;background: #1BB5EC;border-radius: 28px;font-size: 24px;color: #FFFFFF;line-height:60px;cursor:pointer;" @click="getwearFanCard()">佩戴</div>
+        <div style="width: 160px;height: 60px;background: #F9772A;border-radius: 28px;font-size: 24px;color: #FFFFFF;line-height:60px;cursor:pointer;margin-right:40px" @click="nowear">取消</div>
+        <div style="width: 160px;height: 60px;background: #F9772A;border-radius: 28px;font-size: 24px;color: #FFFFFF;line-height:60px;cursor:pointer;" @click="getwearFanCard()">佩戴</div>
       </div>
     </el-dialog>
     <el-dialog
@@ -142,7 +142,7 @@
         <div class="fansname2">{{this.name2}}</div>
       </div>
       <div style="text-align:center;margin-top:40px;display: flex;justify-content: center;margin-bottom:26px">
-        <div style="width: 424px;height: 60px;background: #1BB5EC;border-radius: 28px;font-size: 24px;color: #FFFFFF;line-height:60px;cursor:pointer;" @click="Getfancard()">领取</div>
+        <div style="width: 424px;height: 60px;background: #F9772A;border-radius: 28px;font-size: 24px;color: #FFFFFF;line-height:60px;cursor:pointer;" @click="Getfancard()">领取</div>
       </div>
     </el-dialog>
     <button class="btn" :class="{'login': isLogin}" @click.stop="handleSend">发布</button>

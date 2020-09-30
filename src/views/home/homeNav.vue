@@ -4,7 +4,7 @@
       <div class="nav-menu">
         <div class="nav-logo" v-if="navLogo" align="center">
           <router-link :to="{name:'home'}" @click.native="navClickEvent('爱球直播')">
-            <img src="@/assets/logo.png" style="width:68px">
+            <img src="@/assets/logo.png" style="    width: 40px;height: 40px;margin-top: 10px;">
           </router-link>
           <router-link :to="{name:'home'}" @click.native="navClickEvent('爱球直播')">
             <div style="height:60px;line-height:60px;margin-left:10px">爱球直播</div>

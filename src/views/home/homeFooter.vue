@@ -57,7 +57,7 @@
             <div class="content-layout">
               <p class="title">关注我们</p>
               <p class="content sub-title">主播及公会合作微信</p>
-              <img src="@/assets/all-contact-qrcode.jpg" style="width:96px;height:96px" />
+              <img src="@/assets/all-contact-qrcode.png" style="width:96px;height:96px" />
             </div>
             <div class="content-layout">
               <p class="title">联系我们</p>

@@ -1,5 +1,56 @@
 <template>
   <div class="live-gift" :class="{'hidden': hidden}" v-show="giftList.length>0">
+    <el-dialog :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+      <div style="display:flex">
+        <div
+          style="color: #999999;font-size: 14px;height:40px;line-height:40px;margin-right:12px;"
+        >代充账号:</div>
+        <div v-if="flag==false">
+          <el-input v-model="touid" placeholder="请输入对方UID"></el-input>
+        </div>
+        <div v-else style="display:flex">
+          <div>
+            <img :src="avatarUrl" style="width:30px;height:30px;margin-top:5px;border-radius:50px;" />
+          </div>
+          <div style="margin-top:5px;margin-left:10px">
+            <div style="margin-bottom:4px;font-size: 14px;">{{uname}}</div>
+            <div style="font-size:12px;">UID:{{id}}</div>
+          </div>
+        </div>
+        <div class="getuid" @click="GetToUser()" v-if="flag==false">确认</div>
+        <div class="getuid" @click="noGetToUser()" v-else>取消</div>
+      </div>
+      <div class="default">
+        <div v-for="(item,index) in defaultpaylist" :key="index">
+          <div class="defaultmoney" @click="getcoin(item.coin,item.price)" tabindex="1">
+            <div style="font-size:18px;color:#333333;text-align: center;margin-top: 7px;">{{item.price}}元</div>
+            <div style="font-size:12px;color:#F9772A;margin-top:4px;text-align: center;">{{item.coin}}球币</div>
+          </div>
+        </div>
+        <div class="defaultmoney" @click="isanymoney = true" v-if="isanymoney == false">
+          <div style="font-size:18px;color:#333333;text-align: center;margin-top: 7px;">任意金额</div>
+          <div style="font-size:12px;color:#F9772A;margin-top:4px;text-align: center;">1元=1000球币</div>
+        </div>
+        <div class="defaultmoney1" v-if="isanymoney == true" tabindex="1">
+          <div style="font-size:18px;color:#333333;text-align: center;margin-top: 7px;"><input type="text" class="inputmoney" v-model="anymoney">元</div>
+          <div style="font-size:12px;color:#F9772A;margin-top:4px;text-align: center;">1元=1000球币</div>
+        </div>
+      </div>
+      <div style="margin-top:20px" v-if="isanymoney == false">可获得{{coinsum}}球币</div>
+      <div style="margin-top:20px;margin-bottom" v-else>可获得{{anymoney*1000}}球币</div>
+      <div class="alipay" @click="alipay()"><img src="@/assets/zhifubao.png" style="width: 16px;height: 16px;margin-top: 8px;margin-right: 10px;">支付宝</div>
+      <section style="margin-top:30px;text-align:center">
+            <el-checkbox v-model="agreement" style="margin:15px auto 0;font-size:12px;">
+              <span style="font-size:12px;">我已阅读并同意</span>
+              <a
+                target="_blank"
+                :href=href
+                class="know"
+                style="font-size:12px;"
+              >《充值须知》</a>
+            </el-checkbox>
+        </section>
+    </el-dialog>
     <div class="gift-count">
       <div class="my-count">
         我的积分:
@@ -120,9 +171,9 @@
 
 <script>
 import { sendGift } from "@/api/liveroom";
-import { Popover, Button, Input, Message } from "element-ui";
+import { Popover, Button, Input, Message, Dialog } from "element-ui";
 import { throttle } from "@/utils/debounceAndthrottle";
-import { MyPackage, getPay } from "@/api/api";
+import { MyPackage, getPay, paylist, getToUser, payType, payadd } from "@/api/api";
 // import PersonWallt from '@/components/MCenter/PersonWallt.vue';
 
 export default {
@@ -153,6 +204,17 @@ export default {
         },
       ],
       radioIndex: 0,
+      flag: false,
+      touid: "",
+      avatarUrl: "",
+      id: "",
+      defaultpaylist:'',
+      uname: "",
+      anymoney:1,
+      price:'',
+      agreement:true,
+      coinsum:0,
+      isanymoney:false,
       gift: {
         value: 1,
       },
@@ -160,6 +222,7 @@ export default {
       // giftname:'',
       // giftsum:'',
       freegift:'',
+      dialogVisible:false,
       payDialogVisible: false,
       tabBool: [false, true, false],
     };
@@ -169,6 +232,7 @@ export default {
     [Button.name]: Button,
     [Input.name]: Input,
     [Message.name]: Message,
+    [Dialog.name]: Dialog,
     // PersonWallt
   },
   props: {
@@ -205,6 +269,71 @@ export default {
     this.Getpay()
   },
   methods: {
+    alipay(){
+      if(this.touid == ''){
+        this.touid = this.$store.state.userStatus.userInfo.uid
+      }
+      if(this.isanymoney==true){
+        this.price = this.anymoney
+      }
+      // console.log(this.touid)
+      let data = {
+        toUid:this.touid,
+        platform:'pc',
+        price:this.price,
+        type:1,
+      }
+      if(this.agreement==true){
+        payadd(data).then(res=>{
+        if(res.code==0){
+          // console.log("返回的链接=",res,"aa")
+        let routeData = this.$router.resolve({ path:'/html',query:{htmls:res.data.payInfo}})
+        // console.log(routeData)
+        this.dialogVisible = false
+        window.open(routeData.href,'_blank');
+        }else{
+          Message.error(res.msg);
+        }
+      })
+      }else{
+        Message.error("请同意协议");
+      }
+    },
+    getpayType(){
+      let data = {
+        type:3
+      }
+      payType(data).then((res)=>{
+        this.defaultpaylist = res.data.payTypes 
+        // console.log("默认充值金额组=",res)
+      })
+    },
+    GetToUser() {
+      let data = {
+        uid: this.touid,
+      };
+      getToUser(data).then((res) => {
+        // console.log("代充信息=", res);
+        if (res.code == 0) {
+          this.flag = true;
+          this.avatarUrl = res.data.avatarUrl;
+          this.id = res.data.id;
+          this.uname = res.data.uname;
+        } else {
+          Message.error(res.msg);
+          this.flag = false;
+        }
+      });
+    },
+    noGetToUser() {
+      this.touid = ''
+      let data = {
+        uid: "",
+      };
+      getToUser(data).then((res) => {
+        this.flag = false;
+      });
+    },
     Getpay(){
       this.href = process.env.VUE_APP_ZY_API+'/topup'
       console.log("54544",href)
@@ -213,6 +342,13 @@ export default {
           this.Summoney = res.data.coin 
         }
       })
+    },
+    //多少球币
+    getcoin(coin,price){
+      this.isanymoney = false;
+      this.anymoney = 1;
+      this.coinsum = coin;
+      this.price = price;
     },
     //我的礼物背包
     getMyPackage(){
@@ -253,10 +389,13 @@ export default {
         .then((res) => {
           this.sending = false;
           if (res.code == 0) {
-            console.log("5555555555555555555555555555555555")
             this.$emit("sendGiftSuccess", res.data);
             this.getMyPackage();
-          } else {
+          } else if(res.code==500){
+            console.log("5555555555555555555555555555555555")
+            this.dialogVisible = true
+            Message.error(res.msg);
+          }else{
             Message.error(res.msg);
           }
           // console.log(res);
@@ -585,6 +724,70 @@ export default {
     }
   }
 }
+.getuid {
+  width: 60px;
+  height: 34px;
+  border-radius: 5px;
+  border: 1px solid #979797;
+  line-height: 34px;
+  text-align: center;
+  font-size: 14px;
+  margin-left: 20px;
+  transition: all 0.2s;
+  cursor: pointer;
+  margin-top: 3px;
+}
+
+.getuid:hover {
+  border: 1px solid #f9772a;
+  color: #f9772a;
+  // transition: all 0.2s
+}
+.default{
+  display: flex;
+  flex-wrap: wrap;
+}
+.defaultmoney:focus{
+border: 1px solid #f9772a;
+}
+.defaultmoney1{
+  width: 122px;
+height: 50px;
+background: #FFFFFF;
+border-radius: 5px;
+border: 1px solid #f9772a;
+margin-right: 5px;
+margin-left: 5px;
+margin-top: 20px;
+}
+.alipay{
+  width: 111px;
+height: 32px;
+background: #FFFFFF;
+border-radius: 5px;
+border: 1px solid #999999;
+line-height: 32px;
+cursor: pointer;
+margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.know{
+  color: #f9772a;
+}
+
+::v-deep .el-checkbox__input.is-checked + .el-checkbox__label {
+    color: #f9772a;
+}
+
+::v-deep .el-checkbox__input.is-checked .el-checkbox__inner {
+    background-color: #f9772a;
+    border-color: #f9772a;
+}
+
+::v-deep .el-checkbox__inner:hover {
+    border-color: #f9772a;
+}
 // .backpack{
 //   position: absolute;
 //   width: 461px;
@@ -592,6 +795,22 @@ export default {
 // background: #FFFFFF;
 // box-shadow: 0px 4px 8px 0px #D8D8D8;
 // }
+.inputmoney {
+  border: 1px solid #bebebe;;
+  width: 50px;
+  outline: 0;
+}
+.defaultmoney{
+  width: 122px;
+height: 50px;
+background: #FFFFFF;
+border-radius: 5px;
+border: 1px solid #999999;
+margin-right: 5px;
+margin-left: 5px;
+margin-top: 20px;
+transition: all 0.2s;
+}
 </style>
 <style>
 .live-popper {

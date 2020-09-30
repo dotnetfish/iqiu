@@ -29,7 +29,7 @@
       </div> -->
       <!-- 举报内容 -->
       <div v-if="flag1==true" class="reportborderinfo">
-        <div style="width: 306px;height: 29px;background: #1BB5EC;">
+        <div style="width: 306px;height: 29px;background: #F9772A;">
           <span style="margin-left:14px;color:#ffffff">用户举报</span>
           <img src="@/assets/close3.png" @click="flag1 = false" style="margin-top:6px;margin-left:200px;width:16px;height:16px;cursor: pointer;">
         </div>
@@ -41,7 +41,7 @@
       </div>
       <!-- 举报弹幕 -->
       <div v-if="flag2==true" class="reportbaninfo">
-        <div style="width: 306px;height: 30px;background: #1BB5EC;display:flex">
+        <div style="width: 306px;height: 30px;background: #F9772A;display:flex">
           <div style="margin-left:126px;color:#ffffff;font-size:14px;height: 30px;line-height: 30px;">弹幕举报</div>
           <div><img src="@/assets/close3.png" @click="flag2 = false" style="margin-top:6px;margin-left:94px;width:16px;height:16px;cursor: pointer;"></div>
         </div>
@@ -63,7 +63,7 @@
       </div>
       <!-- 弹幕举报成功 -->
       <div v-if="flag3==true" class="reportbordersuccess">
-        <div style="width: 306px;height: 29px;background: #1BB5EC;">
+        <div style="width: 306px;height: 29px;background: #F9772A;">
           <span style="margin-left:14px;color:#ffffff">用户举报</span>
           <img src="@/assets/close3.png" @click="flag3 = false" style="margin-top:6px;margin-left:200px;width:16px;height:16px;cursor: pointer;">
         </div>
@@ -1009,7 +1009,7 @@
 .submit{
   width: 286px;
 height: 40px;
-background: #1BB5EC;
+background: #F9772A;
 border-radius: 20px;
 color: white;
 text-align: center;
@@ -1021,7 +1021,7 @@ margin-left: 11px;
 .submittrue{
   width: 102px;
 height: 40px;
-background: #1BB5EC;
+background: #F9772A;
 border-radius: 20px;
 color: white;
 line-height: 40px;

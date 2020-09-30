@@ -186,7 +186,7 @@ export default {
                 background-color: #fff;
                 border-radius: 10px;
                 &:hover {
-                  color: $color-main;
+                  color: #F9772A;
                 }
               }
               .code-show {

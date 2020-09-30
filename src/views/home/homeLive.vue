@@ -100,7 +100,7 @@
     <div class="liveRecomend news" style="margin-top:15px;">
       <div class="liveRecomend">
         <div class="liveRecomend-title">
-          <img src="@/assets/home/rebo.png" style="width:36px;height:32px;margin: 18px 12px 18px 0px;">
+          <img src="@/assets/home/rebo.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
           <p class="liveRecomend-title-text">热门赛事</P>
           <button class="liveRecomend-title-chenge-hot"  @click="changeHotschedule()" v-if="schedulelist.length>4">换一换
           </button>
@@ -889,7 +889,7 @@
           top: 43%;
           width: 185px;
           height: 63px;
-          color: $color-main;
+          color: #F9772A;
           background: rgba(0, 0, 0, 0.6);
           border-radius: 63px;
           text-align: center;
@@ -898,7 +898,7 @@
 
         .intoLiveRomm:hover {
           color: rgba(255, 255, 255, 1);
-          background: $color-main;
+          background: #F9772A;
         }
       }
 
@@ -1008,7 +1008,7 @@
       font-family: PingFangSC-Medium, PingFang SC;
       border: 0px;
       font-weight: 500;
-      color: rgb(55, 171, 248);
+      color: #F9772A;
       line-height: 50px;
       z-index: 4;
       outline:0;
@@ -1023,7 +1023,7 @@
       font-family: PingFangSC-Medium, PingFang SC;
       border: 0px;
       font-weight: 500;
-      color: rgb(55, 171, 248);
+      color: #F9772A;
       line-height: 50px;
       z-index: 4;
       outline:0;
@@ -1218,7 +1218,7 @@
   line-height: 23px;
   background: rgba(255, 255, 255, 1);
   border: 0px solid rgba(27, 181, 236, 1);
-  color: #1BB5EC;
+  color: #F9772A;
   margin-top: 5px;
   outline: 0;
   margin-left: 7px;

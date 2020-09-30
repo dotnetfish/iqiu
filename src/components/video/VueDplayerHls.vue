@@ -81,7 +81,7 @@ export default {
         container: this.$refs.dplayer,
         live: true,
         autoplay: true, // 自动播放
-        theme: '#1BB5EC',
+        theme: '#F9772A',
         loop: false, // 视频循环播放
         lang: 'zh-cn',
         screenshot: false,

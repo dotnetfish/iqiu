@@ -615,7 +615,7 @@ export default {
   width: 4px;
   height: 20px;
   margin-top: 20px;
-  background: rgba(27, 181, 236, 1);
+  background: #F9772A;
 }
 
 .Game-Date {
@@ -705,7 +705,7 @@ export default {
   line-height: 20.5px;
   background: rgba(255, 255, 255, 1);
   border: 0px solid rgba(27, 181, 236, 1);
-  color: #1BB5EC;
+  color: #F9772A;
   margin-left: 27px;
   margin-top: 5px;
   font-size: 12px;

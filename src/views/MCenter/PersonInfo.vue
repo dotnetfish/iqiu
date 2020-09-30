@@ -971,7 +971,7 @@ export default {
 }
 
 .setpassword {
-  border: #1bb5ec solid 2px;
+  border: #F9772A solid 2px;
   background-color: rgba(240, 240, 240, 1);
   border-radius: 20px;
   color: rgba(51, 51, 51, 1);

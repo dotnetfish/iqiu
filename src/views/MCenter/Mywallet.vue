@@ -33,7 +33,7 @@
         <div class="getuid" @click="noGetToUser()" v-else>取消</div>
       </div>
       <div class="default">
-        <div v-for="(item,index) in Defaultpaylist" :key="index">
+        <div v-for="(item,index) in defaultpaylist" :key="index">
           <div class="defaultmoney" @click="getcoin(item.coin,item.price)" tabindex="1">
             <div style="font-size:18px;color:#333333;text-align: center;margin-top: 7px;">{{item.price}}元</div>
             <div style="font-size:12px;color:#F9772A;margin-top:4px;text-align: center;">{{item.coin}}球币</div>
@@ -79,8 +79,9 @@
       <el-table-column prop="price" header-align="center" align="center" label="支付金额"></el-table-column>
       <el-table-column prop="status" header-align="center" align="center" label="订单状态">
         <template slot-scope="scope">
-          <div v-if="scope.row.status==1">未支付</div>
-          <div v-if="scope.row.status==2">已支付</div>
+          <div v-if="scope.row.status==0">支付失败</div>
+          <div v-if="scope.row.status==1">已支付</div>
+          <div v-if="scope.row.status==2">支付失败</div>
         </template>
       </el-table-column>
       <!-- <el-table-column fixed="right" header-align="center" align="center" width="200" label="操作">

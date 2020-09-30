@@ -845,7 +845,7 @@ export default {
 .blueone {
   width: 68px;
   height: 3px;
-  background: rgba(83, 199, 241, 1);
+  background: #F9772A;
   border-radius: 2px;
   margin-left: 9.6%;
 }
@@ -853,7 +853,7 @@ export default {
 .bluetow {
   width: 68px;
   height: 4px;
-  background: rgba(83, 199, 241, 1);
+  background: #F9772A;
   border-radius: 3px;
   margin-left: 46.8%;
 }
