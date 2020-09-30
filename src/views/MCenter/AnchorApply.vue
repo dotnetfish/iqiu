@@ -89,7 +89,7 @@
       <div class="isAnchor">你已经是一名主播了，赶快去开启开播吧！
       </div>
       <a target="_blank" :href="DOWNLOAD_APP_URL">
-        <el-button type="primary" size="small">开始直播
+        <el-button type="primary" size="small" class="beginbo">开始直播
         </el-button>
       </a>
 
@@ -436,5 +436,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  ::v-deep .beginbo {
+    background-color: #F9772A;
+    border: 0;
   }
 </style>

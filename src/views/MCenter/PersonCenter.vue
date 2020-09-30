@@ -38,6 +38,14 @@
               <div class="person-title" slot="label">任务中心</div>
               <TaskCenter></TaskCenter>
             </el-tab-pane>
+            <el-tab-pane name="10" :key="10">
+              <div class="person-title" slot="label">我的钱包</div>
+              <Mywallet></Mywallet>
+            </el-tab-pane>
+            <el-tab-pane name="11" :key="11">
+              <div class="person-title" slot="label">我的收益</div>
+              <Myearnings></Myearnings>
+            </el-tab-pane>
             <el-tab-pane name="7" :key="7">
               <div class="person-title" slot="label">我的勋章</div>
               <Mymedal></Mymedal>
@@ -71,8 +79,10 @@
   // import PersonEdit from './PersonEdit.vue';
   // import PersonCostDetalis from './PersonCostDetalis';
   import AnchorApply from './AnchorApply';
+  import Myearnings from './Myearnings';
   import TaskCenter from './TaskCenter';
   import Mymedal from './Mymedal';
+  import Mywallet from './Mywallet';
   import SysMessage from './SysMessage';
   import Fansapply from './Fansapply';
   import { haveMessage } from "@/api/api";
@@ -96,6 +106,8 @@
       Mymedal,
       Fansapply,
       SysMessage,
+      Mywallet,
+      Myearnings,
     },
     data() {
       return {
@@ -218,21 +230,23 @@
       }
 
       ::v-deep .el-tabs__item.is-active {
-        color: $color-main;
+        color: #F9772A;
       }
       ::v-deep .el-tabs__item {
         color: #666;
         padding: 0 30px;
         width: 200px;
         font-weight: 600;
+        height: 55px;
+        line-height: 55px;
       }
 
       ::v-deep .el-tabs__active-bar {
-        background-color: $color-main;
+        background-color: #F9772A;
       }
 
       ::v-deep .el-tabs__item:hover {
-        color: $color-main;
+        color: #F9772A;
         cursor: pointer;
       }
 

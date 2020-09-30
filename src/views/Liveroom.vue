@@ -472,7 +472,7 @@ export default {
      */
     sendDanmaku(message, type,msgColor) {
       this.col1 = this.col 
-      if(msgColor == '#000000'){
+      if(!msgColor){
         msgColor = '#FFFFFF'
       }
       let colorMap = {
@@ -576,7 +576,7 @@ export default {
     return channelInfo({ cid: this.liveroom }).then(res => {
            this.channelInfo = res.data;
            document.title = this.channelInfo.name;
-          //  console.log(112233);
+           console.log("888888888888888888888888888",this.channelInfo);
           //  console.log(res);
         });
     },
@@ -731,8 +731,8 @@ export default {
       }
     },
     // 发送消息
-    sendMsg(msg,nowicon,name,levelicon) {
-      console.log(msg,"sendMsg",name);
+    sendMsg(msg,levelicon,nowicon,name) {
+      console.log(msg,"sendMsg",name,levelicon);
       let sign = md5Secret(msg);
       let params = {
         user: {
@@ -867,7 +867,7 @@ export default {
   & > ::v-deep div:not(:only-child):last-of-type {
     position: absolute !important;
     z-index: 19 !important;
-    top: 0 !important;
+    top: 0px !important;
     /*background-color: red!important;*/
   }
 }

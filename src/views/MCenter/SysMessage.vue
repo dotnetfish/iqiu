@@ -80,9 +80,13 @@ export default {
             pageSize:this.pageSize,
           }
           sysMessagelist(data).then((res) => {
-              console.log("系统消息列表==",res)
-              this.total = res.total
-              this.messagelist = res.data
+            //   console.log("系统消息列表==",res)
+              if(res.data.length!=0){
+                this.total = res.total
+                this.messagelist = res.data
+              }else{
+                  this.total = 0
+              }
           })
       },
       getreadsysMessage(){

@@ -14,7 +14,7 @@
         </el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" size="small" @click="findLiveRecordDay">查询</el-button>
+        <el-button type="primary" size="small" @click="findLiveRecordDay" class="search">查询</el-button>
       </el-form-item>
     </el-form>
     <el-row>
@@ -164,5 +164,9 @@
     text-align: right;
     margin-top: 16px
   }
-
+  ::v-deep .search{
+    color: #ffffff;
+    background-color: #F9772A;
+    border: 0;
+  }
 </style>

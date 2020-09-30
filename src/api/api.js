@@ -470,6 +470,24 @@ axios({
   contentTypejson:true,
 })
 
+//主播粉丝牌详情
+export const FanCardinfo = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/fanCard/info`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//我的背包礼物列表
+export const MyPackage = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/live/gift/getMyPackage`,
+  method:"get",
+  data,
+  contentTypejson:true,
+})
+
 //系统消息列表
 export const sysMessagelist = (data) =>
 axios({
@@ -501,6 +519,78 @@ axios({
 export const accusationadd = (data) =>
 axios({
   url:`${baseURL}/aiqiu/v1/app/accusation/add`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//充值记录列表
+export const paylist = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/pay/list`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//充值记录列表
+export const bindBank = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/user/bindBank`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//代充人信息
+export const getToUser = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/pay/getToUser`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//默认充值数据
+export const payType = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/pay/payType`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//支付宝充值球币
+export const payadd = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/pay/add`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//获取用户资产
+export const getPay = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/user/getPay`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//我的收益
+export const mySalary = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/pay/mySalary`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//主播申请提现
+export const paycash = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/pay/cash`,
   method:"post",
   data,
   contentTypejson:true,

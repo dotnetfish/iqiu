@@ -18,7 +18,7 @@
             <img :src="levellist.icon" style="width:35px;height:16px" />
           </div>
           <div style="width:200px;margin-left:15px;">
-            <el-progress :percentage=percent></el-progress>
+            <el-progress :percentage=percent color='#F9772A'></el-progress>
           </div>
           <div class="percentnum">{{percentnum}}</div>
           <!-- <div>
@@ -26,7 +26,7 @@
           </div> -->
         </div>
         <div
-          style="font-size:12px;font-family:PingFangSC-Regular,PingFang SC;font-weight:400;color:rgba(83,199,241,1);margin-top:20px"
+          style="font-size:12px;font-family:PingFangSC-Regular,PingFang SC;font-weight:400;color:#F9772A;margin-top:20px"
         >等级说明</div>
         <div
           style="font-size:12px;font-family:PingFangSC-Regular,PingFang SC;font-weight:400;color:rgba(102,102,102,1);margin-top:4px"
@@ -277,7 +277,7 @@ export default {
 .blueone {
   width: 38px;
   height: 4px;
-  background: rgba(83, 199, 241, 1);
+  background: #F9772A;
   border-radius: 2px;
   margin-left: 71px;
 }
@@ -285,7 +285,7 @@ export default {
 .bluetow {
   width: 38px;
   height: 4px;
-  background: rgba(83, 199, 241, 1);
+  background: #F9772A;
   border-radius: 2px;
   margin-left: 227px;
 }

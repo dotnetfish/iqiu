@@ -9,17 +9,22 @@
           style="font-size:18px;font-family:PingFangSC-Medium,PingFang SC;font-weight:500;color:rgba(51,51,51,1);margin-top:32px"
         >{{userName}}</div>
         <div
-          style="font-size:18px;font-family:PingFangSC-Regular,PingFang SC;font-weight:400;color:rgba(83,199,241,1);margin-top:20px"
-        ><span style="color:rgba(51,51,51,1)">ID:</span>{{userid}}</div>
+          style="font-size:18px;font-family:PingFangSC-Regular,PingFang SC;font-weight:400;color:#F9772A;margin-top:20px"
+        ><span style="color:#F9772A">ID:</span>{{userid}}</div>
     </div>
     </div>
     <div style="width:910px;height:2px;background:rgba(240,240,240,1);margin-top:30px;margin-bottom: 16px;"></div>
-    <div style="display:flex">
+    <div style="display:flex" v-if="status != 1">
         <div style="width:120px;height:40px;line-height:40px;font-size:18px;">粉丝牌名称:</div>
         <el-input v-model="fansname" style="width:300px"></el-input>
     </div>
-    <div class="rules">需要三个汉字或四个数字/英文/中英数结合</div>
-    <div style="margin-left:120px"><el-button class="submit" @click="submit">提交</el-button></div>
+    <div style="display:flex" v-if="status == 1">
+        <div style="width:110px;height:40px;line-height:40px;font-size:18px;margin-top:-6px;">我的粉丝牌:</div>
+        <div><img :src="icon" style="width:78px;height:30px"></div>
+        <div class="name">{{channelName}}</div>
+    </div>
+    <div class="rules" v-if="status != 1">需要三个汉字或四个数字/英文/中英数结合</div>
+    <div style="margin-left:120px" v-if="status != 1"><el-button class="submit" @click="submit">提交</el-button></div>
 
   </section>
 </template>
@@ -27,7 +32,7 @@
 <script>
 import Cropper from "@/components/MCenter/Cropper.vue";
 import { Button, Input, Message} from "element-ui";
-import { FanCardadd } from "@/api/api";
+import { FanCardadd, FanCardinfo } from "@/api/api";
 import { usersLoginInfo } from "@/api/mcenterapi";
 import { loginInfo } from "@/api/liveroom";
 
@@ -46,6 +51,9 @@ export default {
       userid:"",
       // levellist:[],
       fansname:"",
+      status:'',
+      channelName:'',
+      icon:''
     };
   },
   created: {
@@ -68,7 +76,6 @@ export default {
           name: this.fansname
         }
         FanCardadd(data).then(res => {
-          console.log(res)
           if(res.code == 0){
             Message.success({
               message: "申请成功,待审核",
@@ -80,6 +87,14 @@ export default {
           }
         })
       }
+      },
+      getFanCardinfo(){
+        FanCardinfo().then(res=>{
+          console.log("pppppppppppppppppppp",res)
+          this.status = res.data.status
+          this.channelName = res.data.name
+          this.icon = res.data.icon
+        })
       },
     getHomeUserInfo () {
         loginInfo().then(res => {
@@ -107,6 +122,7 @@ export default {
   mounted() {
     this.usersLoginInfo();
     this.getHomeUserInfo();
+    this.getFanCardinfo();
   },
 };
 </script>
@@ -190,7 +206,14 @@ margin-bottom: 30px;
 
 .submit {
     width: 160px;
-    background: #1BB5EC;
+    background: #F9772A;
     color: rgb(255, 255, 255);
+}
+.name {
+  position:absolute;
+    margin-left: 140px;
+    width: 50px;
+    margin-top: 8px;
+    color: white;
 }
 </style>

@@ -201,7 +201,7 @@
     color: rgba(153, 153, 153, 1);
 
     .notFollow-tip-text {
-      color: $color-main;
+      color: #F9772A;
     }
   }
 
@@ -231,7 +231,7 @@
   }
 
   .nav-icon:hover {
-    color: $color-main;
+    color: #F9772A;
   }
 
   .login-tip-content {

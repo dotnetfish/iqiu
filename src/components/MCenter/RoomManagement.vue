@@ -3,7 +3,7 @@
   <div>
     <el-form :inline="true" :model="formData">
       <el-form-item>
-        <el-button class="addBtn" type="primary" size="small" @click="dialogVisible = true">添加管理员</el-button>
+        <el-button class="addBtn" type="primary" size="small" @click="dialogVisible = true" style="color: #ffffff;background-color: #F9772A;border: 0;">添加管理员</el-button>
       </el-form-item>
     </el-form>
     <el-row>

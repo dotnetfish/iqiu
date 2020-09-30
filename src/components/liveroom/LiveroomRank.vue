@@ -256,7 +256,7 @@ export default {
 .blueone {
   width: 36px;
   height: 4px;
-  background: rgba(83, 199, 241, 1);
+  background: #F9772A;
   border-radius: 2px;
   margin-left: 19%;
 }
@@ -264,7 +264,7 @@ export default {
 .bluetow {
   width: 36px;
   height: 4px;
-  background: rgba(83, 199, 241, 1);
+  background: #F9772A;
   border-radius: 2px;
   margin-left: 73.3%;
 }

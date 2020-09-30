@@ -4,18 +4,18 @@
     <el-form :model="form" ref="form" label-width="80px" label-position="left">
       <el-form-item label="房间ID:" prop="" class="item">
         {{ info.id }}
-        <el-button @click="handleJump(info.id)" class="ml20 mr20" type="primary" plain size="small">进入直播间</el-button>
+        <el-button @click="handleJump(info.id)" class="ml20 mr20" type="primary" plain size="small" style="color: #ffffff;background-color: #F9772A;border: 0;">进入直播间</el-button>
         粉丝数：{{ info.followCount }}
       </el-form-item>
       <el-form-item label="rtmp地址:">
           <span style="width:60%; display:inline-block;overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{rtmp_url}}</span>
-          <el-button type="primary" class="cobyOrderSn" round style="height: 24px;line-height: 1px;margin-left: 10px;width: 58px;"
+          <el-button type="primary" class="cobyOrderSn" round style="height: 24px;line-height: 1px;margin-left: 10px;width: 58px;color: #ffffff;background-color: #F9772A;border: 0;"
                      size="small" v-clipboard:copy="rtmp_url"> 复制
           </el-button>
       </el-form-item>
       <el-form-item label="直播码:">
           <span style="width:60%; display:inline-block;overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{rtmp_code_url}}</span>
-          <el-button type="primary" class="cobyOrderSn" round style="height: 24px;line-height: 1px;margin-left: 10px;width: 58px;"
+          <el-button type="primary" class="cobyOrderSn" round style="height: 24px;line-height: 1px;margin-left: 10px;width: 58px;color: #ffffff;background-color: #F9772A;border: 0;"
                      size="small" v-clipboard:copy="rtmp_code_url"> 复制
           </el-button>
       </el-form-item>
@@ -23,7 +23,7 @@
         <el-input v-model="name" maxlength="25"
                   show-word-limit placeholder="请输入房间标题" clearable size="medium"
                   style="width:300px;"></el-input>
-        <el-button class="ml20" type="primary" plain size="small">修改</el-button>
+        <el-button class="ml20" type="primary" plain size="small" style="color: #ffffff;background-color: #F9772A;border: 0;">修改</el-button>
         <br>
         <span class="tips">房间标题通过审核后，需要间隔5分钟才能再次修改</span>
       </el-form-item>
@@ -40,6 +40,7 @@
           class="ml20"
           type="primary"
           size="small"
+          style="color: #ffffff;background-color: #F9772A;border: 0;"
           plain
           @click="classificationVisible = true"
         >选择分类
@@ -60,6 +61,7 @@
         type="primary"
         size="small"
         @click="handleSave"
+        style="color: #ffffff;background-color: #F9772A;border: 0;"
       >
         保存设置
       </el-button>
@@ -145,7 +147,7 @@
             :span="5"
             v-for="(o, index) in classificationType"
             :key="index"
-            style="margin-top: 10px"
+            style="margin-top: 10px;"
           >
             <el-radio v-model="classificationIndex" :label="index" border>
               <div class="tip">{{ classificationType[index] }}</div>
@@ -155,7 +157,7 @@
         <el-row style="margin-top: 20px">
           <el-button
             type="primary"
-            style="height: 30px;line-height: 1px;"
+            style="height: 30px;line-height: 1px;color: #ffffff;background-color: #F9772A;border: 0;"
             @click="handleClassification"
           >确 定
           </el-button>
@@ -361,7 +363,9 @@
       border-radius: 30px;
       height: 30px;
     }
-
+    .el-radio.is-bordered.is-checked{
+      border: #F9772A solid 1px;
+    }
     .el-radio__input {
       border-radius: 30px;
       height: 30px;
@@ -370,6 +374,11 @@
     .tip {
       margin-top: -18px;
       margin-left: 7px;
+      // border: #F9772A solid 1px;
+      color:#F9772A
     }
   }
+  // ::v-deep .el-radio.is-bordered.is-checked{
+  //   border: #F9772A solid 1px;
+  // }
 </style>

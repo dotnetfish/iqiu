@@ -98,6 +98,7 @@ export default {
     rewardsign() {
       // var a = document.querySelector("body");
       this.flagreward = true
+      // console.log("55555555555512129",this.flagreward)
       document.querySelector('body').setAttribute('style','overflow:hidden;')
       setTimeout(() => {
         this.flagreward = false

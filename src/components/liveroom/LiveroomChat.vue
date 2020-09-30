@@ -24,7 +24,7 @@
           <div style="margin-top:36px;margin-left:5px;font-size:14px">{{username}}</div>
           <img src="@/assets/close2.png" @click="flag = false" style="margin-top:36px;margin-left:98px;width:16px;height:16px;cursor: pointer;">
         </div>
-        <div style="margin-top:14px;margin-left:14px;font-size:14px;height:50px;white-space: normal;width: 92%;word-break: break-all;">个性签名:{{usersign}}</div>
+        <div style="margin-top:14px;margin-left:20px;font-size:14px;height:50px;white-space: normal;width: 89%;word-break: break-all;">个性签名:{{usersign}}</div>
         <div class="reportbuttom" @click="reportinfo()">举报用户</div>
       </div> -->
       <!-- 举报内容 -->
@@ -34,9 +34,9 @@
           <img src="@/assets/close3.png" @click="flag1 = false" style="margin-top:6px;margin-left:200px;width:16px;height:16px;cursor: pointer;">
         </div>
         <div style="display:flex">
-          <div class="reportbuttom1" >举报头像</div>
-          <div class="reportbuttom2" >举报昵称</div>
-          <div class="reportbuttom1" @click="reportbaninfo()">举报弹幕</div>
+          <div class="reportbuttom2" @click="report('举报头像')">举报头像</div>
+          <div class="reportbuttom2" @click="report('举报昵称')">举报昵称</div>
+          <div class="reportbuttom2" @click="reportbaninfo()">举报弹幕</div>
         </div>
       </div>
       <!-- 举报弹幕 -->
@@ -50,11 +50,28 @@
         </div>
         <div style="margin-left:20px;margin-top:16px;font-size:14px;color:#333333">举报类型</div>
         <div style="display:flex;flex-wrap:wrap">
-          <div class="reportbuttom3" >垃圾广告营销</div>
-          <div class="reportbuttom1" >侮辱谩骂</div>
-          <div class="reportbuttom1" >违法反动</div>
-          <div class="reportbuttom1">淫秽色情</div>
-          <div class="reportbuttom3">嘲讽/不友善</div>
+          <button class="reportbuttom3" @click="typecontent='垃圾广告营销'">垃圾广告营销</button>
+          <button class="reportbuttom1" @click="typecontent='侮辱谩骂'">侮辱谩骂</button>
+          <button class="reportbuttom1" @click="typecontent='违法反动'">违法反动</button>
+          <button class="reportbuttom1" @click="typecontent='淫秽色情'">淫秽色情</button>
+          <button class="reportbuttom3" @click="typecontent='嘲讽/不友善'">嘲讽/不友善</button>
+        </div>
+        <div>
+          <textarea placeholder="或在此填写举报理由" class="inputcontent" v-model="inputcontent"></textarea>
+        </div>
+        <div class="submit" @click="report2(typecontent,inputcontent)">提交</div>
+      </div>
+      <!-- 弹幕举报成功 -->
+      <div v-if="flag3==true" class="reportbordersuccess">
+        <div style="width: 306px;height: 29px;background: #1BB5EC;">
+          <span style="margin-left:14px;color:#ffffff">用户举报</span>
+          <img src="@/assets/close3.png" @click="flag3 = false" style="margin-top:6px;margin-left:200px;width:16px;height:16px;cursor: pointer;">
+        </div>
+        <div style="margin-top:30px;text-align: center;"><img src="@/assets/rank/reportsuccess.png"> </div>
+        <div style="text-align: center;color: #333333;font-size: 14px;margin-top:10px">你已举报成功</div>
+        <div style="width:100%;display: flex;justify-content: center;margin-top:10px"><div style="width:228px;color:#333333;font-size:12px;">系统会在后台确认违规后，会对该用户进行相对应的处理，感谢您对网络环境净化做出的努力。</div></div>
+        <div style="width:100%;display: flex;justify-content: center;margin-top:46px">
+          <div class="submittrue" @click="flag3 = false">确定</div>
         </div>
       </div>
       <!--聊天内容-->
@@ -65,11 +82,13 @@
           <template v-if="item._lctype === -1">
             <img class="role-icon" v-if="item._lcattrs.user.role != 0"
                  :src="require('@/assets/img/live-chat-role'+item._lcattrs.user.role+'.png')" alt="">
+            <img :src="item._lcattrs.user.fansCardUrl" style="width: 66px;height: 24px;margin-right:6px;" v-if="item._lcattrs.user.fansCardUrl">
+                <span style="position:absolute;color:#FFFFFF;left:48px;text-align:center;top:8.5px;width:42px;transform: scale(0.7);font-size: 16px;">{{item._lcattrs.user.fansCardName}}</span>
               <div style="position:relative;">
-                <img :src="item._lcattrs.user.fansCardUrl" style="width: 42px;height: 16px;margin-right:6px;" v-if="item._lcattrs.user.fansCardUrl">
-                <span style="position:absolute;color:#FFFFFF;left:6px;text-align:center;top:-1px;width:42px;transform: scale(0.7);">{{item._lcattrs.user.fansCardName}}</span>
+                <!-- <img :src="item._lcattrs.user.fansCardUrl" style="width: 42px;height: 16px;margin-right:6px;" v-if="item._lcattrs.user.fansCardUrl">
+                <span style="position:absolute;color:#FFFFFF;left:5px;text-align:center;top:1.5px;width:42px;transform: scale(0.7);font-size: 13px;">{{item._lcattrs.user.fansCardName}}</span> -->
                 <img :src="item._lcattrs.user.icon" style="width: 40px;height: 16px;margin-right:6px;" v-if="item._lcattrs.user.icon">
-                <span class="item-name" :data-item="index" @click="reportuser(item._lcattrs.user.name,item._lcattrs.user.avatar,item._lcattrs.user.sign,item._lctext)">{{ item._lcattrs.user.name }}: </span>
+                <span class="item-name" :data-item="index" @click="reportuser(item._lcattrs.user.name,item._lcattrs.user.avatar,item._lcattrs.user.sign,item._lctext,item._lcattrs.user.id)">{{ item._lcattrs.user.name }}: </span>
               <span class="item-content" :style="{'color':item._lcattrs.msgColor}" v-if="item._lcattrs.msgColor">{{ item._lctext }}</span>
               <span class="item-content" :style="{'color':'#000000'}" v-else>{{ item._lctext }}</span>
               </div>
@@ -244,10 +263,14 @@
         flag:false,
         flag1:false,
         flag2:false,
+        flag3:false,
         username:'',
         userimg:'',
         usersign:'',
         usercontent:'',
+        userid:'',
+        inputcontent:'',
+        typecontent:'',
         showingList: [
           // {
           //   showId: '冯曦妤_12915206930636800',
@@ -381,11 +404,12 @@
     },
     methods: {
       //举报用户
-      reportuser(name,img,sign,content){
+      reportuser(name,img,sign,content,id){
         this.username = name;
         this.userimg = img;
         this.usersign = sign;
         this.usercontent = content;
+        this.userid = id;
         this.flag = true;
       },
       reportinfo(){
@@ -395,6 +419,37 @@
       reportbaninfo(){
         this.flag1 = false;
         this.flag2 = true;
+      },
+      // reportsuccess(){
+      //   this.flag2 = false;
+      //   this.flag1 = false;
+      //   this.flag3 = true;
+      // },
+      report(type) {
+      //   let data = {
+      //     type: type,
+      //     content: '',
+      //     cid: this.$store.state.userStatus.userInfo.uid,
+      //     toUid: this.userid,
+      //   }
+      //   accusationadd(data).then((res) => {
+      // });
+        this.flag2 = false;
+        this.flag1 = false;
+        this.flag3 = true;
+      },
+      report2(type,content) {
+      //   let data = {
+      //     type: type,
+      //     content: content,
+      //     cid: this.$store.state.userStatus.userInfo.uid,
+      //     toUid: this.userid,
+      //   }
+      //   accusationadd(data).then((res) => {
+      // });
+        this.flag2 = false;
+        this.flag1 = false;
+        this.flag3 = true;
       },
       /**
        * 0~0.99元
@@ -729,7 +784,7 @@
       overflow-y: scroll;
 
       .main {
-        color: $color-main;
+        color: #F9772A;
       }
 
       .ban {
@@ -748,7 +803,8 @@
       .chat-item {
         display: flex;
         align-items:flex-start;
-        padding: 7px 0;
+        padding-top: 7px;
+        position: relative;
       }
 
       .item-name {
@@ -757,17 +813,20 @@
         height: 24px;
         font-size: 14px;
         line-height: 24px;
+        color: #F9772A;
         @extend .main;
+        vertical-align: bottom;
       }
 // 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
       .item-content {
-        margin-left: 4px;
+        margin-left: 1px;
         height: 24px;
         line-height: 24px;
         white-space: normal;
         word-break: break-all;
         font-size: 14px;
         cursor: default;
+        vertical-align: bottom;
         // color: $color-title2;
         // color: col;
       }
@@ -781,7 +840,7 @@
         margin-right: 4px;
         width: 26px;
         height: 14px;
-        margin-top: 2px;
+        margin-top: 5px;
       }
     }
 
@@ -824,6 +883,17 @@
   margin-left: 20px;
   }
 
+  .reportbordersuccess{
+  width: 306px;
+  height: 318px;
+  box-shadow: 0px 2px 4px 0px #D8D8D8;
+  position: fixed;
+  background: white;
+  z-index: 999;
+  margin-top: 108px;
+  margin-left: 20px;
+  }
+
   .reportbaninfo{
   width: 306px;
   height: 417px;
@@ -858,7 +928,7 @@
     font-size: 12px;
     text-align: center;
     line-height: 19px;
-    margin-top: 20px;
+    margin-top: 12px;
     cursor: pointer;
     color:#666666;
   }
@@ -877,7 +947,12 @@
     color: #666666;
     cursor: pointer;
   }
-
+.reportbuttom1:focus {
+    outline: none;
+    border-color: #409eff;
+    background: #409eff;
+    color: white;
+}
   .reportbuttom3{
     width: 88px;
     height: 20px;
@@ -888,11 +963,16 @@
     font-size: 12px;
     text-align: center;
     line-height: 19px;
-    margin-top: 20px;
+    margin-top: 12px;
     color: #666666;
     cursor: pointer;
   }
-
+  .reportbuttom3:focus {
+    outline: none;
+    border-color: #409eff;
+    background: #409eff;
+    color: white;
+}
   .name-content{
     width: 286px;
     height: 91px;
@@ -901,4 +981,50 @@
     margin-left: 10px;
     display: flex;
   }
+
+  .inputcontent {
+    display: block;
+    resize: vertical;
+    padding: 5px 15px;
+    line-height: 1.5;
+    box-sizing: border-box;
+    width: 87%;
+    height: 80px;
+    margin-left: 20px;
+    margin-top: 26px;
+    font-size: 14px;
+    color: #606266;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+  }
+
+  .inputcontent:focus {
+    outline: none;
+    border-color: #409eff;
+}
+
+.submit{
+  width: 286px;
+height: 40px;
+background: #1BB5EC;
+border-radius: 20px;
+color: white;
+text-align: center;
+line-height: 40px;
+margin-top: 22px;
+margin-left: 11px;
+}
+
+.submittrue{
+  width: 102px;
+height: 40px;
+background: #1BB5EC;
+border-radius: 20px;
+color: white;
+line-height: 40px;
+text-align: center;
+}
 </style>

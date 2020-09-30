@@ -11,14 +11,14 @@
       </div>
       <div>
         <div
-          style="font-size:16px;font-family:PingFangSC-Medium,PingFang SC;font-weight:500;color:rgba(51,51,51,1);margin-top:17px"
+          style="font-size:16px;font-weight:500;color:rgba(51,51,51,1);margin-top:17px"
         >{{userName}}</div>
         <div style="display:flex;margin-top:14px">
           <div>
             <img :src="levellist.icon" style="width:35px;height:16px" />
           </div>
           <div style="width:200px;margin-left:15px;">
-            <el-progress :percentage=percent></el-progress>
+            <el-progress :percentage=percent color='#F9772A'></el-progress>
           </div>
           <div class="percentnum">{{percentnum}}</div>
           <!-- <div>
@@ -26,10 +26,10 @@
           </div> -->
         </div>
         <div
-          style="font-size:12px;font-family:PingFangSC-Regular,PingFang SC;font-weight:400;color:rgba(83,199,241,1);margin-top:20px"
+          style="font-size:12px;font-weight:400;color:#F9772A;;margin-top:20px"
         >等级说明</div>
         <div
-          style="font-size:12px;font-family:PingFangSC-Regular,PingFang SC;font-weight:400;color:rgba(102,102,102,1);margin-top:4px"
+          style="font-size:12px;font-weight:400;color:rgba(102,102,102,1);margin-top:4px"
         >提示：可以通过发送弹幕和赠送礼物，获得更多经验值</div>
       </div>
     </div>
@@ -48,16 +48,16 @@
       <div class="blueone" v-if="showblue==true"></div>
       <div class="bluetow" v-if="showblue==false"></div>
     </div>
-    <div class="nowfansbj" v-if="myfanscardlist[0].status == 1">
+    <div class="nowfansbj" v-if="myfanscardlist[0].status == 1 && flag == true">
         <div><img :src="myfanscardlist[0].avatar" style="width:60px;height:60px;margin-top:20px;margin-left:10px;border-radius:150px"></div>
         <div class="divier"></div>
         <div class="information">
-            <div style="font-size: 16px;color: #1BB5EC;margin-top:17px;">{{myfanscardlist[0].channelName}}</div>
+            <div style="font-size: 16px;color: #F9772A;margin-top:17px;">{{myfanscardlist[0].channelName}}</div>
             <div style="font-size: 12px;color: #666666;margin-top:12px;margin-bottom:12px">粉丝等级:{{myfanscardlist[0].level}}</div>
             <div style="font-size: 12px;color: #999999;display:flex;">
                 <div>等级亲密度:</div>
                 <div style="width:160px;margin-left:15px;">
-            <el-progress :percentage="parseFloat(((myfanscardlist[0].intimacy/(myfanscardlist[0].needIntimacy+myfanscardlist[0].intimacy))*100).toFixed(1))"></el-progress>
+            <el-progress :percentage="parseFloat(((myfanscardlist[0].intimacy/(myfanscardlist[0].needIntimacy+myfanscardlist[0].intimacy))*100).toFixed(1))" color='#F9772A'></el-progress>
                 </div>
                 <div class="percentnum">{{myfanscardlist[0].intimacy}}/{{myfanscardlist[0].intimacy+myfanscardlist[0].needIntimacy}}</div>
             </div>
@@ -75,9 +75,9 @@
       </el-table-column>
       <el-table-column fixed="right" header-align="center" align="center" width="200" label="操作">
         <template slot-scope="scope">
-          <el-button type="text" size="small" @click="wear(scope.row.fanCardId)" v-if="scope.row.status==0">佩戴</el-button>
-          <el-button type="text" size="small" v-if="scope.row.status==1">已佩戴</el-button>
-          <el-button type="text" size="small" v-if="scope.row.status==1" @click="nowear(scope.row.fanCardId)">取消佩戴</el-button>
+          <el-button type="text" size="small" @click="wear(scope.row.fanCardId)" class="wearcolor" v-if="scope.row.status==0">佩戴</el-button>
+          <el-button type="text" size="small" v-if="scope.row.status==1" class="wearcolor">已佩戴</el-button>
+          <el-button type="text" size="small" v-if="scope.row.status==1" class="wearcolor" @click="nowear(scope.row.fanCardId)">取消佩戴</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -109,6 +109,7 @@ export default {
       percent:0,
       percentnum:'',
       myfanscardlist:[],
+      flag:true,
     };
   },
   created: {
@@ -145,7 +146,11 @@ export default {
       getmyFanCardList() {
           myFanCardList().then((res)=>{
               console.log("我的粉丝牌列表=",res)
-              this.myfanscardlist = res.data
+              if(res.data){
+                this.myfanscardlist = res.data
+              } else{
+                this.flag = false;
+              }
           })
       },
     changeblue() {
@@ -239,7 +244,7 @@ export default {
 .blueone {
   width: 38px;
   height: 4px;
-  background: rgba(83, 199, 241, 1);
+  background: #F9772A;
   border-radius: 2px;
   margin-left: 71px;
 }
@@ -247,7 +252,7 @@ export default {
 .bluetow {
   width: 38px;
   height: 4px;
-  background: rgba(83, 199, 241, 1);
+  background: #F9772A;
   border-radius: 2px;
   margin-left: 227px;
 }
@@ -355,12 +360,15 @@ position: relative;
     width: 74px;
     height: 26px;
     line-height: 26px;
-    color:rgb(0, 183, 255);
-    border: rgb(0, 183, 255) solid 2px;
+    color:#F9772A;
+    border: #F9772A solid 2px;
     border-radius: 30px;
     text-align: center;
     position: absolute;
     right: 16px;
     top: 16px;
+}
+::v-deep .wearcolor{
+  color:#F9772A;
 }
 </style>

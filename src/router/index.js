@@ -14,6 +14,22 @@ const routes = [
     component: Home
   },
   {
+    path: "/html",
+    name: "html",
+    meta: {
+      title: "支付"
+    },
+    component: ()=> import('../views/MCenter/html.vue')
+  },
+  {
+    path: "/paysuccess",
+    name: "paysuccess",
+    meta: {
+      title: "支付成功"
+    },
+    component: ()=> import('../views/word/paysuccess.vue')
+  },
+  {
     path:"/privary",
     name:"Privary",
     meta:{
@@ -60,6 +76,22 @@ const routes = [
       title:"弹幕管理"
   },
   component: ()=> import('../views/word/barrage.vue')
+},
+{
+  path:"/withdrawal",
+  name:"Withdrawal",
+  meta:{
+      title:"提现说明"
+  },
+  component: ()=> import('../views/word/withdrawal.vue')
+},
+{
+  path:"/topup",
+  name:"Topup",
+  meta:{
+      title:"充值说明"
+  },
+  component: ()=> import('../views/word/topup.vue')
 },
 {
   path:"/fans",

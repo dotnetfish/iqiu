@@ -315,9 +315,9 @@ export default {
         font-size: 14px;
         line-height: 1;
         border-radius: 24px;
-        color: $color-main;
+        color: #F9772A;
         background-color: #fff;
-        border: 1px solid $color-main;
+        border: 1px solid #F9772A;
       }
     }
 
@@ -384,7 +384,7 @@ export default {
       flex-basis: 50%;
       height: 100%;
       color: #fff;
-      background-color: $color-main;
+      background-color: #F9772A;
       cursor: pointer;
 
       &.follow {

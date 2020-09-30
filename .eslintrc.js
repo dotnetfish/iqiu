@@ -7,7 +7,7 @@ module.exports = {
     },
     "parser": "babel-eslint",
      parser: "vue-eslint-parser",
-    "extends": "eslint:recommended",
+    // "extends": "eslint:recommended",
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"

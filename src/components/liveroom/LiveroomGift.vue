@@ -5,6 +5,10 @@
         我的积分:
         <span class="color-main">{{ userLogin.credit }}</span>
       </div>
+      <div class="my-count">
+        我的球币:
+        <span class="color-main">{{ Summoney }}</span>
+      </div>
       <div class="count-tip">
         每日登陆赠送
         <span class="color-main">200</span> 积分
@@ -38,7 +42,8 @@
                 <div class="popper-head-wrap">
                   <div class="title-wrap">
                     <span class="title">{{ item.name }}</span>
-                    <span class="count">（{{ item.price }}积分）</span>
+                    <span class="count" v-if="item.type==1">（{{ item.price }}积分）</span>
+                    <span class="count" v-if="item.type!=1">（{{ item.price }}球币）</span>
                   </div>
                   <div class="popper-radios-wrap">
                     <span
@@ -53,6 +58,7 @@
               </div>
               <div class="popper-foot">
                 <p class="count">我的积分：{{ userLogin.credit }}</p>
+                <!-- <p class="count">我的球币：{{ Summoney }}</p> -->
                 <!-- <input class="input" type="tel" v-model="gift.value"> -->
                 <el-input v-model="gift.value" placeholder="自定义" :value="gift.value" class="input"></el-input>
                 <el-button
@@ -74,6 +80,30 @@
     <div class="rightmove">
       <el-button @click="rightmove()" v-if="xxx != length">＞</el-button>
     </div>
+    <!-- <div style="margin-left:20px;margin-right:20px;">
+      <div style="margin-top:3px"><img src="@/assets/rank/backpack.png"></div>
+      <div style="margin-left:7px">背包</div>
+    </div> -->
+    <el-popover
+            popper-class="live-popper"
+            placement="top-end"
+            width="335"
+            trigger="hover"
+          >
+          <div style="margin-left:10px;margin-top:10px;margin-bottom:10px">我的背包</div>
+          <div v-for="(item,index1) in freegift" :key="index1">
+            <div style="margin-left:10px;margin-top:10px;margin-bottom:10px">
+              <div style="width:60px;text-align:center" @click="handleSendGift(item,1)"><img :src=item.imageUrl style="width:30px;height:30px"></div>
+              <div style="width:60px;text-align:center">{{item.name}}</div>
+              <div style="width:60px;text-align:center">x{{item.sum}}</div>
+            </div>
+          </div>
+            <div class="item" slot="reference" style="margin-left:20px;margin-right:20px;">
+              <img style="margin-top:3px" class="logo" src="@/assets/rank/backpack.png" alt />
+              <div style="margin-left:7px">背包</div>
+            </div>
+          </el-popover>
+    <!-- <div class="backpack"></div> -->
     </div>
     <!--    <div class="popper-switch" @click="handleSwitch">-->
     <!--      <i class="icon ion_down" :class="{'ion_up': hidden}"></i>-->
@@ -90,8 +120,9 @@
 
 <script>
 import { sendGift } from "@/api/liveroom";
-import { Popover, Button, Input } from "element-ui";
+import { Popover, Button, Input, Message } from "element-ui";
 import { throttle } from "@/utils/debounceAndthrottle";
+import { MyPackage, getPay } from "@/api/api";
 // import PersonWallt from '@/components/MCenter/PersonWallt.vue';
 
 export default {
@@ -99,6 +130,7 @@ export default {
   data() {
     return {
       sending: false,
+      Summoney:0,
       xxx: 0,
       length:8,
       hidden: true, // 展示全部礼物
@@ -124,6 +156,10 @@ export default {
       gift: {
         value: 1,
       },
+      // imageUrl:'',
+      // giftname:'',
+      // giftsum:'',
+      freegift:'',
       payDialogVisible: false,
       tabBool: [false, true, false],
     };
@@ -132,6 +168,7 @@ export default {
     [Popover.name]: Popover,
     [Button.name]: Button,
     [Input.name]: Input,
+    [Message.name]: Message,
     // PersonWallt
   },
   props: {
@@ -163,9 +200,32 @@ export default {
     },
   },
   created() {},
+  mounted() {
+    this.getMyPackage()
+    this.Getpay()
+  },
   methods: {
+    Getpay(){
+      this.href = process.env.VUE_APP_ZY_API+'/topup'
+      console.log("54544",href)
+      getPay().then(res=>{
+        if(res.data.coin){
+          this.Summoney = res.data.coin 
+        }
+      })
+    },
+    //我的礼物背包
+    getMyPackage(){
+      MyPackage().then((res)=>{
+        console.log("我的礼物背包",res.data)
+        this.freegift = res.data
+        // this.imageUrl = res.data.imageUrl;
+        // this,giftname = res.data.name;
+        // this.giftsum = res.data.sum;
+      })
+    },
     rightmove() {
-      console.log("sadafaefwertwrrgreg===-==",this.giftList.length)
+      // console.log("sadafaefwertwrrgreg===-==",this.giftList.length)
       this.length = this.giftList.length - 8;
       if (this.xxx < this.giftList.length) {
         this.xxx += 1;
@@ -181,7 +241,7 @@ export default {
       if (isNaN(this.gift.value) || !this.gift.value)
         return this.Message.error("请输入数字");
       this.sending = true;
-      console.log("礼物item = ",item);
+      // console.log("礼物item = ",item);
       sendGift({
         uid: this.userLogin.id,
         sendFromType: 0, // 礼物来源: credit:0 package:1 coin:2
@@ -193,11 +253,13 @@ export default {
         .then((res) => {
           this.sending = false;
           if (res.code == 0) {
+            console.log("5555555555555555555555555555555555")
             this.$emit("sendGiftSuccess", res.data);
+            this.getMyPackage();
           } else {
-            this.Message.error(res.msg);
+            Message.error(res.msg);
           }
-          console.log(res);
+          // console.log(res);
         })
         .catch((err) => {
           if (err.data.msg) this.Message.error(err.data.msg);
@@ -523,6 +585,13 @@ export default {
     }
   }
 }
+// .backpack{
+//   position: absolute;
+//   width: 461px;
+// height: 286px;
+// background: #FFFFFF;
+// box-shadow: 0px 4px 8px 0px #D8D8D8;
+// }
 </style>
 <style>
 .live-popper {

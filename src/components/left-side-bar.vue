@@ -445,7 +445,7 @@
             }
 
             &:hover {
-              color: $color-main;
+              color: #f9772a;
 
               /*i {*/
               /*  &.gz {*/

@@ -569,7 +569,7 @@ export default {
   font-size: 20px;
   line-height: 60px;
   margin-left: 47.8%;
-  color: rgba(27, 181, 236, 1);
+  color: #F9772A;
 }
 
 .alldate {
@@ -586,6 +586,13 @@ export default {
   height: 50px;
   margin-left: 10px;
   margin-top: 4px;
+  // color: #ffffff;
+  // background-color: #F9772A;
+}
+.datebutton :focus{
+  color: #ffffff !important;
+  background-color: #F9772A;
+  border: 0;
 }
 
 .nowweek {

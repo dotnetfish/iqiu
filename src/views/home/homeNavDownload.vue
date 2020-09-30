@@ -174,7 +174,7 @@
   }
 
   .nav-icon:hover {
-    color: $color-main;
+    color: #F9772A;
   }
 
 

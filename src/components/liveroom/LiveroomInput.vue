@@ -10,7 +10,7 @@
     </div>
     <div class="paintingmessage" v-if="flag==true" @mouseenter="changeImageSrc(1)" @mouseleave="changeImageSrc(2)">
       <div class="paintingmessage-back">
-        <div style="margin-left:28px">彩色弹幕</div>
+        <div style="margin-left:28px">彩色弹幕<span style="font-size:12px;color:#1BB5EC;margin-left:6px">(粉丝牌每十级解锁一个彩色弹幕)</span></div>
         <div class="changebarrage">
           <div class="change1" @click="changecolor(1)">
               <img src="@/assets/fans/default.png" v-if="colornum==1">
@@ -69,7 +69,7 @@
   <div class="conditionsmessage" v-if="flagconditions==true" @mouseenter="changeflagconditions(1)" @mouseleave="changeflagconditions(2)">
       <div class="conditionsmessage-back">
         <div style="margin-left:28px;font-size:14px;color:#666666;position:absolute;margin-top:20px">当天赠送主播500积分，即可获得专属主播勋章</div>
-        <div style="margin-left:28px;font-size:14px;color:#666666;position:absolute;margin-top:50px;color:#1BB5EC;cursor:pointer;" @click="more()">了解更多></div>
+        <div style="margin-left:28px;font-size:14px;color:#666666;position:absolute;margin-top:50px;color:#f9772a;cursor:pointer;" @click="more()">了解更多></div>
       </div>
     </div>
     <div class="fans" @mouseenter="changeflagconditions(1)" @mouseleave="changeflagconditions(2)" @click="receive()" v-if="islevel==false">
@@ -84,25 +84,33 @@
         <div class="fansname">{{this.name}}</div>
       </div>
     </div>
-    <div class="changefansflag" v-if="changefansflag==true">
+    <div class="changefansflag" v-if="changefansflag==true" >
       <div class="changefansflag-back">
-        <div style="margin-left:28px;font-size:18px;color:#1BB5EC;position:absolute;margin-top:20px">我的粉丝勋章</div>
+        <div style="margin-left:28px;font-size:18px;color:#f9772a;position:absolute;margin-top:20px">我的粉丝勋章</div>
         <happy-scroll color="rgb(249,183,33)" size="3" resize style="height:430px;width:336px;margin-left:10px;margin-top:66px;position:absolute" hide-horizontal>
           <div>
             <div v-for="(item,index) in fanslist" :key="index">
               <div style="display:flex;margin-bottom:10px">
-                <div style="margin-left:21px;margin-right:12px"><img :src="item.icon" style="width: 66px;height: 24px;"></div>
-                <div class="name3">{{item.name}}</div>
-                <div>{{item.channelName}}</div>
+                <div v-if="item.isGet == 1" style="display:flex;">
+                  <div style="margin-left:21px;margin-right:12px"><img :src="item.icon" style="width: 66px;height: 24px;"></div>
+                  <div class="name3">{{item.name}}</div>
+                  <div>{{item.channelName}}</div>
+                  <div style="margin-top:3px">(当前直播间)</div>
+                </div>
+                <div v-else style="display:flex;">
+                  <div style="margin-left:21px;margin-right:12px"><img :src="item.icon" style="width: 66px;height: 24px;"></div>
+                  <div class="name3">{{item.name}}</div>
+                  <div>{{item.channelName}}</div>
+                </div>
                 <div v-if="item.isGet == 0 && item.isHave == 1" class="getnowfans" @click="getnowfans()">可领取</div>
-                <div v-if="item.isGet == 0 && item.isHave == 0" class="getnowfans">不可领取</div>
+                <div v-if="item.isGet == 0 && item.isHave == 0" class="getnowfans" @click="prompt()">不可领取</div>
               </div>
               <div style="display:flex;align-items:center;height: 26px;margin-bottom:10px" v-if="item.isGet == 1 || item.isGet == null" >
                 <div v-if="item.status == 0"><div class="alchange" @click="alter(item.fanCardId)"></div></div>
                 <div v-if="item.status == 1"><img src="@/assets/fans/alchange.png" style="width: 15px;height: 15px;margin-left: 21px;"></div>  
                 <div style="margin-left:21px;margin-right:12px">Lv.{{item.level}}</div>
                 <div style="width:120px;margin-left:15px;">
-                  <el-progress :percentage="parseFloat(((item.intimacy/(item.needIntimacy+item.intimacy))*100).toFixed(1))" :text-inside=true :stroke-width="12"></el-progress>
+                  <el-progress :percentage="parseFloat(((item.intimacy/(item.needIntimacy+item.intimacy))*100).toFixed(1))" :text-inside=true :stroke-width="12" color='#F9772A'></el-progress>
                 </div>
                 <div style="margin-left:27px">Lv.{{item.level+1}}</div>
                 <!-- <div>{{item.intimacy}}/{{item.needIntimacy+item.intimacy}}</div>  -->
@@ -119,7 +127,7 @@
       <div style="text-align:center;font-size: 24px;color: #333333;margin-top:130px">领取成功</div>
       <div style="text-align:center;font-size: 24px;color: #333333;margin-top:20px">是否佩戴当前粉丝牌</div>
       <div style="text-align:center;margin-top:40px;display: flex;justify-content: center;margin-bottom:26px;">
-        <div style="width: 160px;height: 60px;background: #1BB5EC;border-radius: 28px;font-size: 24px;color: #FFFFFF;line-height:60px;cursor:pointer;margin-right:40px" @click="dialogVisible1=false">取消</div>
+        <div style="width: 160px;height: 60px;background: #1BB5EC;border-radius: 28px;font-size: 24px;color: #FFFFFF;line-height:60px;cursor:pointer;margin-right:40px" @click="nowear">取消</div>
         <div style="width: 160px;height: 60px;background: #1BB5EC;border-radius: 28px;font-size: 24px;color: #FFFFFF;line-height:60px;cursor:pointer;" @click="getwearFanCard()">佩戴</div>
       </div>
     </el-dialog>
@@ -137,7 +145,7 @@
         <div style="width: 424px;height: 60px;background: #1BB5EC;border-radius: 28px;font-size: 24px;color: #FFFFFF;line-height:60px;cursor:pointer;" @click="Getfancard()">领取</div>
       </div>
     </el-dialog>
-    <el-button class="btn" :class="{'login': isLogin}" @click.stop="handleSend">发布</el-button>
+    <button class="btn" :class="{'login': isLogin}" @click.stop="handleSend">发布</button>
     <!--<div class="btn" :class="{'login': isLogin}">发布</div>-->
   </div>
 </template>
@@ -204,6 +212,18 @@
       }
     },
     methods: {
+      Changefansflag(){
+        this.changefansflag = false
+      },
+      nowear(){
+        this.dialogVisible1=false
+        this.$router.go(0);
+      },
+      //点击不可领取时提示差多少
+      prompt(){
+        this.getfindFanCard()
+      },
+      //颜色
       getHomeUserInfo () {
         loginInfo().then(res => {
           this.levelicon = res.data.userLevelDto.icon;
@@ -312,7 +332,7 @@
           } else if(res.data.isHave == 1){
             this.dialogVisible = true
           } else if(res.data.isHave == 0){
-            Message.success({
+            Message.error({
               message: "未达到领取条件，还差"+res.data.userCoin+"积分",
             });
           }
@@ -353,7 +373,8 @@
         }
       },
       more() {
-        this.$router.push({ path: '/fans' })
+        window.open(process.env.VUE_APP_ZY_API + '/fans')
+        // this.$router.push({ path: '/fans' })
       },
       setTime: setTime,
       // handleSend() {
@@ -363,16 +384,17 @@
       // },
       handleSend: throttle(function () {
         if (!this.textarea) return;
+        // console.log("asdafafaqefeee",this.levelicon)
         if(this.nowicon){
-          this.$emit('sendMsg', this.textarea,this.nowicon,this.name,this.levelicon)
+          this.$emit('sendMsg', this.textarea,this.levelicon,this.nowicon,this.name)
         }else{
-          this.$emit('sendMsg', this.textarea)
+          this.$emit('sendMsg', this.textarea,this.levelicon)
         }
         this.textarea = "";
         this.getaddMesNum()
       }, 2000),
       getaddMesNum () {
-        console.log("发送弹幕id====",this.channelInfo.id)
+        // console.log("发送弹幕id====",this.channelInfo.id)
         let data = {
             cid:this.channelInfo.id,
           }
@@ -439,10 +461,11 @@
       padding-left: 80px;
     }
 
-    .btn {
+   .btn {
       display: inline-block;
       width: 20%;
       height: 54px;
+      outline: 0;
       /*line-height: 54px;*/
       text-align: center;
       color: #fff;
@@ -450,10 +473,10 @@
       cursor: pointer;
       border-radius: 0 4px 4px 0;
       border: 0 none;
-      background-color: $color-border-input;
+      background-color: #F9772A;
 
       &.login {
-        background-color: $color-main;
+        background-color: #F9772A;
       }
     }
 
@@ -666,7 +689,7 @@
   border: rgb(107, 181, 241) solid 1px;
   color: rgb(107, 181, 241);
   text-align: center;
-  width: 60px;
+  width: 80px;
   height: 18px;
   cursor: pointer;
 }
@@ -699,6 +722,5 @@
   width: 44px;
   text-align: center;
   margin-left: 42px;
-
 }
 </style>

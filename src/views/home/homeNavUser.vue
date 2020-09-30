@@ -193,7 +193,7 @@
  @import "@/assets/css/_var.scss";
  .login-item {
    &:hover {
-     color: $color-main;
+     color: #F9772A;
    }
  }
  .nav-nologin{

@@ -4,7 +4,10 @@
       <div class="nav-menu">
         <div class="nav-logo" v-if="navLogo" align="center">
           <router-link :to="{name:'home'}" @click.native="navClickEvent('爱球直播')">
-            <img :src="src">
+            <img src="@/assets/logo.png" style="width:68px">
+          </router-link>
+          <router-link :to="{name:'home'}" @click.native="navClickEvent('爱球直播')">
+            <div style="height:60px;line-height:60px;margin-left:10px">爱球直播</div>
           </router-link>
         </div>
         <div class="nav-display">
@@ -147,7 +150,8 @@
       flex-flow: row;
 
       .nav-logo {
-        width: 144px;
+        display: flex;
+        width: 156px;
         height: 60px;
         margin-right: 50px;
         img {
@@ -181,14 +185,14 @@
           .nav-routing:hover {
             width: 80px;
             height: 60px;
-            color: $color-main;
+            color: #F9772A;
           }
 
           .nav-routing-active {
             width: 60px;
             height: 34px;
             margin: 0px 10px 0px 10px;
-            background: $color-main;
+            background: #F9772A;
             border-radius: 60px;
             color: rgba(255, 255, 255, 1);
             line-height: 34px;
@@ -217,7 +221,7 @@
       .routing:hover {
         width: 80px;
         height: 60px;
-        color: $color-main;
+        color: #F9772A;
       }
 
       .routing-home {
