@@ -638,10 +638,10 @@
       this.$router.push({ path: '/live-broadcast', query: { mid } })
     },
       downloadleft() {
-         window.open(process.env.VUE_APP_ZY_API + '/zhibo')
+         window.open(process.env.VUE_APP_HREF + '/zhibo')
       },
       downloadright() {
-         window.open(process.env.VUE_APP_ZY_API + '/category')
+         window.open(process.env.VUE_APP_HREF + '/category')
       },
       // 获取推荐列表
       getSugestedList() {

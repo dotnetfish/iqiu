@@ -1,6 +1,6 @@
 <template>
   <div class="live-gift" :class="{'hidden': hidden}" v-show="giftList.length>0">
-    <el-dialog :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+    <el-dialog :visible.sync="dialogVisible" width="30%">
       <div style="display:flex">
         <div
           style="color: #999999;font-size: 14px;height:40px;line-height:40px;margin-right:12px;"
@@ -108,8 +108,8 @@
                 </div>
               </div>
               <div class="popper-foot">
-                <p class="count">我的积分：{{ userLogin.credit }}</p>
-                <!-- <p class="count">我的球币：{{ Summoney }}</p> -->
+                <p class="count" v-if="item.type==1">我的积分：{{ userLogin.credit }}</p>
+                <p class="count" v-if="item.type!=1">我的球币：{{ Summoney }}</p>
                 <!-- <input class="input" type="tel" v-model="gift.value"> -->
                 <el-input v-model="gift.value" placeholder="自定义" :value="gift.value" class="input"></el-input>
                 <el-button
@@ -171,7 +171,7 @@
 
 <script>
 import { sendGift } from "@/api/liveroom";
-import { Popover, Button, Input, Message, Dialog } from "element-ui";
+import { Popover, Button, Input, Message, Dialog, Checkbox } from "element-ui";
 import { throttle } from "@/utils/debounceAndthrottle";
 import { MyPackage, getPay, paylist, getToUser, payType, payadd } from "@/api/api";
 // import PersonWallt from '@/components/MCenter/PersonWallt.vue';
@@ -185,6 +185,7 @@ export default {
       xxx: 0,
       length:8,
       hidden: true, // 展示全部礼物
+      href:'',
       radioList: [
         {
           value: 10,
@@ -233,6 +234,7 @@ export default {
     [Input.name]: Input,
     [Message.name]: Message,
     [Dialog.name]: Dialog,
+    [Checkbox.name]:Checkbox,
     // PersonWallt
   },
   props: {
@@ -267,6 +269,7 @@ export default {
   mounted() {
     this.getMyPackage()
     this.Getpay()
+    this.getpayType()
   },
   methods: {
     alipay(){
@@ -300,12 +303,13 @@ export default {
       }
     },
     getpayType(){
+      console.log("默认充值金额组=")
       let data = {
         type:3
       }
       payType(data).then((res)=>{
         this.defaultpaylist = res.data.payTypes 
-        // console.log("默认充值金额组=",res)
+        console.log("默认充值金额组=",res)
       })
     },
     GetToUser() {
@@ -335,13 +339,15 @@ export default {
       });
     },
     Getpay(){
-      this.href = process.env.VUE_APP_ZY_API+'/topup'
-      console.log("54544",href)
-      getPay().then(res=>{
+      this.href = process.env.VUE_APP_HREF+'/topup'
+      console.log("54544",this.href)
+      if(this.$store.state.userStatus.userInfo.uid){
+        getPay().then(res=>{
         if(res.data.coin){
           this.Summoney = res.data.coin 
         }
       })
+      }
     },
     //多少球币
     getcoin(coin,price){
@@ -352,13 +358,15 @@ export default {
     },
     //我的礼物背包
     getMyPackage(){
-      MyPackage().then((res)=>{
+      if(this.$store.state.userStatus.userInfo.uid){
+        MyPackage().then((res)=>{
         console.log("我的礼物背包",res.data)
         this.freegift = res.data
         // this.imageUrl = res.data.imageUrl;
         // this,giftname = res.data.name;
         // this.giftsum = res.data.sum;
       })
+      }
     },
     rightmove() {
       // console.log("sadafaefwertwrrgreg===-==",this.giftList.length)
@@ -532,7 +540,7 @@ export default {
   .allall {
     right: 0;
     position: absolute;
-    width: 723px;
+    width: 775px;
     height: 60px;
     display: flex;
   }

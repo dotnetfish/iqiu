@@ -84,7 +84,7 @@ export default {
       this.type=type
     },
     getmySalary(){
-      this.href = process.env.VUE_APP_ZY_API+'/withdrawal'
+      this.href = process.env.VUE_APP_HREF+'/withdrawal'
         mySalary().then(res=>{
            this.Summoney = res.data.totalCoin
         })

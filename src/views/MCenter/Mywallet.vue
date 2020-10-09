@@ -199,7 +199,7 @@ export default {
     },
     //获取个人资产
     Getpay(){
-      this.href = process.env.VUE_APP_ZY_API+'/topup'
+      this.href = process.env.VUE_APP_HREF+'/topup'
       console.log("54544",href)
       getPay().then(res=>{
         if(res.data.coin){

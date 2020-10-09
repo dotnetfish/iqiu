@@ -373,7 +373,7 @@
         }
       },
       more() {
-        window.open(process.env.VUE_APP_ZY_API + '/fans')
+        window.open(process.env.VUE_APP_HREF + '/fans')
         // this.$router.push({ path: '/fans' })
       },
       setTime: setTime,

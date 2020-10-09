@@ -439,18 +439,18 @@ export default {
 
 .pc {
   color: #fff;
-  background-color: rgb(27, 181, 236);
+  background-color: #f9772a;
   border: 0;
-  outline-color: rgb(0, 162, 255);
+  outline-color:  #f9772a;
   border-radius: 4px;
 }
 
 .m {
   color: #fff;
-  background-color: rgb(27, 181, 236);
+  background-color:  #f9772a;
   border: 0;
   margin-left: 20px;
-  outline-color: rgb(0, 162, 255);
+  outline-color:  #f9772a;
   border-radius: 4px;
 }
 
@@ -463,12 +463,12 @@ export default {
 
 .copyurl {
   color: #fff;
-  background-color: rgb(27, 181, 236);
+  background-color: #f9772a;
   border: 0;
   height: 39px;
   margin-left: 10px;
   width: 20%;
-  outline-color: rgb(0, 162, 255);
+  outline-color: #f9772a;
   border-radius: 4px;
 }
 
