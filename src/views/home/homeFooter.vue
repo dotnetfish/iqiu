@@ -126,6 +126,24 @@
                 </span>
               </a></div>
           </div>
+          <div class="address1">
+            <div class="record-content">
+              <router-link :to="{name:'Culture'}" @click.native="navClickEvent('网络文化经营许可证')">
+                <span style="margin: 0px 0px 0px 5px; color:#939393;">
+                  文网文： 桂网文 (2020)4469-158号
+                </span>
+              </router-link>
+              <!-- <a
+                target="_blank"
+                :href="require('../../assets/culture.pdf')"
+                style="display:inline-block;text-decoration:none;"
+              >
+                <span style="margin: 0px 0px 0px 5px; color:#939393;">
+                  文网文： 桂网文 (2020)4469-158号
+                </span>
+              </a> -->
+            </div>
+          </div>
         </div>
       </div>
     </footer>
@@ -270,7 +288,7 @@ export default {
   .home-footer-record {
     background: #000;
     width: 100%;
-    height: 57px;
+    height: 75px;
 
     .record-content {
       text-align: center;
@@ -395,6 +413,11 @@ export default {
 .address {
   display: flex;
   width: 415px;
+  margin: 0 auto;
+}
+.address1 {
+  display: flex;
+  width: 234px;
   margin: 0 auto;
 }
 .blank {

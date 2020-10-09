@@ -54,6 +54,14 @@ const routes = [
   component: ()=> import('../views/word/aboutwefake.vue')
 },
 {
+  path:"/culture",
+  name:"Culture",
+  meta:{
+      title:"网络文化经营许可证"
+  },
+  component: ()=> import('../views/word/culture.vue')
+},
+{
   path:"/serve",
   name:"Serve",
   meta:{

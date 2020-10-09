@@ -7,7 +7,7 @@
       </div>
       <div class="top3">
         <div class="item item0" :class="'item'+ top3Index" v-for="(top3Item,top3Index) in item.top3" :key="top3Index">
-          <img :src="top3Item.avatarUrl" alt="">
+          <img :src="top3Item.avatarUrl" alt="" @click="enter(top3Item.uid)">
           <span class="item-name">
             <el-tooltip effect="dark" :content="top3Item.uname " placement="top-start">
                   <span class="name">{{ top3Item.uname }}</span>
@@ -71,6 +71,9 @@
       console.log('989889998',this.config)
     },
     methods: {
+      enter(roomid){
+        window.open(process.env.VUE_APP_HREF + '/' + roomid)
+      },
       fillRankList(rankList, rankType) {
         let list = [];
         if (rankList.length >= 10) {

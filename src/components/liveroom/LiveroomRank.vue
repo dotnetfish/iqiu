@@ -19,15 +19,15 @@
         <div class="befor-three" v-if="rankinglist[0]">
             <div class="level2">
               <img src="@/assets/rank/no2.png">
-              <img :src=rankinglist[1].avatarUrl class="no2" v-if="rankinglist[1]">
+              <img :src=rankinglist[1].avatarUrl class="no2" v-if="rankinglist[1]" @click="enter(rankinglist[1].uid)">
             </div>
             <div class="level1">
               <img src="@/assets/rank/no1.png">
-              <img :src=rankinglist[0].avatarUrl class="no1" v-if="rankinglist[0]">
+              <img :src=rankinglist[0].avatarUrl class="no1" v-if="rankinglist[0]" @click="enter(rankinglist[0].uid)">
             </div>
             <div class="level3">
               <img src="@/assets/rank/no3.png">
-              <img :src=rankinglist[2].avatarUrl class="no3" v-if="rankinglist[2]">
+              <img :src=rankinglist[2].avatarUrl class="no3" v-if="rankinglist[2]" @click="enter(rankinglist[2].uid)">
             </div>
         </div>
         <div v-else>
@@ -57,15 +57,15 @@
         <div class="befor-three" v-if="rankinglist[0]">
             <div class="level2">
               <img src="@/assets/rank/no2.png">
-              <img :src=rankinglist[1].avatarUrl class="no2" v-if="rankinglist[1]">
+              <img :src=rankinglist[1].avatarUrl class="no2" v-if="rankinglist[1]" @click="enter(rankinglist[1].uid)">
             </div>
             <div class="level1">
               <img src="@/assets/rank/no1.png">
-              <img :src=rankinglist[0].avatarUrl class="no1" v-if="rankinglist[0]">
+              <img :src=rankinglist[0].avatarUrl class="no1" v-if="rankinglist[0]" @click="enter(rankinglist[0].uid)">
             </div>
             <div class="level3">
               <img src="@/assets/rank/no3.png">
-              <img :src=rankinglist[2].avatarUrl class="no3" v-if="rankinglist[2]">
+              <img :src=rankinglist[2].avatarUrl class="no3" v-if="rankinglist[2]" @click="enter(rankinglist[2].uid)">
             </div>
         </div>
         <div v-else>
@@ -77,8 +77,10 @@
         </div>
         <div class="three-name">
           <div class="name1" v-if="rankinglist[1]">{{rankinglist[1].uname}}</div>
+          <div class="name1" v-if="rankinglist[0]!=null && rankinglist[1]==null">虚位以待</div>
           <div class="name2" v-if="rankinglist[0]">{{rankinglist[0].uname}}</div>
           <div class="name3" v-if="rankinglist[2]">{{rankinglist[2].uname}}</div>
+          <div class="name3" v-if="rankinglist[0]!=null && rankinglist[2]==null">虚位以待</div>
         </div>
         <div class="three-rank">
           <div class="rank1" v-if="rankinglist[1]">{{rankinglist[1].score}}贡献值</div>
@@ -154,6 +156,9 @@ export default {
     },
   },
   methods: {
+    enter(roomid){
+        window.open(process.env.VUE_APP_HREF + '/' + roomid)
+      },
     changeblue(x) {
       this.showblue = x;
       if(this.showblue == true) {
@@ -279,6 +284,7 @@ export default {
   height: 65px;
   width: 17%;
   margin-top: 30px;
+  cursor: pointer;
 }
 .level1 {
   height: 120px;
@@ -287,12 +293,14 @@ export default {
   display: -webkit-flex;
   align-items:center;
   justify-content:center;
+  cursor: pointer;
 }
 .level3 {
   height: 66px;
   width: 17%;
   margin-top: 32px;
   display: flex;
+  cursor: pointer;
 }
 
 .no2 {

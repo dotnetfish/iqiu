@@ -668,7 +668,7 @@ export default {
 }
 
 .information-title {
-  width: 100%;
+  width: 80%;
   height: 26px;
   margin-top: 7px;
   line-height: 30px;
@@ -680,6 +680,7 @@ export default {
   overflow:hidden;
   text-overflow:ellipsis;
   color: rgba(102, 102, 102, 1);
+  margin-left: 14px;
 }
 
 .information-time {
