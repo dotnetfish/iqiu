@@ -90,7 +90,7 @@ export default {
       },
       getFanCardinfo(){
         FanCardinfo().then(res=>{
-          console.log("pppppppppppppppppppp",res)
+          // console.log("pppppppppppppppppppp",res)
           this.status = res.data.status
           this.channelName = res.data.name
           this.icon = res.data.icon

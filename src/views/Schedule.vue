@@ -513,12 +513,12 @@ export default {
         this.nmouth = this.nowyear;
       }
       this.changedate = t2;
-      let timeStr1 = t1 + "/" + t2 + "/00:00:00";
-      let timeStr2 = t1 + "/" + t2 + "/23:59:59";
+      let timeStr1 = t1 + '/' + t2 + ' ' + '00:00:00'
+      let timeStr2 = t1 + '/' + t2 + ' ' + '23:59:59'
       console.log(t1 + "/" + t2)
       console.log(timeStr2)
-      let time1 = new Date(timeStr1).getTime();
-      let time2 = new Date(timeStr2).getTime();
+      let time1 = new Date(timeStr1.replace(/-/g,'/')).getTime();
+      let time2 = new Date(timeStr2.replace(/-/g,'/')).getTime();
       let headers = { "content-type": "application/json" };
       let data = {
         startTime: time1,

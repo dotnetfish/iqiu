@@ -14,6 +14,24 @@
       </div>
       <anchor-live-log></anchor-live-log>
     </el-tab-pane>
+    <!-- <el-tab-pane label="直播数据" name="12" :key="12">
+              <div slot="label" class="person-subtitle">
+                <div class="ml5">直播数据</div>
+              </div>
+              <Playdata></Playdata>
+            </el-tab-pane>
+            <el-tab-pane label="直播设置" name="13" :key="13">
+              <div slot="label" class="person-subtitle">
+                <div class="ml5">直播设置</div>
+              </div>
+              <Playset></Playset>
+            </el-tab-pane>
+            <el-tab-pane label="我的收入" name="14" :key="14">
+              <div slot="label" class="person-subtitle">
+                <div class="ml5">我的收入</div>
+              </div>
+              <Myincome></Myincome>
+            </el-tab-pane> -->
 <!--    <el-tab-pane label="我的收益" name="6" :key="6">-->
 <!--      <div slot="label" class="person-subtitle">-->
 <!--        <div class="ml5">我的收益</div>-->
@@ -35,6 +53,9 @@
   // import AnchorMyIncome from "./AnchorMyIncome";
   import AnchorLiveLog from "./AnchorLiveLog";
   import AnchorRoom from "./AnchorRoom";
+  // import Playdata from './Playdata';
+  // import Playset from './Playset';
+  // import Myincome from './Myincome';
 
   export default {
     name: "AnchorCenter",
@@ -47,7 +68,10 @@
       // AnchorIncomeDetalis,
       // LiveOption,
       AnchorLiveLog,
-      AnchorRoom
+      AnchorRoom,
+      // Playdata,
+      // Playset,
+      // Myincome,
     },
     data() {
       return {

@@ -1,7 +1,7 @@
 <template>
   <div class="live-gift" :class="{'hidden': hidden}" v-show="giftList.length>0">
-    <el-dialog :visible.sync="dialogVisible" width="30%">
-      <div style="display:flex">
+    <el-dialog :visible.sync="dialogVisible" width="34%">
+      <div style="display:flex;background: #F0F0F0;height: 54px;padding-left: 24px;padding-top: 14px;">
         <div
           style="color: #999999;font-size: 14px;height:40px;line-height:40px;margin-right:12px;"
         >代充账号:</div>
@@ -36,10 +36,13 @@
           <div style="font-size:12px;color:#F9772A;margin-top:4px;text-align: center;">1元=1000球币</div>
         </div>
       </div>
-      <div style="margin-top:20px" v-if="isanymoney == false">可获得{{coinsum}}球币</div>
-      <div style="margin-top:20px;margin-bottom" v-else>可获得{{anymoney*1000}}球币</div>
+      <div style="background: #F9F9F9;height: 30px;padding-top: 20px;" v-if="isanymoney == false"><div style="margin-left: 28px;color:#F9772A;">可获得{{coinsum}}球币</div></div>
+      <div style="background: #F9F9F9;height: 30px;padding-top: 20px;" v-else><div style="margin-left: 28px;color:#F9772A;">可获得{{anymoney*1000}}球币</div></div>
+      <div style="margin-top:40px;margin-left: 28px;font-size: 14px;color: #333333;" v-if="isanymoney == false">请选择支付方式,支付<span style="color:#F9772A;font-size:24px">{{coinsum/1000}}</span>元</div>
+      <div style="margin-top:40px;margin-left: 28px;font-size: 14px;color: #333333;" v-else>请选择支付方式,支付<span style="color:#F9772A;font-size:24px">{{anymoney}}</span>元</div>
       <div class="alipay" @click="alipay()"><img src="@/assets/zhifubao.png" style="width: 16px;height: 16px;margin-top: 8px;margin-right: 10px;">支付宝</div>
-      <section style="margin-top:30px;text-align:center">
+      <div style="width:100%;height: 2px;background: #F9F9F9;margin-top:30px;"></div>
+      <section style="text-align:center">
             <el-checkbox v-model="agreement" style="margin:15px auto 0;font-size:12px;">
               <span style="font-size:12px;">我已阅读并同意</span>
               <a
@@ -54,7 +57,8 @@
     <div class="gift-count">
       <div class="my-count">
         我的积分:
-        <span class="color-main">{{ userLogin.credit }}</span>
+        <span class="color-main" v-if="userLogin.credit">{{ userLogin.credit }}</span>
+        <span class="color-main" v-else>0</span>
       </div>
       <div class="my-count">
         我的球币:
@@ -207,6 +211,7 @@ export default {
       radioIndex: 0,
       flag: false,
       touid: "",
+      Touid:'',
       avatarUrl: "",
       id: "",
       defaultpaylist:'',
@@ -274,14 +279,16 @@ export default {
   methods: {
     alipay(){
       if(this.touid == ''){
-        this.touid = this.$store.state.userStatus.userInfo.uid
+        this.Touid = this.$store.state.userStatus.userInfo.uid
+      }else{
+        this.Touid = this.touid
       }
       if(this.isanymoney==true){
         this.price = this.anymoney
       }
       // console.log(this.touid)
       let data = {
-        toUid:this.touid,
+        toUid:this.Touid,
         platform:'pc',
         price:this.price,
         type:1,
@@ -754,6 +761,9 @@ export default {
 .default{
   display: flex;
   flex-wrap: wrap;
+  width: 97%;
+  padding-left: 17px;
+  background: #F9F9F9;
 }
 .defaultmoney:focus{
 border: 1px solid #f9772a;
@@ -770,6 +780,7 @@ margin-top: 20px;
 }
 .alipay{
   width: 111px;
+  margin-left: 28px;
 height: 32px;
 background: #FFFFFF;
 border-radius: 5px;
@@ -782,6 +793,15 @@ margin-top: 20px;
 }
 .know{
   color: #f9772a;
+}
+
+::v-deep .el-dialog__header {
+  padding: 0;
+}
+
+::v-deep .el-dialog__body{
+  padding: 0;
+  padding-bottom: 20px;
 }
 
 ::v-deep .el-checkbox__input.is-checked + .el-checkbox__label {
@@ -809,13 +829,13 @@ margin-top: 20px;
   outline: 0;
 }
 .defaultmoney{
-  width: 122px;
+width: 122px;
 height: 50px;
 background: #FFFFFF;
 border-radius: 5px;
-border: 1px solid #999999;
-margin-right: 5px;
-margin-left: 5px;
+border: 1px solid #F2F2F2;
+margin-right: 10px;
+margin-left: 10px;
 margin-top: 20px;
 transition: all 0.2s;
 }

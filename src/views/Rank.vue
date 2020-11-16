@@ -52,14 +52,14 @@
       }
     },
     created() {
-      rankingQuery({ typeCode: 'newanchor' }).then(
+      rankingQuery({ typeCode: 'newanchor', timeType: 'ALL' }).then(
         res => {
           let list = [];
           if (res.data) list = res.data.itemDtoList
           this.fillRankList( list, 1);
         }
       );
-      rankingQuery({ typeCode: "hotanchor" }).then(
+      rankingQuery({ typeCode: "hotanchor", timeType: 'ALL' }).then(
         res => {
           let list = [];
           if (res.data) list = res.data.itemDtoList
@@ -72,6 +72,7 @@
     },
     methods: {
       enter(roomid){
+        console.log('989889998',roomid)
         window.open(process.env.VUE_APP_HREF + '/' + roomid)
       },
       fillRankList(rankList, rankType) {

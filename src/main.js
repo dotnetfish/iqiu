@@ -12,7 +12,12 @@ import VueClipboard from 'vue-clipboard2'
 import { HappyScroll } from 'vue-happy-scroll'
 import 'vue-happy-scroll/docs/happy-scroll.css'
 import VDistpicker from 'v-distpicker'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import echarts from 'echarts'
 
+Vue.prototype.$echarts = echarts
+Vue.use(ElementUI);
 Vue.component('v-distpicker', VDistpicker)
 Vue.use(HappyScroll)
 Vue.component('happy-scroll', HappyScroll)

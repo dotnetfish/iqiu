@@ -124,26 +124,22 @@
                 <span style="margin: 0px 0px 0px 5px; color:#939393;">
                   ICP备案号：桂ICP备2020006699号
                 </span>
-              </a></div>
+              </a>
+              <router-link :to="{name:'Culture'}" @click.native="navClickEvent('网络文化经营许可证')">
+                <span style="margin: 0px 0px 0px 5px; color:#939393;">
+                  文网文： 桂网文 (2020)4469-158号
+                </span>
+              </router-link></div>
           </div>
-          <div class="address1">
+          <!-- <div class="address1">
             <div class="record-content">
               <router-link :to="{name:'Culture'}" @click.native="navClickEvent('网络文化经营许可证')">
                 <span style="margin: 0px 0px 0px 5px; color:#939393;">
                   文网文： 桂网文 (2020)4469-158号
                 </span>
               </router-link>
-              <!-- <a
-                target="_blank"
-                :href="require('../../assets/culture.pdf')"
-                style="display:inline-block;text-decoration:none;"
-              >
-                <span style="margin: 0px 0px 0px 5px; color:#939393;">
-                  文网文： 桂网文 (2020)4469-158号
-                </span>
-              </a> -->
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </footer>
@@ -412,7 +408,7 @@ export default {
 }
 .address {
   display: flex;
-  width: 415px;
+  width: 606px;
   margin: 0 auto;
 }
 .address1 {

@@ -110,12 +110,12 @@
       setTime: setTime,
       handleSelectMetch(row) {
         return matchesSubscribe({ mid:row.metchId }).then(res => {
-          console.log(res,'111111111');
+          // console.log(res,'111111111');
         }).catch(() => {
         })
       }, handleUnSelectMetch(row) {
         return matchesUnsubscribe({ mid:row.metchId }).then(res => {
-          console.log(res,'111111111');
+          // console.log(res,'111111111');
         }).catch(() => {
         })
       },
@@ -138,7 +138,7 @@
         return matchesInstant({ type }).then(res => {
           this.fomatterData(res.data)
           this.loading = false;
-          console.log(res);
+          // console.log(res);
         }).catch(() => {
           this.loading = false;
         })
@@ -156,7 +156,7 @@
           let metchTime = new Date(setTime(metchArr[1]).yearStr2).getTime()
           let metchStatusStr = metchArr[10] == 0 ? '进行中' : metchArr[10] == 1 ? '未开始' : '已结束'; // 0 进行 1未开始，其他的都可以认为是已结束
           // let metchTime = metchArr[1]
-          console.log(metchTime);
+          // console.log(metchTime);
 
           metchItem = {
             metchId: metchArr[0],

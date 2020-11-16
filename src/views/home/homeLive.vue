@@ -141,51 +141,8 @@
               <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{item.teamTwo}}</div>
             </div>
           </div>
-          <!-- <div class="boss">
-            <div class="bossone">
-              <div style="width:33px;height:30px;"><img src="@/assets/home/zuqiu.png" style="width:33px;height:30px"></div>
-              <div style="line-height:30px;color:rgb(154, 160, 179);margin-left:10px">莫西超</div>
-              <div style="line-height:30px;margin-left:20%;margin-right:2%">07月28日</div>
-              <div style="line-height:30px;color:rgb(154, 160, 179)">09:00</div>
-            </div>
-
-            <div class="bosstow">
-              <div style="width:60px;height:60px;"><img src="@/assets/icon_nologin@2x.png" style="width:60px;height:60px"></div>
-               <div style="line-height:60px;margin-left:30px;margin-right:30px">VS</div>
-              <div style="width:60px;height:60px"><img src="@/assets/icon_nologin@2x.png" style="width:60px;height:60px"></div>
-            </div>
-
-            <div class="bossthree">
-              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">系里哈哈</div>
-              <div style="width:60px;height:28px;margin-left:12px;margin-right:12px"><img src="@/assets/home/yuyue.jpg" style="width:60px;height:28px"></div>
-              <div style="line-height:30px;width:63px;height:60px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">呼哈呼哈</div>
-            </div>
-          </div> -->
         </div>   
     </div>
-    <!-- ss -->
-    <!-- <div class="shareall">
-      <el-popover placement="bottom-start" width="410" trigger="hover">
-        <div class="text">老铁分享一个呗~</div>
-        <div class="sharearea">
-          <div class="share1" @click="share('qq')">
-            <img src="@/assets/share/qq.png" alt />
-          </div>
-          <div class="share1" @click="share('qzone')">
-            <img src="@/assets/share/kongjian.png" alt />
-          </div>
-          <div class="share1" @click="share('weibo')">
-            <img src="@/assets/share/xinlang.png" alt />
-          </div>
-        </div>
-        <button
-          slot="reference"
-          class="share-button"
-        >
-          <span class="share-text">分享</span>
-        </button>
-      </el-popover>
-    </div> -->
       <div class="liveRecomend">
         <div class="liveRecomend-title">
           <img src="@/assets/home/homeIcon/hotRecom@2x.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
@@ -211,7 +168,8 @@
           </div>
           <div class="allimg">
           <div class="shuffling">
-          <section class="news-content">
+            <img src="@/assets/gonggao/big2.png" style="width:420px;height:350px;" @click="zhibo()">
+          <!-- <section class="news-content">
             <el-carousel height="350px">
               <el-carousel-item v-for="(item,index) in protocolList" :key="index">
                 <a :href="item.url" target="_blank" @click="homeClickEvent('ad_click','新闻公告',item.url)">
@@ -219,11 +177,7 @@
                 </a>
               </el-carousel-item>
             </el-carousel>
-            <!-- <div class="news-item" v-for="(item,index) in protocolList" :key="index">
-              <a class="news-item-title" :href="item.url" target="_blank">{{ item.title }}</a> -->
-              <!--          <p class="news-item-desc">{{ item }} 爱球直播平台（以下简称“本平台”）是全民的直…</p>-->
-            <!-- </div> -->
-          </section>
+          </section> -->
           </div>
           <div>
           <div class="img1"> <img src="@/assets/gonggao/small2.png" style="width:210px;height:170px;" @click="privacy()"></div>
@@ -232,33 +186,301 @@
           </div>
         </section>
         <!-- 新闻 -->
-        <section class="rightnews">
+        <!-- <section class="rightnews">
           <div class="liveRecomend-title">
             <img src="@/assets/home/homeIcon/news.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
             <p class="liveRecomend-title-text">新闻
-  <!--            <i class="el-icon-arrow-right arrow-right"></i>-->
             </P>
           </div>
           <div class="news-item" v-for="(item,index) in protocolList" :key="index">
               <a class="news-item-title" :href="item.url" target="_blank">{{ item.title }}</a>
-              <!--          <p class="news-item-desc">{{ item }} 爱球直播平台（以下简称“本平台”）是全民的直…</p>-->
             </div>
+        </section> -->
+        <section class="rightnews" style="background:rgb(250, 250, 250);margin-top:20px">
+            <div class="liveRecomend-title" style="background:#F9772A;width:172px">
+              <p class="liveRecomend-title-text" style="color:#ffffff;margin-left:20px;margin-right:20px">球队数据详情
+              </P>
+            </div>
+            <div style="display:flex;margin-top:20px">
+              <div @click="gamename(1)" ref="teamname1" style="cursor: pointer;color:#F9772A;margin-left:28px;margin-right:14px">中超</div>
+              <div @click="gamename(2)" ref="teamname2" style="cursor: pointer;margin-left:14px;margin-right:14px;">英超</div>
+              <div @click="gamename(3)" ref="teamname3" style="cursor: pointer;margin-left:14px;margin-right:14px;">西甲</div>
+              <div @click="gamename(4)" ref="teamname4" style="cursor: pointer;margin-left:14px;margin-right:14px;">意甲</div>
+              <div @click="gamename(5)" ref="teamname5" style="cursor: pointer;margin-left:14px;margin-right:14px;">德甲</div>
+              <div @click="gamename(6)" ref="teamname6" style="cursor: pointer;margin-left:14px;margin-right:28px;">法甲</div>
+            </div>
+            <div class="tabledata" v-if="teamtype=='中超'" >
+            <el-table
+          :data="teaminfolist"
+          stripe
+          key="table1"
+          height="calc(100vh - 554px)"
+          style="width: 100%">
+          <template slot="empty">
+                <span style="font-size: 6rem">暂无数据</span>
+          </template>
+          <el-table-column
+            align="center"
+            prop="rank"
+            label="名次">
+          </el-table-column>
+          <el-table-column
+            align="center"
+            prop="teamLogo,teamName"
+            label="球队"
+            width="136">
+            <template slot-scope="scope" class="cell">
+              <div style="display:flex;text-align:center">
+                <div><img :src="scope.row.teamLogo" style="width:25px;height:25px;margin-right:4px"></div>
+                <div>{{scope.row.teamName}}</div>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            align="center"
+            prop="matchesWon,matchesDraw,matchesLost"
+            label="胜/平/负">
+            <template slot-scope="scope" class="cell">
+                {{scope.row.matchesWon}}/{{scope.row.matchesDraw}}/{{scope.row.matchesLost}}
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="points"
+            align="center"
+            label="积分">
+            <template slot-scope="scope" class="cell">
+                {{scope.row.points}}
+            </template>
+          </el-table-column>
+        </el-table>
+    </div>
+    <div class="tabledata" v-if="teamtype=='英超'" >
+            <el-table
+          :data="teaminfolist"
+          stripe
+          key="table1"
+          height="calc(100vh - 554px)"
+          style="width: 100%">
+          <template slot="empty">
+                <span style="font-size: 6rem">暂无数据</span>
+          </template>
+          <el-table-column
+            align="center"
+            prop="rank"
+            label="名次">
+          </el-table-column>
+          <el-table-column
+          align="center"
+            prop="teamLogo,teamName"
+            label="球队"
+            width="136">
+            <template slot-scope="scope" class="cell">
+              <div style="display:flex">
+                <div><img :src="scope.row.teamLogo" style="width:25px;height:25px;margin-right:4px"></div>
+                <div>{{scope.row.teamName}}</div>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            align="center"
+            prop="matchesWon,matchesDraw,matchesLost"
+            label="胜/平/负">
+            <template slot-scope="scope" class="cell">
+                {{scope.row.matchesWon}}/{{scope.row.matchesDraw}}/{{scope.row.matchesLost}}
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="points"
+            align="center"
+            label="积分">
+            <template slot-scope="scope" class="cell">
+                {{scope.row.points}}
+            </template>
+          </el-table-column>
+        </el-table>
+    </div>
+    <div class="tabledata" v-if="teamtype=='西甲'" >
+            <el-table
+          :data="teaminfolist"
+          stripe
+          key="table1"
+          height="calc(100vh - 554px)"
+          style="width: 100%">
+          <template slot="empty">
+                <span style="font-size: 6rem">暂无数据</span>
+          </template>
+          <el-table-column
+            align="center"
+            prop="rank"
+            label="名次">
+          </el-table-column>
+          <el-table-column
+          align="center"
+            prop="teamLogo,teamName"
+            label="球队"
+            width="136">
+            <template slot-scope="scope" class="cell">
+              <div style="display:flex">
+                <div><img :src="scope.row.teamLogo" style="width:25px;height:25px;margin-right:4px"></div>
+                <div>{{scope.row.teamName}}</div>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            align="center"
+            prop="matchesWon,matchesDraw,matchesLost"
+            label="胜/平/负">
+            <template slot-scope="scope" class="cell">
+                {{scope.row.matchesWon}}/{{scope.row.matchesDraw}}/{{scope.row.matchesLost}}
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="points"
+            align="center"
+            label="积分">
+            <template slot-scope="scope" class="cell">
+                {{scope.row.points}}
+            </template>
+          </el-table-column>
+        </el-table>
+    </div>
+    <div class="tabledata" v-if="teamtype=='意甲'" >
+            <el-table
+          :data="teaminfolist"
+          stripe
+          key="table1"
+          height="calc(100vh - 554px)"
+          style="width: 100%">
+          <template slot="empty">
+                <span style="font-size: 6rem">暂无数据</span>
+          </template>
+          <el-table-column
+            align="center"
+            prop="rank"
+            label="名次">
+          </el-table-column>
+          <el-table-column
+          align="center"
+            prop="teamLogo,teamName"
+            label="球队"
+            width="136">
+            <template slot-scope="scope" class="cell">
+              <div style="display:flex">
+                <div><img :src="scope.row.teamLogo" style="width:25px;height:25px;margin-right:4px"></div>
+                <div>{{scope.row.teamName}}</div>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            align="center"
+            prop="matchesWon,matchesDraw,matchesLost"
+            label="胜/平/负">
+            <template slot-scope="scope" class="cell">
+                {{scope.row.matchesWon}}/{{scope.row.matchesDraw}}/{{scope.row.matchesLost}}
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="points"
+            align="center"
+            label="积分">
+            <template slot-scope="scope" class="cell">
+                {{scope.row.points}}
+            </template>
+          </el-table-column>
+        </el-table>
+    </div>
+    <div class="tabledata" v-if="teamtype=='德甲'" >
+            <el-table
+          :data="teaminfolist"
+          stripe
+          key="table1"
+          height="calc(100vh - 554px)"
+          style="width: 100%">
+          <template slot="empty">
+                <span style="font-size: 6rem">暂无数据</span>
+          </template>
+          <el-table-column
+            align="center"
+            prop="rank"
+            label="名次">
+          </el-table-column>
+          <el-table-column
+          align="center"
+            prop="teamLogo,teamName"
+            label="球队"
+            width="136">
+            <template slot-scope="scope" class="cell">
+              <div style="display:flex">
+                <div><img :src="scope.row.teamLogo" style="width:25px;height:25px;margin-right:4px"></div>
+                <div>{{scope.row.teamName}}</div>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            align="center"
+            prop="matchesWon,matchesDraw,matchesLost"
+            label="胜/平/负">
+            <template slot-scope="scope" class="cell">
+                {{scope.row.matchesWon}}/{{scope.row.matchesDraw}}/{{scope.row.matchesLost}}
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="points"
+            align="center"
+            label="积分">
+            <template slot-scope="scope" class="cell">
+                {{scope.row.points}}
+            </template>
+          </el-table-column>
+        </el-table>
+    </div>
+    <div class="tabledata" v-if="teamtype=='法甲'" >
+            <el-table
+          :data="teaminfolist"
+          stripe
+          key="table1"
+          height="calc(100vh - 554px)"
+          style="width: 100%">
+          <template slot="empty">
+                <span style="font-size: 6rem">暂无数据</span>
+          </template>
+          <el-table-column
+            align="center"
+            prop="rank"
+            label="名次">
+          </el-table-column>
+          <el-table-column
+          align="center"
+            prop="teamLogo,teamName"
+            label="球队"
+            width="136">
+            <template slot-scope="scope" class="cell">
+              <div style="display:flex">
+                <div><img :src="scope.row.teamLogo" style="width:25px;height:25px;margin-right:4px"></div>
+                <div>{{scope.row.teamName}}</div>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            align="center"
+            prop="matchesWon,matchesDraw,matchesLost"
+            label="胜/平/负">
+            <template slot-scope="scope" class="cell">
+                {{scope.row.matchesWon}}/{{scope.row.matchesDraw}}/{{scope.row.matchesLost}}
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="points"
+            align="center"
+            label="积分">
+            <template slot-scope="scope" class="cell">
+                {{scope.row.points}}
+            </template>
+          </el-table-column>
+        </el-table>
+    </div>
         </section>
         </div>
-
-      <!-- <section class="hot-wrap">
-        <div class="liveRecomend-title">
-          <img src="@/assets/home/homeIcon/hotRecom@2x.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
-          <p class="liveRecomend-title-text">热门
-          </P>
-          <button class="liveRecomend-title-chenge"  @click="changeHotVideo()">换一换
-          </button>
-        </div>
-        <div style="margin: 0 -12px;width:100%">
-          <livelistitem :liveList="recommendVideo8" :itemStyle="{width: 'calc(24.4% - 18px)'}"
-                        @homeListEventTanck="homeListHotTanck"></livelistitem>
-        </div>
-    </section> -->
     </div>
 
     <div class="liveRecomend" v-show="recommendFootball.length>0">
@@ -312,7 +534,7 @@
 </template>
 <script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
 <script>
-  import { Button, Popover, divider, Carousel, CarouselItem, Dialog, Form, FormItem, } from 'element-ui'
+  import { Button, Popover, divider, Carousel, CarouselItem, Dialog, Form, FormItem,Table,TableColumn } from 'element-ui'
   import RightFloatLayer from '@/components/right-float-layer.vue'
   import videoPlayer from "@/components/video/videoPlayer.vue"
   import livelistitem from "@/components/live-list-item.vue"
@@ -321,7 +543,7 @@
   import * as eventTrack from '@/utils/eventTracking.js'
   import loginPop from "@/components/login/loginTipPopup.vue";
   // import { liveList,changeHotVideo } from "@/api/api";
-  import { liveList,recommendLiveList,hotmatchList,addmatchList, deletematchList, applyStatus, setPassword,newTaskAdd,dayTaskAdd} from "@/api/api"
+  import { liveList,recommendLiveList,hotmatchList,addmatchList, deletematchList, applyStatus, setPassword,newTaskAdd,dayTaskAdd,teamInfo} from "@/api/api"
   // import  from "@/modules/share/qzopensl.js";
   import QRCode from 'qrcodejs2'
   // import img from '@/assets/share/kongjian.png'
@@ -337,6 +559,8 @@
       [divider.name]: divider,
       [Carousel.name]: Carousel,
       [CarouselItem.name]: CarouselItem,
+      [Table.name]: Table,
+      [TableColumn.name]: TableColumn,
       videoPlayer,
       livelistitem,
       RightFloatLayer,
@@ -359,11 +583,11 @@
             url: 'http://m.iqiulive.cn/contract_user',
             img: require('@/assets/gonggao/big2.png'),
           },
-          {
-            title: "[公告]爱球直播隐私政策",
-            url: 'http://m.iqiulive.cn/contract_privacy',
-            img: require('@/assets/gonggao/big2.png'),
-          }
+          // {
+          //   title: "[公告]爱球直播隐私政策",
+          //   url: 'http://m.iqiulive.cn/contract_privacy',
+          //   img: require('@/assets/gonggao/big2.png'),
+          // }
         ],
         sum: 0,
         isPassword:false,
@@ -378,6 +602,8 @@
         flag2:false,
         Newpassword:"",
       Newpassword1:"",
+        teamtype:'',
+        teaminfolist:[],
         // videoshow:false,
       }
     },
@@ -428,23 +654,92 @@
         this.getmatchList();
      }, 200)
      this.currentTime();
+     this.getteamInfo();
       // window.addEventListener('scroll',this.handleScroll,true)
     },
     methods: {
+      //球队切换
+      gamename(index){
+        if(index==1){
+          this.$refs.teamname1.style.color = '#F9772A';
+          this.$refs.teamname2.style.color = '#000000';
+          this.$refs.teamname3.style.color = '#000000';
+          this.$refs.teamname4.style.color = '#000000';
+          this.$refs.teamname5.style.color = '#000000';
+          this.$refs.teamname6.style.color = '#000000';
+          this.getteamInfo(1);
+        }else if(index==2){
+          this.$refs.teamname1.style.color = '#000000';
+          this.$refs.teamname2.style.color = '#F9772A';
+          this.$refs.teamname3.style.color = '#000000';
+          this.$refs.teamname4.style.color = '#000000';
+          this.$refs.teamname5.style.color = '#000000';
+          this.$refs.teamname6.style.color = '#000000';
+          this.getteamInfo(2);
+        }else if(index==3){
+          this.$refs.teamname1.style.color = '#000000';
+          this.$refs.teamname2.style.color = '#000000';
+          this.$refs.teamname3.style.color = '#F9772A';
+          this.$refs.teamname4.style.color = '#000000';
+          this.$refs.teamname5.style.color = '#000000';
+          this.$refs.teamname6.style.color = '#000000';
+          this.getteamInfo(3);
+        }else if(index==4){
+          this.$refs.teamname1.style.color = '#000000';
+          this.$refs.teamname2.style.color = '#000000';
+          this.$refs.teamname3.style.color = '#000000';
+          this.$refs.teamname4.style.color = '#F9772A';
+          this.$refs.teamname5.style.color = '#000000';
+          this.$refs.teamname6.style.color = '#000000';
+          this.getteamInfo(4);
+        }else if(index==5){
+          this.$refs.teamname1.style.color = '#000000';
+          this.$refs.teamname2.style.color = '#000000';
+          this.$refs.teamname3.style.color = '#000000';
+          this.$refs.teamname4.style.color = '#000000';
+          this.$refs.teamname5.style.color = '#F9772A';
+          this.$refs.teamname6.style.color = '#000000';
+          this.getteamInfo(5);
+        }else{
+          this.$refs.teamname1.style.color = '#000000';
+          this.$refs.teamname2.style.color = '#000000';
+          this.$refs.teamname3.style.color = '#000000';
+          this.$refs.teamname4.style.color = '#000000';
+          this.$refs.teamname5.style.color = '#000000';
+          this.$refs.teamname6.style.color = '#F9772A';
+          this.getteamInfo(6);
+        }
+      },
+      //获取球队信息详情
+      getteamInfo(index){
+        if(index){
+          if(index==1){
+            this.teamtype = '中超'
+          }else if(index==2){
+            this.teamtype = '英超'
+          }else if(index==3){
+            this.teamtype = '西甲'
+          }else if(index==4){
+            this.teamtype = '意甲'
+          }else if(index==5){
+            this.teamtype = '德甲'
+          }else{
+            this.teamtype = '法甲'
+          }
+        }else{
+          this.teamtype = '中超'
+        }
+        let data = {
+          type: this.teamtype
+        }
+      teamInfo(data).then((res) => {
+        this.teaminfolist = res.data
+        console.log('eeeeeeeeeeeeeee=',res);
+      });
+      },
       share(type) {
-      // console.log(encodeURIComponent(document.location))
-      // let i = require('https://rpic.douyucdn.cn/asrpic/200716/48699_1730.png/dy1')
-      console.log(597777776);
+      // console.log(597777776);
       this.getnewTaskAdd(type)
-      // else{
-      //   var url = 'http://www.iqiulive.cn/'+this.channelInfo.id;
-      //         // encodePath = encodeURIComponent(url),
-      //         // targetUrl = 'http://qr.liantu.com/api.php?text=' + encodePath;
-      //     //  window.open(url,'weixin', 'height=320, width=320')
-      // }
-      // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+document.location.href+'?sharesource=qzone&title='+this.sum+'&pics=图片地址&summary= 嗯嗯')
-      // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(document.location) + '?sharesource=qzone&title=' + sum + '&pics=' +  + '&summary=' + '');
-      // window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+document.location.href+'?sharesource=qzone&title='+ftit+'&pics='+lk+'&summary='+document.querySelector('meta[name="description"]').getAttribute('content'))
     },
       getnewTaskAdd(type) {
         let data = {
@@ -633,6 +928,9 @@
         this.hotschedulelist = this.schedulelist.slice(0, 4)
         this.flag = true
       }
+    },
+    zhibo(){
+      window.open(process.env.VUE_APP_HREF + '/zhibo')
     },
     live(mid) {
       this.$router.push({ path: '/live-broadcast', query: { mid } })
@@ -1328,5 +1626,43 @@
   color: rgb(255, 255, 255);
   width: 85%;
   cursor: pointer;
+}
+
+.tabledata {
+  width: 100%;
+  height: 62px;
+  margin-top: 20px;
+}
+
+.el-table--scrollable-y {
+  ::v-deep .el-table__body-wrapper::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::v-deep .gutter {
+    width: 4px !important;
+  }
+}
+
+.el-table--scrollable-y {
+  ::v-deep .el-table__body-wrapper::-webkit-scrollbar-thumb {
+    background-color: #F9772A;
+    border-radius: 7px;
+    // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+}
+/*定义滚动条的轨道颜色、内阴影及圆角*/
+.el-table--scrollable-y {
+  ::v-deep .el-table__body-wrapper::-webkit-scrollbar-track {
+    // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    border-radius: 3px;
+  }
+}
+
+::v-deep .el-table::before {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0px;
 }
 </style>

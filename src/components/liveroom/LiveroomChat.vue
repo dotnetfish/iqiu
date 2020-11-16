@@ -18,7 +18,7 @@
     <!--聊天室-->
     <section class="chat-wrap">
       <!-- 举报框 -->
-      <!-- <div v-if="flag==true" class="reportborder">
+      <div v-if="flag==true" class="reportborder">
         <div style="display:flex">
           <img :src="userimg" style="width:56px;height:56px;margin-left:27px;margin-top:3px">
           <div style="margin-top:36px;margin-left:5px;font-size:14px">{{username}}</div>
@@ -26,7 +26,7 @@
         </div>
         <div style="margin-top:14px;margin-left:20px;font-size:14px;height:50px;white-space: normal;width: 89%;word-break: break-all;">个性签名:{{usersign}}</div>
         <div class="reportbuttom" @click="reportinfo()">举报用户</div>
-      </div> -->
+      </div>
       <!-- 举报内容 -->
       <div v-if="flag1==true" class="reportborderinfo">
         <div style="width: 306px;height: 29px;background: #F9772A;">
@@ -49,12 +49,21 @@
           <div style="margin-top:14px;margin-left:14px;font-size:14px;white-space:normal;word-break:break-all;width:92%;letter-spacing:1px;line-height:125%">{{username}}:{{usercontent}}</div>
         </div>
         <div style="margin-left:20px;margin-top:16px;font-size:14px;color:#333333">举报类型</div>
-        <div style="display:flex;flex-wrap:wrap">
-          <button class="reportbuttom3" @click="typecontent='垃圾广告营销'">垃圾广告营销</button>
+        <div style="margin-left:20px;margin-top:10px">
+          <el-checkbox-group v-model="dialogFormData.checkList" @change=change>
+            <div style="display:flex;flex-wrap:wrap">
+            <div v-for="(item,index) in jurisdictionlist" :key="index">
+              <div style="width:110px">
+                <el-checkbox :label=item.name></el-checkbox>
+                </div>
+              </div>
+            </div>
+          </el-checkbox-group>
+          <!-- <button class="reportbuttom3" @click="typecontent='垃圾广告营销'">垃圾广告营销</button>
           <button class="reportbuttom1" @click="typecontent='侮辱谩骂'">侮辱谩骂</button>
           <button class="reportbuttom1" @click="typecontent='违法反动'">违法反动</button>
           <button class="reportbuttom1" @click="typecontent='淫秽色情'">淫秽色情</button>
-          <button class="reportbuttom3" @click="typecontent='嘲讽/不友善'">嘲讽/不友善</button>
+          <button class="reportbuttom3" @click="typecontent='嘲讽/不友善'">嘲讽/不友善</button> -->
         </div>
         <div>
           <textarea placeholder="或在此填写举报理由" class="inputcontent" v-model="inputcontent"></textarea>
@@ -83,7 +92,7 @@
             <img class="role-icon" v-if="item._lcattrs.user.role != 0"
                  :src="require('@/assets/img/live-chat-role'+item._lcattrs.user.role+'.png')" alt="">
             <img :src="item._lcattrs.user.fansCardUrl" style="width: 66px;height: 24px;margin-right:6px;" v-if="item._lcattrs.user.fansCardUrl">
-                <span style="position:absolute;color:#FFFFFF;left:48px;text-align:center;top:8.5px;width:42px;transform: scale(0.7);font-size: 16px;">{{item._lcattrs.user.fansCardName}}</span>
+                <span style="position:absolute;color:#FFFFFF;left:15px;text-align:center;top:9.5px;width:58px;transform: scale(0.7);font-size: 16px;">{{item._lcattrs.user.fansCardName}}</span>
               <div style="position:relative;">
                 <!-- <img :src="item._lcattrs.user.fansCardUrl" style="width: 42px;height: 16px;margin-right:6px;" v-if="item._lcattrs.user.fansCardUrl">
                 <span style="position:absolute;color:#FFFFFF;left:5px;text-align:center;top:1.5px;width:42px;transform: scale(0.7);font-size: 13px;">{{item._lcattrs.user.fansCardName}}</span> -->
@@ -129,7 +138,7 @@
   import LiveroomBan from '@/components/liveroom/LiveroomBan'
   // import LiveroomHongbao from '@/components/liveroom/LiveroomHongbao'
   import LiveroomGif from '@/components/liveroom/LiveroomGif'
-  import { accusationadd } from '@/api/api'
+  import { accusationadd, accusationtype } from '@/api/api'
 
   import { debounce } from "@/utils/debounceAndthrottle";
 
@@ -175,6 +184,12 @@
           return {}
         }
       },
+      channelInfo: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
       msgList: {
         type: Array,
         default: () => {
@@ -264,6 +279,16 @@
         flag1:false,
         flag2:false,
         flag3:false,
+        jurisdictionlist:'',
+        dialogFormData: {
+          checkList:[],
+          content: "",
+          forbidType: "",
+          jurisdictionName:'',
+          jurisdictionIds:'',
+          toUid:'',
+          cid:'',
+        },
         username:'',
         userimg:'',
         usersign:'',
@@ -419,6 +444,7 @@
       reportbaninfo(){
         this.flag1 = false;
         this.flag2 = true;
+        this.getjurisdiction()
       },
       // reportsuccess(){
       //   this.flag2 = false;
@@ -426,30 +452,57 @@
       //   this.flag3 = true;
       // },
       report(type) {
-      //   let data = {
-      //     type: type,
-      //     content: '',
-      //     cid: this.$store.state.userStatus.userInfo.uid,
-      //     toUid: this.userid,
-      //   }
-      //   accusationadd(data).then((res) => {
-      // });
+        let data = {
+          type: type,
+          content: '',
+          cid: this.channelInfo.id,
+          toUid: this.userid,
+        }
+        accusationadd(data).then((res) => {
+      });
         this.flag2 = false;
         this.flag1 = false;
         this.flag3 = true;
       },
       report2(type,content) {
-      //   let data = {
-      //     type: type,
-      //     content: content,
-      //     cid: this.$store.state.userStatus.userInfo.uid,
-      //     toUid: this.userid,
-      //   }
-      //   accusationadd(data).then((res) => {
-      // });
+        let data = {
+          type: this.dialogFormData.jurisdictionName,
+          content: this.usercontent,
+          cid: this.channelInfo.id,
+          toUid: this.userid,
+        }
+        accusationadd(data).then((res) => {
+      });
         this.flag2 = false;
         this.flag1 = false;
         this.flag3 = true;
+      },
+      change(){
+        this.dialogFormData.jurisdictionName = ''
+        this.dialogFormData.jurisdictionIds = ''
+        for(let i=0;i<this.dialogFormData.checkList.length;i++){
+          if(i==this.dialogFormData.checkList.length-1){
+            this.dialogFormData.jurisdictionName = this.dialogFormData.jurisdictionName + this.dialogFormData.checkList[i]
+            for(let j=0;j<this.jurisdictionlist.length;j++){
+              if(this.dialogFormData.checkList[i] ==  this.jurisdictionlist[j].name){
+                this.dialogFormData.jurisdictionIds = this.dialogFormData.jurisdictionIds + this.jurisdictionlist[j].id
+              }
+            }
+          }else{
+            this.dialogFormData.jurisdictionName = this.dialogFormData.checkList[i] + ',' + this.dialogFormData.jurisdictionName
+            for(let j=0;j<this.jurisdictionlist.length;j++){
+              if(this.dialogFormData.checkList[i] ==  this.jurisdictionlist[j].name){
+                this.dialogFormData.jurisdictionIds = this.jurisdictionlist[j].id + ',' + this.dialogFormData.jurisdictionIds
+              }
+            }
+          }
+        }
+      },
+    getjurisdiction(){
+        accusationtype().then((res) => {
+          this.jurisdictionlist = res.data;
+          // console.log("55555555555==",this.jurisdictionlist)
+            });
       },
       /**
        * 0~0.99元
@@ -1014,7 +1067,7 @@ border-radius: 20px;
 color: white;
 text-align: center;
 line-height: 40px;
-margin-top: 22px;
+margin-top: 12px;
 margin-left: 11px;
 }
 
@@ -1026,5 +1079,22 @@ border-radius: 20px;
 color: white;
 line-height: 40px;
 text-align: center;
+}
+
+::v-deep .el-input__inner:focus{
+      border-color:  #F9772A !important;      
+  } 
+    ::v-deep .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
+  background-color:#F9772A !important;
+  border-color: #F9772A !important;
+}
+::v-deep .el-checkbox__input.is-checked + .el-checkbox__label {
+  color: #F9772A !important;
+}
+::v-deep .el-checkbox.is-bordered.is-checked{
+  border-color: #F9772A !important;
+}
+::v-deep .el-checkbox__input.is-focus .el-checkbox__inner{
+  border-color:  #F9772A !important;
 }
 </style>

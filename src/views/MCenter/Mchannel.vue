@@ -35,8 +35,8 @@
       }
     },
     created () {
-      console.log('频道首页')
-      console.log('折叠状态',this.$store.state.fold);
+      // console.log('频道首页')
+      // console.log('折叠状态',this.$store.state.fold);
       this.getFoldState();
     },
     mounted () {

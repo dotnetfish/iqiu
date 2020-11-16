@@ -174,8 +174,8 @@ export default {
           this.percent = parseFloat(((this.levellist.experience/(this.levellist.experience + this.levellist.needExperience))*100).toFixed(1));
           this.percentnum = this.levellist.experience+"/"+(this.levellist.experience + this.levellist.needExperience)
           this.taskOrder = this.levellist.taskOrder
-          console.log("个人信息9",res)
-          console.log("个人信息9",parseFloat(((this.levellist.experience/(this.levellist.experience + this.levellist.needExperience))*100).toFixed(1)))
+          // console.log("个人信息9",res)
+          // console.log("个人信息9",parseFloat(((this.levellist.experience/(this.levellist.experience + this.levellist.needExperience))*100).toFixed(1)))
           // this.balance = res.data.accountDto.miCoin.balance
         })
       },

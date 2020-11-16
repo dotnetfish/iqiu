@@ -57,7 +57,7 @@ export default {
   width: 100%;
   height: 930px;
   margin: 0 auto;
-  background: url(../assets/img/download1.png) no-repeat;
+  background: url(../assets/img/download1.jpg) no-repeat;
   background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;

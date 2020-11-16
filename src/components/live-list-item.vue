@@ -349,8 +349,8 @@
           span {
             // float: right;
             padding-left: 20px;
-            background: url('../assets/icon_user.png') no-repeat left center;
-            background-size: 14px 11px;
+            background: url('../assets/hot.png') no-repeat left center;
+            background-size: 11px 15px;
           }
         }
       }

@@ -79,11 +79,25 @@ module.exports = () => {
       devServer: {
         disableHostCheck: true,//(required)
         port: 80,
-        host: '192.168.0.100',
+        host: '192.168.0.11',
         proxy: {
           "/aiqiu/*": {
             target: "https://api.iqiulive.cn", // test
             changeOrigin: true
+          },
+          "/dqd/*": {
+            target: "https://sport-data.dongqiudi.com", // test
+            changeOrigin: true,
+            pathRewrite: {
+              '^/dqd': ''  
+            }
+          },
+          "/wxzf/*": {
+            target: "https://api.mch.weixin.qq.com", // test
+            changeOrigin: true,
+            pathRewrite: {
+              '^/wxzf': ''  
+            }
           },
           // "/mock/*": {
           //   target: "https://mock.yonyoucloud.com", // test

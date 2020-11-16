@@ -432,10 +432,10 @@ export default {
   computed: {
     userStatus: {
       get() {
-        console.log(
-          "home-nav-user检测到登录状态改变",
-          this.$store.state.userStatus
-        );
+        // console.log(
+        //   "home-nav-user检测到登录状态改变",
+        //   this.$store.state.userStatus
+        // );
         return this.$store.state.userStatus;
       },
       set(val) {
@@ -454,7 +454,9 @@ export default {
     //绑定银行卡
     getbindBank(){
       let data = {
-        bankCard: this.bankcard
+        bankCard: this.bankcard,
+        bankUname: this.bankname,
+        bankName: this.bankarea,
       }
       bindBank(data).then((res)=>{
         if(res.code==0){
@@ -482,8 +484,8 @@ export default {
     },
     //所在地
     addressChange(arr) {
-      console.log("sadafssgasegge=", this.selectedOptions);
-      console.log(CodeToText[arr[0]], CodeToText[arr[1]]);
+      // console.log("sadafssgasegge=", this.selectedOptions);
+      // console.log(CodeToText[arr[0]], CodeToText[arr[1]]);
       this.province = CodeToText[arr[0]];
       this.city = CodeToText[arr[1]];
     },
@@ -531,7 +533,7 @@ export default {
       if (this.flag1 == false && this.flag2 == false) {
         this.getsetPassword();
       }
-      console.log(this.Password);
+      // console.log(this.Password);
     },
     submitupdate() {
       var FloatRegex = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{6,16}$/;
@@ -548,7 +550,7 @@ export default {
       if (this.Flag1 == false && this.Flag2 == false) {
         this.getupdatePassword();
       }
-      console.log(this.Password);
+      // console.log(this.Password);
     },
     back() {
       this.nopassword = true;

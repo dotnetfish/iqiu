@@ -524,6 +524,15 @@ axios({
   contentTypejson:true,
 })
 
+//举报类型
+export const accusationtype = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/accusation/type`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
 //充值记录列表
 export const paylist = (data) =>
 axios({
@@ -591,6 +600,511 @@ axios({
 export const paycash = (data) =>
 axios({
   url:`${baseURL}/aiqiu/v1/app/pay/cash`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//充值记录详情
+export const zfbinfo = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/pay/zfb/info`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//球队信息
+export const teamInfo = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/teamInfo/detail`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//指数数据
+export const dataInfo = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/teamInfo/dataInfo`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//我的公会
+export const myUnion = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/myUnion`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//退出公会
+export const delMyUnion = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/delMyUnion`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//主播签约公会
+export const channelAdd = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/channelAdd`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//公会人气排行
+export const channelRank = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/channelRank`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//公会收入排行
+export const cashRank = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/cashRank`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//屏蔽黑词
+export const word = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/user/forbid/word`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//黑词列表
+export const wordList = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/user/forbid/wordList`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//删除黑词
+export const delWord = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/user/forbid/delWord`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+
+//添加屏蔽记录
+export const userLimitRecordAdd = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/user/forbid/userLimitRecordAdd`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//屏蔽记录列表
+export const userLimitRecordList = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/user/forbid/userLimitRecordList`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//开启用户发言限制
+export const startUserLimit = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/user/forbid/startUserLimit`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//关闭用户发言限制
+export const closeUserLimit = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/user/forbid/closeUserLimit`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//查看用户是否可以发言
+export const userSendMes = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/user/forbid/userSendMes`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//用户发言限制列表
+export const userLimit = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/user/forbid/userLimit`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//用户发言限制列表
+export const myGiftJoin = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/myGiftJoin`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//用户发言限制列表
+export const giftRecord = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/giftRecord`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//添加房管
+export const addManagers = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/live/room/addManagers`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//我的房管
+export const myManagers = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/live/room/myManagers`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//房管权限列表
+export const jurisdiction = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/live/room/jurisdiction`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//封禁用户
+export const forbidUsers = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/user/forbid/forbidUser`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//封禁列表
+export const forbidName = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/live/room/forbidName`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//解除封禁
+export const unForbidUser = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/user/forbid/unForbidUser`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//操作记录
+export const forbidRecords = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/live/room/forbidRecord`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//公会首页数据
+export const unionindex = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/index`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//公会角色
+export const unionRole = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/unionRole`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//oss
+export const getKey = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/upload/getKey`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//创建公会
+export const unionadd = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/add`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//修改公会
+export const unionupdate = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/update`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//主播列表
+export const channelList = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/channelList`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//主播详情
+export const unionLiveRecordInfo = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/unionLiveRecordInfo`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//主播信息
+export const unionLiveRecordFirstInfo = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/unionLiveRecordFirstInfo`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//主播申请加入公会列表
+export const channelApplyList = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/channelApplyList`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//公会审核主播
+export const channelAddCheck = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/channelAddCheck`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//主播直播记录列表
+export const unionLiveRecordList = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/unionLiveRecordList`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//流量监控
+export const unionflow = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/flow`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//主播监控
+export const channelSee = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/channelSee`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//举报列表
+export const unionaccusationList = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/accusationList`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//主播结算数据列表
+export const channelSalaryList = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/channelSalaryList`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//主播结算数据详情
+export const channelSalaryInfo = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/channelSalaryInfo`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//公会收入明细
+export const uniontransfer = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/transfer`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//修改抽成比例
+export const setScale = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/setScale`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//公会申请提现
+export const cashApply = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/cashApply`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//可提现金额
+export const unioncash = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/cash`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//提现记录
+export const cashRecord = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/cashRecord`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//公会管理员列表
+export const assistantList = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/assistantList`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//添加管理员
+export const assistantAdd = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/assistantAdd`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//管理员菜单
+export const assistantMenu = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/assistantMenu`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//删除管理员
+export const assistantDel = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/assistantDel`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//修改管理员信息
+export const assistantUpdate1 = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/assistantUpdate1`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//分组列表
+export const uniongroup = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/group`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//设置分组
+export const setGroup = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/setGroup`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//房管辞职
+export const delManagers = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/live/room/delManagers`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//我管理的列表
+export const managerRooms = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/live/room/managerRooms`,
   method:"post",
   data,
   contentTypejson:true,

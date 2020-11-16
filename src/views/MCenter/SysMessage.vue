@@ -42,7 +42,7 @@ export default {
       userName: "",
       userid:"",
       messagelist:[],
-      total:'',
+      total:0,
       pageSize:10,
       pageIndex:1,
     };

@@ -10,6 +10,7 @@
           v-show="channelInfo.typeName"
           :to="{ path: '/zhibo', query: { 'typeId': channelInfo.type || 'all', name: channelInfo.typeName }}"
         >{{ channelInfo.typeName }}</router-link>
+        <span class="label" @click="dialogVisible = true,getjurisdiction()" style="cursor: pointer;">举报</span>
       </h3>
       <div class="label-wrap">
         <span>主播：{{ channelInfo.uname }}</span>
@@ -18,6 +19,31 @@
         <span>{{ channelInfo.onlinescore }}</span>
       </div>
     </div>
+    <el-dialog
+      title="举报主播"
+      :visible.sync="dialogVisible"
+      width="30%"
+      center>
+      <el-form label-width="80px" :model="dialogFormData">
+        <el-form-item label="内容">
+          <el-input v-model="dialogFormData.content" placeholder="请输入内容"></el-input>
+        </el-form-item>
+        <el-form-item label="举报类型">
+          <el-checkbox-group v-model="dialogFormData.checkList" @change=change>
+            <div style="display:flex;flex-wrap:wrap">
+            <div v-for="(item,index) in jurisdictionlist" :key="index">
+              <div style="width:110px">
+                <el-checkbox :label=item.name></el-checkbox>
+                </div>
+              </div>
+            </div>
+          </el-checkbox-group>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button round type="primary" @click="report()" style="color: #ffffff;background-color: #F9772A;border: 0;">提交</el-button>
+      </span>
+    </el-dialog>
     <div class="shareall">
       <el-popover placement="bottom-start" width="410" trigger="hover">
         <div class="text">老铁分享一个呗~</div>
@@ -73,7 +99,7 @@ import { Button, Popover, Input } from "element-ui";
 import { attentionAnchor, attentionCancelAnchor } from "@/api/liveroom";
 import { throttle } from "@/utils/debounceAndthrottle";
 import QRCode from "qrcodejs2";
-import { newTaskAdd,dayTaskAdd } from "@/api/api";
+import { newTaskAdd,dayTaskAdd,accusationtype,accusationadd } from "@/api/api";
 
 export default {
   name: "LiveroomHeader",
@@ -85,11 +111,22 @@ export default {
   data() {
     return {
       sharearea: "",
+      dialogVisible: false,
       shareaream: "",
       area: "",
       flag: 1,
       aream: "",
       show:true,
+      jurisdictionlist:'',
+      dialogFormData: {
+          checkList:[],
+          content: "",
+          forbidType: "",
+          jurisdictionName:'',
+          jurisdictionIds:'',
+          toUid:'',
+          cid:'',
+        },
     };
   },
   props: {
@@ -119,9 +156,57 @@ export default {
     setTimeout(() => {
       this.creatQrCode();
     }, 1000);
+    this.getjurisdiction();
     // console.log("899898898989889==",this.channelInfo.id);
   },
   methods: {
+    report(){
+      let data = {
+        content: this.dialogFormData.content,
+        cid:this.channelInfo.id,
+        toUid:this.channelInfo.id,
+        type:this.dialogFormData.jurisdictionName
+      }
+      accusationadd(data).then((res) => {
+        if(res.code==0){
+          this.dialogVisible = false
+          Message.success({
+              message: "举报成功",
+            });
+        }else{
+          Message.error({
+              message: res.msg,
+            });
+        }
+        });
+    },
+    change(){
+        this.dialogFormData.jurisdictionName = ''
+        this.dialogFormData.jurisdictionIds = ''
+        for(let i=0;i<this.dialogFormData.checkList.length;i++){
+          if(i==this.dialogFormData.checkList.length-1){
+            this.dialogFormData.jurisdictionName = this.dialogFormData.jurisdictionName + this.dialogFormData.checkList[i]
+            for(let j=0;j<this.jurisdictionlist.length;j++){
+              if(this.dialogFormData.checkList[i] ==  this.jurisdictionlist[j].name){
+                this.dialogFormData.jurisdictionIds = this.dialogFormData.jurisdictionIds + this.jurisdictionlist[j].id
+              }
+            }
+          }else{
+            this.dialogFormData.jurisdictionName = this.dialogFormData.checkList[i] + ',' + this.dialogFormData.jurisdictionName
+            for(let j=0;j<this.jurisdictionlist.length;j++){
+              if(this.dialogFormData.checkList[i] ==  this.jurisdictionlist[j].name){
+                this.dialogFormData.jurisdictionIds = this.jurisdictionlist[j].id + ',' + this.dialogFormData.jurisdictionIds
+              }
+            }
+          }
+        }
+      },
+    getjurisdiction(){
+        accusationtype().then((res) => {
+          this.jurisdictionlist = res.data;
+          // console.log("55555555555==",this.jurisdictionlist)
+            });
+      },
     changepc() {
       this.flag = 1;
     },
@@ -504,5 +589,22 @@ export default {
   font-size: 20px;
   text-align: center;
   margin-top: 20px;
+}
+
+  ::v-deep .el-input__inner:focus{
+      border-color:  #F9772A !important;      
+  } 
+    ::v-deep .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
+  background-color:#F9772A !important;
+  border-color: #F9772A !important;
+}
+::v-deep .el-checkbox__input.is-checked + .el-checkbox__label {
+  color: #F9772A !important;
+}
+::v-deep .el-checkbox.is-bordered.is-checked{
+  border-color: #F9772A !important;
+}
+::v-deep .el-checkbox__input.is-focus .el-checkbox__inner{
+  border-color:  #F9772A !important;
 }
 </style>

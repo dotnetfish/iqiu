@@ -183,7 +183,7 @@
     methods: {
       beforeUpload1(file){
         const isLt2M = file.size / 1024/ 1024 < 10;
-        console.log(file);
+        // console.log(file);
         if (!isLt2M) {
           Message.error('上传图片大小不能超过 10MB!')
           return false
@@ -192,7 +192,7 @@
       },
       beforeUpload2(file){
         const isLt2M = file.size / 1024 / 1024 < 10;
-        console.log(file);
+        // console.log(file);
         if (!isLt2M) {
           Message.error('上传图片大小不能超过 10MB!')
           return false
@@ -201,7 +201,7 @@
       },
       beforeUpload3(file){
         const isLt2M = file.size / 1024 / 1024 < 10;
-        console.log(file);
+        // console.log(file);
         if (!isLt2M) {
           Message.error('上传图片大小不能超过 10MB!')
           return false
@@ -221,13 +221,13 @@
               headers: {'Content-Type': 'text/plain'}
             }
           ).then(response => {
-            console.log('剪裁后-上传response',response)
-            console.log('剪裁后-上传response',response.data.data[0])
+            // console.log('剪裁后-上传response',response)
+            // console.log('剪裁后-上传response',response.data.data[0])
             if (response.data.code === 0) {
               this.$set(this.form2, key,response.data.data[0])
               this.$set(this.imgList, key+"Base64",resBase64)
               // this.form2[key] = response.data.data[0]
-              console.log(response);
+              // console.log(response);
             } else {
               Message.error(response.data.msg)
             }
@@ -279,20 +279,19 @@
           }
         }).catch(() => {
           this.Message.error('网络异常，请稍后再试')
-
         })
       },
       getMobileCode() {
         this.$refs.form.validateField('mobile', (errorMessage) => {
-          console.log(errorMessage, 'errorMessage');
+          // console.log(errorMessage, 'errorMessage');
           if (!errorMessage) {
-            console.log(this.form.mobile);
+            // console.log(this.form.mobile);
             let param = encodeURIComponent(encrypt('message', this.form.mobile))
             getCodeEncrypt(param).then(res => {
               if (res.code === 0) {
                 let countDownSet = setInterval(() => {
                   this.coutDown--
-                  console.log(this.coutDown);
+                  // console.log(this.coutDown);
                   if (this.coutDown <= 0) {
                     this.verifyStatus = true
                     clearInterval(countDownSet)
@@ -323,7 +322,7 @@
 
             })
           } else {
-            console.log('error submit!!');
+            // console.log('error submit!!');
             return false;
           }
         });
@@ -338,12 +337,12 @@
                 this.Message.error(res.msg)
               }
             }).catch(err => {
-              console.log(err);
+              // console.log(err);
               this.Message.error(err.data.msg || '网络异常，请稍后再试1')
 
             })
           } else {
-            console.log('error submit!!');
+            // console.log('error submit!!');
             return false;
           }
         });
@@ -363,7 +362,7 @@
 
             })
           } else {
-            console.log('error submit!!');
+            // console.log('error submit!!');
             return false;
           }
         });
@@ -442,4 +441,19 @@
     background-color: #F9772A;
     border: 0;
   }
+  .el-steps.el-steps--horizontal ::v-deep .el-step.is-horizontal.is-center ::v-deep .el-step__head.is-finish {
+    color: #F9772A !important;
+    border-color: #F9772A !important;
+  }
+
+  // .el-steps.el-steps--horizontal ::v-deep .el-step.is-horizontal.is-center ::v-deep .el-step__title.is-finish {
+  //   color: #37c424;
+  // }
+  // .el-steps.el-steps--horizontal ::v-deep .el-step.is-horizontal.is-center ::v-deep.el-step__description.is-finish {
+  //   color: #9c2127;
+  // }
+  // .el-steps.el-steps--horizontal ::v-deep .el-step.is-horizontal.is-center ::v-deep .el-step__head.is-process {
+  //   color: #F9772A !important;
+  //   border-color: #F9772A !important;
+  // }
 </style>

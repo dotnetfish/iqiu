@@ -155,7 +155,7 @@
   import setTime from "@/utils/setTime";
   import { throttle } from "@/utils/debounceAndthrottle";
   import { loginInfo } from "@/api/liveroom"
-  import {addMesNum, findFanCard, getFanCard, wearFanCard, getLevel, getChannelFanCard} from "@/api/api"
+  import {addMesNum, findFanCard, getFanCard, wearFanCard, getLevel, getChannelFanCard, wordList, userLimitRecordAdd, userSendMes} from "@/api/api"
 
   export default {
     name: 'LiveroomInput',
@@ -185,6 +185,10 @@
         level:'',
         colornum:1,
         levelicon:'',
+        blacklist:'',
+        isSend:1,
+        black:'',
+        reason:'',
       }
     },
     props: {
@@ -384,7 +388,57 @@
       // },
       handleSend: throttle(function () {
         if (!this.textarea) return;
-        // console.log("asdafafaqefeee",this.levelicon)
+        let newtext1 = this.textarea
+        let newtext2 = this.textarea
+        for(let j=0;j<this.blacklist.length;j++){
+          let reg=new RegExp(this.blacklist[j].word,'g')//g代表全部
+          this.textarea=this.textarea.replace(reg,'**');
+          if(newtext1 != this.textarea){
+            newtext1 = this.textarea
+            if(j==this.blacklist.length-1){
+              this.reason = this.reason + '(' +this.blacklist[j].word + ')'
+            console.log("asdafafaqefeee1==========5",this.reason)
+            }else{
+            this.reason = '(' + this.blacklist[j].word + ')' + ',' + this.reason
+            console.log("asdafafaqefeee1==========",this.reason)
+          }
+          }
+        }
+          if(this.textarea!=newtext2){
+            let data = {
+              cid:this.channelInfo.id,
+              uid:this.$store.state.userStatus.userInfo.uid,
+              content:newtext2,
+              reason:'触发黑词'+ this.reason,
+              uname:this.$store.state.userStatus.userInfo.uname
+            }
+            userLimitRecordAdd(data).then((res) => {
+          });
+          }
+        let a = this.textarea
+        //  console.log("asdafafaqefeee1",this.textarea)
+        let data = {
+          cid:this.channelInfo.id,
+        }
+        userSendMes(data).then((res) => {
+          this.isSend = res.data.isSend
+          if(this.isSend==0){
+            // console.log("asdafafaqefeee22",a)
+          let data = {
+              cid:this.channelInfo.id,
+              uid:this.$store.state.userStatus.userInfo.uid,
+              content:this.newtext2,
+              reason:'等级或注册天数不达标',
+              uname:this.$store.state.userStatus.userInfo.uname
+            }
+            userLimitRecordAdd(data).then((res) => {
+              this.$message.error('用户等级或注册天数不达标');
+              this.textarea = ''
+          });
+        }
+          });
+          setTimeout(() => {
+        if (!this.textarea) return;
         if(this.nowicon){
           this.$emit('sendMsg', this.textarea,this.levelicon,this.nowicon,this.name)
         }else{
@@ -392,6 +446,8 @@
         }
         this.textarea = "";
         this.getaddMesNum()
+        }, 200);
+        // console.log("asdafafaqefeee",this.levelicon)
       }, 2000),
       getaddMesNum () {
         // console.log("发送弹幕id====",this.channelInfo.id)
@@ -415,6 +471,16 @@
           this.flagconditions = false
         }
       },
+      //获取黑词列表
+      getblacklist(){
+        let data = {
+          cid: this.channelInfo.id
+        }
+        wordList(data).then((res) => {
+          this.blacklist = res.data
+          // console.log("黑刺列表====",this.blacklist)
+      });
+      }
     },
     mounted() {
       // this.getfindFanCard()
@@ -422,6 +488,9 @@
          this.getHomeUserInfo();
       this.changecolor(1);
       this.GetLevel();
+      setTimeout(() => {
+        this.getblacklist();
+     }, 100);
       setTimeout(() => {
         this.GetChannelFanCard();
      }, 10);

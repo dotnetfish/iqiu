@@ -108,7 +108,7 @@ export default {
       levellist:[],
       percent:0,
       percentnum:'',
-      myfanscardlist:[],
+      myfanscardlist:[{status:999}],
       flag:true,
     };
   },
@@ -145,7 +145,7 @@ export default {
       },
       getmyFanCardList() {
           myFanCardList().then((res)=>{
-              console.log("我的粉丝牌列表=",res)
+              // console.log("我的粉丝牌列表=",res)
               if(res.data){
                 this.myfanscardlist = res.data
               } else{
@@ -168,8 +168,8 @@ export default {
           this.levellist = res.data.userLevelDto;
           this.percent = parseFloat(((this.levellist.experience/(this.levellist.experience + this.levellist.needExperience))*100).toFixed(1));
           this.percentnum = this.levellist.experience+"/"+(this.levellist.experience + this.levellist.needExperience)
-          console.log("个人信息9",res)
-          console.log("个人信息9",parseFloat(((this.levellist.experience/(this.levellist.experience + this.levellist.needExperience))*100).toFixed(1)))
+          // console.log("个人信息9",res)
+          // console.log("个人信息9",parseFloat(((this.levellist.experience/(this.levellist.experience + this.levellist.needExperience))*100).toFixed(1)))
         })
       },
     usersLoginInfo() {

@@ -3,7 +3,7 @@
   <div class="live-gif" v-show="showingList.length>0">
     <transition-group name="zoom-in" appear>
       <div class="gif-item" v-for="(item) in showingList" :key="item.vueKey">
-        <img v-if="item.active && giftListToObject[item.gift.id]" class="gif-logo" :src="giftListToObject[item.gift.id].animationUrl" alt="">
+        <img v-if="item.active && giftListToObject[item.gift.id]" class="gif-logo" :src="giftListToObject[item.gift.id].bigAnimationUrl" alt="">
       </div>
     </transition-group>
   </div>

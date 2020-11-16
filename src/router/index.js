@@ -22,6 +22,14 @@ const routes = [
     component: ()=> import('../views/MCenter/html.vue')
   },
   {
+    path: "/weixinhtml",
+    name: "weixinhtml",
+    meta: {
+      title: "微信支付"
+    },
+    component: ()=> import('../views/MCenter/weixinhtml.vue')
+  },
+  {
     path: "/paysuccess",
     name: "paysuccess",
     meta: {

@@ -207,7 +207,7 @@
     },
     methods: {
       handleJump(roomId) {
-        console.log(roomId);
+        // console.log(roomId);
         const { href } = this.$router.resolve(`/${ roomId }`)
         window.open(href, "_blank");
       },
@@ -347,6 +347,9 @@
     font-size: 12px;
     color: $color-title3;
   }
+  ::v-deep .el-input__inner:focus{
+      border-color:  #F9772A !important;      
+  }
 </style>
 
 <style lang="scss">
@@ -354,7 +357,6 @@
     .el-radio__input {
       display: none;
     }
-
     .classificationtype .is-checked {
       /*background-color: #e8f0ff;*/
     }

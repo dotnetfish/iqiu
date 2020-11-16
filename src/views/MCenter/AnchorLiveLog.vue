@@ -10,7 +10,7 @@
             v-model="formData.dayTime"
             type="date"
             value-format="yyyy-MM-dd"
-            placeholder="选择日期">
+            placeholder="仅限半年内日期">
         </el-date-picker>
       </el-form-item>
       <el-form-item>
@@ -26,7 +26,7 @@
           style="width: 100%">
         <el-table-column
             prop="startTime"
-            label="时间"
+            label="开播时间"
             align="center"
             header-align="center"
         >
@@ -45,10 +45,10 @@
           </template>
         </el-table-column>
         <el-table-column
-            prop="uv"
-            label="在线观看"
-            align="center"
-            header-align="center"
+          prop="totalCoin"
+          label="收获球币"
+          align="center"
+          header-align="center"
         >
         </el-table-column>
         <el-table-column
@@ -107,6 +107,31 @@
               totalDuration: 0,
             }
         },
+        filters: {
+    formatDate: function (value) {
+        let date = new Date(value);
+        let yy = date.getFullYear();
+        let mm = date.getMonth() + 1;
+        let dd = date.getDate();
+        let h = date.getHours();
+        h = h < 10 ? "0" + h : h;
+        let m = date.getMinutes();
+        m = m < 10 ? "0" + m : m;
+        let s = date.getSeconds();
+        s = s < 10 ? "0" + s : s;
+        return yy + "年" + mm + "月" + dd + "日" + " " + h + ":" + m + ":" + s;
+        },
+    FormatDate: function (value) {
+        let date = new Date(value);
+        let h = date.getHours();
+        h = h < 10 ? "0" + h : h;
+        let m = date.getMinutes();
+        m = m < 10 ? "0" + m : m;
+        let s = date.getSeconds();
+        s = s < 10 ? "0" + s : s;
+        return h + ":" + m + ":" + s;
+        },
+  },
         methods: {
             setTime: setTime,
             findLiveRecordDay() {

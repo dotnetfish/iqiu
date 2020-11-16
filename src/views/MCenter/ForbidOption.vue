@@ -53,7 +53,7 @@
         })
           .then(response => {
             if (response.code === 0) {
-              console.log(response, 'responseresponseresponseresponseresponse');
+              // console.log(response, 'responseresponseresponseresponseresponse');
               this.allForbid = response.data.allForbid; // 全局禁言: 仅超管主播管理员可发言, true-打开, false-关闭, 不修改的话什么也不传
               this.allowCreateTime = response.data.allowCreateTime; // 允许发言的最低天数, 0-365, 不修改的话什么也不传
               this.onlyAllowFans = response.data.onlyAllowFans; // 仅粉丝可发言, true-打开, false-关闭, 不修改的话什么也不传

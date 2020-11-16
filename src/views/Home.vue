@@ -23,6 +23,24 @@
     },
     data() {
       return {}
+    },
+    methods:{
+      open () {
+      if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+        window.setTimeout(function () {
+          window.location.href = 'http://m.iqiulive.com'
+        }, 10)
+      } else if (navigator.userAgent.match(/android/i)) {
+        window.setTimeout(function () {
+          window.location.href = 'http://m.iqiulive.com'
+        }, 10)
+      } else {
+        return
+      }
+    },
+    },
+    mounted(){
+      this.open();
     }
   }
 </script>

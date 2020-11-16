@@ -35,6 +35,7 @@
           :hongbaoList="hongbaoList"
           :userLogin="userLogin"
           :msgList="msgList"
+          :channelInfo="channelInfo"
           :giftItem="giftItem"
           :userInfo="userInfo"
           :col="col"

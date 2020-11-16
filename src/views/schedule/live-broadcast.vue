@@ -1,5 +1,7 @@
 <template>
-  <div class="back">
+  <div class="Back">
+    <div class="back"></div>
+    <div class="Back">
     <!-- 侧边栏 -->
     <LeftSideBar></LeftSideBar>
     <!-- 顶部信息 -->
@@ -95,52 +97,86 @@
       </div>
     </div>
     <!-- 分数信息 -->
-    <div class="type-points" v-if=false>
+    <div class="type-points" v-if="flag==true && flag1==false">
+      <div class="let-points" @click="changetype(1)" ref="typeone">让球</div>
+      <div class="o-zhi" @click="changetype(2)" ref="typetow">欧指</div>
+      <div class="total-score" @click="changetype(3)" ref="typethree">进球数</div>
+    </div>
+    <div class="type-points" v-if="flag1==true">
       <div class="let-points" @click="changetype(1)" ref="typeone">让分</div>
       <div class="o-zhi" @click="changetype(2)" ref="typetow">欧指</div>
       <div class="total-score" @click="changetype(3)" ref="typethree">总分</div>
     </div>
-    <!-- 让分 -->
-    <div class="tabledata" v-if="type==1 && false" >
+     <!-- 让球 -->
+    <div class="tabledata" v-if="type==1" >
       <el-table
-    :data="table1Data"
-    :cell-style="changeCellStyle"
+    :data="datalist.asia"
     stripe
+    key="table1"
     style="width: 100%">
+    <template slot="empty">
+          <span style="font-size: 14px">暂无数据</span>
+    </template>
     <el-table-column
-      prop="company"
-      label="公司"
-      width="255">
+      align="center"
+      prop="name"
+      label="公司">
+    </el-table-column>
+    <el-table-column label="初始" align="center">
+    <el-table-column
+    align="center"
+      prop="begin"
+      label="主">
+      <template slot-scope="scope" class="cell">
+          {{scope.row.begin.homeWin}}
+      </template>
     </el-table-column>
     <el-table-column
-      prop="host1"
+    align="center"
+      prop="begin"
+      label="初始让球">
+      <template slot-scope="scope" class="cell">
+          {{scope.row.begin.draw}}
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="begin"
+      align="center"
+      label="客">
+      <template slot-scope="scope" class="cell">
+          {{scope.row.begin.awayWin}}
+      </template>
+    </el-table-column>
+    </el-table-column>
+    <el-table-column label="即时" align="center">
+    <el-table-column
+      prop="now"
       label="主"
-      width="157.5">
+      align="center">
+      <template slot-scope="scope" class="cell">
+        <div v-if="scope.row.now.homeWin<scope.row.begin.homeWin" style="color:green">{{scope.row.now.homeWin}}</div>
+        <div v-else-if="scope.row.now.homeWin>scope.row.begin.homeWin" style="color:red">{{scope.row.now.homeWin}}</div>
+        <div v-else>{{scope.row.now.homeWin}}</div>
+      </template>
     </el-table-column>
     <el-table-column
-      prop="begin1"
+      prop="now"
       label="初始让球"
-      width="157.5">
+      align="center">
+      <template slot-scope="scope" class="cell">
+          {{scope.row.now.draw}}
+      </template>
     </el-table-column>
     <el-table-column
-      prop="guest1"
+      prop="now"
       label="客"
-      width="157.5">
+      align="center">
+      <template slot-scope="scope" class="cell">
+        <div v-if="scope.row.now.awayWin<scope.row.begin.awayWin" style="color:green">{{scope.row.now.awayWin}}</div>
+        <div v-else-if="scope.row.now.awayWin>scope.row.begin.awayWin" style="color:red">{{scope.row.now.awayWin}}</div>
+        <div v-else>{{scope.row.now.awayWin}}</div>
+      </template>
     </el-table-column>
-    <el-table-column
-      prop="host2"
-      label="主"
-      width="157.5">
-    </el-table-column>
-    <el-table-column
-      prop="begin2"
-      label="初始让球"
-      width="157.5">
-    </el-table-column>
-    <el-table-column
-      prop="guest2"
-      label="客"
-      width="157.5">
     </el-table-column>
   </el-table>
     </div>
@@ -148,44 +184,283 @@
     <!-- 欧指 -->
     <div class="tabledata" v-if="type==2">
       <el-table
-    :data="table2Data"
-    :cell-style="changeCellStyle"
+    :data="datalist.euro"
     stripe
+    key="table2"
     style="width: 100%">
+    <template slot="empty">
+          <span style="font-size: 14px">暂无数据</span>
+    </template>
     <el-table-column
-      prop="company"
+      prop="name"
+      align="center"
+      label="公司">
+    </el-table-column>
+    <el-table-column label="欧指" align="center">
+    <el-table-column
+      prop="begin"
+      label="主胜"
+      align="center">
+      <template slot-scope="scope">
+        <div v-if="scope.row.now.homeWin<scope.row.begin.homeWin" style="color:green">{{scope.row.now.homeWin}}</div>
+        <div v-else-if="scope.row.now.homeWin>scope.row.begin.homeWin" style="color:red">{{scope.row.now.homeWin}}</div>
+        <div v-else>{{scope.row.now.homeWin}}</div>
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="begin"
+      label="平局"
+      align="center"
+      >
+      <template slot-scope="scope">
+        <div v-if="scope.row.now.draw<scope.row.begin.draw" style="color:green">{{scope.row.now.draw}}</div>
+        <div v-else-if="scope.row.now.draw>scope.row.begin.draw" style="color:red">{{scope.row.now.draw}}</div>
+        <div v-else>{{scope.row.now.draw}}</div>
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="begin"
+      label="客胜"
+      align="center"
+      >
+      <template slot-scope="scope">
+        <div v-if="scope.row.now.awayWin<scope.row.begin.awayWin" style="color:green">{{scope.row.now.awayWin}}</div>
+        <div v-else-if="scope.row.now.awayWin>scope.row.begin.awayWin" style="color:red">{{scope.row.now.awayWin}}</div>
+        <div v-else>{{scope.row.now.awayWin}}</div>
+      </template>
+    </el-table-column>
+    </el-table-column>
+    <el-table-column label="凯利" align="center">
+    <el-table-column
+      prop="now"
+      label="主胜"
+      align="center"
+      >
+      <template slot-scope="scope">
+        <div v-if="scope.row.now.kelly_homeWin<scope.row.begin.kelly_homeWin" style="color:green">{{scope.row.now.kelly_homeWin}}</div>
+        <div v-else-if="scope.row.now.kelly_homeWin>scope.row.begin.kelly_homeWin" style="color:red">{{scope.row.now.kelly_homeWin}}</div>
+        <div v-else>{{scope.row.now.kelly_homeWin}}</div>
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="now"
+      label="平局"
+      align="center"
+      >
+      <template slot-scope="scope">
+        <div v-if="scope.row.now.kelly_draw<scope.row.begin.kelly_draw" style="color:green">{{scope.row.now.kelly_draw}}</div>
+        <div v-else-if="scope.row.now.kelly_draw>scope.row.begin.kelly_draw" style="color:red">{{scope.row.now.kelly_draw}}</div>
+        <div v-else>{{scope.row.now.kelly_draw}}</div>
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="now"
+      label="客胜"
+      align="center"
+      >
+      <template slot-scope="scope">
+        <div v-if="scope.row.now.kelly_awayWin<scope.row.begin.kelly_awayWin" style="color:green">{{scope.row.now.kelly_awayWin}}</div>
+        <div v-else-if="scope.row.now.kelly_awayWin>scope.row.begin.kelly_awayWin" style="color:red">{{scope.row.now.kelly_awayWin}}</div>
+        <div v-else>{{scope.row.now.kelly_awayWin}}</div>
+      </template>
+    </el-table-column>
+    </el-table-column>
+  </el-table>
+    </div>
+
+    <!-- 进球数 -->
+    <div class="tabledata" v-if="type==3">
+      <el-table
+    :data="datalist.size"
+    stripe
+    key="table3"
+    style="width: 100%">
+    <template slot="empty">
+          <span style="font-size: 14px">暂无数据</span>
+    </template>
+    <el-table-column
+      prop="name"
       label="公司"
-      width="255">
+      align="center">
     </el-table-column>
     <el-table-column
-      prop="big1"
-      label="大分"
-      width="157.5">
+      prop="begin"
+      label="大球"
+      align="center">
+      <template slot-scope="scope">
+          {{scope.row.begin.homeWin}}
+      </template>
     </el-table-column>
     <el-table-column
-      prop="total1"
-      label="总分"
-      width="157.5">
+      prop="begin"
+      label="总球"
+      align="center">
+      <template slot-scope="scope">
+          {{scope.row.begin.draw}}
+      </template>
     </el-table-column>
     <el-table-column
-      prop="small1"
-      label="小分"
-      width="157.5">
+      prop="begin"
+      label="小球"
+      align="center">
+      <template slot-scope="scope">
+          {{scope.row.begin.awayWin}}
+      </template>
     </el-table-column>
     <el-table-column
-      prop="big2"
-      label="大分"
-      width="157.5">
+      prop="now"
+      label="大球"
+      align="center">
+      <template slot-scope="scope">
+        <div v-if="scope.row.now.homeWin<scope.row.begin.homeWin" style="color:green">{{scope.row.now.homeWin}}</div>
+        <div v-else-if="scope.row.now.homeWin>scope.row.begin.homeWin" style="color:red">{{scope.row.now.homeWin}}</div>
+        <div v-else>{{scope.row.now.homeWin}}</div>
+      </template>
     </el-table-column>
     <el-table-column
-      prop="total2"
-      label="总分"
-      width="157.5">
+      prop="now"
+      label="总球"
+      align="center">
+      <template slot-scope="scope">
+          {{scope.row.now.draw}}
+      </template>
     </el-table-column>
     <el-table-column
-      prop="small2"
-      label="小分"
-      width="157.5">
+      prop="now"
+      label="小球"
+      align="center">
+      <template slot-scope="scope">
+        <div v-if="scope.row.now.awayWin<scope.row.begin.awayWin" style="color:green">{{scope.row.now.awayWin}}</div>
+        <div v-else-if="scope.row.now.awayWin>scope.row.begin.awayWin" style="color:red">{{scope.row.now.awayWin}}</div>
+        <div v-else>{{scope.row.now.awayWin}}</div>
+      </template>
+    </el-table-column>
+  </el-table>
+    </div>
+    </div>
+    <div v-if="flag==false && flag1==true">
+    <!-- 让分 -->
+    <div class="tabledata" v-if="type==1" >
+      <el-table
+    :data="datalist.asia"
+    stripe
+    key="table4"
+    style="width: 100%">
+    <template slot="empty">
+          <span style="font-size: 14px">暂无数据</span>
+    </template>
+    <el-table-column
+      align="center"
+      prop="name"
+      label="公司">
+    </el-table-column>
+    <el-table-column label="初始" align="center">
+    <el-table-column
+    align="center"
+      prop="begin"
+      label="主">
+      <template slot-scope="scope" class="cell">
+          {{scope.row.begin.homeWin}}
+      </template>
+    </el-table-column>
+    <el-table-column
+    align="center"
+      prop="begin"
+      label="初始让球">
+      <template slot-scope="scope" class="cell">
+          {{scope.row.begin.draw}}
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="begin"
+      align="center"
+      label="客">
+      <template slot-scope="scope" class="cell">
+          {{scope.row.begin.awayWin}}
+      </template>
+    </el-table-column>
+    </el-table-column>
+    <el-table-column label="即时" align="center">
+    <el-table-column
+      prop="now"
+      label="主"
+      align="center">
+      <template slot-scope="scope" class="cell">
+        <div v-if="scope.row.now.homeWin<scope.row.begin.homeWin" style="color:green">{{scope.row.now.homeWin}}</div>
+        <div v-else-if="scope.row.now.homeWin>scope.row.begin.homeWin" style="color:red">{{scope.row.now.homeWin}}</div>
+        <div v-else>{{scope.row.now.homeWin}}</div>
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="now"
+      label="初始让球"
+      align="center">
+      <template slot-scope="scope" class="cell">
+          {{scope.row.now.draw}}
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="now"
+      label="客"
+      align="center">
+      <template slot-scope="scope" class="cell">
+        <div v-if="scope.row.now.awayWin<scope.row.begin.awayWin" style="color:green">{{scope.row.now.awayWin}}</div>
+        <div v-else-if="scope.row.now.awayWin>scope.row.begin.awayWin" style="color:red">{{scope.row.now.awayWin}}</div>
+        <div v-else>{{scope.row.now.awayWin}}</div>
+      </template>
+    </el-table-column>
+    </el-table-column>
+  </el-table>
+    </div>
+
+    <!-- 欧指 -->
+    <div class="tabledata" v-if="type==2">
+      <el-table
+    :data="datalist.euro"
+    stripe
+    key="table5"
+    style="width: 100%">
+    <template slot="empty">
+          <span style="font-size: 14px">暂无数据</span>
+    </template>
+    <el-table-column
+      prop="name"
+      align="center"
+      label="公司">
+    </el-table-column>
+    <el-table-column label="欧指" align="center">
+    <el-table-column
+      prop="begin"
+      label="主胜"
+      align="center">
+      <template slot-scope="scope">
+        <div v-if="scope.row.now.homeWin<scope.row.begin.homeWin" style="color:green">{{scope.row.now.homeWin}}</div>
+        <div v-else-if="scope.row.now.homeWin>scope.row.begin.homeWin" style="color:red">{{scope.row.now.homeWin}}</div>
+        <div v-else>{{scope.row.now.homeWin}}</div>
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="begin"
+      label="平局"
+      align="center"
+      >
+      <template slot-scope="scope">
+        <div v-if="scope.row.now.draw<scope.row.begin.draw" style="color:green">{{scope.row.now.draw}}</div>
+        <div v-else-if="scope.row.now.draw>scope.row.begin.draw" style="color:red">{{scope.row.now.draw}}</div>
+        <div v-else>{{scope.row.now.draw}}</div>
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="begin"
+      label="客胜"
+      align="center"
+      >
+      <template slot-scope="scope">
+        <div v-if="scope.row.now.awayWin<scope.row.begin.awayWin" style="color:green">{{scope.row.now.awayWin}}</div>
+        <div v-else-if="scope.row.now.awayWin>scope.row.begin.awayWin" style="color:red">{{scope.row.now.awayWin}}</div>
+        <div v-else>{{scope.row.now.awayWin}}</div>
+      </template>
+    </el-table-column>
     </el-table-column>
   </el-table>
     </div>
@@ -193,36 +468,72 @@
     <!-- 总分 -->
     <div class="tabledata" v-if="type==3">
       <el-table
-    :data="table3Data"
-    :cell-style="changeCellStyle"
+    :data="datalist.size"
     stripe
+    key="table6"
     style="width: 100%">
+    <template slot="empty">
+          <span style="font-size: 14px">暂无数据</span>
+    </template>
     <el-table-column
-      prop="company"
+      prop="name"
       label="公司"
-      width="255">
+      align="center">
     </el-table-column>
     <el-table-column
-      prop="guesty1"
-      label="客胜"
-      width="236.25">
+      prop="begin"
+      label="大球"
+      align="center">
+      <template slot-scope="scope">
+          {{scope.row.begin.homeWin}}
+      </template>
     </el-table-column>
     <el-table-column
-      prop="hosty1"
-      label="主胜"
-      width="236.25">
+      prop="begin"
+      label="总球"
+      align="center">
+      <template slot-scope="scope">
+          {{scope.row.begin.draw}}
+      </template>
     </el-table-column>
     <el-table-column
-      prop="guesty2"
-      label="客胜"
-      width="236.25">
+      prop="begin"
+      label="小球"
+      align="center">
+      <template slot-scope="scope">
+          {{scope.row.begin.awayWin}}
+      </template>
     </el-table-column>
     <el-table-column
-      prop="hosty2"
-      label="主胜"
-      width="236.25">
+      prop="now"
+      label="大球"
+      align="center">
+      <template slot-scope="scope">
+        <div v-if="scope.row.now.homeWin<scope.row.begin.homeWin" style="color:green">{{scope.row.now.homeWin}}</div>
+        <div v-else-if="scope.row.now.homeWin>scope.row.begin.homeWin" style="color:red">{{scope.row.now.homeWin}}</div>
+        <div v-else>{{scope.row.now.homeWin}}</div>
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="now"
+      label="总球"
+      align="center">
+      <template slot-scope="scope">
+          {{scope.row.now.draw}}
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="now"
+      label="小球"
+      align="center">
+      <template slot-scope="scope">
+        <div v-if="scope.row.now.awayWin<scope.row.begin.awayWin" style="color:green">{{scope.row.now.awayWin}}</div>
+        <div v-else-if="scope.row.now.awayWin>scope.row.begin.awayWin" style="color:red">{{scope.row.now.awayWin}}</div>
+        <div v-else>{{scope.row.now.awayWin}}</div>
+      </template>
     </el-table-column>
   </el-table>
+    </div>
     </div>
   </div>
 </template>
@@ -230,8 +541,11 @@
 <script>
 import LeftSideBar from "@/components/left-side-bar.vue";
 import videoPlayer from "@/components/video/videoPlayer.vue";
-import { liveList,matchInfo,matchChannelList } from "@/api/api";
+import { liveList,matchInfo,matchChannelList,dataInfo } from "@/api/api";
 import { Table,TableColumn} from "element-ui";
+import jsonp from 'jsonp'
+// import axios from "@/api/Axios1";
+import axios from "@/api/axios";
 // import * as eventTrack from '@/utils/eventTracking.js'
 export default {
   data() {
@@ -242,7 +556,11 @@ export default {
       recommendVideo2: [],
       matchChannelList:[1,2,3,4],
       type:1,
+      flag: true,
+      flag1: false,
       scheduleInfo:null,
+      datalist:'',
+      dataid:'',
       table1Data: [{
           company: 'sjhjfkdj',
           guest1: '0.98',
@@ -338,25 +656,55 @@ export default {
   },
   mounted() {
     this.getMatchDetail();
-    console.log("this.$route.params = ",this.$route);
+    // console.log("this.$route.params = ",this.$route);
   },
   methods: {
+    //json转换
+    getdatalist(){
+      let data = {
+        dataId: this.dataid
+      }
+      dataInfo(data).then((res) => {
+        if (this.dataid) { this.flag = true }
+        this.datalist = JSON.parse(res.data)
+        if (this.datalist.euro.length !== 0) {
+          if (!this.datalist.euro[0].now.kelly_draw) {
+            this.flag1 = true
+            this.flag = false
+          }
+        }
+        // console.log("ooooooooooooooooooo",this.datalist)
+      })
+//         axios.get('/dqd/soccer/biz/dqd/v1/match/odds/index/'+this.dataid+'?app=dqd&lang=zh-cn&cmp_type=soccer').then((response)=>{
+//         // console.log("1111111111111",response)
+//         if(response){this.flag = true}
+// 　　    this.datalist = response
+//         // console.log("ooooooooooooooooooo",this.datalist)
+//       })
+      // delete this.datalist.matchId;
+      // this.$set(this.datalist,'matchId',this.dataid)
+      // console.log("分数数据=",this.datalist)
+      this.getMatchChannelList();
+    },
     changeCellStyle (row, column, rowIndex, columnIndex) {
       if(row.column.label === "公司"){
-        return 'background: rgba(27,181,236,0.2)'  // 修改的样式
+        return 'background: #F9772A38'  // 修改的样式
       }else{
         return ''
       }
     },
     //获取赛事详情
     getMatchDetail() {
+      document.querySelector('body').setAttribute('style','background-color: rgba(27, 181, 236, 0);')
       let data = {
         mid: this.$route.query.mid
       };
       matchInfo(data).then((res) => {        
         this.scheduleInfo = res.data;
-
-        this.getMatchChannelList();
+        if(res.data.dataId){this.dataid=res.data.dataId}
+        // console.log("sssssssssssssssss",res)
+        this.getdatalist();
+        // this.getMatchChannelList();
       });
     },
     //获取赛事正在直播的主播列表
@@ -366,27 +714,26 @@ export default {
       };
       matchChannelList(data).then((res) => {        
         this.matchChannelList = res.data;
-        console.log("比赛视频", this.matchChannelList)
+        // console.log("比赛视频", this.matchChannelList)
 
         if(this.matchChannelList && this.matchChannelList.length > 0){
           this.recommendVideo = res.data[0];
         }
-        
         this.getSugestedList();
       });
     },
     show() {
       this.allshow = !this.allshow;
-      console.log(this.allshow);
+      // console.log(this.allshow);
     },
     changeRocm(item) {
       this.recommendVideo = item;
-      console.log("9999999999999999999999999",this.recommendVideo)
+      // console.log("9999999999999999999999999",this.recommendVideo)
     },
     intoLiveRomm(itemID) {
       const { href } = this.$router.resolve(itemID, "/");
-      console.log(this.$router.resolve(itemID, "/"));
-      console.log(5555555);
+      // console.log(this.$router.resolve(itemID, "/"));
+      // console.log(5555555);
       window.open(href, "_blank");
       this.homeClickEvent(
         "living_room_enter_click",
@@ -404,10 +751,10 @@ export default {
       let headers = {};
       liveList(data, headers).then((res) => {
         // console.log('首页-获取推荐列表--res',res)
-        console.log("2222比赛视频", this.recommendVideo)
+        // console.log("2222比赛视频", this.recommendVideo)
         if(!this.recommendVideo){
           this.recommendVideo = res.data[0];
-          console.log("3333比赛视频", this.recommendVideo)
+          // console.log("3333比赛视频", this.recommendVideo)
         }
         
         this.recommendVideo6 = res.data.slice(0, 6);
@@ -419,7 +766,7 @@ export default {
       this.type = type;
       if(this.type==1) {
         this.$refs.typeone.style.color='rgba(255, 255, 255, 1)';
-        this.$refs.typeone.style.background='rgba(27, 181, 236, 1)';
+        this.$refs.typeone.style.background='#F9772A';
         this.$refs.typetow.style.color='rgba(102, 102, 102, 1)';
         this.$refs.typetow.style.background='rgba(255, 255, 255, 1)';
         this.$refs.typethree.style.color='rgba(102, 102, 102, 1)';
@@ -428,7 +775,7 @@ export default {
         this.$refs.typeone.style.color='rgba(102, 102, 102, 1)';
         this.$refs.typeone.style.background='rgba(255, 255, 255, 1)';
         this.$refs.typetow.style.color='rgba(255, 255, 255, 1)';
-        this.$refs.typetow.style.background='rgba(27, 181, 236, 1)';
+        this.$refs.typetow.style.background='#F9772A';
         this.$refs.typethree.style.color='rgba(102, 102, 102, 1)';
         this.$refs.typethree.style.background='rgba(255, 255, 255, 1)';
       } else {
@@ -437,7 +784,7 @@ export default {
         this.$refs.typetow.style.color='rgba(102, 102, 102, 1)';
         this.$refs.typetow.style.background='rgba(255, 255, 255, 1)';
         this.$refs.typethree.style.color='rgba(255, 255, 255, 1)';
-        this.$refs.typethree.style.background='rgba(27, 181, 236, 1)';
+        this.$refs.typethree.style.background='#F9772A';
       }
     }
   },
@@ -446,19 +793,32 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/css/_index.scss";
+// .back {
+//   position: fixed;
+//   width: 163%;
+//   height: 3000px;
+//   background: url(../../assets/beijing.png) no-repeat;
+//   background-size: 100% 100%;
+//   // -webkit-background-size: cover;
+//   // -o-background-size: cover;
+//   background-position: center 0;
+//   z-index: 0;
+//   margin-left: -408px;
+// }
 .back {
-  position: absolute;
-  width: 163%;
-  height: 912px;
+  position: fixed;
+  width: 100%;
+  height: 100%;
   background: url(../../assets/beijing.png) no-repeat;
-  background-size: cover;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
-  background-position: center 0;
-  z-index: 0;
-  margin-left: -408px;
+  background-size: 100% 100%;
+  z-index: -2;
+  left: 0;
+  top: 0;
+  // margin-left: -408px;
 }
-
+.Back{
+  z-index: 10;
+}
 .nav {
   width: 100%;
   height: 100px;
@@ -469,7 +829,7 @@ export default {
 .iconone {
   width: 100px;
   height: 100px;
-  margin-left: 25.1%;
+  margin-left: 16.1%;
 }
 
 .icontow {
@@ -756,13 +1116,13 @@ export default {
   display: flex;
   width: 1200px;
   height: 62px;
-  margin-left: 19.75%;
+  // margin-left: 19.75%;
 }
 
 .let-points {
   width: 399px;
   height: 100%;
-  background: rgba(27, 181, 236, 1);
+  background:#F9772A;
   font-size: 26px;
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
@@ -803,7 +1163,7 @@ export default {
 .tabledata {
   width: 1200px;
   height: 62px;
-  margin-left: 19.75%;
+  // margin-left: 19.75%;
   margin-top: 20px;
 }
 
