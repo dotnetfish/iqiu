@@ -33,6 +33,10 @@
               <div class="routing" v-if="$route.name !== 'Rank' ">榜单</div>
               <div class="nav-routing-active" v-if="$route.name === 'Rank' ">榜单</div>
             </router-link>
+            <router-link :to="{name:'Ballplace'}" @click.native="navClickEvent('球场')">
+              <div class="routing" v-if="$route.name !== 'Ballplace' ">球场</div>
+              <div class="nav-routing-active" v-if="$route.name === 'Ballplace' ">球场</div>
+            </router-link>
             <router-link :to="{name:'Download'}" @click.native="navClickEvent('下载')">
               <div class="routing" v-if="$route.name !== 'Download' ">下载</div>
               <div class="nav-routing-active" v-if="$route.name === 'Download' ">下载</div>

@@ -3,35 +3,41 @@
       <div style="display:flex;margin-top:40px">
           <div style="display:flex">
               <div>
-                  <img src='@/assets/timg.jpg' style="width:120px;height:120px;border-radius:120px;">
+                  <img :src=info.logo style="width:120px;height:120px;border-radius:120px;">
               </div>
               <div style="margin-left:30px">
-                  <div style="font-size: 24px;color: #333333;">{{uniondata1[0].name}}</div>
-                  <div style="margin-top:18px;width:60px;background: #F9772A;border-radius: 7px;height:16px;color:#FFFFFF;font-size:12px;line-height:16px;text-align:center">普通公会</div>
-                  <div style="font-size: 16px;color: #666666;margin-right:20px;margin-top:30px">创建时间:{{uniondata1[0].createTime}}</div>
+                  <div style="font-size: 24px;color: #333333;">{{info.name}}</div>
+                  <div style="margin-top:14px;width:60px;background: #F9772A;border-radius: 7px;height:16px;color:#FFFFFF;font-size:12px;line-height:16px;text-align:center">普通公会</div>
+                  <div style="font-size: 16px;color: #666666;margin-top:14px">公会ID:{{info.id}}</div>
+                  <div style="font-size: 16px;color: #666666;margin-right:20px;margin-top:20px">创建时间:{{info.createTime | FormatDate}}</div>
               </div>
           </div>
     </div>
     <div style="width:910px;height:2px;background:rgba(240,240,240,1);margin-top:30px;margin-bottom: 16px;"></div>
     <div style="display:flex;margin-top:26px;margin-bottom:80px">
         <div style="width:100px;margin-right:90px">
-            <div style="width:100px;text-align:center;font-size:26px;color: #F9772A;font-weight: 600;">{{uniondata1[0].channelNum}}</div>
+            <div style="width:100px;text-align:center;font-size:26px;color: #F9772A;font-weight: 600;" v-if="nowinfo.channelNum">{{nowinfo.channelNum}}</div>
+            <div style="width:100px;text-align:center;font-size:26px;color: #F9772A;font-weight: 600;" v-else>0</div>
             <div style="margin-top:18px;color:#666666;font-size:14px;width:100px;text-align:center">主播数量</div>
         </div>
         <div style="width:100px;margin-right:90px">
-            <div style="width:100px;text-align:center;font-size:26px;color: #F9772A;font-weight: 600;">{{uniondata1[0].livingNum}}</div>
+            <div style="width:100px;text-align:center;font-size:26px;color: #F9772A;font-weight: 600;" v-if="nowinfo.livingNum">{{nowinfo.livingNum}}</div>
+            <div style="width:100px;text-align:center;font-size:26px;color: #F9772A;font-weight: 600;" v-else>0</div>
             <div style="margin-top:18px;color:#666666;font-size:14px;width:100px;text-align:center">当前开播数</div>
         </div>
         <div style="width:100px;margin-right:90px">
-            <div style="width:100px;text-align:center;font-size:26px;color: #F9772A;font-weight: 600;">{{uniondata1[0].channelApplyNum}}</div>
+            <div style="width:100px;text-align:center;font-size:26px;color: #F9772A;font-weight: 600;" v-if="nowinfo.channelApplyNum">{{nowinfo.channelApplyNum}}</div>
+            <div style="width:100px;text-align:center;font-size:26px;color: #F9772A;font-weight: 600;" v-else>0</div>
             <div style="margin-top:18px;color:#666666;font-size:14px;width:100px;text-align:center">主播申请</div>
         </div>
         <div style="width:100px;margin-right:90px">
-            <div style="width:100px;text-align:center;font-size:26px;color: #F9772A;font-weight: 600;">{{uniondata1[0].totalCoin}}</div>
-            <div style="margin-top:18px;color:#666666;font-size:14px;width:100px;text-align:center">当日收益</div>
+            <div style="width:100px;text-align:center;font-size:26px;color: #F9772A;font-weight: 600;" v-if="nowinfo.totalCoin">{{nowinfo.totalCoin}}</div>
+            <div style="width:100px;text-align:center;font-size:26px;color: #F9772A;font-weight: 600;" v-else>0</div>
+            <div style="margin-top:18px;color:#666666;font-size:14px;width:100px;text-align:center">昨日收益</div>
         </div>
         <div style="width:100px;margin-right:90px">
-            <div style="width:100px;text-align:center;font-size:26px;color: #F9772A;font-weight: 600;">{{uniondata1[0].accusationNum}}</div>
+            <div style="width:100px;text-align:center;font-size:26px;color: #F9772A;font-weight: 600;" v-if="nowinfo.accusationNum">{{nowinfo.accusationNum}}</div>
+            <div style="width:100px;text-align:center;font-size:26px;color: #F9772A;font-weight: 600;" v-else>0</div>
             <div style="margin-top:18px;color:#666666;font-size:14px;width:100px;text-align:center">当日违规次数</div>
         </div>
     </div>
@@ -45,7 +51,7 @@
 </template>
 
 <script>
-import { unionindex, unionRole } from "@/api/api";
+import { unionindex, unionRole,unionInfo } from "@/api/api";
 import echarts from 'echarts'
 export default {
   name: "Guildhome",
@@ -59,6 +65,8 @@ export default {
         unionId:'',
         daylist:[],
         moneylist:[],
+        info:[],
+        nowinfo:[],
         numlist:[],
         uniondata1:[{
             name: '嘿嘿嘿',
@@ -85,10 +93,26 @@ export default {
       s = s < 10 ? "0" + s : s;
       return mm + "/" + dd;
     },
+    FormatDate: function (value) {
+      let date = new Date(value);
+      let yy = date.getFullYear();
+      let mm = date.getMonth() + 1;
+      let dd = date.getDate();
+      return yy + "年" + mm + "月" + dd + "日";
+    },
   },
   props: {
   },
   methods: {
+    //我的公会详情
+      getunionInfo() {
+        let data = {
+          unionId: this.unionId,
+        }
+        unionInfo(data).then((res) => {
+            this.info = res.data    
+      });
+      },
       changetype(type) {
       this.type = type;
       if(this.type==1) {
@@ -125,6 +149,7 @@ export default {
           this.moneylist=[]
           this.numlist=[]
           unionindex(data).then((res) => {
+              this.nowinfo = res
               this.uniondata = res.data
               for(let i=0;i<res.data.length;i++){
                   let date = new Date(this.uniondata[i].createTime);
@@ -148,6 +173,7 @@ export default {
           unionRole().then((res) => {
               this.unionId = res.data.unionId
               this.getunionindex();
+              this.getunionInfo();
           })
       },
       //绘制图形
@@ -217,6 +243,7 @@ export default {
   },
   mounted() {
       this.getunionRole();
+      // this.getmyUnion()
   },
 };
 </script>

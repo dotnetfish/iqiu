@@ -23,7 +23,7 @@
         </el-table-column>
         <el-table-column
           prop="cid"
-          label="主播id"
+          label="主播ID"
           align="center"
           header-align="center"
         >
@@ -61,7 +61,7 @@
         </el-table-column>
         <el-table-column fixed="right" header-align="center" align="center" width="100" label="操作">
           <template slot-scope="scope">
-            <el-button type="text" size="small" @click="look(scope.row.cid,scope.row.overTime)" style="color:#F9772A">查看详情</el-button>
+            <el-button type="text" size="small" @click="look(scope.row.cid,scope.row.overTime,scope.row.group,scope.row.type)" style="color:#F9772A">查看详情</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -76,7 +76,7 @@
       layout="total, sizes, prev, pager, next, jumper"
       :total="total">
     </el-pagination>
-    <Hostdetails v-if="flag" :cid='cid' :flag='flag' :time='time' ref="editor" @cancel='cancel()' @refreshDataList="refreshData()"></Hostdetails>
+    <Hostdetails v-if="flag" :cid='cid' :flag='flag' :type='type' :group='group' :time='time' ref="editor" @cancel='cancel()' @refreshDataList="refreshData()"></Hostdetails>
   </section>
 </template>
 
@@ -101,6 +101,8 @@ export default {
         flag:false,
         cid:'',
         time:'',
+        group:'',
+        type:'',
     };
   },
   filters: {
@@ -119,9 +121,11 @@ export default {
     },
   },
   methods: {
-      look(id,time){
+      look(id,time,group,type){
         this.cid = id
         this.time = time
+        this.group = group
+        this.type = type
         // console.log("545454==",this.time)
         this.flag = true
       },

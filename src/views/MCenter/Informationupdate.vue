@@ -4,6 +4,16 @@
         <div style="width:140px;text-align:left;color:#333333;font-size: 20px;">公会封面</div>
         <div>
             <el-upload
+          class="avatar-uploader"
+          action=""
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload"
+        >
+          <img style="width:200px;height:200px" v-if="imageUrl" :src="imageUrl" class="avatar" />
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+            <!-- <el-upload
                 class="upload-demo"
                 :file-list=fileList
                 list-type="picture-card"
@@ -11,9 +21,8 @@
                 ref="inputer"
                 action="https://jsonplaceholder.typicode.com/posts/">
                 <i class="el-icon-upload"></i>
-                <!-- <div class="el-upload__text">点击上传封面</div> -->
                 <div class="el-upload__tip" slot="tip" style="color:#F93434">只能上传jpg/png文件，且不超过500kb</div>
-            </el-upload>
+            </el-upload> -->
         </div>
     </div>
     <div style="display:flex;margin-left:14px;margin-top:34px">
@@ -38,25 +47,45 @@
         <div style="width:140px;text-align:left;color:#333333;font-size: 20px;">上传证件照</div>
         <div style="margin-right:60px">
             <el-upload
+          class="avatar-uploader"
+          action=""
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess1"
+          :before-upload="beforeAvatarUpload1"
+        >
+          <img style="width:200px;height:200px" v-if="imageUrl1" :src="imageUrl1" class="avatar" />
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+            <!-- <el-upload
                 class="upload-demo"
                 :on-change="beforeUpload2"
                 :file-list=fileList1
                 list-type="picture-card"
+                ref="inputer"
                 action="https://jsonplaceholder.typicode.com/posts/">
                 <i class="el-icon-upload">正面</i>
-                <!-- <div class="el-upload__text">点击上传正面</div> -->
-            </el-upload>
+            </el-upload> -->
         </div>
         <div>
             <el-upload
+          class="avatar-uploader"
+          action=""
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess2"
+          :before-upload="beforeAvatarUpload2"
+        >
+          <img style="width:200px;height:200px" v-if="imageUrl2" :src="imageUrl2" class="avatar" />
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+            <!-- <el-upload
                 class="upload-demo"
                 :on-change="beforeUpload3"
                 :file-list=fileList2
                 list-type="picture-card"
+                ref="inputer"
                 action="https://jsonplaceholder.typicode.com/posts/">
                 <i class="el-icon-upload">反面</i>
-                <!-- <div class="el-upload__text">点击上传反面</div> -->
-            </el-upload>
+            </el-upload> -->
         </div>
     </div>
     <div style="display:flex;margin-left:14px;margin-top:34px">
@@ -66,7 +95,7 @@
         </div>
     </div>
     <div style="display:flex;margin-left:14px;margin-top:34px">
-        <div style="width:140px;text-align:left;color:#333333;font-size: 20px;">公会招募信息</div>
+        <div style="width:140px;text-align:left;color:#333333;font-size: 20px;">公会主营品类</div>
         <div>
             <el-input type="textarea" v-model="sign" placeholder="不超过300字" maxlength="300"></el-input>
         </div>
@@ -75,18 +104,29 @@
         <div style="width:140px;text-align:left;color:#333333;font-size: 20px;">营业执照</div>
         <div style="margin-right:60px">
             <el-upload
+          class="avatar-uploader"
+          action=""
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess3"
+          :before-upload="beforeAvatarUpload3"
+        >
+          <img style="width:200px;height:200px" v-if="imageUrl3" :src="imageUrl3" class="avatar" />
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+            <!-- <el-upload
                 class="upload-demo"
                 :on-change="beforeUpload4"
                 :file-list=fileList3
+                ref="inputer"
                 list-type="picture-card"
                 action="https://jsonplaceholder.typicode.com/posts/">
                 <i class="el-icon-upload"></i>
-                <!-- <div class="el-upload__text">点击上传照片</div> -->
-            </el-upload>
+            </el-upload> -->
         </div>
     </div>
     <div style="display:flex;margin-top:34px;margin-left:154px">
-        <div style="color:#ffffff;font-size:18px;height:40px;line-height:40px;width:200px;text-align:center;background-color:#F9772A;cursor: pointer;" @click="getunionupdate">提交</div>
+        <div style="color:#ffffff;font-size:18px;height:40px;line-height:40px;width:200px;text-align:center;background-color:#F9772A;cursor: pointer;" @click="getunionupdate" v-if="status!=4">提交</div>
+        <div style="color:#ffffff;font-size:18px;height:40px;line-height:40px;width:200px;text-align:center;background-color:#666666;cursor: pointer;" v-else>提交</div>
     </div>
   </section>
 </template>
@@ -101,6 +141,7 @@ export default {
   data() {
     return {
         unionId:'',
+        status:1,
         name:'',
         content:'',
         bossname:'',
@@ -117,9 +158,192 @@ export default {
         fileList1:[{url:''}],
         fileList2:[{url:''}],
         fileList3:[{url:''}],
+        imageUrl: "",
+      imageUrl1: "",
+      imageUrl2: "",
+      imageUrl3: "",
     };
   },
   methods: {
+       handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    handleAvatarSuccess1(res, file) {
+      this.imageUrl1 = URL.createObjectURL(file.raw);
+    },
+    handleAvatarSuccess2(res, file) {
+      this.imageUrl2 = URL.createObjectURL(file.raw);
+    },
+    handleAvatarSuccess3(res, file) {
+      this.imageUrl3 = URL.createObjectURL(file.raw);
+    },
+    //1
+    beforeAvatarUpload(file) {
+      console.log(file);
+      const OSS = require("ali-oss/dist/aliyun-oss-sdk");
+      let client = new OSS({
+        region: "oss-cn-shenzhen",
+        accessKeyId: "this.accessKeyId",
+        accessKeySecret: "this.accessKeySecret",
+        bucket: "iqiulive-static",
+      });
+      getKey(data).then((res) => {
+        client.options.accessKeyId = res.data.ak;
+        client.options.accessKeySecret = res.data.as;
+      });
+
+      // console.log('33333=',this.$refs.inputer.uploadFiles);
+      var key = new Date().getTime();//生成时间戳
+      // file.name = key
+      const Name = file.name;
+      // console.log("生成key", file);
+      const filename = "/avatar/" + key + Name ; // 组成新文件名
+      const data = file;
+
+      setTimeout(() => {
+        client
+          .multipartUpload(filename, data)
+          .then((res) => {
+            if (res.res.status === 200) {
+              this.$message({
+                message: "添加成功",
+                type: "success",
+              });
+              this.imageUrl = "http://static.cloudartisan.cn/avatar/" + key + Name
+              this.downloadUrl = "http://static.cloudartisan.cn/avatar/" + key + Name;
+            }
+            // 上传
+          })
+          .catch((err) => {});
+      }, 200);
+    },
+    //2
+    beforeAvatarUpload1(file) {
+      console.log(file);
+      const OSS = require("ali-oss/dist/aliyun-oss-sdk");
+      let client = new OSS({
+        region: "oss-cn-shenzhen",
+        accessKeyId: "this.accessKeyId",
+        accessKeySecret: "this.accessKeySecret",
+        bucket: "iqiulive-static",
+      });
+      getKey(data).then((res) => {
+        client.options.accessKeyId = res.data.ak;
+        client.options.accessKeySecret = res.data.as;
+      });
+
+      // console.log(this.$refs.inputer.uploadFiles);
+      var key = new Date().getTime();//生成时间戳
+      const Name = file.name;
+      const filename = "/avatar/" + key + Name; // 组成新文件名
+      const data = file;
+
+      setTimeout(() => {
+        client
+          .multipartUpload(filename, data)
+          .then((res) => {
+            if (res.res.status === 200) {
+              this.$message({
+                message: "添加成功",
+                type: "success",
+              });
+              this.imageUrl1 = "http://static.cloudartisan.cn/avatar/" + key + Name
+              this.downloadUrl1 = "http://static.cloudartisan.cn/avatar/" + key + Name;
+            }
+            // 上传
+          })
+          .catch((err) => {});
+      }, 200);
+    },
+    //3
+    beforeAvatarUpload2(file) {
+      console.log(file);
+      const OSS = require("ali-oss/dist/aliyun-oss-sdk");
+      let client = new OSS({
+        region: "oss-cn-shenzhen",
+        accessKeyId: "this.accessKeyId",
+        accessKeySecret: "this.accessKeySecret",
+        bucket: "iqiulive-static",
+      });
+      getKey(data).then((res) => {
+        client.options.accessKeyId = res.data.ak;
+        client.options.accessKeySecret = res.data.as;
+      });
+
+      // console.log(this.$refs.inputer.uploadFiles);
+      var key = new Date().getTime();//生成时间戳
+      const Name = file.name;
+      const filename = "/avatar/" + key + Name; // 组成新文件名
+      const data = file;
+
+      setTimeout(() => {
+        client
+          .multipartUpload(filename, data)
+          .then((res) => {
+            if (res.res.status === 200) {
+              this.$message({
+                message: "添加成功",
+                type: "success",
+              });
+              this.imageUrl2 = "http://static.cloudartisan.cn/avatar/" + key + Name
+              this.downloadUrl2 = "http://static.cloudartisan.cn/avatar/" + key + Name;
+            }
+            // 上传
+          })
+          .catch((err) => {});
+      }, 200);
+    },
+    //4
+    beforeAvatarUpload3(file) {
+      console.log(file);
+      const OSS = require("ali-oss/dist/aliyun-oss-sdk");
+      let client = new OSS({
+        region: "oss-cn-shenzhen",
+        accessKeyId: "this.accessKeyId",
+        accessKeySecret: "this.accessKeySecret",
+        bucket: "iqiulive-static",
+      });
+      getKey(data).then((res) => {
+        client.options.accessKeyId = res.data.ak;
+        client.options.accessKeySecret = res.data.as;
+      });
+      var key = new Date().getTime();
+      // console.log(this.$refs.inputer.uploadFiles);
+      
+      const Name = file.name;
+      const filename = "/avatar/" + key + Name; // 组成新文件名
+      const data = file;
+
+      setTimeout(() => {
+        client
+          .multipartUpload(filename, data)
+          .then((res) => {
+            if (res.res.status === 200) {
+              this.$message({
+                message: "添加成功",
+                type: "success",
+              });
+              this.imageUrl3 = "http://static.cloudartisan.cn/avatar/" + key + Name
+              this.downloadUrl3 = "http://static.cloudartisan.cn/avatar/" + key + Name;
+            }
+            // 上传
+          })
+          .catch((err) => {});
+      }, 200);
+    },
+    OSS() {
+      const OSS = require("ali-oss/dist/aliyun-oss-sdk");
+      let client = new OSS({
+        region: "oss-cn-shenzhen",
+        accessKeyId: "this.accessKeyId",
+        accessKeySecret: "this.accessKeySecret",
+        bucket: "iqiulive-static",
+      });
+      getKey(data).then((res) => {
+        client.options.accessKeyId = res.data.ak;
+        client.options.accessKeySecret = res.data.as;
+      });
+    },
       //修改
       getunionupdate(){
           let data = {
@@ -132,9 +356,9 @@ export default {
               businessUrl:this.downloadUrl3,
               logo: this.downloadUrl,
               contact: this.tel,
-              recruit:this.sign,
+              businessType:this.sign,
               dec:this.content,
-              businessType:''
+              recruit:''
           }
           unionupdate(data).then((res) => {
             if(res.code==0){
@@ -163,11 +387,12 @@ export default {
         client.options.accessKeyId = res.data.ak
         client.options.accessKeySecret = res.data.as
       });
-      const Name = this.$refs.inputer.uploadFiles[0].name
-      const suffix = Name.substr(Name.indexOf('.'))              // 文件后缀
+      const Name = this.$refs.inputer.uploadFiles[1].name
+    //   const suffix = Name.substr(Name.indexOf('.'))              // 文件后缀
       const filename ='/avatar/' + Name          // 组成新文件名     
-      const data = this.$refs.inputer.uploadFiles[0].raw;
+      const data = this.$refs.inputer.uploadFiles[1].raw;
       this.downloadUrl = 'http://static.cloudartisan.cn/avatar/' + Name
+      this.fileList[0].url = this.downloadUrl
       setTimeout(() => {
         client.multipartUpload(filename, data).then(res => {   // 上传
             this.$message({
@@ -191,11 +416,12 @@ export default {
         client.options.accessKeyId = res.data.ak
         client.options.accessKeySecret = res.data.as
       });
-      const Name = this.$refs.inputer.uploadFiles[0].name
-      const suffix = Name.substr(Name.indexOf('.'))              // 文件后缀
+      const Name = this.$refs.inputer.uploadFiles[1].name
+    //   const suffix = Name.substr(Name.indexOf('.'))              // 文件后缀
       const filename ='/avatar/' + Name          // 组成新文件名     
-      const data = this.$refs.inputer.uploadFiles[0].raw;
+      const data = this.$refs.inputer.uploadFiles[1].raw;
       this.downloadUrl1 = 'http://static.cloudartisan.cn/avatar/' + Name
+      this.fileList1[0].url = this.downloadUrl1
       setTimeout(() => {
         client.multipartUpload(filename, data).then(res => {   // 上传
             this.$message({
@@ -219,11 +445,12 @@ export default {
         client.options.accessKeyId = res.data.ak
         client.options.accessKeySecret = res.data.as
       });
-      const Name = this.$refs.inputer.uploadFiles[0].name
-      const suffix = Name.substr(Name.indexOf('.'))              // 文件后缀
+      const Name = this.$refs.inputer.uploadFiles[1].name
+    //   const suffix = Name.substr(Name.indexOf('.'))              // 文件后缀
       const filename ='/avatar/' + Name          // 组成新文件名     
-      const data = this.$refs.inputer.uploadFiles[0].raw;
+      const data = this.$refs.inputer.uploadFiles[1].raw;
       this.downloadUrl2 = 'http://static.cloudartisan.cn/avatar/' + Name
+      this.fileList2[0].url = this.downloadUrl2
       setTimeout(() => {
         client.multipartUpload(filename, data).then(res => {   // 上传
             this.$message({
@@ -247,11 +474,13 @@ export default {
         client.options.accessKeyId = res.data.ak
         client.options.accessKeySecret = res.data.as
       });
+      console.log("999999999999==",this.$refs.inputer)
       const Name = this.$refs.inputer.uploadFiles[0].name
-      const suffix = Name.substr(Name.indexOf('.'))              // 文件后缀
+    //   const suffix = Name.substr(Name.indexOf('.'))              // 文件后缀
       const filename ='/avatar/' + Name          // 组成新文件名     
       const data = this.$refs.inputer.uploadFiles[0].raw;
       this.downloadUrl3 = 'http://static.cloudartisan.cn/avatar/' + Name
+      this.fileList3[0].url = this.downloadUrl3
       setTimeout(() => {
         client.multipartUpload(filename, data).then(res => {   // 上传
             this.$message({
@@ -273,6 +502,7 @@ export default {
       getmyUnion() {
         myUnion().then((res) => {
             this.info = res.data
+            this.status = res.data.status
             this.name = this.info.name
             this.content = this.info.dec
             this.bossname = this.info.manager
@@ -282,10 +512,10 @@ export default {
             this.downloadUrl1 = this.info.managerUrl
             this.downloadUrl2= this.info.managerReUrl
             this.downloadUrl3 = this.info.businessUrl
-            this.fileList[0].url = this.downloadUrl
-            this.fileList1[0].url = this.downloadUrl1
-            this.fileList2[0].url = this.downloadUrl2
-            this.fileList3[0].url = this.downloadUrl3  
+            this.imageUrl = this.downloadUrl
+            this.imageUrl1 = this.downloadUrl1
+            this.imageUrl2 = this.downloadUrl2
+            this.imageUrl3 = this.downloadUrl3  
       });
       },
   },

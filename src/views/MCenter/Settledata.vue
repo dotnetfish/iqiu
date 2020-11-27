@@ -29,7 +29,7 @@
         </el-table-column>
         <el-table-column
           prop="cid"
-          label="主播id"
+          label="主播ID"
           align="center"
           header-align="center"
         >
@@ -87,16 +87,6 @@
                 <div v-if="scope.row.type==1">新签</div>
                 <div v-if="scope.row.type==2">续约</div>
             </div>
-        </template>
-        </el-table-column>
-        <el-table-column
-          prop="createTime"
-          label="开始时间"
-          align="center"
-          header-align="center"
-        >
-        <template slot-scope="scope">
-            <div>{{scope.row.createTime | formatDate}}</div>
         </template>
         </el-table-column>
         <el-table-column

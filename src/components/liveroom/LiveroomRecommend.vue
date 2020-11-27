@@ -10,7 +10,7 @@
 <!--          :liveList="recommendList" :itemStyle="{width: 'calc(45% - 34px)'}">-->
 <!--        </live-list-item>-->
         <template v-for="(item,index) in recommendList">
-          <li class="live-recommend-item" :key="item.id" v-if="index < showCount" @click="handleJump('/'+ item._id)">
+          <li class="live-recommend-item" :key="item.id" v-if="index < showCount" @click="handleJump('/'+ item.id)">
             <div class="logo-wrap">
               <img class="item-bg" :src="item.imageUrl" alt="">
             </div>
@@ -99,7 +99,7 @@
         this.showCount = (this.$refs.recommend.clientWidth / 265).toFixed(0)
       },
       handleJump(path) {
-        console.log(path);
+        console.log('地址id',this.recommendList);
         const { href } = this.$router.resolve(path)
         window.open(href, "_blank");
       }
@@ -154,14 +154,15 @@
 
   .live-recommend {
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: nowrap;
 
     .live-recommend-item {
 
       margin-right: 10px;
       margin-bottom: 10px;
-      flex: 1 1 auto;
+      // flex: 1 1 auto;
       display: inline-block;
       width: 240px;
       /*height: 214px;*/

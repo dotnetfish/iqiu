@@ -5,9 +5,9 @@
       <el-form-item>
         <el-input v-model="dataForm.uid" placeholder="用户ID"></el-input>
       </el-form-item>
-      <el-form-item>
+      <!-- <el-form-item>
         <el-input v-model="dataForm.roomname" placeholder="房间昵称"></el-input>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item>
         <el-button @click="Getuserlist()" style="color: #ffffff;background-color: #F9772A;border: 0;">查询</el-button>
       </el-form-item>
@@ -275,6 +275,7 @@
             });
           }
           this.dialogVisible = false
+          this.getmyManagers()
             });
         // this.setManager(this.dialogFormData, "管理员添加成功")
       },

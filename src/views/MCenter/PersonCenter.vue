@@ -11,7 +11,7 @@
 <!--              <div class="person-title" slot="label">个人中心</div>-->
 <!--            </el-tab-pane>-->
             <el-tab-pane name="0" :key="0">
-                            <div class="person-title" slot="label" @click="show=false,show1=false,show2=false,show3=false,show4=false">个人中心</div>
+                            <div class="person-title" slot="label" @click="show=false,show1=false,show2=false,show3=false,show4=false,showagent=false">个人中心</div>
 <!--              <div slot="label" class="person-subtitle">-->
 <!--                <div class="ml5">我的资料</div>-->
 <!--              </div>-->
@@ -52,13 +52,13 @@
               </div>
               <Myincome></Myincome>
             </el-tab-pane>
-            <el-tab-pane label="我的公会" name="15" :key="15" v-if="show">
+            <el-tab-pane label="我的公会" name="15" :key="15" v-if="show && role!=1">
               <div slot="label" class="person-subtitle" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">
                 <div class="ml5">我的公会</div>
               </div>
               <Myguild @getname="getname"></Myguild>
             </el-tab-pane>
-            <el-tab-pane label="公会签约" name="16" :key="16" v-if="show">
+            <el-tab-pane label="公会签约" name="16" :key="16" v-if="show && role!=1">
               <div slot="label" class="person-subtitle" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">
                 <div class="ml5">公会签约</div>
               </div>
@@ -76,109 +76,114 @@
               <div slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">我是房管</div>
               <mymanagement></mymanagement>
             </el-tab-pane>
-            <el-tab-pane name="17" :key="17" v-if="showguildhome">
-              <div slot="label" class="person-title"  @click="show1=!show1,activeName='17'">
+            <el-tab-pane name="33" :key="33" v-if="role!=3">
+              <div slot="label" class="person-title"  @click="showagent=!showagent,activeName='33'">
+                经纪人后台
+              </div>
+            </el-tab-pane>
+            <el-tab-pane name="17" :key="17" v-if="showguildhome && showagent">
+              <div slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;"  @click="show1=!show1,activeName='17'">
                 公会首页
               </div>
             </el-tab-pane>
             <el-tab-pane label="公会主页" name="17" :key="17" v-if="show1">
-                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">公会主页</div>
+                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 16px;margin-left:24px;">公会主页</div>
               <Guildhome></Guildhome>
             </el-tab-pane>
-            <el-tab-pane label="公会申请" name="18" :key="18" v-if="show1">
-                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">公会申请</div>
-              <Guildapply></Guildapply>
-            </el-tab-pane>
-            <el-tab-pane name="19" :key="19" v-if="showhost">
-              <div slot="label" class="person-title"  @click="show2=!show2,activeName='19'">
+            <el-tab-pane name="19" :key="19" v-if="showhost && showagent">
+              <div slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;" @click="show2=!show2,activeName='19'">
                 主播设置
               </div>
             </el-tab-pane>
             <el-tab-pane label="主播列表" name="19" :key="19" v-if="show2">
-                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">主播列表</div>
+                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 16px;margin-left:24px;">主播列表</div>
               <Hostlist></Hostlist>
             </el-tab-pane>
             <el-tab-pane label="主播申请" name="20" :key="20" v-if="show2">
-                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">主播申请</div>
+                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 16px;margin-left:24px;">主播申请</div>
               <Hostapply></Hostapply>
             </el-tab-pane>
-            <el-tab-pane label="当前开播" name="21" :key="21" v-if="show2">
-                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">当前开播</div>
+            <el-tab-pane label="开播记录" name="21" :key="21" v-if="show2">
+                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 16px;margin-left:24px;">当前开播</div>
               <Nowliving></Nowliving>
             </el-tab-pane>
             <el-tab-pane label="流失预警" name="22" :key="22" v-if="show2">
-                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">流失预警</div>
+                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 16px;margin-left:24px;">流失预警</div>
               <Losswarn></Losswarn>
             </el-tab-pane>
             <el-tab-pane label="主播监控" name="31" :key="31" v-if="show2">
-                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">主播监控</div>
+                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 16px;margin-left:24px;">主播监控</div>
               <Hostwatch></Hostwatch>
             </el-tab-pane>
             <el-tab-pane label="违规举报" name="23" :key="23" v-if="show2">
-                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">违规举报</div>
+                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 16px;margin-left:24px;">违规举报</div>
               <Violation></Violation>
             </el-tab-pane>
-            <el-tab-pane name="24" :key="24" v-if="showdata">
-              <div slot="label" class="person-title"  @click="show3=!show3,activeName='24'">
+            <el-tab-pane name="24" :key="24" v-if="showdata && showagent">
+              <div slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;"  @click="show3=!show3,activeName='24'">
                 结算数据
               </div>
             </el-tab-pane>
             <el-tab-pane label="主播结算数据" name="24" :key="24" v-if="show3">
-                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">主播结算数据</div>
+                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 16px;margin-left:24px;">主播结算数据</div>
               <Settledata></Settledata>
             </el-tab-pane>
             <el-tab-pane label="主播结算设置" name="26" :key="26" v-if="show3">
-                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">主播结算设置</div>
+                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 16px;margin-left:24px;">主播结算设置</div>
               <Settleset></Settleset>
             </el-tab-pane>
             <el-tab-pane label="公会收入明细" name="25" :key="25" v-if="show3">
-                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">公会收入明细</div>
+                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 16px;margin-left:24px;">公会收入明细</div>
               <Guildincomedata></Guildincomedata>
             </el-tab-pane>
             <el-tab-pane label="公会提现" name="27" :key="27" v-if="show3">
-                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">公会提现</div>
+                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 16px;margin-left:24px;">公会提现</div>
               <Guildcash></Guildcash>
             </el-tab-pane>
-            <el-tab-pane name="28" :key="28" v-if="showset">
-              <div slot="label" class="person-title"  @click="show4=!show4,activeName='28'">
+            <el-tab-pane name="28" :key="28" v-if="showset && showagent">
+              <div slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;"  @click="show4=!show4,activeName='28'">
                 公会设置
               </div>
             </el-tab-pane>
             <el-tab-pane label="公会管理员" name="28" :key="28" v-if="show4">
-                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">公会管理员</div>
+                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 16px;margin-left:24px;">公会管理员</div>
               <Guildadministrator></Guildadministrator>
             </el-tab-pane>
             <el-tab-pane label="分组设置" name="29" :key="29" v-if="show4">
-                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">分组设置</div>
+                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 16px;margin-left:24px;">分组设置</div>
               <Uniongroup></Uniongroup>
             </el-tab-pane>
             <el-tab-pane label="信息修改" name="30" :key="30" v-if="show4">
-                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 18px;">信息修改</div>
+                <div  slot="label" class="ml5" style="display: flex;justify-content: flex-start;align-items: center;font-size: 16px;margin-left:24px;">信息修改</div>
               <Informationupdate></Informationupdate>
             </el-tab-pane>
+            <el-tab-pane label="公会申请" name="18" :key="18" v-if="role == null || role == 3">
+                <div class="person-title" slot="label" @click="show=false,show1=false,show2=false,show3=false,show4=false,showagent=false">公会申请</div>
+              <Guildapply></Guildapply>
+            </el-tab-pane>
             <el-tab-pane name="6" :key="6">
-              <div class="person-title" slot="label" @click="show=false,show1=false,show2=false,show3=false,show4=false">任务中心</div>
+              <div class="person-title" slot="label" @click="show=false,show1=false,show2=false,show3=false,show4=false,showagent=false">任务中心</div>
               <TaskCenter></TaskCenter>
             </el-tab-pane>
             <el-tab-pane name="10" :key="10">
-              <div class="person-title" slot="label" @click="show=false,show1=false,show2=false,show3=false,show4=false">我的钱包</div>
+              <div class="person-title" slot="label" @click="show=false,show1=false,show2=false,show3=false,show4=false,showagent=false">我的钱包</div>
               <Mywallet></Mywallet>
             </el-tab-pane>
             <el-tab-pane name="11" :key="11">
-              <div class="person-title" slot="label" @click="show=false,show1=false,show2=false,show3=false,show4=false">我的收益</div>
+              <div class="person-title" slot="label" @click="show=false,show1=false,show2=false,show3=false,show4=false,showagent=false">我的收益</div>
               <Myearnings></Myearnings>
             </el-tab-pane>
             <el-tab-pane name="7" :key="7">
-              <div class="person-title" slot="label" @click="show=false,show1=false,show2=false,show3=false,show4=false">我的勋章</div>
+              <div class="person-title" slot="label" @click="show=false,show1=false,show2=false,show3=false,show4=false,showagent=false">我的勋章</div>
               <Mymedal></Mymedal>
             </el-tab-pane>
             <el-tab-pane name="8" :key="8">
-              <div class="person-title" slot="label" @click="show=false,show1=false,show2=false,show3=false,show4=false">粉丝牌申请</div>
+              <div class="person-title" slot="label" @click="show=false,show1=false,show2=false,show3=false,show4=false,showagent=false">粉丝牌申请</div>
               <Fansapply></Fansapply>
             </el-tab-pane>
             <el-tab-pane name="9" :key="9">
-              <div class="person-title" slot="label" @click="show=false,show1=false,show2=false,show3=false,show4=false">系统消息<div class="count" v-if="count == true"></div></div>
-              <SysMessage></SysMessage>
+              <div class="person-title" slot="label" @click="issysmessage=true,show=false,show1=false,show2=false,show3=false,show4=false,showagent=false,gethaveMessage()">系统消息<div class="count" v-if="count == true"></div></div>
+              <SysMessage v-if="issysmessage"></SysMessage>
             </el-tab-pane>
             <!-- <el-tab-pane name="5" :key="5">
               <div class="person-title" slot="label">直播记录</div>  
@@ -288,6 +293,7 @@
         showhost:false,
         showdata:false,
         showset:false,
+        showagent:false,
         tabPosition: 'left',
         activeName: "0",
         edit: 1,
@@ -298,6 +304,8 @@
         gname:'',
         endtime:'',
         menu:[],
+        role:1,
+        issysmessage:false
       };
     },
     created() {
@@ -311,6 +319,7 @@
       //公会权限
       getunionRole(){
           unionRole().then((res) => {
+            this.role = res.data.role
               if(res.data.role==2){
                 this.menu = res.data.menu.split(",")
                 for(let i = 0;i<this.menu.length;i++){
@@ -506,7 +515,7 @@
   }
 
   .ml5 {
-    margin-left: 8px;
+    margin-left: 12px;
   }
 
   .mt10 {

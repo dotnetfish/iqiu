@@ -29,7 +29,7 @@
         </el-table-column>
         <el-table-column
           prop="cid"
-          label="主播id"
+          label="主播ID"
           align="center"
           header-align="center"
         >
@@ -43,7 +43,7 @@
         </el-table-column>
         <el-table-column
           prop="startTime"
-          label="最近开播时间"
+          label="开播时间"
           align="center"
           header-align="center"
         >
@@ -58,11 +58,11 @@
           header-align="center"
         >
         <template slot-scope="scope">
-            <div>{{scope.row.durationSum | FormatDate}}</div>
+            <div>{{parseInt(scope.row.durationSum/60/60)}}时{{parseInt((scope.row.durationSum-parseInt(scope.row.durationSum/60/60)*60*60)/60)}}分</div>
         </template>
         </el-table-column>
         <el-table-column
-          prop="havDaySum"
+          prop="havDay"
           label="有效开播天数"
           align="center"
           header-align="center"

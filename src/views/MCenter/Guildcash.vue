@@ -1,9 +1,9 @@
 <template>
   <section class="apply me-wrap">
-      <div style="font-weight: 500;color: #333333;font-size: 18px;margin-bottom:20px">每月10月25号可进行结算提现，未提现余额自动结算至默认结算账户</div>
+      <div style="font-weight: 500;color: #333333;font-size: 18px;margin-bottom:20px">每月25号可进行结算提现，未提现余额自动结算至默认结算账户</div>
       <div style="display:flex;margin-bottom:20px">
-          <div style="font-weight: 500;color: #333333;font-size: 24px;margin-right:20px;height:40px;line-height:40px">可提现余额(元)</div>
-          <div><el-input v-model="unioncashdata"></el-input></div>
+          <div style="font-weight: 500;color: #333333;font-size: 24px;margin-right:20px;height:40px;line-height:40px">可提现余额({{unioncashdata}}元)</div>
+          <div><el-input v-model="wantunioncashdata" placeholder="请输入提取金额"></el-input></div>
           <div style="width: 120px;height: 40px;background: #F9772A;border-radius: 7px;line-height:40px;text-align:center;color:#ffffff;margin-left:20px;cursor: pointer;" @click="card()">提现到卡</div>
       </div>
       <div style="width:110%;height:28px;background: #F0F0F0;margin-bottom:20px;margin-left:-32px"></div>
@@ -132,7 +132,8 @@ export default {
         // total:0,
         unionId:'',
         tablelist:'',
-        unioncashdata:'',
+        unioncashdata:0,
+        wantunioncashdata:'',
     };
   },
   filters: {
@@ -162,6 +163,7 @@ export default {
       getcashApply(){
           let data = {
             unionId: this.unionId,
+            coin:this.wantunioncashdata,
             type:3
           }
           cashApply(data).then((res) => {

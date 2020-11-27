@@ -97,7 +97,7 @@
 <!--      </div>-->
 <!--    </div>-->
     
-    <div class="liveRecomend news" style="margin-top:15px;">
+    <div class="liveRecomend news" style="margin-top:15px;margin-bottom:110px">
       <div class="liveRecomend">
         <div class="liveRecomend-title">
           <img src="@/assets/home/rebo.png" style="width:25px;height:22px;margin: 18px 12px 18px 0px;">
@@ -157,7 +157,6 @@
                         @homeListEventTanck="homeListHotTanck"></livelistitem>
         </div>
     </div>
-
       <div class="img-news">
         <section class="news-wrap">
           <div class="liveRecomend-title">
@@ -217,7 +216,7 @@
           height="calc(100vh - 554px)"
           style="width: 100%">
           <template slot="empty">
-                <span style="font-size: 6rem">暂无数据</span>
+                <span style="font-size: 14px">暂无数据</span>
           </template>
           <el-table-column
             align="center"
@@ -262,7 +261,7 @@
           height="calc(100vh - 554px)"
           style="width: 100%">
           <template slot="empty">
-                <span style="font-size: 6rem">暂无数据</span>
+                <span style="font-size: 14px">暂无数据</span>
           </template>
           <el-table-column
             align="center"
@@ -307,7 +306,7 @@
           height="calc(100vh - 554px)"
           style="width: 100%">
           <template slot="empty">
-                <span style="font-size: 6rem">暂无数据</span>
+                <span style="font-size: 14px">暂无数据</span>
           </template>
           <el-table-column
             align="center"
@@ -352,7 +351,7 @@
           height="calc(100vh - 554px)"
           style="width: 100%">
           <template slot="empty">
-                <span style="font-size: 6rem">暂无数据</span>
+                <span style="font-size: 14px">暂无数据</span>
           </template>
           <el-table-column
             align="center"
@@ -397,7 +396,7 @@
           height="calc(100vh - 554px)"
           style="width: 100%">
           <template slot="empty">
-                <span style="font-size: 6rem">暂无数据</span>
+                <span style="font-size: 14px">暂无数据</span>
           </template>
           <el-table-column
             align="center"
@@ -442,7 +441,7 @@
           height="calc(100vh - 554px)"
           style="width: 100%">
           <template slot="empty">
-                <span style="font-size: 6rem">暂无数据</span>
+                <span style="font-size: 14px">暂无数据</span>
           </template>
           <el-table-column
             align="center"

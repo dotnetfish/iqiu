@@ -1,6 +1,6 @@
 <template>
   <section class="apply me-wrap">
-    <div v-if="info!=''">
+    <div v-if="status==1 || status==4">
       <div style="display:flex;margin-top:40px">
           <div style="display:flex">
               <div>
@@ -54,11 +54,21 @@
       </div>
       <div style="display:flex;margin-top:140px;margin-bottom:100px">
           <el-button @click="goon()" style="color: #ffffff;background-color: #F9772A;border: 0;width:180px;margin-right:20px;height:42px">续签</el-button>
-          <el-button @click="outguild()" style="color: #F9772A;background-color: #ffffff;border: #F9772A solid 1px ;width:180px;margin-bottom: 8rem;">退出公会</el-button>
+          <el-button @click="dialogVisible=true" style="color: #F9772A;background-color: #ffffff;border: #F9772A solid 1px ;width:180px;margin-bottom: 8rem;">退出公会</el-button>
       </div>
+      <el-dialog
+      title="是否确认退出公会"
+      :visible.sync="dialogVisible"
+      width="30%"
+      center>
+      <span slot="footer" class="dialog-footer">
+        <el-button round type="primary" @click="outguild()" style="color: #ffffff;background-color: #F9772A;border: 0;margin-right:30px;width:100px">确认</el-button>
+        <el-button round type="primary" @click="dialogVisible=false" style="color: #ffffff;background-color: #999999;border: 0;width:100px;">取消</el-button>
+      </span>
+    </el-dialog>
     </div>
     <div v-else>
-      <img src="@/assets/none.png">
+      <div style="width:100%;text-align:center;margin-top:200px"><img src="@/assets/none.png"></div>
     </div>
   </section>
 </template>
@@ -73,6 +83,8 @@ export default {
   data() {
     return {
         info:'',
+        dialogVisible:false,
+        status:2,
         // info:{
         //     logo:'@/assets/timg.jpg',
         //     name:'黑鹰集团',
@@ -115,7 +127,8 @@ export default {
       //获取公会信息
       getmyUnion() {
         myUnion().then((res) => {
-            this.info = res.data    
+            this.info = res.data
+            this.status = res.data.status    
       });
           // console.log("88888888888888888888888888888888888888=",this.info)
       },
@@ -132,7 +145,9 @@ export default {
         cid:this.$store.state.userStatus.userInfo.uid
       }
       delMyUnion(data).then((res) => {
-         this.$message.success('退出成功');    
+         this.$message.success('退出成功');
+         this.dialogVisible = false
+         this.getmyUnion()    
       });
     }
   },

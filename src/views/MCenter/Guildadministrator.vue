@@ -16,7 +16,7 @@
         </el-table-column>
         <el-table-column
           prop="uid"
-          label="用户id"
+          label="用户ID"
           align="center"
           header-align="center"
         >
@@ -218,6 +218,7 @@ export default {
       //编辑管理员信息
       updateManager(id){
           let data = {
+              id: this.id,
               uid:this.dialogFormData.uid,
               unionId:this.unionId,
               menu:this.dialogFormData.jurisdictionName,
@@ -248,7 +249,11 @@ export default {
               status:this.value
           }
           assistantAdd(data).then((res) => {
+            if(res.code==0){
               this.$message.success('添加成功');
+            }else{
+              this.$message.error(res.msg);
+            }
               this.dialogVisible = false;
               this.getassistantList()
       });

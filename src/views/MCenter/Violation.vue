@@ -35,7 +35,7 @@
         </el-table-column>
         <el-table-column
           prop="cid"
-          label="主播id"
+          label="主播ID"
           align="center"
           header-align="center"
         >

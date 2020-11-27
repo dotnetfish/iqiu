@@ -46,7 +46,7 @@
           header-align="center"
         >
         <template slot-scope="scope">
-            <div>{{scope.row.duration | FormatDate}}</div>
+            <div>{{parseInt(scope.row.duration/60/60)}}时{{parseInt((scope.row.duration-parseInt(scope.row.duration/60/60)*60*60)/60)}}分</div>
         </template>
         </el-table-column>
         <el-table-column
@@ -81,11 +81,12 @@
         >
         </el-table-column>
         <el-table-column
-          prop="screenMode"
+          prop="group"
           label="分组"
           align="center"
           header-align="center"
         >
+        <div>{{group}}</div>
         </el-table-column>
         <el-table-column
           prop="type"
@@ -93,6 +94,10 @@
           align="center"
           header-align="center"
         >
+        <div style="display:flex;justify-content:center;">
+                <div v-if="type==1">新签</div>
+                <div v-if="type==2">续约</div>
+            </div>
         </el-table-column>
         <el-table-column
           prop="type"
@@ -140,7 +145,13 @@ export default{
     cid:{
       type:String
     },
+    group:{
+      type:String
+    },
     time:{
+      type:Number 
+    },
+    type:{
       type:Number 
     }
   },
@@ -198,6 +209,7 @@ export default{
       },
     getdetails(){
       // console.log("545454==",this.time)
+      // console.log('54saacacac==',this.type)
       let data = {
         cid: this.cid,
         startTime:'',

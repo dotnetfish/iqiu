@@ -45,15 +45,17 @@
           </div>
         </div>
       </div>
-      <!-- <div style="display:flex;margin-left:8px" v-if="item.lastPlayTime && seconds">
+      <div style="display:flex;margin-left:8px" v-if="item.lastPlayTime && seconds">
         <div style="color:#999999">开始时间:{{item.lastPlayTime | formatDate}}</div>
       </div>
       <div style="display:flex;margin-left:8px" v-else>
         <div style="color:#999999">开始时间:未知</div>
       </div>
       <div style="display:flex;margin-left:8px" v-if="item.lastPlayTime && seconds">
-        <div style="color:#999999;margin-top:2px">开播时长:{{(hour*60*60 + minutes*60 + seconds + item.liveNum)*1000 | FormatDate}}</div>
-      </div> -->
+        <div style="color:#999999;margin-top:2px">开播时长:{{parseInt((hour*60*60 + minutes*60 + seconds + item.liveNum)/60/60)}}时
+          {{parseInt((hour*60*60 + minutes*60 + seconds + item.liveNum - (parseInt((hour*60*60 + minutes*60 + seconds + item.liveNum)/60/60))*60*60)/60)}}分
+          {{(hour*60*60 + minutes*60 + seconds + item.liveNum) - parseInt(((hour*60*60 + minutes*60 + seconds + item.liveNum)/60/60))*60*60 - (parseInt((hour*60*60 + minutes*60 + seconds + item.liveNum - (parseInt((hour*60*60 + minutes*60 + seconds + item.liveNum)/60/60))*60*60)/60))*60}}秒</div>
+      </div>
     </div>
     <!-- </a> -->
   </div>
@@ -64,7 +66,7 @@
 <script>
   // import * as api from "@/api/api";
   export default {
-    name: 'LiveListItem',
+    name: 'Watchvideo',
     props: {
       // msg: String
       itemW: {
@@ -189,9 +191,12 @@
       // console.log('h:',this.hour,'m:',this.minutes,'s:',this.seconds)
     },
     mounted() {
+      this.gettime()
       // console.log('h:',this.hour,'h:',this.minutes,'h:',this.seconds)
     },
     methods: {
+      //获取时间
+      gettime(){},
       // 跳转直播间
       toLiveRoom(cid,item) {
         console.log('组件-埋点测试-', item)

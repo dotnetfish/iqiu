@@ -70,7 +70,7 @@
           header-align="center"
         >
         <template slot-scope="scope">
-            <div>{{scope.row.duration | FormatDate}}</div>
+            <div>{{parseInt(scope.row.durationSum/60/60)}}时{{parseInt((scope.row.durationSum-parseInt(scope.row.durationSum/60/60)*60*60)/60)}}分</div>
         </template>
         </el-table-column>
         <el-table-column

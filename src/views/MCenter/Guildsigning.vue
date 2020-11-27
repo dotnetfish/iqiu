@@ -3,7 +3,7 @@
       <div style="display:flex;margin-top:40px">
           <div style="display:flex">
               <div>
-                  <img src='@/assets/timg.jpg' style="width:120px;height:120px;border-radius:120px;">
+                  <img :src=$store.state.userStatus.userInfo.avatarUrl style="width:120px;height:120px;border-radius:120px;">
               </div>
               <div style="margin-left:30px">
                   <div style="font-size: 24px;color: #333333;">个人资料</div>
@@ -81,27 +81,28 @@
             <div style="width: 430px;height: 300px;background: #F0F0F0;border-radius: 8px;margin-right:14px;margin-top:14px">
                 <div style="display:flex;margin-left:40px">
                 <div style="margin-top:18px;">
-                    <img src='@/assets/timg.jpg' style="width:100px;height:100px;border-radius:100px;">
+                    <img :src=item.logo style="width:100px;height:100px;border-radius:100px;">
                 </div>
                 <div style="margin-left:30px;margin-top:18px;">
                     <div style="font-size: 22px;color: #333333;">{{item.name}}</div>
                     <div style="font-size: 12px;color: #666666;margin-top:26px">公会ID：{{item.id}}</div>
-                    <div style="font-size: 12px;color: #666666;margin-top:7px">签约主播：{{item.count}}</div>
-                    <div style="font-size: 12px;color: #666666;margin-top:7px">创建时间：{{item.time}}</div>
+                    <div style="font-size: 12px;color: #666666;margin-top:7px" v-if="item.count">签约主播：{{item.channelNum}}</div>
+                    <div style="font-size: 12px;color: #666666;margin-top:7px" v-else>签约主播：0</div>
+                    <div style="font-size: 12px;color: #666666;margin-top:7px">创建时间：{{item.createTime | FormatDate}}</div>
                 </div>
             </div>
             <div style="display:flex;margin-top:30px">
                 <div style="margin-left:40px;margin-right:10px;width: 2px;height: 18px;background: #F9772A;border-radius: 2px;"></div>
                 <div>
                     <div style="color: #333333;font-size:18px">主营品类</div>
-                    <div style="color: #666666;font-size:14px;margin-top:12px;width:350px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{item.type}}</div>
+                    <div style="color: #666666;font-size:14px;margin-top:12px;width:350px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{item.businessType}}</div>
                 </div>
                 </div>
                 <div style="display:flex;margin-top:30px">
                 <div style="margin-left:40px;margin-right:10px;width: 2px;height: 18px;background: #F9772A;border-radius: 2px;"></div>
                 <div>
                     <div style="color: #333333;font-size:18px">公会介绍</div>
-                    <div style="color: #666666;font-size:14px;margin-top:12px;width:350px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{item.speak}}</div>
+                    <div style="color: #666666;font-size:14px;margin-top:12px;width:350px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{item.dec}}</div>
                 </div>
                 </div>
             </div>
@@ -112,27 +113,28 @@
             <div style="width: 430px;height: 300px;background: #F0F0F0;border-radius: 8px;margin-right:14px;margin-top:14px">
                 <div style="display:flex;margin-left:40px">
                 <div style="margin-top:18px;">
-                    <img src='@/assets/timg.jpg' style="width:100px;height:100px;border-radius:100px;">
+                    <img :src=item.logo style="width:100px;height:100px;border-radius:100px;">
                 </div>
                 <div style="margin-left:30px;margin-top:18px;">
                     <div style="font-size: 22px;color: #333333;">{{item.name}}</div>
                     <div style="font-size: 12px;color: #666666;margin-top:26px">公会ID：{{item.id}}</div>
-                    <div style="font-size: 12px;color: #666666;margin-top:7px">签约主播：{{item.count}}</div>
-                    <div style="font-size: 12px;color: #666666;margin-top:7px">创建时间：{{item.time}}</div>
+                    <div style="font-size: 12px;color: #666666;margin-top:7px" v-if="item.count">签约主播：{{item.channelNum}}</div>
+                    <div style="font-size: 12px;color: #666666;margin-top:7px" v-else>签约主播：0</div>
+                    <div style="font-size: 12px;color: #666666;margin-top:7px">创建时间：{{item.createTime | FormatDate}}</div>
                 </div>
             </div>
             <div style="display:flex;margin-top:30px">
                 <div style="margin-left:40px;margin-right:10px;width: 2px;height: 18px;background: #F9772A;border-radius: 2px;"></div>
                 <div>
                     <div style="color: #333333;font-size:18px">主营品类</div>
-                    <div style="color: #666666;font-size:14px;margin-top:12px;width:350px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{item.type}}</div>
+                    <div style="color: #666666;font-size:14px;margin-top:12px;width:350px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{item.businessType}}</div>
                 </div>
                 </div>
                 <div style="display:flex;margin-top:30px">
                 <div style="margin-left:40px;margin-right:10px;width: 2px;height: 18px;background: #F9772A;border-radius: 2px;"></div>
                 <div>
                     <div style="color: #333333;font-size:18px">公会介绍</div>
-                    <div style="color: #666666;font-size:14px;margin-top:12px;width:350px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{item.speak}}</div>
+                    <div style="color: #666666;font-size:14px;margin-top:12px;width:350px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{item.dec}}</div>
                 </div>
                 </div>
             </div>
@@ -170,6 +172,28 @@ export default {
         info:'',
         moneyinfo:'',
     };
+  },
+  filters: {
+    formatDate: function (value) {
+      let date = new Date(value);
+      let yy = date.getFullYear();
+      let mm = date.getMonth() + 1;
+      let dd = date.getDate();
+      let h = date.getHours();
+      h = h < 10 ? "0" + h : h;
+      let m = date.getMinutes();
+      m = m < 10 ? "0" + m : m;
+      let s = date.getSeconds();
+      s = s < 10 ? "0" + s : s;
+      return yy + "年" + mm + "月" + dd + "日" + " " + h + ":" + m + ":" + s;
+    },
+    FormatDate: function (value) {
+      let date = new Date(value);
+      let yy = date.getFullYear();
+      let mm = date.getMonth() + 1;
+      let dd = date.getDate();
+      return yy + "年" + mm + "月" + dd + "日";
+    },
   },
   props: {
     gname:{
@@ -209,6 +233,7 @@ export default {
             this.type = 2;
             time = this.endtime + this.value * 30 * 24 * 60 * 60 * 1000
         }
+        time = this.value*30
         // console.log("777777777777777777777777=",time)
         let data = {
             unionId: this.guildname,
@@ -223,6 +248,8 @@ export default {
             message: "提交成功",
             type: "success"
           });
+          }else{
+            this.$message.error(res.msg);
           }  
       });
     },

@@ -319,6 +319,7 @@
       Getuserlist() {
       let data = {
         uid: this.dataForm.uid,
+        cid: this.$store.state.userStatus.userInfo.uid,
         jurisdictionName: this.dataForm.type,
         operateUid: this.dataForm.ruid,
         forbidEndTime: this.dataForm.Time,
@@ -469,6 +470,7 @@
       getforbidName(){
         let data = {
           uid: this.dataForm.uid,
+          cid: this.$store.state.userStatus.userInfo.uid,
           jurisdictionName: this.dataForm.type,
           operateUid: this.dataForm.ruid,
           forbidEndTime: this.dataForm.Time,

@@ -993,6 +993,15 @@ axios({
   contentTypejson:true,
 })
 
+//公会详情
+export const unionInfo = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/union/unionInfo`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
 //修改抽成比例
 export const setScale = (data) =>
 axios({
@@ -1068,7 +1077,7 @@ axios({
 //修改管理员信息
 export const assistantUpdate1 = (data) =>
 axios({
-  url:`${baseURL}/aiqiu/v1/app/union/assistantUpdate1`,
+  url:`${baseURL}/aiqiu/v1/app/union/assistantUpdate`,
   method:"post",
   data,
   contentTypejson:true,
@@ -1105,6 +1114,69 @@ axios({
 export const managerRooms = (data) =>
 axios({
   url:`${baseURL}/aiqiu/v1/live/room/managerRooms`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//球场分类列表
+export const dynamictype = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/dynamic/type`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//话题列表
+export const subjectList = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/dynamic/subjectList`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//搜索话题列表
+export const searchSubjectList = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/dynamic/searchSubjectList`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//关注列表
+export const followList = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/dynamic/followList`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//发布动态
+export const dynamicadd = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/dynamic/add`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//添加话题
+export const addSubject = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/dynamic/addSubject`,
+  method:"post",
+  data,
+  contentTypejson:true,
+})
+
+//表情列表
+export const feelingList = (data) =>
+axios({
+  url:`${baseURL}/aiqiu/v1/app/dynamic/feelingList`,
   method:"post",
   data,
   contentTypejson:true,

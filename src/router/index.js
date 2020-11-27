@@ -179,6 +179,14 @@ const routes = [
         component: () => import("../views/Rank.vue")
       },
       {
+        path: "/ballplace",
+        name: "Ballplace",
+        meta: {
+          title: "球场"
+        },
+        component: () => import("../views/Ballplace.vue")
+      },
+      {
         path: "/download",
         name: "Download",
         meta: {

@@ -32,7 +32,7 @@
         </el-table-column>
         <el-table-column
           prop="cid"
-          label="主播id"
+          label="主播ID"
           align="center"
           header-align="center"
         >
@@ -139,7 +139,7 @@
       </div>
       <div style="display:flex;margin-top:24px">
           <div style="color:#666666;width:120px;height:40px;line-height:40px;text-align:right;margin-right:24px;">类别:</div>
-          <div><el-input v-model="type"></el-input></div>
+          <div><el-input v-model="type" ></el-input></div>
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button round type="primary" @click="isagree(1)" style="color: #ffffff;background-color: #F9772A;border: 0;margin-right:30px;width:100px">同意</el-button>
@@ -181,7 +181,7 @@
         </el-table-column>
         <el-table-column
           prop="cid"
-          label="主播id"
+          label="主播ID"
           align="center"
           header-align="center"
         >
@@ -364,6 +364,11 @@ export default {
       },
       //审核
       isagree(status){
+        if(this.type=='新签'){
+          this.type = 1
+        }else{
+          this.type = 2
+        }
           let data = {
               id:this.cid,
               type:this.type,
@@ -384,7 +389,11 @@ export default {
       },
       editHandle(scale,type,id){
           this.scale = scale;
-          this.type = type;
+          if(type==1){
+            this.type = '新签'
+          }else{
+            '续签'
+          }
           this.cid = id;
         //   console.log("565656566",id)
           this.dialogVisible = true

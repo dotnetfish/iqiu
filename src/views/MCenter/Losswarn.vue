@@ -20,7 +20,7 @@
         </el-table-column>
         <el-table-column
           prop="cid"
-          label="主播id"
+          label="主播ID"
           align="center"
           header-align="center"
         >
@@ -56,7 +56,8 @@
         >
         <template slot-scope="scope">
             <div style="display:flex;justify-content:center;">
-            <div>{{scope.row.liveTimeNum | FormatDate}}</div>
+            <!-- <div>{{scope.row.liveTimeNum | FormatDate}}</div> -->
+            <div>{{parseInt(scope.row.liveTimeNum/60/60)}}时{{parseInt((scope.row.liveTimeNum-parseInt(scope.row.liveTimeNum/60/60)*60*60)/60)}}分</div>
             <div v-if="scope.row.liveTimeNumType==1"><img src="@/assets/guild/4.png"></div>
             <div v-if="scope.row.liveTimeNumType==2"><img src="@/assets/guild/5.png"></div>
             <div>{{scope.row.liveTimeFaceNum.toFixed(2)}}%</div>

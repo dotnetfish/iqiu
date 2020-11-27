@@ -2,18 +2,21 @@
   <section class="apply me-wrap">
     <el-form :inline="true" :model="dataForm">
       <el-form-item>
-        <el-input v-model="dataForm.cid" placeholder="主播id" clearable></el-input>
+        <el-input v-model="dataForm.cid" placeholder="主播ID" clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click="Getsearch()" style="color: #ffffff;background-color: #F9772A;border: 0;">查询</el-button>
       </el-form-item>
     </el-form>
+    <div class="timer">
+        <!-- <div ref="startTimer"></div> -->
+    </div>
     <div class="liveRecomend">
         <div class="liveRecomend-title">
         </div>
         <div style="margin: 0 -12px;width:1224px">
-          <livelistitem :liveList="tablelist" :itemStyle="{width: 'calc(25% - 24px)'}"
-                        @homeListEventTanck="homeListHotTanck"></livelistitem>
+          <watchvideo :liveList="tablelist" :itemStyle="{width: 'calc(25% - 24px)'}"
+                        @homeListEventTanck="homeListHotTanck" :hour="hour" :minutes="minutes" :seconds="seconds"></watchvideo>
         </div>
     </div>
     <!-- <el-row>
@@ -43,15 +46,14 @@
     </el-pagination> -->
   </section>
 </template>
-
 <script>
 import { channelSee, unionRole } from "@/api/api";
-import livelistitem from "@/components/live-list-item.vue"
+import watchvideo from "@/components/watchvideo.vue"
 
 export default {
   name: "Hostwatch",
   components: {
-    livelistitem
+    watchvideo
   },
   data() {
     return {
@@ -65,6 +67,11 @@ export default {
         // total:0,
         unionId:'',
         tablelist:[],
+        timer: "",
+        hour: 0,
+        minutes: 0,
+        seconds: 0,
+        cr: ''
     };
   },
   filters: {
@@ -82,6 +89,9 @@ export default {
       return yy + "年" + mm + "月" + dd + "日" + " " + h + ":" + m + ":" + s;
     }
   },
+  created() {
+      this.timer = setInterval(this.startTimer, 1000);
+    },
   methods: {
     homeListHotTanck(param) { //living_room_enter_click
         this.homeClickEvent('living_room_enter_click', '热门推荐', param.id, param.name)
@@ -111,6 +121,7 @@ export default {
       },
       //查询
       Getsearch(){
+        console.log("h=",this.hour,'m=',this.minutes,'s=',this.seconds)
           let data = {
             cid:this.dataForm.cid,
             unionId: this.unionId,
@@ -129,6 +140,27 @@ export default {
               this.getchannelSee();
           })
       },
+      //计时器
+      startTimer() {
+            this.seconds += 1;
+            if (this.seconds >= 60) {
+                this.seconds = 0;
+                this.minutes = this.minutes + 1;
+            }
+
+            if (this.minutes >= 60) {
+                this.minutes = 0;
+                this.hour = this.hour + 1;
+            }
+            // this.$refs.startTimer.innerHTML = (this.hour < 10 ? '0' + this.hour: this.hour) + ':' + (this.minutes < 10 ? '0' + this.minutes: this.minutes) + ':' + (this.seconds < 10 ? '0' + this.seconds: this.seconds);
+            this.cr =  this.seconds
+        },
+        stop () {
+            clearInterval(this.timer)
+        },
+        start () {
+            this.timer = setInterval(this.startTimer, 1000)
+        }
   },
   mounted() {
       this.getunionRole()
